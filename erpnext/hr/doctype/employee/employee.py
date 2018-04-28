@@ -40,10 +40,10 @@ class Employee(NestedSet):
 		self.validate_date()
 		self.validate_email()
 		self.validate_status()
-		self.validate_employee_leave_approver()
 		self.validate_reports_to()
 		self.validate_preferred_email()
-
+		self.validate_employee_grade()
+		
 		if self.user_id:
 			self.validate_for_enabled_user_id()
 			self.validate_duplicate_user_id()
@@ -150,11 +150,6 @@ class Employee(NestedSet):
 			throw(_("User {0} is already assigned to Employee {1}").format(
 				self.user_id, employee[0]), frappe.DuplicateEntryError)
 
-	def validate_employee_leave_approver(self):
-		for l in self.get("leave_approvers")[:]:
-			if "Leave Approver" not in frappe.get_roles(l.leave_approver):
-				frappe.get_doc("User", l.leave_approver).add_roles("Leave Approver")
-
 	def validate_reports_to(self):
 		if self.reports_to == self.name:
 			throw(_("Employee cannot report to himself."))
@@ -166,7 +161,19 @@ class Employee(NestedSet):
 	def validate_preferred_email(self):
 		if self.prefered_contact_email and not self.get(scrub(self.prefered_contact_email)):
 			frappe.msgprint(_("Please enter " + self.prefered_contact_email))
-
+	
+	def validate_employee_grade(self):
+		if self.employee_grade:
+			max_level = frappe.db.get_value("Employee Grade", self.employee_grade, "max_level")
+			if not self.employee_level :
+				throw(_("Employee Level must be set"))
+			else:
+				if self.employee_level <= 0:
+					throw(_("Employee level Must have value bigger than 0"))
+				if self.employee_level > max_level:
+					throw(_("Employee level Must be smaller or equal to Grade Max level %d"%max_level))
+				
+			
 def get_timeline_data(doctype, name):
 	'''Return timeline for attendance'''
 	return dict(frappe.db.sql('''select unix_timestamp(attendance_date), count(*)
