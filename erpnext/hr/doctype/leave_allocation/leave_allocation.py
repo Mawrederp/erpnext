@@ -136,8 +136,9 @@ def check_max_allocation_balance():
         if prefered_email:
 
             try:
-                make(subject = "Max Annual Leave exceeded", content=content_msg, recipients=prefered_email,
-                    send_email=True, sender="erp@tawari.sa")
+                # make(subject = "Max Annual Leave exceeded", content=content_msg, recipients=prefered_email,
+                #     send_email=True, sender="erp@tawari.sa")
+                print prefered_email
             except:
                 frappe.msgprint("could not send")
 
