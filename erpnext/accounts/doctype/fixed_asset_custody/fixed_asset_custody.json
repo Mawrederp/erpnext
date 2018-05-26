@@ -295,7 +295,7 @@
    "fieldname": "employee", 
    "fieldtype": "Link", 
    "hidden": 0, 
-   "ignore_user_permissions": 0, 
+   "ignore_user_permissions": 1, 
    "ignore_xss_filter": 0, 
    "in_filter": 0, 
    "in_global_search": 0, 
@@ -601,7 +601,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2017-12-24 18:47:30.578441", 
+ "modified": "2018-05-17 14:27:42.613144", 
  "modified_by": "Administrator", 
  "module": "Accounts", 
  "name": "Fixed Asset Custody", 
@@ -756,6 +756,7 @@
  "show_name_in_global_search": 0, 
  "sort_field": "modified", 
  "sort_order": "DESC", 
+ "title_field": "fixed_asset", 
  "track_changes": 1, 
  "track_seen": 1
 }

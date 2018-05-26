@@ -24,7 +24,7 @@ class SalarySlip(TransactionBase):
         self.get_days_of_month()
         self.validate_overtime()
         # self.validate_return_from_leave_deduction()
-        self.validate_business_trip_earning()
+        # self.validate_business_trip_earning()
         self.validate_training_trip_earning()
         self.validate_return_from_leave_deduction()
         self.get_join_date_deducted_days()
@@ -92,7 +92,7 @@ class SalarySlip(TransactionBase):
     def validate_business_trip_earning(self):
         emp_return_date= frappe.db.sql("""
             select from_date,cost_total,ticket_cost from `tabBusiness Trip` where 
-            employee='{0}' and docstatus=1 and 
+            employee='{0}' and docstatus=1 and payment_encashment = 'After Trip (Next Month Salary)' and 
             from_date between '{1}' and '{2}' order by from_date""".format(self.employee,self.start_date,self.end_date))
 
         if emp_return_date:
