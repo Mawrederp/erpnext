@@ -1,23 +1,9 @@
-<div class="Header">
-    <style type="text/css" scoped>
-    @media screen {
-        div.Header {
-            display: none;
-        }
-    }
-    
-    @media print {
-        div.Header {
-            position: fixed;
-            top: 0;
-        }
-    }
-    </style>
+<div style="margin-bottom: 7px;">
     {%= frappe.boot.letter_heads[frappe.defaults.get_default("letter_head")] %}
-    <h2 class="text-center">{%= __("Bank Clearance Summary") %}</h2>
-    <h4 class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {%= filters.company %}</h4>
-    <hr>
 </div>
+    <h2 class="text-center">{%= __("Bank Clearance Summary") %}</h2>
+	<p class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {%= __(filters.company) %}</p>
+<hr>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -40,13 +26,15 @@
             {% } %} {% } %}
     </tbody>
 </table>
-<p class="text-right text-muted">Printed On {%= dateutil.str_to_user(dateutil.get_datetime_as_string()) %}</p>
+
+<p class="text-right text-muted">{%= __("Printed On") %}: {%= dateutil.str_to_user(dateutil.get_datetime_as_string()) %}</p>
+
 <table class="text-center" style="margin-top:25px;">
     <tr>
         <td>
             <table style="margin-top:15px;margin-left:50px;">
                 <tr>
-                    <td>{%= __("Account User") %}: </td>
+                    <td>{%= __("Accounts User") %} </td>
                 </tr>
                 <tr style="margin-top:15px;">
                     <td>
@@ -64,7 +52,7 @@
         <td>
             <table style="margin-top:15px;margin-left:190px;">
                 <tr style="margin-top:15px;">
-                    <td>{%= __("Account Manage") %}: </td>
+                    <td>{%= __("Accounts Manager") %} </td>
                 </tr>
                 <tr style="margin-top:15px;">
                     <td>
@@ -81,7 +69,7 @@
 <br>
 <table class="text-left text-muted">
     <tr>
-        <td>{%= __("Printed By") %}: </td>
+        <td>{%= __("Printed By") %} </td>
     </tr>
     <tr style="margin-top:15px;">
         <td>

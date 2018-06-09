@@ -1,39 +1,46 @@
 <div style="margin-bottom: 7px;">
     {%= frappe.boot.letter_heads[frappe.defaults.get_default("letter_head")] %}
 </div>
-<h2 class="text-center">{%= __("Ordered Items To Be Billed") %}</h2>
-<h4 class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {%= filters.company %}</h4>
+<h2 class="text-center">{%= __("Purchase Invoice Trends") %}</h2>
+<h4 class="text-center">{%= __(filters.company) %}</h4>
+<p >{%= __(filters.period)  %}</p>
+<p >{%= __(filters.based_on) %}</p>
+<p >{%= __(filters.group_by) %}</p>
+<p >{%= __(filters.fiscal_year) %}</p>
 <hr>
 <table class="table table-bordered">
-    <thead>
-        <tr>
-            <th style="width: 20%">{%= __("Payment Document") %}</th>
-            <th style="width: 20%">{%= __("Payment Entry") %}</th>
-            <th style="width: 15%">{%= __("Party Type") %}</th>
-            <th style="width: 15%">{%= __("Party") %}</th>
-            <th style="width: 10%">{%= __("Invoice") %}</th>
-            <th style="width: 10%">{%= __("Debit") %}</th>
-            <th style="width: 10%">{%= __("Credit") %}</th>
-
-        </tr>
-    </thead>
-    <tbody>
-     
-        {% for(var i=0, l=data.length; i
-        <l; i++) { %}  <tr>
-            <td>{%= data[i]["Payment Document"] %}</td>
-            <td>{%= data[i]["Payment Entry"] %}</td>
-            <td>{%= data[i]["Party Type"] %}</td>
-            <td>{%= data[i]["Party"] %}</td>
-            <td>{%= data[i]["Invoice"] %}</td>
-            <td>{%= data[i]["Debit"] %}</td>
-            <td>{%= data[i]["Credit"] %}</td>
-            </tr>
-           {% } %}
-
-    </tbody>
+	<thead>
+		<tr>
+			<th style="width: {%= 100 - (report.columns.length - 2) * 13 %}%"></th>
+			{% for(var i=2, l=report.columns.length; i<l; i++) { %}
+				<th class="text-right">{%= report.columns[i].label %}</th>
+			{% } %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for(var j=0, k=data.length; j<k; j++) { %}
+			{%
+				var row = data[j];
+				var row_class = data[j].parent_account ? "" : "financial-statements-important";
+				row_class += data[j].account_name ? "" : " financial-statements-blank-row";
+			%}
+			<tr class="{%= row_class %}">
+				<td>
+					<span style="padding-left: {%= cint(data[j].indent) * 2 %}em">{%= row.account_name %}</span>
+				</td>
+				{% for(var i=2, l=report.columns.length; i<l; i++) { %}
+					<td class="text-right">
+						{% var fieldname = report.columns[i].field || report.columns[i].fieldname; %}
+						{% if (!is_null(row[fieldname])) { %}
+							{%= format_currency(row[fieldname], filters.presentation_currency) %}
+						{% } %}
+					</td>
+				{% } %}
+			</tr>
+		{% } %}
+	</tbody>
 </table>
-<p class="text-right text-muted">Printed On {%= dateutil.str_to_user(dateutil.get_datetime_as_string()) %}</p>
+<p class="text-right text-muted">{%= __("Printed On") %}: {%= dateutil.str_to_user(dateutil.get_datetime_as_string()) %}</p>
 
 <br>
 

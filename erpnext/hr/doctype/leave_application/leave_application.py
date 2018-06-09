@@ -695,7 +695,7 @@ class LeaveApplication(Document):
 	def get_total_leaves_on_half_day(self):
 		return frappe.db.sql("""select sum(total_leave_days) from `tabLeave Application`
 			where employee = %(employee)s
-			and docstatus < 2
+			and docstatus = 1
 			and status in ("Open", "Approved")
 			and from_date = %(from_date)s
 			and to_date = %(to_date)s
