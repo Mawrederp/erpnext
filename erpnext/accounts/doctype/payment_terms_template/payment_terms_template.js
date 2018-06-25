@@ -8,8 +8,8 @@ frappe.ui.form.on('Payment Terms Template', {
 		frm.add_fetch("payment_term", "due_date_based_on", "due_date_based_on");
 		frm.add_fetch("payment_term", "credit_days", "credit_days");
 		frm.add_fetch("payment_term", "credit_months", "credit_months");
-		frm.add_fetch("payment_term", "apply_tax", "apply_tax");
-		frm.add_fetch("payment_term", "is_advance", "is_advance");
+		//~ frm.add_fetch("payment_term", "apply_tax", "apply_tax");
+		//~ frm.add_fetch("payment_term", "is_advance", "is_advance");
 		frm.add_fetch("payment_term", "account", "account");
 	}
 });
