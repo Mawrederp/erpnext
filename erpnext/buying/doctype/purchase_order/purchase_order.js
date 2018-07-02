@@ -207,7 +207,7 @@ erpnext.buying.PurchaseOrderController = erpnext.buying.BuyingController.extend(
                 "doc": cur_frm.doc,
                 "freeze": true,
                 callback: function(r) {
-                    if(frappe.session.user == "Administrator" || frappe.session.user == r.message){
+                    if(frappe.session.user == "Administrator" || frappe.session.user == r.message || frappe.user_roles.indexOf("Accounts Manager") != -1){
                         if (flt(doc.per_received, 2) < 100 && allow_receipt) {
                             cur_frm.add_custom_button(__('Receive'), me.make_purchase_receipt, __("Make"));
 
