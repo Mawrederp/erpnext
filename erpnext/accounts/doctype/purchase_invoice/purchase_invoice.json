@@ -874,7 +874,7 @@
   }, 
   {
    "allow_bulk_edit": 0, 
-   "allow_on_submit": 0, 
+   "allow_on_submit": 1, 
    "bold": 0, 
    "collapsible": 0, 
    "columns": 0, 
@@ -893,7 +893,7 @@
    "no_copy": 0, 
    "oldfieldname": "conversion_rate", 
    "oldfieldtype": "Currency", 
-   "permlevel": 0, 
+   "permlevel": 1, 
    "precision": "9", 
    "print_hide": 1, 
    "print_hide_if_no_value": 0, 
@@ -3708,7 +3708,7 @@
  "istable": 0, 
  "max_attachments": 0, 
  "menu_index": 0, 
- "modified": "2018-04-04 11:29:22.693692", 
+ "modified": "2018-07-05 11:15:40.972687", 
  "modified_by": "Administrator", 
  "module": "Accounts", 
  "name": "Purchase Invoice", 
@@ -3717,7 +3717,7 @@
   {
    "amend": 0, 
    "apply_user_permissions": 0, 
-   "cancel": 1, 
+   "cancel": 0, 
    "create": 1, 
    "delete": 0, 
    "email": 1, 
@@ -3731,7 +3731,7 @@
    "role": "Accounts User", 
    "set_user_permissions": 0, 
    "share": 1, 
-   "submit": 1, 
+   "submit": 0, 
    "write": 1
   }, 
   {
