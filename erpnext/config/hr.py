@@ -146,6 +146,11 @@ def get_data():
 				},
 				{
 					"type": "doctype",
+					"name": "Hand Over",
+					"description":_("Hand Over")
+				},
+				{
+					"type": "doctype",
 					"name": "Exit Re Entry Application",
 					"description": _("Exit Re Entry Application."),
 				},
