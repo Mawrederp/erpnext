@@ -91,6 +91,11 @@ def get_data():
 				},
 				{
 					"type": "doctype",
+					"name": "Hand Over",
+					"description":_("Hand Over")
+				},
+				{
+					"type": "doctype",
 					"name": "Financial Custody",
 					"description":_("Financial Custody"),
 				},
@@ -143,11 +148,6 @@ def get_data():
 					"type": "doctype",
 					"name": "Return From Leave Statement",
 					"description":_("Return From Leave Statement")
-				},
-				{
-					"type": "doctype",
-					"name": "Hand Over",
-					"description":_("Hand Over")
 				},
 				{
 					"type": "doctype",
