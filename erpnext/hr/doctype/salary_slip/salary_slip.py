@@ -27,7 +27,10 @@ class SalarySlip(TransactionBase):
         # self.validate_business_trip_earning()
         self.validate_training_trip_earning()
         self.validate_return_from_leave_deduction()
-        self.get_join_date_deducted_days()
+
+        if self.deduction_done != 1:
+        	self.get_join_date_deducted_days()
+
         self.status = self.get_status()
 
         self.validate_dates()
@@ -148,25 +151,14 @@ class SalarySlip(TransactionBase):
         # if self.get('__islocal'):
         #   self.set_deduction_for_return_from_leave(self.start_date, self.end_date)
 
-    def get_join_date_deducted_days(self):
-        doj = self.get_emp_join_date()
-        if getdate(doj).month == getdate(self.start_date).month and getdate(doj).year == getdate(self.start_date).year:
-            date_dif = date_diff(doj, get_first_day(getdate(doj)))
-            if date_dif > 0:
-                self.deducted_days = date_dif    
-                # ss = frappe.get_doc("Salary Structure", self.salary_structure)
-                # for doc in ss.get("earnings"):
-                #   if doc.get("salary_component") == "Basic":
-                #       doc.set("formula", "base-((base/30)*(jd_deducted_days))")
-
-                # ss.save(ignore_permissions=True)
-
-
     # def get_join_date_deducted_days(self):
     #     doj = self.get_emp_join_date()
     #     if getdate(doj).month == getdate(self.start_date).month and getdate(doj).year == getdate(self.start_date).year:
-    #         date_dif = date_diff(get_last_day(getdate(doj)),doj)
+    #         date_dif = date_diff( str(getdate(doj).year)+'-'+str(getdate(doj).month)+'-'+'30' , doj)-1
+
+    #         frappe.throw(str(date_dif))
     #         if date_dif > 0:
+            	
     #             self.deducted_days = date_dif    
     #             # ss = frappe.get_doc("Salary Structure", self.salary_structure)
     #             # for doc in ss.get("earnings"):
@@ -174,6 +166,28 @@ class SalarySlip(TransactionBase):
     #             #       doc.set("formula", "base-((base/30)*(jd_deducted_days))")
 
     #             # ss.save(ignore_permissions=True)
+
+
+
+    def get_join_date_deducted_days(self):
+        doj = self.get_emp_join_date()
+        if getdate(doj).month == getdate(self.start_date).month and getdate(doj).year == getdate(self.start_date).year:
+            date_dif = getdate(get_last_day(getdate(doj))).day - date_diff(doj , get_first_day(getdate(doj)))
+            day_value = self.gross_pay/30
+            month_value_all = day_value*date_dif
+            gozi_deduction = 0
+            for i in  self.deductions:
+            	if i.salary_component=='GOSI':
+            		gozi_deduction = i.amount
+            		break
+
+            total_all = month_value_all - gozi_deduction
+            total_deducted_days = self.gross_pay-total_all-gozi_deduction
+            self.append('deductions', {"salary_component": 'Deducted Days' ,"amount": str(round(total_deducted_days,1))})
+            self.deduction_done = 1
+
+
+
 
 
     def get_emp_join_date(self):
