@@ -739,16 +739,21 @@ def make_journal_entry(args):
 	:return: name of created Journal Entry
 	"""
 	def accounts_values():
+		if 'cost_center' in args:
+			cost_center = args['cost_center']
+		else:
+			cost_center = ""
+
 		return [
 			dict(
-				account=args['debit_account'], cost_center=args['cost_center'],
+				account=args['debit_account'], cost_center=cost_center,
 				party_type=args['party_type'] if args['voucher_type'] == 'Contra Entry' else '',
 				party=args['party'] if args['voucher_type'] == 'Contra Entry' else '',
 				debit_in_account_currency=args['paid_amount'],
 				credit_in_account_currency=0,
 			),
 			dict(
-				account=args['credit_account'], cost_center=args['cost_center'],
+				account=args['credit_account'], cost_center=cost_center,
 				party_type=args['party_type'] if args['voucher_type'] == 'Bank Entry' else '',
 				party=args['party'] if args['voucher_type'] == 'Bank Entry' else '',
 				debit_in_account_currency=0,
