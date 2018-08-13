@@ -116,7 +116,7 @@ class SalesInvoice(SellingController):
 
 		self.check_prev_docstatus()
 
-		if self.is_return:
+		if self.is_return and not self.update_billed_amount_in_sales_order:
 			# NOTE status updating bypassed for is_return
 			self.status_updater = []
 
@@ -161,7 +161,7 @@ class SalesInvoice(SellingController):
 		if frappe.db.get_single_value('Accounts Settings', 'unlink_payment_on_cancellation_of_invoice'):
 			unlink_ref_doc_from_payment_entries(self)
 
-		if self.is_return:
+		if self.is_return and not self.update_billed_amount_in_sales_order:
 			# NOTE status updating bypassed for is_return
 			self.status_updater = []
 
@@ -318,6 +318,7 @@ class SalesInvoice(SellingController):
 			if not for_validate and not self.customer:
 				self.customer = pos.customer
 
+			self.ignore_pricing_rule = pos.ignore_pricing_rule
 			if pos.get('account_for_change_amount'):
 				self.account_for_change_amount = pos.get('account_for_change_amount')
 
@@ -334,7 +335,7 @@ class SalesInvoice(SellingController):
 			for item in self.get("items"):
 				if item.get('item_code'):
 					for fname, val in get_pos_profile_item_details(pos,
-						frappe._dict(item.as_dict()), pos).items():
+						frappe._dict(item.as_dict()), pos, True).items():
 
 						if (not for_validate) or (for_validate and not item.get(fname)):
 							item.set(fname, val)
