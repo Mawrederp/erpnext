@@ -803,8 +803,8 @@ def make_journal_entry(args):
 	journal_entry.submit()
 	# journal_entry.save()
 	pe = frappe.get_doc("Payment Entry", args['payment_entry'])
-	pe.db_set("docstatus", 2, update_modified=False)
 	update_outstanding_amount(pe)
+	pe.db_set("docstatus", 2, update_modified=False)
 	return journal_entry.name
 
 def update_outstanding_amount(pe):

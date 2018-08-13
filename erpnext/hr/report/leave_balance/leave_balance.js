@@ -4,6 +4,12 @@
 
 frappe.query_reports["Leave Balance"] = {
 	"filters": [
-
+		{
+			"fieldname":"date",
+			"label": __("Date"),
+			"fieldtype": "Date",
+			"reqd": 1,
+			"default": date.get_today()
+		}
 	]
 }
