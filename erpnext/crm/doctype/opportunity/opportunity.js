@@ -24,6 +24,13 @@ frappe.ui.form.on("Opportunity", {
 	enquiry_from: function(frm) {
 		frm.toggle_reqd("lead", frm.doc.enquiry_from==="Lead");
 		frm.toggle_reqd("customer", frm.doc.enquiry_from==="Customer");
+
+		if (cur_frm.doc.enquiry_from == "Lead"){
+			cur_frm.add_fetch("lead", "lead_owner", "lead_owner");
+		}
+		else{
+			cur_frm.set_value("lead_owner", "");
+		}
 	},
 
 	refresh: function(frm) {
@@ -191,4 +198,14 @@ cur_frm.cscript['Declare Opportunity Lost'] = function() {
 		})
 	});
 	dialog.show();
+}
+cur_frm.cscript.cost = cur_frm.cscript.selling_price = function(doc, cdt, cdn){
+	caclulate_profit_margin_marckup();
+}
+
+function caclulate_profit_margin_marckup(){
+	
+	cur_frm.set_value("profit", cur_frm.doc.selling_price - cur_frm.doc.cost);
+	cur_frm.set_value("margin", cur_frm.doc.profit / cur_frm.doc.selling_price*100);
+	cur_frm.set_value("marckup", cur_frm.doc.profit / cur_frm.doc.cost*100);
 }
