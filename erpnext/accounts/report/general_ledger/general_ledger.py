@@ -95,7 +95,7 @@ def get_columns(filters):
 		_("Project") + ":Link/Project:100", _("Cost Center") + ":Link/Cost Center:100",
 		_("Against Voucher Type") + "::120", _("Against Voucher") + ":Dynamic Link/"+_("Against Voucher Type")+":160",
 		_("Remarks") + "::400",
-		_("Reson") + "::400",
+		_("Reason") + "::400",
 		_("Description") + "::400",
 		_("PO") + ":Link/Purchase Order:100",
 
@@ -308,13 +308,13 @@ def get_balance_row(label, balance, balance_in_account_currency=None):
 def get_result_as_list(data, filters):
 	result = []
 	for d in data:
-		row = [d.get("posting_date"), d.get("account"), d.get("debit"), d.get("credit")]
+		row = [d.get("posting_date"), _(d.get("account")), _(d.get("debit")), _(d.get("credit"))]
 
 		if filters.get("show_in_account_currency"):
-			row += [d.get("debit_in_account_currency"), d.get("credit_in_account_currency")]
+			row += [_(d.get("debit_in_account_currency")), _(d.get("credit_in_account_currency"))]
 
-		row += [d.get("voucher_type"), d.get("voucher_no"), d.get("title"), d.get("against"),
-			d.get("party_type"), d.get("party"), d.get("project"), d.get("cost_center"), d.get("against_voucher_type"), d.get("against_voucher"), d.get("remarks"), d.get("reason"), d.get("description"),d.get("purchase_order")
+		row += [_(d.get("voucher_type")), _(d.get("voucher_no")), _(d.get("title")), _(d.get("against")),
+			_(d.get("party_type")), _(d.get("party")), _(d.get("project")), _(d.get("cost_center")), _(d.get("against_voucher_type")), _(d.get("against_voucher")), _(d.get("remarks")), _(d.get("reason")), _(d.get("description")),_(d.get("purchase_order"))
 		]
 
 		result.append(row)

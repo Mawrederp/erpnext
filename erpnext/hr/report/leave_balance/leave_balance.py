@@ -64,25 +64,25 @@ def get_data(filters):
 
 
 
-		# sick_leave=frappe.db.sql("select from_date from `tabLeave Allocation` where employee='{0}' and leave_type='Sick Leave - مرضية' order by creation desc limit 1".format(emp.name))
-		# if sick_leave:
-		# 	remain_sick = frappe.db.sql(""" select (select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'Sick Leave - مرضية' and docstatus =1 order by creation desc limit 1 ) - ( select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='Sick Leave - مرضية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' )""".format(emp.name,sick_leave[0][0],filters.get("date")))
-		# 	max_sick = frappe.db.sql(""" select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'Sick Leave - مرضية' and docstatus =1 order by creation desc limit 1 """.format(emp.name))
-		# 	used_sick = frappe.db.sql(""" select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='Sick Leave - مرضية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' """.format(emp.name,annual_leave[0][0],filters.get("date")))
+		sick_leave=frappe.db.sql("select from_date from `tabLeave Allocation` where employee='{0}' and leave_type='Sick Leave - مرضية' order by creation desc limit 1".format(emp.name))
+		if sick_leave:
+			remain_sick = frappe.db.sql(""" select (select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'Sick Leave - مرضية' and docstatus =1 order by creation desc limit 1 ) - ( select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='Sick Leave - مرضية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' )""".format(emp.name,sick_leave[0][0],filters.get("date")))
+			max_sick = frappe.db.sql(""" select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'Sick Leave - مرضية' and docstatus =1 order by creation desc limit 1 """.format(emp.name))
+			used_sick = frappe.db.sql(""" select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='Sick Leave - مرضية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' """.format(emp.name,sick_leave[0][0],filters.get("date")))
 
 
-		# emergency_leave=frappe.db.sql("select from_date from `tabLeave Allocation` where employee='{0}' and leave_type='emergency -اضطرارية' order by creation desc limit 1".format(emp.name))
-		# if emergency_leave:
-		# 	remain_emergency = frappe.db.sql(""" select (select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'emergency -اضطرارية' and docstatus =1 order by creation desc limit 1 ) - ( select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='emergency -اضطرارية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' )""".format(emp.name,emergency_leave[0][0],filters.get("date")))
-		# 	max_emergency = frappe.db.sql(""" select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'emergency -اضطرارية' and docstatus =1 order by creation desc limit 1 """.format(emp.name))
-		# 	used_emergency = frappe.db.sql(""" select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='emergency -اضطرارية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' """.format(emp.name,annual_leave[0][0],filters.get("date")))
+		emergency_leave=frappe.db.sql("select from_date from `tabLeave Allocation` where employee='{0}' and leave_type='emergency -اضطرارية' order by creation desc limit 1".format(emp.name))
+		if emergency_leave:
+			remain_emergency = frappe.db.sql(""" select (select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'emergency -اضطرارية' and docstatus =1 order by creation desc limit 1 ) - ( select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='emergency -اضطرارية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' )""".format(emp.name,emergency_leave[0][0],filters.get("date")))
+			max_emergency = frappe.db.sql(""" select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'emergency -اضطرارية' and docstatus =1 order by creation desc limit 1 """.format(emp.name))
+			used_emergency = frappe.db.sql(""" select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='emergency -اضطرارية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' """.format(emp.name,emergency_leave[0][0],filters.get("date")))
 
 
-		# educational_leave=frappe.db.sql("select from_date from `tabLeave Allocation` where employee='{0}' and leave_type='Educational - تعليمية' order by creation desc limit 1".format(emp.name))
-		# if educational_leave:
-		# 	remain_educational = frappe.db.sql(""" select (select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'Educational - تعليمية' and docstatus =1 order by creation desc limit 1 ) - ( select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='Educational - تعليمية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' )""".format(emp.name,educational_leave[0][0],filters.get("date")))
-		# 	max_educational = frappe.db.sql(""" select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'Educational - تعليمية' and docstatus =1 order by creation desc limit 1 """.format(emp.name))
-		# 	used_educational = frappe.db.sql(""" select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='Educational - تعليمية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' """.format(emp.name,annual_leave[0][0],filters.get("date")))
+		educational_leave=frappe.db.sql("select from_date from `tabLeave Allocation` where employee='{0}' and leave_type='Educational - تعليمية' order by creation desc limit 1".format(emp.name))
+		if educational_leave:
+			remain_educational = frappe.db.sql(""" select (select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'Educational - تعليمية' and docstatus =1 order by creation desc limit 1 ) - ( select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='Educational - تعليمية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' )""".format(emp.name,educational_leave[0][0],filters.get("date")))
+			max_educational = frappe.db.sql(""" select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'Educational - تعليمية' and docstatus =1 order by creation desc limit 1 """.format(emp.name))
+			used_educational = frappe.db.sql(""" select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='Educational - تعليمية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' """.format(emp.name,educational_leave[0][0],filters.get("date")))
 
 	
 
@@ -93,9 +93,9 @@ def get_data(filters):
 		emp.date_of_joining,
 
 		remain_annual if used_annual[0][0] and annual_leave[0][0] else max_annual,
-		# remain_sick if used_sick[0][0] and sick_leave[0][0] else max_sick,
-		# remain_emergency if used_emergency[0][0] and emergency_leave[0][0] else max_emergency,
-		# remain_educational if used_educational[0][0] and educational_leave[0][0] else max_educational,
+		remain_sick if used_sick[0][0] and sick_leave[0][0] else max_sick,
+		remain_emergency if used_emergency[0][0] and emergency_leave[0][0] else max_emergency,
+		remain_educational if used_educational[0][0] and educational_leave[0][0] else max_educational,
 		
     	]
 		data.append(row)
