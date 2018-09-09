@@ -1,19 +1,24 @@
 <div style="margin-bottom: 7px;">
     {%= frappe.boot.letter_heads[frappe.defaults.get_default("letter_head")] %}
 </div>
-<h2 class="text-center">{%= __("Purchase Order Items To Be Billed ") %}</h2>
-<h4 class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {%= filters.company %}</h4>
+<h2 class="text-center">{%= __(report.report_name) %}</h2>
+<h4 class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {% if (frappe.boot.lang == "ar") { %}
+    {%= ("شركة تواري") %}
+     {% } else { %}
+     {%= __("Tawari") %}
+     {% }
+     %}</h4>
 <hr>
-<table class="table table-bordered">
+<table class="table table-bordered" {% if (frappe.boot.lang == "ar") { %} style="direction: rtl" {% } %}>
     <thead>
         <tr>
-            <th style="width: 15%">{%= __("Purchase Order") %}</th>
-            <th style="width: 10%">{%= __("Suplier") %}</th>
-            <th style="width: 15%">{%= __("Item Code") %}</th>
-            <th style="width: 15%">{%= __("Item Name") %}</th>
-            <th style="width: 15%">{%= __("Amount") %}</th>
-            <th style="width: 15%">{%= __("Billed Amount") %}</th>
-            <th style="width: 15%">{%= __("Amount to Bill") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 15%;text-align: right!important" {% } else { %} style="width: 15%" {% } %}>{%= __("Purchase Order") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>{%= __("Suplier") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 15%;text-align: right!important" {% } else { %} style="width: 15%" {% } %}>{%= __("Item Code") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 15%;text-align: right!important" {% } else { %} style="width: 15%" {% } %}>{%= __("Item Name") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 15%;text-align: right!important" {% } else { %} style="width: 15%" {% } %}>{%= __("Amount") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 15%;text-align: right!important" {% } else { %} style="width: 15%" {% } %}>{%= __("Billed Amount") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 15%;text-align: right!important" {% } else { %} style="width: 15%" {% } %}>{%= __("Amount to Bill") %}</th>
 
         </tr>
     </thead>
@@ -21,19 +26,19 @@
      
         {% for(var i=0, l=data.length; i
         <l; i++) { %}  <tr>
-            <td>{%= data[i]["Purchase Order"] %}</td>
-            <td>{%= data[i]["Suplier"] %}</td>
-            <td>{%= data[i]["Item Code"] %}</td>
-            <td>{%= data[i]["Item Name"] %}</td>
-            <td>{%= data[i]["Amount"] %}</td>
-            <td>{%= data[i]["Billed Amount"] %}</td>
-            <td>{%= data[i]["Amount to Bill"] %}</td>
+            <td>{%= __(data[i][__("Purchase Order")]) %}</td>
+            <td>{%= __(data[i][__("Suplier")]) %}</td>
+            <td>{%= __(data[i][__("Item Code")]) %}</td>
+            <td>{%= __(data[i][__("Item Name")]) %}</td>
+            <td>{%= __(data[i][__("Amount")]) %}</td>
+            <td>{%= __(data[i][__("Billed Amount")]) %}</td>
+            <td>{%= __(data[i][__("Amount to Bill")]) %}</td>
             </tr>
            {% } %}
 
     </tbody>
 </table>
-<p class="text-right text-muted">Printed On {%= dateutil.str_to_user(dateutil.get_datetime_as_string()) %}</p>
+<p class="text-right text-muted">{%= __("Printed On") %}:  {%= dateutil.str_to_user(dateutil.get_datetime_as_string()) %}</p>
 
 <br>
 

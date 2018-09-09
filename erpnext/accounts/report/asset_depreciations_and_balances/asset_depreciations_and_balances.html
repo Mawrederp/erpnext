@@ -2,16 +2,22 @@
     {%= frappe.boot.letter_heads[frappe.defaults.get_default("letter_head")] %}
 </div>
 <h2 class="text-center">{%= __("Asset Depreciation And Balances") %}</h2>
-<p class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {%= __(filters.company) %}</p>
+<p class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {% if (frappe.boot.lang == "ar") { %}
+   {%= ("شركة تواري") %}
+    {% } else { %}
+    {%= ("Tawari") %}
+    {% }
+    %}
+    </p>
 <hr>
-<table class="table table-bordered">
+<table class="table table-bordered" {% if (frappe.boot.lang == "ar") { %} style="direction: rtl" {% } %}>
     <thead>
-        <tr>
-            <th style="width: 15%">{%= __("Asset Category") %}</th>
-            <th style="width: 15%">{%= __("Cost of Sold Asset") %}</th>
-            <th style="width: 15%">{%= __("Cost of Scrapped Asset") %}</th>
-            <th style="width: 15%">{%= __("Depreciation Eliminated due to disposal of assets") %}</th>
-            <th style="width: 40%">{%= __("Depreciation Amount during the period") %}</th>
+        <tr >
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 15%;text-align: right!important" {% } else { %} style="width: 15%" {% } %}>{%= __("Asset Category") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 15%;text-align: right!important" {% } else { %} style="width: 15%" {% } %}>{%= __("Cost of Sold Asset") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 15%;text-align: right!important" {% } else { %} style="width: 15%" {% } %}>{%= __("Cost of Scrapped Asset") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 15%;text-align: right!important" {% } else { %} style="width: 15%" {% } %}>{%= __("Depreciation Eliminated due to disposal of assets") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 40%;text-align: right!important" {% } else { %} style="width: 40%" {% } %}>{%= __("Depreciation Amount during the period") %}</th>
         </tr>
     </thead>
     <tbody>

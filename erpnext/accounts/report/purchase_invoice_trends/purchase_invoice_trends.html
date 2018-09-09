@@ -1,19 +1,33 @@
+<style>
+		.print-format{
+			{% if (filters.periodicity == "Monthly" || filters.periodicity == "شهريا") { %}
+			max-width: 13.3in!important;
+	{% } %}
+		}
+	
+</style>
+
 <div style="margin-bottom: 7px;">
     {%= frappe.boot.letter_heads[frappe.defaults.get_default("letter_head")] %}
 </div>
 <h2 class="text-center">{%= __("Purchase Invoice Trends") %}</h2>
-<h4 class="text-center">{%= __(filters.company) %}</h4>
-<p >{%= __(filters.period)  %}</p>
-<p >{%= __(filters.based_on) %}</p>
-<p >{%= __(filters.group_by) %}</p>
-<p >{%= __(filters.fiscal_year) %}</p>
+{% if (frappe.boot.lang == "ar") { %}
+<h4 class="text-center">{%= ("شركة تواري") %}</h4>
+{% } else { %}
+<h4 class="text-center">{%= __(filters.company) %}	</h4>
+{% }
+%}
+<p class="text-center" >{%= __(filters.period)  %}</p>
+<p class="text-center">{%= __(filters.based_on) %}</p>
+<p class="text-center">{%= __(filters.group_by) %}</p>
+<p class="text-center">{%= __(filters.fiscal_year) %}</p>
 <hr>
-<table class="table table-bordered">
+<table class="table table-bordered" {% if (frappe.boot.lang == "ar") { %} style="direction: rtl" {% } %}>
 	<thead>
 		<tr>
 			<th style="width: {%= 100 - (report.columns.length - 2) * 13 %}%"></th>
 			{% for(var i=2, l=report.columns.length; i<l; i++) { %}
-				<th class="text-right">{%= report.columns[i].label %}</th>
+				<th {% if (frappe.boot.lang == "ar") { %} class="text-right" {% } else { %} class="text-left" {% } %}>{%= __(report.columns[i].label) %}</th>
 			{% } %}
 		</tr>
 	</thead>
@@ -32,7 +46,12 @@
 					<td class="text-right">
 						{% var fieldname = report.columns[i].field || report.columns[i].fieldname; %}
 						{% if (!is_null(row[fieldname])) { %}
-							{%= format_currency(row[fieldname], filters.presentation_currency) %}
+						{% if (frappe.boot.lang == "ar") { %}
+						{%= format_currency(row[fieldname], "ر.س") %}
+					{% } else { %}
+							{%= format_currency(row[fieldname], " ") + " SAR " %}
+					{% }
+				%}
 						{% } %}
 					</td>
 				{% } %}

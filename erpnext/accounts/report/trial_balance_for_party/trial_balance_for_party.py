@@ -223,14 +223,14 @@ def get_columns(filters, show_party_name):
 		},
 		{
 			"fieldname": "opening_debit",
-			"label": _("Opening (Dr)"),
+			"label": (_("Opening") + " ("+ _("Dr")+")"),
 			"fieldtype": "Currency",
 			"options": "currency",
 			"width": 120
 		},
 		{
 			"fieldname": "opening_credit",
-			"label": _("Opening (Cr)"),
+			"label": (_("Opening") + " ("+ _("Cr")+")"),
 			"fieldtype": "Currency",
 			"options": "currency",
 			"width": 120
@@ -251,14 +251,14 @@ def get_columns(filters, show_party_name):
 		},
 		{
 			"fieldname": "closing_debit",
-			"label": _("Closing (Dr)"),
+			"label": (_("Closing") + " ("+ _("Dr")+")"),
 			"fieldtype": "Currency",
 			"options": "currency",
 			"width": 120
 		},
 		{
 			"fieldname": "closing_credit",
-			"label": _("Closing (Cr)"),
+			"label": (_("Closing") + " ("+ _("Cr")+")"),
 			"fieldtype": "Currency",
 			"options": "currency",
 			"width": 120
@@ -282,7 +282,7 @@ def get_columns(filters, show_party_name):
 	if filters.get("party_type")=="Customer":
 		columns.insert(1, {
 			"fieldname": "customer_group",
-			"label": _("Customer group"),
+			"label": _("Customer Group"),
 			"fieldtype": "Data",
 			"width": 200
 		})

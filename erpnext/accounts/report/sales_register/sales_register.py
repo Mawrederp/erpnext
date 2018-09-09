@@ -31,11 +31,11 @@ def execute(filters=None):
 		sales_order = list(set(invoice_so_dn_map.get(inv.name, {}).get("sales_order", [])))
 		delivery_note = list(set(invoice_so_dn_map.get(inv.name, {}).get("delivery_note", [])))
 
-		row = [inv.name, inv.posting_date, inv.customer, inv.customer_name,
-		customer_map.get(inv.customer, {}).get("customer_group"), 
-		customer_map.get(inv.customer, {}).get("territory"),
-		inv.debit_to, ", ".join(mode_of_payments.get(inv.name, [])), inv.project, inv.remarks, 
-		", ".join(sales_order), ", ".join(delivery_note), company_currency]
+		row = [inv.name, inv.posting_date, _(inv.customer), _(inv.customer_name),
+		_(customer_map.get(inv.customer, {}).get("customer_group")), 
+		_(customer_map.get(inv.customer, {}).get("territory")),
+		inv.debit_to, ", ".join(mode_of_payments.get(inv.name, [])), _(inv.project), _(inv.remarks), 
+		", ".join(sales_order), ", ".join(delivery_note), _(company_currency)]
 
 		# map income values
 		base_net_total = 0
