@@ -110,8 +110,15 @@ class DeliveryNote(SellingController):
 		self.update_current_stock()
 
 		if not self.installation_status: self.installation_status = 'Not Installed'
-		self.validate_project()
+		# self.validate_project()
 	
+	def after_insert(self):
+		if self.project_sales_order_approval:
+			doc = frappe.get_doc('Project Sales Order Approval', self.project_sales_order_approval)
+			doc.delivery_note = self.name
+			doc.save(ignore_permissions=True)
+
+
 	def validate_project(self):
 		if self.project : 
 			warehouse = frappe.db.get_value("Project", self.project, "default_warehouse")

@@ -88,8 +88,8 @@ class SalesInvoice(SellingController):
 		self.set_billing_hours_and_amount()
 		self.update_timesheet_billing_for_project()
 		self.set_status()
-		if self.get("__islocal") :
-				self.title = self.get_title()
+		# if self.get("__islocal") :
+		# 	self.title = self.get_title()
 				
 	def get_title(self):
 		from frappe.utils import getdate
@@ -113,7 +113,7 @@ class SalesInvoice(SellingController):
 			nammeing_doc.index_value = 1
 			nammeing_doc.year = str(getdate(self.posting_date).year)
 			nammeing_doc.name_of_doc = self.doctype
-			nammeing_doc.save()
+			nammeing_doc.save(ignore_permissions=True)
 			return title
 		
 	def set_items_by_project(self):

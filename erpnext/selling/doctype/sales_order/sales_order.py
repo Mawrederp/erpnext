@@ -47,7 +47,7 @@ class SalesOrder(SellingController):
 		if not self.delivery_status: self.delivery_status = 'Not Delivered'
 		if self.get("__islocal") :
 				self.title = self.get_title()
-		self.validate_project()
+		# self.validate_project()
 	
 	def validate_project(self):
 		if self.project : 

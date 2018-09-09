@@ -6,7 +6,41 @@
 frappe.provide("erpnext.stock");
 frappe.provide("erpnext.stock.delivery_note");
 
+
 frappe.ui.form.on("Delivery Note", {
+	project: function(frm,cdt,cdn){
+		if (frm.doc.project && frm.doc.project != "" ){
+		frm.script_manager.trigger("customer");
+		}
+	},
+	customer: function(frm){
+		if (frm.doc.project && frm.doc.project != "" ){
+			frm.add_fetch("project", "customer", "customer");
+		}
+		if(frm.doc.customer && frm.doc.customer != ""){
+			var name = frappe.call({
+				method:"frappe.client.get_value",
+				args: {
+				doctype:"Customer",
+				filters: {
+					customer_name:frm.doc.customer,
+				},
+				fieldname:["customer_name_in_arabic"]
+				}, 
+				callback: function(r) { 
+				console.log(r);
+	
+				// set the returned value in a field
+				cur_frm.set_value("customer_name_in_arabic", "");
+				if(r.message){
+				cur_frm.set_value("customer_name_in_arabic", r.message["customer_name_in_arabic"]);
+	}
+				}
+			})
+		}
+		
+
+	},
 	setup: function(frm) {
 		frm.custom_make_buttons = {
 			'Packing Slip': 'Packing Slip',
@@ -30,6 +64,132 @@ frappe.ui.form.on("Delivery Note", {
 
 	}
 });
+var map_current_doc_new = function(opts) {
+	console.log(opts);
+	console.log("query filters: ")
+	console.log(opts.get_query_filters)
+	// if(cur_dialog && cur_dialog.fields_dict.customer.value){
+	// 	opts.setters["customer"] = cur_dialog.fields_dict.customer.value || ""
+	// 	console.log("Setter Worked")
+	// }else{
+	// 	console.log("Setter Failed")
+	// }
+	if(opts.get_query_filters) {
+		opts.get_query = function() {
+			console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+			console.log(opts.get_query_filters)
+			console.log(opts)
+			opts.get_query_filters["transaction_date"] = undefined;
+			if(cur_dialog && cur_dialog.fields_dict.date_range.value){
+				opts.get_query_filters["delivery_date"] = cur_dialog.fields_dict.date_range.value
+			}
+			return {filters: opts.get_query_filters};
+		}
+	}
+	var _map = function() {
+		if($.isArray(cur_frm.doc.items) && cur_frm.doc.items.length > 0) {
+			// remove first item row if empty
+			if(!cur_frm.doc.items[0].item_code) {
+				cur_frm.doc.items = cur_frm.doc.items.splice(1);
+			}
+
+			// find the doctype of the items table
+			var items_doctype = frappe.meta.get_docfield(cur_frm.doctype, 'items').options;
+
+			// find the link fieldname from items table for the given
+			// source_doctype
+			var link_fieldname = null;
+			frappe.get_meta(items_doctype).fields.forEach(function(d) {
+				if(d.options===opts.source_doctype) link_fieldname = d.fieldname; });
+
+			// search in existing items if the source_name is already set and full qty fetched
+			var already_set = false;
+			var item_qty_map = {};
+
+			$.each(cur_frm.doc.items, function(i, d) {
+				opts.source_name.forEach(function(src) {
+					if(d[link_fieldname]==src) {
+						already_set = true;
+						if (item_qty_map[d.scope_item])
+							item_qty_map[d.scope_item] += flt(d.qty);
+						else
+							item_qty_map[d.scope_item] = flt(d.qty);
+					}
+				});
+			});
+
+			if(already_set) {
+				opts.source_name.forEach(function(src) {
+					frappe.model.with_doc(opts.source_doctype, src, function(r) {
+						var source_doc = frappe.model.get_doc(opts.source_doctype, src);
+						$.each(source_doc.items || [], function(i, row) {
+							if(row.qty > flt(item_qty_map[row.item_code])) {
+								already_set = false;
+								return false;
+							}
+						})
+					})
+
+					if(already_set) {
+						frappe.msgprint(__("You have already selected items from {0} {1}",
+							[opts.source_doctype, src]));
+						return;
+					}
+
+				})
+			}
+		}
+
+		return frappe.call({
+			// Sometimes we hit the limit for URL length of a GET request
+			// as we send the full target_doc. Hence this is a POST request.
+			type: "POST",
+			method: 'frappe.model.mapper.map_docs',
+			args: {
+				"method": opts.method,
+				"source_names": opts.source_name,
+				"target_doc": cur_frm.doc,
+			},
+			callback: function(r) {
+				if(!r.exc) {
+					var doc = frappe.model.sync(r.message);
+					cur_frm.dirty();
+					cur_frm.refresh();
+				}
+			}
+		});
+	}
+	if(opts.source_doctype) {
+		console.log(opts.setters)
+		var d = new frappe.ui.form.MultiSelectDialog({
+			doctype: opts.source_doctype,
+			target: opts.target,
+			date_field: opts.date_field || undefined,
+			setters: opts.setters,
+			get_query: opts.get_query,
+			action: function(selections, args) {
+				let values = selections;
+				if(values.length === 0){
+					frappe.msgprint(__("Please select {0}", [opts.source_doctype]))
+					return;
+				}
+				if(values.length  > 1){
+					frappe.msgprint(__("You cannot select more than pne {0}", [opts.source_doctype]))
+					return;
+				}
+				opts.source_name = values;
+				opts.setters = args;
+				d.dialog.hide();
+				_map();
+			},
+		});
+		console.log("dialog: ")
+		console.log(d);
+	} else if(opts.source_name) {
+		opts.source_name = [opts.source_name];
+		_map();
+	}
+}
 
 erpnext.stock.DeliveryNoteController = erpnext.selling.SellingController.extend({
 	refresh: function(doc, dt, dn) {
@@ -64,6 +224,23 @@ erpnext.stock.DeliveryNoteController = erpnext.selling.SellingController.extend(
 								project: cur_frm.doc.project || undefined,
 								customer: cur_frm.doc.customer || undefined,
 								company: cur_frm.doc.company
+							}
+						})
+					}, __("Get items from"));
+					this.frm.add_custom_button(__('Sales Order Approval'),
+					function() {
+						map_current_doc_new({
+							method: "pmo.project_services.doctype.project_sales_order_approval.project_sales_order_approval.make_delivery_note",
+							source_doctype: "Project Sales Order Approval",
+							target: me.frm,
+							setters: {
+								customer: me.frm.doc.customer || undefined,
+							},
+							get_query_filters: {
+								docstatus: 0,
+								workflow_state: "Approved by PMO Director",
+								project_name: me.frm.doc.project || undefined,
+								date_delivered:  undefined
 							}
 						})
 					}, __("Get items from"));
@@ -167,14 +344,14 @@ cur_frm.cscript.update_status = function(status) {
 }
 
 // ***************** Get project name *****************
-cur_frm.fields_dict['project'].get_query = function(doc, cdt, cdn) {
-	return {
-		query: "erpnext.controllers.queries.get_project_name",
-		filters: {
-			'customer': doc.customer
-		}
-	}
-}
+// cur_frm.fields_dict['project'].get_query = function(doc, cdt, cdn) {
+// 	return {
+// 		query: "erpnext.controllers.queries.get_project_name",
+// 		filters: {
+// 			'customer': doc.customer
+// 		}
+// 	}
+// }
 
 cur_frm.fields_dict['transporter_name'].get_query = function(doc) {
 	return{
