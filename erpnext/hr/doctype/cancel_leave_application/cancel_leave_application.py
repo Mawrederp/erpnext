@@ -44,18 +44,23 @@ class CancelLeaveApplication(Document):
 	pass
 
 	def validate_emp(self):
-		 if self.get('__islocal'):
-			if u'CEO' in frappe.get_roles(frappe.session.user):
-				self.workflow_state = "Created By CEO"
-			elif u'Director' in frappe.get_roles(frappe.session.user):
-				self.workflow_state = "Created By Director"
-			elif u'Manager' in frappe.get_roles(frappe.session.user):
-				self.workflow_state = "Created By Manager"
-			elif u'Line Manager' in frappe.get_roles(frappe.session.user):
-				self.workflow_state = "Created By Line Manager"
-			elif u'Employee' in frappe.get_roles(frappe.session.user):
-				self.workflow_state = "Pending"
+		if self.employee:
+			employee_user = frappe.get_value("Employee", filters={"name": self.employee}, fieldname="user_id")
+			if self.get('__islocal') and employee_user:
+				if u'CEO' in frappe.get_roles(employee_user):
+					self.workflow_state = "Created By CEO"
+				elif u'Director' in frappe.get_roles(employee_user):
+					self.workflow_state = "Created By Director"
+				elif u'Manager' in frappe.get_roles(employee_user):
+					self.workflow_state = "Created By Manager"
+				elif u'Line Manager' in frappe.get_roles(employee_user):
+					self.workflow_state = "Created By Line Manager"
+				elif u'Employee' in frappe.get_roles(employee_user):
+					self.workflow_state = "Pending"
 
+			if not employee_user and self.get('__islocal'):
+				self.workflow_state = "Pending"
+				
 	def validate_dates(self):
 		if getdate(self.cancel_date) >= getdate(self.to_date):
 			frappe.throw(_("Cancel date can not be greater or equal than end date"))
@@ -63,28 +68,46 @@ class CancelLeaveApplication(Document):
 	def validate_leave_cancelation(self):
 		leave_application = frappe.get_doc("Leave Application",{'name':self.leave_application})
 		if leave_application:
-			if getdate(self.cancel_date) < getdate(self.from_date):
-				if leave_application.docstatus == 1:
-					leave_application.flags.ignore_validate_update_after_submit = True
-				elif leave_application.docstatus == 2:
-					frappe.throw(_("Leave Application {0} is already canceled".format(self.leave_application)))
-				else:
-					leave_application = frappe.get_doc("Leave Application", self.leave_application)
-					leave_application.is_canceled = "Yes"
-					leave_application.workflow_state ='Canceled By Employee'
-					leave_application.save()
-					frappe.msgprint(_("Leave Application record {0} has been canceled").format("<a href='#Form/Leave Application/{0}'>{0}</a>".format(self.leave_application)))
-		# leave_doc=frappe.get_value("Leave Application",filters={"name":self.leave_application},fieldname="docstatus")
-		# if leave_doc==0:
-			elif getdate(self.cancel_date) >= getdate(self.from_date) and getdate(self.cancel_date) <= getdate(self.to_date):
-				leave_application.old_to_date = leave_application.to_date
-				leave_application.to_date= self.cancel_date
-				leave_application.is_canceled = 1
-				leave_application.total_leave_days = get_number_of_leave_days(self.employee, leave_application.leave_type, leave_application.from_date, 
-					self.cancel_date, leave_application.half_day)
-				leave_application.flags.ignore_validate_update_after_submit = True
-				leave_application.save()
-				frappe.msgprint(_("Leave Application to date {0} has been amended").format("<a href='#Form/Leave Application/{0}'>{0}</a>".format(self.leave_application)))			
+			frappe.db.sql('''
+				UPDATE `tabLeave Application`
+				SET 
+				
+				is_canceled=1,
+				docstatus=2,
+				workflow_state='Leave Canceled'
+				
+				WHERE name = %s ;
+				''', leave_application.name)
+			frappe.db.commit()
+			
+			#~ leave_application.is_canceled = 1
+			#~ leave_application.docstatus = 2
+			#~ leave_application.workflow_state ='Leave Canceled'
+			#~ leave_application.flags.ignore_validate_update_after_submit = True
+			#~ leave_application.flags.ignore_validate = True 
+			#~ leave_application.save()
+			#~ if getdate(self.cancel_date) < getdate(self.from_date):
+				#~ if leave_application.docstatus == 1:
+					#~ leave_application.flags.ignore_validate_update_after_submit = True
+				#~ elif leave_application.docstatus == 2:
+					#~ frappe.throw(_("Leave Application {0} is already canceled".format(self.leave_application)))
+				#~ else:
+					#~ leave_application = frappe.get_doc("Leave Application", self.leave_application)
+					#~ leave_application.is_canceled = "Yes"
+					#~ leave_application.workflow_state ='Canceled By Employee'
+					#~ leave_application.save()
+					#~ frappe.msgprint(_("Leave Application record {0} has been canceled").format("<a href='#Form/Leave Application/{0}'>{0}</a>".format(self.leave_application)))
+		#~ # leave_doc=frappe.get_value("Leave Application",filters={"name":self.leave_application},fieldname="docstatus")
+		#~ # if leave_doc==0:
+			#~ elif getdate(self.cancel_date) >= getdate(self.from_date) and getdate(self.cancel_date) <= getdate(self.to_date):
+				#~ leave_application.old_to_date = leave_application.to_date
+				#~ leave_application.to_date= self.cancel_date
+				#~ leave_application.is_canceled = 1
+				#~ leave_application.total_leave_days = get_number_of_leave_days(self.employee, leave_application.leave_type, leave_application.from_date, 
+					#~ self.cancel_date, leave_application.half_day)
+				#~ leave_application.flags.ignore_validate_update_after_submit = True
+				#~ leave_application.save()
+				#~ frappe.msgprint(_("Leave Application to date {0} has been amended").format("<a href='#Form/Leave Application/{0}'>{0}</a>".format(self.leave_application)))			
 
 	def add_leave_details(self):
 		la =frappe.get_doc('Leave Application',{'name' : self.leave_application})

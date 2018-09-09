@@ -53,7 +53,7 @@ def get_fiscal_years(transaction_date=None, fiscal_year=None, label="Date", verb
 		}, as_dict=as_dict)
 		if fycv :
 			throw(_("Transaction is made in Closed Fiscal Year")) 
-				
+
 	return fy
 
 def validate_fiscal_year(date, fiscal_year, label=_("Date"), doc=None):
@@ -739,20 +739,25 @@ def make_journal_entry(args):
 	:return: name of created Journal Entry
 	"""
 	def accounts_values():
+		if 'cost_center' in args:
+			cost_center = args['cost_center']
+		else:
+			cost_center = ""
+
 		return [
 			dict(
-				account=args['debit_account'], cost_center=args['cost_center'],
+				account=args['debit_account'], cost_center=cost_center,
 				party_type=args['party_type'] if args['voucher_type'] == 'Contra Entry' else '',
 				party=args['party'] if args['voucher_type'] == 'Contra Entry' else '',
-				debit_in_account_currency=args['paid_amount'],
-				credit_in_account_currency=0,
-			),
-			dict(
-				account=args['credit_account'], cost_center=args['cost_center'],
-				party_type=args['party_type'] if args['voucher_type'] == 'Bank Entry' else '',
-				party=args['party'] if args['voucher_type'] == 'Bank Entry' else '',
 				debit_in_account_currency=0,
 				credit_in_account_currency=args['paid_amount'],
+			),
+			dict(
+				account=args['credit_account'], cost_center=cost_center,
+				party_type=args['party_type'] if args['voucher_type'] == 'Bank Entry' else '',
+				party=args['party'] if args['voucher_type'] == 'Bank Entry' else '',
+				debit_in_account_currency=args['paid_amount'],
+				credit_in_account_currency=0,
 			)
 		]
 
@@ -760,9 +765,9 @@ def make_journal_entry(args):
 		args = json.loads(args)
 
 	# Make sure `voucher_type` is either Contra Entry or Bank Entry
-	if args['voucher_type'] not in ['Contra Entry', 'Bank Entry']:
+	if args['voucher_type'] not in ['Contra Entry']:
 		frappe.msgprint(
-			_('Voucher Type can only be Bank Entry or Contra Entry'),
+			_('Voucher Type can only be Contra Entry'),
 			title='Error', raise_exception=1
 		)
 
@@ -796,9 +801,22 @@ def make_journal_entry(args):
 	journal_entry.set('accounts', accounts_values())
 
 	journal_entry.submit()
-
+	# journal_entry.save()
+	pe = frappe.get_doc("Payment Entry", args['payment_entry'])
+	update_outstanding_amount(pe)
+	pe.db_set("docstatus", 2, update_modified=False)
 	return journal_entry.name
 
+def update_outstanding_amount(pe):
+	for d in pe.get("references"):
+		if (flt(d.allocated_amount))> 0:
+			if(d.reference_doctype) in ["Purchase Invoice", "Sales Invoice"]:
+				inv_doc = frappe.get_doc(d.reference_doctype, d.reference_name)
+				inv_doc.outstanding_amount = flt(d.allocated_amount) + flt(inv_doc.outstanding_amount)
+				inv_doc.save()
+
+			# if flt(d.allocated_amount) > flt(d.outstanding_amount):
+			# 	frappe.throw(_("Row #{0}: Allocated Amount cannot be greater than outstanding amount.").format(d.idx))
 
 @frappe.whitelist()
 def payment_is_returned(name, amount, posting_date):

@@ -62,17 +62,22 @@ def notify_status(doc, method=None):
 
 def get_party_status(doc):
 	'''return party status based on open documents'''
-	status = default_status[doc.doctype]
-	for doctype in status_depends_on[doc.doctype]:
-		filters = get_filters_for(doctype)
-		filters[doc.doctype.lower()] = doc.name
-		if filters:
-			open_count = frappe.get_all(doctype, fields='name', filters=filters, limit_page_length=1)
-			if len(open_count) > 0:
-				status = 'Open'
-				break
+	pass
+	# status = default_status[doc.doctype]
+	# for doctype in status_depends_on[doc.doctype]:
+	# 	filters = get_filters_for(doctype)
+	# 	try:
+	# 		filters[doc.doctype.lower()] = doc.name
+	# 	except:
+	# 		frappe.throw(str(type(filters).__name__))
 
-	return status
+	# 	if filters:
+	# 		open_count = frappe.get_all(doctype, fields='name', filters=filters, limit_page_length=1)
+	# 		if len(open_count) > 0:
+	# 			status = 'Open'
+	# 			break
+
+	# return status
 
 def update_status(doc):
 	'''Set status as open if there is any open notification'''

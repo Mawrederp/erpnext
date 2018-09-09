@@ -26,8 +26,8 @@ frappe.query_reports["Accounts Receivable"] = {
 			"fieldname":"ageing_based_on",
 			"label": __("Ageing Based On"),
 			"fieldtype": "Select",
-			"options": 'Posting Date' + NEWLINE + 'Due Date',
-			"default": "Posting Date"
+			"options": __('Posting Date') + __(NEWLINE) + __('Due Date'),
+			"default": __("Posting Date")
 		},
 		{
 			"fieldtype": "Break",

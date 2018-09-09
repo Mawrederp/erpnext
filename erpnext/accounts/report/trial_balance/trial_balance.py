@@ -227,14 +227,14 @@ def get_columns():
 		},
 		{
 			"fieldname": "opening_debit",
-			"label": _("Opening (Dr)"),
+			"label": (_("Opening") + " ("+ _("Dr")+")"),
 			"fieldtype": "Currency",
 			"options": "currency",
 			"width": 120
 		},
 		{
 			"fieldname": "opening_credit",
-			"label": _("Opening (Cr)"),
+			"label": (_("Opening") + " ("+ _("Cr")+")"),
 			"fieldtype": "Currency",
 			"options": "currency",
 			"width": 120
@@ -255,14 +255,14 @@ def get_columns():
 		},
 		{
 			"fieldname": "closing_debit",
-			"label": _("Closing (Dr)"),
+			"label": (_("Closing") + " ("+ _("Dr")+")"),
 			"fieldtype": "Currency",
 			"options": "currency",
 			"width": 120
 		},
 		{
 			"fieldname": "closing_credit",
-			"label": _("Closing (Cr)"),
+			"label": (_("Closing") + " ("+ _("Cr")+")"),
 			"fieldtype": "Currency",
 			"options": "currency",
 			"width": 120

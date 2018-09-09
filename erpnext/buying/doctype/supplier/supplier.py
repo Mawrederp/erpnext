@@ -44,6 +44,13 @@ class Supplier(TransactionBase):
 		if supp_master_name == 'Supplier Name':
 			self.name = self.supplier_name
 		else:
+			
+			if self.supplier_type == "Foreign":
+				self.naming_series = "FOS-.#####"
+			elif self.supplier_type == "Local":
+				self.naming_series = "LOS-.#####"
+			else :
+				self.naming_series = "OOS-.#####"
 			self.name = make_autoname(self.naming_series + '.#####')
 
 	def update_address(self):
@@ -66,6 +73,8 @@ class Supplier(TransactionBase):
 		if frappe.defaults.get_global_default('supp_master_name') == 'Naming Series':
 			if not self.naming_series:
 				msgprint(_("Series is mandatory"), raise_exception=1)
+			
+
 
 		validate_party_accounts(self)
 		self.status = get_party_status(self)

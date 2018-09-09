@@ -24,23 +24,15 @@ class SalarySlip(TransactionBase):
         self.get_days_of_month()
         self.validate_overtime()
         # self.validate_return_from_leave_deduction()
-        self.validate_business_trip_earning()
+        # self.validate_business_trip_earning()
         self.validate_training_trip_earning()
         self.validate_return_from_leave_deduction()
-        self.get_join_date_deducted_days()
+
+        if self.deduction_done != 1:
+        	self.get_join_date_deducted_days()
+
         self.status = self.get_status()
 
-
-        pan=frappe.get_value("Penalty",filters={'start_date':self.start_date,'end_date':self.end_date,'employee':self.employee, 'docstatus': 1}, fieldname="name")
-        if pan:
-            pen_doc=frappe.get_doc("Penalty",pan)   
-            pen_doc.flags.ignore_permissions = True
-            if pen_doc:
-                if pen_doc.penalty_type=="Amount":
-                    self.penalty_amount=pen_doc.amount
-                elif pen_doc.penalty_type=="Days":
-                    self.penalty_days=pen_doc.days_count
-        
         self.validate_dates()
         self.check_existing()
         self.get_date_details()
@@ -60,6 +52,20 @@ class SalarySlip(TransactionBase):
             if self.salary_slip_based_on_timesheet and (self.total_working_hours > int(max_working_hours)):
                 frappe.msgprint(_("Total working hours should not be greater than max working hours {0}").
                                 format(max_working_hours), alert=True)
+
+    def before_insert(self):
+        pan=frappe.get_value("Penalty",filters={'start_date':self.start_date,'end_date':self.end_date,'employee':self.employee, 'docstatus': 1}, fieldname="name")
+        if pan:
+            pen_doc=frappe.get_doc("Penalty",pan)   
+            pen_doc.flags.ignore_permissions = True
+            if pen_doc:
+                self.penalty_amount = pen_doc.amount
+
+                # if pen_doc.penalty_type=="Amount":
+                #     self.penalty_amount=pen_doc.amount
+                # elif pen_doc.penalty_type=="Days":
+                #     self.penalty_days=pen_doc.days_count
+
 
     def get_days_of_month(self):
         if self.start_date:
@@ -89,7 +95,7 @@ class SalarySlip(TransactionBase):
     def validate_business_trip_earning(self):
         emp_return_date= frappe.db.sql("""
             select from_date,cost_total,ticket_cost from `tabBusiness Trip` where 
-            employee='{0}' and docstatus=1 and 
+            employee='{0}' and docstatus=1 and payment_encashment = 'After Trip (Next Month Salary)' and 
             from_date between '{1}' and '{2}' order by from_date""".format(self.employee,self.start_date,self.end_date))
 
         if emp_return_date:
@@ -145,18 +151,45 @@ class SalarySlip(TransactionBase):
         # if self.get('__islocal'):
         #   self.set_deduction_for_return_from_leave(self.start_date, self.end_date)
 
+    # def get_join_date_deducted_days(self):
+    #     doj = self.get_emp_join_date()
+    #     if getdate(doj).month == getdate(self.start_date).month and getdate(doj).year == getdate(self.start_date).year:
+    #         date_dif = date_diff( str(getdate(doj).year)+'-'+str(getdate(doj).month)+'-'+'30' , doj)-1
+
+    #         frappe.throw(str(date_dif))
+    #         if date_dif > 0:
+            	
+    #             self.deducted_days = date_dif    
+    #             # ss = frappe.get_doc("Salary Structure", self.salary_structure)
+    #             # for doc in ss.get("earnings"):
+    #             #   if doc.get("salary_component") == "Basic":
+    #             #       doc.set("formula", "base-((base/30)*(jd_deducted_days))")
+
+    #             # ss.save(ignore_permissions=True)
+
+
+
     def get_join_date_deducted_days(self):
         doj = self.get_emp_join_date()
         if getdate(doj).month == getdate(self.start_date).month and getdate(doj).year == getdate(self.start_date).year:
-            date_dif = date_diff(doj, get_first_day(getdate(doj)))
-            if date_dif > 0:
-                self.jd_deducted_days = date_dif    
-                # ss = frappe.get_doc("Salary Structure", self.salary_structure)
-                # for doc in ss.get("earnings"):
-                #   if doc.get("salary_component") == "Basic":
-                #       doc.set("formula", "base-((base/30)*(jd_deducted_days))")
+            date_dif = getdate(get_last_day(getdate(doj))).day - date_diff(doj , get_first_day(getdate(doj)))
+            day_value = self.gross_pay/30
+            month_value_all = day_value*date_dif
+            gozi_deduction = 0
+            for i in  self.deductions:
+            	if i.salary_component=='GOSI':
+            		gozi_deduction = i.amount
+            		break
 
-                # ss.save(ignore_permissions=True)
+            total_all = month_value_all - gozi_deduction
+            total_deducted_days = self.gross_pay-total_all-gozi_deduction
+            self.append('deductions', {"salary_component": 'Deducted Days' ,"amount": str(round(total_deducted_days,1))})
+            self.deduction_done = 1
+
+
+
+
+
     def get_emp_join_date(self):
         """  Get Employee Joining Date"""
         date_of_joining=frappe.get_value('Employee',self.employee,'date_of_joining');
@@ -190,9 +223,8 @@ class SalarySlip(TransactionBase):
     #           pass
 
     def set_deduction_for_return_from_leave(self, start_date, end_date):
-
         rt = frappe.db.sql(""" select to_date, return_date from `tabReturn From Leave Statement` where docstatus = 1 and
-        employee = '{0}' and return_date between '{1}' and '{2}'""".format(self.employee, start_date, end_date), as_dict = True)
+        employee = '{0}' and return_date between '{1}' and '{2}'""".format(self.employee, self.start_date, self.end_date), as_dict = True)
 
         if rt:
             deducted_days = 0
@@ -374,10 +406,10 @@ class SalarySlip(TransactionBase):
             earnings.amount = self.hour_rate * self.total_working_hours
 
     def pull_emp_details(self):
-        emp = frappe.db.get_value("Employee", self.employee, ["bank_name", "bank_ac_no"], as_dict=1)
+        emp = frappe.db.get_value("Employee", self.employee, ["bank_name", "iban"], as_dict=1)
         if emp:
             self.bank_name = emp.bank_name
-            self.bank_account_no = emp.bank_ac_no
+            self.bank_account_no = emp.iban
 
 
     def get_leave_details(self, joining_date=None, relieving_date=None, lwp=None):

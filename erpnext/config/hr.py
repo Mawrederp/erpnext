@@ -91,6 +91,11 @@ def get_data():
 				},
 				{
 					"type": "doctype",
+					"name": "Hand Over",
+					"description":_("Hand Over")
+				},
+				{
+					"type": "doctype",
 					"name": "Financial Custody",
 					"description":_("Financial Custody"),
 				},
@@ -277,11 +282,11 @@ def get_data():
 					"name": "Business Trip",
 					"description":_("Business Trip"),
 				},
-				{
-					"type": "doctype",
-					"name": "Business Trip Exceptional Approval",
-					"description":_("Business Trip Exceptional Approval"),
-				},
+				# {
+				# 	"type": "doctype",
+				# 	"name": "Business Trip Exceptional Approval",
+				# 	"description":_("Business Trip Exceptional Approval"),
+				# },
 				{
 					"type": "doctype",
 					"name": "Trip Return and Reimbursement",

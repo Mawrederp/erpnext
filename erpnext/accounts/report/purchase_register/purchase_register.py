@@ -31,10 +31,10 @@ def execute(filters=None):
 		purchase_receipt = list(set(invoice_po_pr_map.get(inv.name, {}).get("purchase_receipt", [])))
 		project = list(set(invoice_po_pr_map.get(inv.name, {}).get("project", [])))
 
-		row = [inv.name, inv.posting_date, inv.supplier, inv.supplier_name,
-			supplier_details.get(inv.supplier),
-			inv.credit_to, inv.mode_of_payment, ", ".join(project), inv.bill_no, inv.bill_date, inv.remarks,
-			", ".join(purchase_order), ", ".join(purchase_receipt), company_currency]
+		row = [inv.name, inv.posting_date, _(inv.supplier), _(inv.supplier_name),
+			_(supplier_details.get(inv.supplier)),
+			inv.credit_to, inv.mode_of_payment, ", ".join(project), inv.bill_no, inv.bill_date, _(inv.remarks),
+			_(", ".join(purchase_order)), _(", ".join(purchase_receipt)), _(company_currency)]
 
 		# map expense values
 		base_net_total = 0

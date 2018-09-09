@@ -2,33 +2,38 @@
     {%= frappe.boot.letter_heads[frappe.defaults.get_default("letter_head")] %}
 </div>
 <h2 class="text-center">{%= __("Ordered Items To Be Billed") %}</h2>
-<h4 class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {%= filters.company %}</h4>
+<h4 class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {% if (frappe.boot.lang == "ar") { %}
+        {%= ("شركة تواري") %}
+         {% } else { %}
+         {%= __("Tawari") %}
+         {% }
+         %}</h4>
 <hr>
-<table class="table table-bordered">
+<table class="table table-bordered" {% if (frappe.boot.lang == "ar") { %} style="direction: rtl" {% } %}>
     <thead>
         <tr>
-            <th style="width: 20%">{%= __("Sales Order") %}</th>
-            <th style="width: 20%">{%= __("Suplier") %}</th>
-            <th style="width: 20%">{%= __("Project") %}</th>
-            <th style="width: 20%">{%= __("Amount") %}</th>
-            <th style="width: 20%">{%= __("Item Name") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 20%;text-align: right!important" {% } else { %} style="width: 20%" {% } %}>{%= __("Sales Order") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 20%;text-align: right!important" {% } else { %} style="width: 20%" {% } %}>{%= __("Suplier") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 20%;text-align: right!important" {% } else { %} style="width: 20%" {% } %}>{%= __("Project") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 20%;text-align: right!important" {% } else { %} style="width: 20%" {% } %}>{%= __("Amount") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 20%;text-align: right!important" {% } else { %} style="width: 20%" {% } %}>{%= __("Item Name") %}</th>
         </tr>
     </thead>
     <tbody>
      
         {% for(var i=0, l=data.length; i
         <l; i++) { %}  <tr>
-            <td>{%= data[i]["Sales Order"] %}</td>
-            <td>{%= data[i]["Suplier"] %}</td>
-            <td>{%= data[i]["Project"] %}</td>
-            <td>{%= data[i]["Amount"] %}</td>
-            <td>{%= data[i]["Item Name"] %}</td>
+            <td>{%= __(data[i][__("Sales Order")]) %}</td>
+            <td>{%= __(data[i][__("Suplier")]) %}</td>
+            <td>{%= __(data[i][__("Project")]) %}</td>
+            <td>{%= __(data[i][__("Amount")]) %}</td>
+            <td>{%=__(data[i][__("Item Name")]) %}</td>
             </tr>
            {% } %}
 
     </tbody>
 </table>
-<p class="text-right text-muted">Printed On {%= dateutil.str_to_user(dateutil.get_datetime_as_string()) %}</p>
+<p class="text-right text-muted">{%= __("Printed On") %}: {%= dateutil.str_to_user(dateutil.get_datetime_as_string()) %}</p>
 
 <br>
 

@@ -874,7 +874,7 @@
   }, 
   {
    "allow_bulk_edit": 0, 
-   "allow_on_submit": 0, 
+   "allow_on_submit": 1, 
    "bold": 0, 
    "collapsible": 0, 
    "columns": 0, 
@@ -893,7 +893,7 @@
    "no_copy": 0, 
    "oldfieldname": "conversion_rate", 
    "oldfieldtype": "Currency", 
-   "permlevel": 0, 
+   "permlevel": 1, 
    "precision": "9", 
    "print_hide": 1, 
    "print_hide_if_no_value": 0, 
@@ -2110,7 +2110,7 @@
   }, 
   {
    "allow_bulk_edit": 0, 
-   "allow_on_submit": 0, 
+   "allow_on_submit": 1, 
    "bold": 0, 
    "collapsible": 0, 
    "columns": 0, 
@@ -2575,7 +2575,7 @@
   }, 
   {
    "allow_bulk_edit": 0, 
-   "allow_on_submit": 0, 
+   "allow_on_submit": 1, 
    "bold": 0, 
    "collapsible": 0, 
    "columns": 0, 
@@ -3717,7 +3717,7 @@
   {
    "amend": 0, 
    "apply_user_permissions": 0, 
-   "cancel": 1, 
+   "cancel": 0, 
    "create": 1, 
    "delete": 0, 
    "email": 1, 
@@ -3731,7 +3731,7 @@
    "role": "Accounts User", 
    "set_user_permissions": 0, 
    "share": 1, 
-   "submit": 1, 
+   "submit": 0, 
    "write": 1
   }, 
   {

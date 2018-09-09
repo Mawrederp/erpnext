@@ -1,22 +1,33 @@
+
+<style>
+        .print-format{
+            max-width: 9.3in;
+        }
+    </style>
 <div style="margin-bottom: 7px;">
     {%= frappe.boot.letter_heads[frappe.defaults.get_default("letter_head")] %}
 </div>
 <h2 class="text-center">{%= __("Purchase Register") %}</h2>
-<h4 class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {%= filters.company %}</h4>
+<h4 class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {% if (frappe.boot.lang == "ar") { %}
+        {%= ("شركة تواري") %}
+         {% } else { %}
+         {%= __("Tawari") %}
+         {% }
+         %}</h4>
 <hr>
-<table class="table table-bordered">
+<table class="table table-bordered" {% if (frappe.boot.lang == "ar") { %} style="direction: rtl" {% } %}>
     <thead>
         <tr>
-            <th style="width: 10%">{%= __("Invoice") %}</th>
-            <th style="width: 10%">{%= __("Supplier Id") %}</th>
-            <th style="width: 10%">{%= __("Supplier Type") %}</th>
-            <th style="width: 10%">{%= __("Mode of Payment") %}</th>
-            <th style="width: 10%">{%= __("Bill No") %}</th>
-            <th style="width: 10%">{%= __("Purchase Order") %}</th>
-            <th style="width: 10%">{%= __("Purchase Receipt") %}</th>
-            <th style="width: 10%">{%= __("Net Total") %}</th>
-            <th style="width: 10%">{%= __("Total Tax") %}</th>
-            <th style="width: 10%">{%= __("Outstanding Amount") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>{%= __("Invoice") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>{%= __("Supplier Id") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>{%= __("Supplier Type") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>{%= __("Mode of Payment") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>{%= __("Bill No") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>{%= __("Purchase Order") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>{%= __("Purchase Receipt") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>{%= __("Net Total") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>{%= __("Total Tax") %}</th>
+            <th {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>{%= __("Outstanding Amount") %}</th>
 
         </tr>
     </thead>
@@ -24,22 +35,22 @@
      
         {% for(var i=0, l=data.length; i
         <l; i++) { %}  <tr>
-            <td>{%= data[i]["Invoice"] %}</td>
-            <td>{%= data[i]["Supplier Id"] %}</td>
-            <td>{%= data[i]["Supplier Type"] %}</td>
-            <td>{%= data[i]["Mode of Payment"] %}</td>
-            <td>{%= data[i]["Bill No"] %}</td>
-            <td>{%= data[i]["Purchase Order"] %}</td>
-            <td>{%= data[i]["Purchase Receipt"] %}</td>
-            <td>{%= data[i]["Net Total"] %}</td>
-            <td>{%= data[i]["Total Tax"] %}</td>
-            <td>{%= data[i]["Outstanding Amount"] %}</td>
+            <td>{%= __(data[i][__("Invoice")]) %}</td>
+            <td>{%= __(data[i][__("Supplier Id")]) %}</td>
+            <td>{%= __(data[i][__("Supplier Type")]) %}</td>
+            <td>{%= __(data[i][__("Mode of Payment")]) %}</td>
+            <td>{%= __(data[i][__("Bill No")]) %}</td>
+            <td>{%= __(data[i][__("Purchase Order")]) %}</td>
+            <td>{%= __(data[i][__("Purchase Receipt")]) %}</td>
+            <td>{%= __(data[i][__("Net Total")]) %}</td>
+            <td>{%= __(data[i][__("Total Tax")]) %}</td>
+            <td>{%= __(data[i][__("Outstanding Amount")]) %}</td>
             </tr>
            {% } %}
 
     </tbody>
 </table>
-<p class="text-right text-muted">Printed On {%= dateutil.str_to_user(dateutil.get_datetime_as_string()) %}</p>
+<p class="text-right text-muted">{%= __("Printed On") %}: {%= dateutil.str_to_user(dateutil.get_datetime_as_string()) %}</p>
 
 <br>
 

@@ -2,7 +2,7 @@
     {%= frappe.boot.letter_heads[frappe.defaults.get_default("letter_head")] %}
 </div>
 <h2 class="text-center">{%= __("Gross Profit") %}</h2>
-<h4 class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {%= filters.company %}</h4>
+<p class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {%= __(filters.company) %}</p>
 <hr>
 <table class="table table-bordered">
     <thead>
@@ -30,7 +30,7 @@
 
     </tbody>
 </table>
-<p class="text-right text-muted">Printed On {%= dateutil.str_to_user(dateutil.get_datetime_as_string()) %}</p>
+<p class="text-right text-muted">{%= __("Printed On") %}: {%= dateutil.str_to_user(dateutil.get_datetime_as_string()) %}</p>
 
 <br>
 

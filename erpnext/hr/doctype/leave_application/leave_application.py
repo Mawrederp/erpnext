@@ -108,17 +108,21 @@ class LeaveApplication(Document):
 	# 			self.set("approvals",app)
 
 	def validate_emp(self):
-		employee_user = frappe.get_value("Employee", filters = {"name": self.employee}, fieldname="user_id")
-		if self.get('__islocal') and employee_user:
-			if u'CEO' in frappe.get_roles(employee_user):
-				self.workflow_state = "Created By CEO"
-			elif u'Director' in frappe.get_roles(employee_user):
-				self.workflow_state = "Created By Director"
-			elif u'Manager' in frappe.get_roles(employee_user):
-					self.workflow_state = "Created By Manager"
-			elif u'Line Manager' in frappe.get_roles(employee_user):
-					self.workflow_state = "Created By Line Manager"
-			else:
+		if self.employee:
+			employee_user = frappe.get_value("Employee", filters = {"name": self.employee}, fieldname="user_id")
+			if self.get('__islocal') and employee_user:
+				if u'CEO' in frappe.get_roles(employee_user):
+					self.workflow_state = "Created By CEO"
+				elif u'Director' in frappe.get_roles(employee_user):
+					self.workflow_state = "Created By Director"
+				elif u'Manager' in frappe.get_roles(employee_user):
+						self.workflow_state = "Created By Manager"
+				elif u'Line Manager' in frappe.get_roles(employee_user):
+						self.workflow_state = "Created By Line Manager"
+				else:
+					self.workflow_state = "Pending"
+									
+			if not employee_user and self.get('__islocal'):
 				self.workflow_state = "Pending"
 
 
@@ -691,7 +695,7 @@ class LeaveApplication(Document):
 	def get_total_leaves_on_half_day(self):
 		return frappe.db.sql("""select sum(total_leave_days) from `tabLeave Application`
 			where employee = %(employee)s
-			and docstatus < 2
+			and docstatus = 1
 			and status in ("Open", "Approved")
 			and from_date = %(from_date)s
 			and to_date = %(to_date)s
@@ -904,11 +908,17 @@ def get_approvers(doctype, txt, searchfield, start, page_len, filters):
 	return approvers_list
 
 @frappe.whitelist()
-def get_monthly_accumulated_leave(from_date, to_date, leave_type, employee):
+def get_monthly_accumulated_leave(from_date, to_date, leave_type, employee, for_report=False):
 	allocation_records = get_leave_allocation_records(from_date, employee, leave_type)
 	if allocation_records:
 		applied_days = get_approved_leaves_for_period(employee, leave_type, allocation_records[employee][leave_type].from_date, to_date)
-		total_leave_days = get_number_of_leave_days(employee, leave_type, from_date, to_date)
+
+
+		if for_report:
+			total_leave_days=0
+		else:
+			total_leave_days = get_number_of_leave_days(employee, leave_type, from_date, to_date)			
+
 		date_dif = date_diff(to_date, allocation_records[employee][leave_type].from_date)
 		balance = ""
 		if leave_type == "Annual Leave - اجازة اعتيادية":
@@ -1157,16 +1167,16 @@ def hooked_leave_allocation_builder():
 					if getdate(add_years(emp.date_of_joining,1)) > getdate(nowdate()):
 						allocation_from_date = emp.date_of_joining
 						allocation_to_date = add_days(add_years(emp.date_of_joining,1),-1)
-						if emp.name == "EMP/1007":
-							print("sssss"  "  " + allocation_from_date)
+						# if emp.name == "EMP/1007":
+						# 	print("sssss"  "  " + allocation_from_date)
 					else:
 						day = "0" + str(getdate(emp.date_of_joining).day) if len(str(getdate(emp.date_of_joining).day)) == 1 else str(getdate(emp.date_of_joining).day)
 						month = "0" + str(getdate(emp.date_of_joining).month) if len(str(getdate(emp.date_of_joining).month)) == 1 else str(getdate(emp.date_of_joining).month)
 						year = str(getdate(nowdate()).year)
 						allocation_from_date = year + "-" + month + "-" + day
 						allocation_to_date = add_days(add_years(allocation_from_date,1),-1)
-						if emp.name == "EMP/1007":
-							print("mmmmm"+ "  " + allocation_from_date)
+						# if emp.name == "EMP/1007":
+						# 	print("mmmmm"+ "  " + allocation_from_date)
 
 					if lt.name == "Annual Leave - اجازة اعتيادية":
 						if getdate(nowdate()) > getdate(add_months(emp.date_of_joining,3)):

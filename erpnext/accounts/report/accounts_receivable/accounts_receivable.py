@@ -104,12 +104,12 @@ class ReceivablePayableReport(object):
 
 					# customer / supplier name
 					if party_naming_by == "Naming Series":
-						row += [self.get_party_name(gle.party_type, gle.party)]
+						row += ([self.get_party_name(gle.party_type, gle.party)])
 
 					# get due date
 					due_date = voucher_details.get(gle.voucher_no, {}).get("due_date", "")
 
-					row += [gle.voucher_type, gle.voucher_no, due_date]
+					row += [_(gle.voucher_type), gle.voucher_no, due_date]
 
 					# get supplier bill details
 					if args.get("party_type") == "Supplier":
@@ -121,7 +121,7 @@ class ReceivablePayableReport(object):
 					# invoiced and paid amounts
 					invoiced_amount = gle.get(dr_or_cr) if (gle.get(dr_or_cr) > 0) else 0
 					paid_amt = invoiced_amount - outstanding_amount
-					row += [invoiced_amount, paid_amt, outstanding_amount]
+					row += [(invoiced_amount), paid_amt, outstanding_amount]
 
 					# ageing data
 					entry_date = due_date if self.filters.ageing_based_on == "Due Date" else gle.posting_date
@@ -133,15 +133,15 @@ class ReceivablePayableReport(object):
 						row[-1]=row[-2]=row[-3]=row[-4]=0
 
 					if self.filters.get(scrub(args.get("party_type"))):
-						row.append(gle.account_currency)
+						row.append(_(gle.account_currency))
 					else:
-						row.append(company_currency)
+						row.append(_(company_currency))
 
 					# customer territory / supplier type
 					if args.get("party_type") == "Customer":
-						row += [self.get_territory(gle.party)]
+						row += [_(self.get_territory(gle.party))]
 					if args.get("party_type") == "Supplier":
-						row += [self.get_supplier_type(gle.party)]
+						row += [_(self.get_supplier_type(gle.party))]
 
 					row.append(gle.remarks)
 					data.append(row)
@@ -182,13 +182,13 @@ class ReceivablePayableReport(object):
 		return flt(gle.get(dr_or_cr)) - flt(gle.credit if gle.party_type == "Customer" else gle.debit) - payment_amount
 
 	def get_party_name(self, party_type, party_name):
-		return self.get_party_map(party_type).get(party_name, {}).get("customer_name" if party_type == "Customer" else "supplier_name") or ""
+		return _(self.get_party_map(party_type).get(party_name, {}).get("customer_name" if party_type == "Customer" else "supplier_name")) or ""
 
 	def get_territory(self, party_name):
-		return self.get_party_map("Customer").get(party_name, {}).get("territory") or ""
+		return _(self.get_party_map("Customer").get(party_name, {}).get("territory")) or ""
 
 	def get_supplier_type(self, party_name):
-		return self.get_party_map("Supplier").get(party_name, {}).get("supplier_type") or ""
+		return _(self.get_party_map("Supplier").get(party_name, {}).get("supplier_type")) or ""
 
 	def get_party_map(self, party_type):
 		if not hasattr(self, "party_map"):
