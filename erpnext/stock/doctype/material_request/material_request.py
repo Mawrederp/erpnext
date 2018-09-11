@@ -78,8 +78,8 @@ class MaterialRequest(BuyingController):
 		# self.validate_director()
 		self.validate_emp_requester()
 		self.validate_project_manager()
-		self.validate_project()
-		self.validate_project_items()
+		# self.validate_project()
+		# self.validate_project_items()
 		# self.set_title()
 		if self.get("__islocal") :
 				self.title = self.get_title()
