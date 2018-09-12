@@ -8,6 +8,7 @@ from frappe import _
 from frappe.utils import flt, getdate, add_months, get_last_day, fmt_money
 from frappe.model.naming import make_autoname
 from frappe.model.document import Document
+from frappe.model.mapper import get_mapped_doc
 
 class BudgetError(frappe.ValidationError): pass
 class DuplicateBudgetError(frappe.ValidationError): pass
@@ -182,3 +183,18 @@ def get_accumulated_monthly_budget(monthly_distribution, posting_date, fiscal_ye
 		dt = add_months(dt, 1)
 
 	return annual_budget * accumulated_percentage / 100
+
+
+@frappe.whitelist()
+def fetch_budget_template(source_name, target_doc=None):
+	#~ frappe.throw(_("{0} is mandatory").format(target_doc))
+	target_doc = get_mapped_doc("Budget Template", source_name, {
+		"Budget Template": {
+			"doctype": "Budget",
+		},
+		"Budget Account": {
+			"doctype": "Budget Account",
+		}
+	}, target_doc)
+
+	return target_doc
