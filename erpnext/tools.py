@@ -17,6 +17,53 @@ import datetime
 from datetime import date
 from dateutil.relativedelta import relativedelta
 
+
+
+
+
+def add_allocation_for_next_year():
+    length=frappe.db.sql("select count(name) from `tabEmployee` where status!='left' ")
+    emp=frappe.db.sql("select name,employee_name,department from `tabEmployee` where status!='left' ")
+    c=0
+    for i in range(length[0][0]):
+        leave_allocation=frappe.db.sql("select from_date,to_date,new_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type='Annual Leave - اجازة اعتيادية' order by creation desc ".format(emp[i][0]))
+        if leave_allocation:
+
+            next_allocation1 = datetime.datetime.strptime(str(leave_allocation[0][0]), '%Y-%m-%d')
+            next_allocation2 = datetime.datetime.strptime(str(leave_allocation[0][1]), '%Y-%m-%d')
+
+            first_next_year = date(next_allocation1.year, next_allocation1.month, next_allocation1.day) + relativedelta(years=+1)
+
+            second_next_year = date(next_allocation2.year, next_allocation2.month, next_allocation2.day) + relativedelta(years=+1)
+            
+            print first_next_year
+            print second_next_year
+            print emp[i][0]
+            print leave_allocation[0][2]
+
+            frappe.get_doc({
+                "doctype":"Leave Allocation",
+                "employee": emp[i][0],
+                "employee_name": emp[i][1],
+                "department": emp[i][2],
+                "leave_type": 'Annual Leave - اجازة اعتيادية',
+                "from_date": first_next_year,
+                "to_date": second_next_year,
+                # "carry_forward": cint(1),
+                "new_leaves_allocated": leave_allocation[0][2],
+                "docstatus": 1
+            }).insert(ignore_permissions=True)
+
+            
+            c+=1
+        
+       
+
+    print 'Count ',c
+
+
+
+
 def tst_emails():
     from frappe.core.doctype.communication.email import make
     content_msg_emp="test email send from tawari using tawari email"

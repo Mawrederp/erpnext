@@ -993,7 +993,7 @@ def has_approved_leave(leave_type, employee):
 def get_approved_leaves_for_period(employee, leave_type, from_date, to_date):
 	#"
 	leave_applications = frappe.db.sql("""
-		select employee, leave_type, from_date, to_date, total_leave_days
+		select name,employee, leave_type, from_date, to_date, total_leave_days
 		from `tabLeave Application`
 		where employee=%(employee)s and leave_type=%(leave_type)s
 			and docstatus=1 and status='Approved'
@@ -1010,15 +1010,31 @@ def get_approved_leaves_for_period(employee, leave_type, from_date, to_date):
 	leave_days = 0
 	for leave_app in leave_applications:
 		if leave_app.from_date >= getdate(from_date) and leave_app.to_date <= getdate(to_date):
-			leave_days += leave_app.total_leave_days
+			return_from_leave = frappe.db.sql(""" select name,from_date,return_date from `tabReturn From Leave Statement` where leave_application='{0}' and docstatus=1""".format(leave_app.name), as_dict=1)
+			if return_from_leave and len(return_from_leave) > 0:
+				print("HELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLO")
+				print("---------------------------------------------------------------------------------------------------------")
+				
+				print( date_diff(return_from_leave[0].return_date,return_from_leave[0].from_date) + 1)
+				leave_days += date_diff(return_from_leave[0].return_date,return_from_leave[0].from_date) + 1
+			else:
+				leave_days += leave_app.total_leave_days
 		else:
 			if leave_app.from_date < getdate(from_date):
 				leave_app.from_date = from_date
 			if leave_app.to_date > getdate(to_date):
 				leave_app.to_date = to_date
-
-			leave_days += get_number_of_leave_days(employee, leave_type,
-				leave_app.from_date, leave_app.to_date)
+			return_from_leave = frappe.db.sql(""" select name,from_date,return_date from `tabReturn From Leave Statement` where leave_application='{0}' and docstatus=1""".format(leave_app.name), as_dict=1)
+			if return_from_leave and len(return_from_leave) > 0:
+				print("HELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLO")
+				
+				print("---------------------------------------------------------------------------------------------------------")
+				print(return_from_leave)
+				print( date_diff(return_from_leave[0].return_date,return_from_leave[0].from_date) + 1)
+				leave_days += date_diff(return_from_leave[0].return_date,return_from_leave[0].from_date) + 1
+			else:
+				leave_days += get_number_of_leave_days(employee, leave_type,
+					leave_app.from_date, leave_app.to_date)
 
 	return leave_days
 
@@ -1343,48 +1359,52 @@ def create_return_from_leave_statement_after_leave():
 	for lp in lps:
 		emp_user = frappe.get_value("Employee", filters = {"name": lp.employee}, fieldname = "user_id")
 		rfls = frappe.get_value("Return From Leave Statement", filters = {"leave_application": lp.name}, fieldname = ["name"])
-		if not rfls and getdate(nowdate()) > getdate(lp.to_date): 
-			workflow_state = ""
-			if u'CEO' in frappe.get_roles(emp_user):
-				workflow_state = "Created By CEO"
-			elif u'Director' in frappe.get_roles(emp_user):
-				workflow_state = "Created By Director"
-			elif u'Manager' in frappe.get_roles(emp_user):
-				workflow_state = "Created By Manager"
-			elif u'Line Manager' in frappe.get_roles(emp_user):
-				workflow_state = "Created By Line Manager"
-			elif u'Employee' in frappe.get_roles(emp_user):
-				workflow_state = "Pending"
-			rfls_doc = frappe.get_doc({
-				"doctype": "Return From Leave Statement",
-				"leave_application": lp.name,
-				"employee": lp.employee,
-				"employee_name": lp.employee_name,
-				"owner": emp_user,
-				"total_leave_days": lp.total_leave_days,
-				"from_date": lp.from_date,
-				"to_date": lp.to_date,
-				"workflow_state": workflow_state
-				})
-			rfls_doc.flags.ignore_validate = True
-			rfls_doc.flags.ignore_mandatory = True
-			rfls_doc.save()
+		try:
+			if not rfls and getdate(nowdate()) > getdate(lp.to_date): 
+				workflow_state = ""
+				if u'CEO' in frappe.get_roles(emp_user):
+					workflow_state = "Created By CEO"
+				elif u'Director' in frappe.get_roles(emp_user):
+					workflow_state = "Created By Director"
+				elif u'Manager' in frappe.get_roles(emp_user):
+					workflow_state = "Created By Manager"
+				elif u'Line Manager' in frappe.get_roles(emp_user):
+					workflow_state = "Created By Line Manager"
+				elif u'Employee' in frappe.get_roles(emp_user):
+					workflow_state = "Pending"
+				rfls_doc = frappe.get_doc({
+					"doctype": "Return From Leave Statement",
+					"leave_application": lp.name,
+					"employee": lp.employee,
+					"employee_name": lp.employee_name,
+					"owner": emp_user,
+					"total_leave_days": lp.total_leave_days,
+					"from_date": lp.from_date,
+					"to_date": lp.to_date,
+					"workflow_state": workflow_state
+					})
+				rfls_doc.flags.ignore_validate = True
+				rfls_doc.flags.ignore_mandatory = True
+				rfls_doc.save()
 
-			frappe.db.commit()
-
+				frappe.db.commit()
+		
 			from frappe.core.doctype.communication.email import make
 			frappe.flags.sent_mail = None
 			content_msg="Please review your Return From Leave Statement a new application has been created"
-	 		prefered_email = frappe.get_value("Employee", filters = {"user_id": emp_user}, fieldname = "prefered_email")
+	 		prefered_email = frappe.get_value("Employee", filters = {"user_id": emp_user}, fieldname = "company_email")
 	
 	 		if prefered_email:
-
 				try:
-					make(subject = "Return from leave Statement", content=content_msg, recipients=prefered_email,
-						send_email=True, sender="erp@tawari.sa")
+					print(prefered_email)
+					print("Sending Message")
+					# make(subject = "Return from leave Statement", content=content_msg, recipients=prefered_email,
+					# 	send_email=True, sender="erp@tawari.sa")
 				except:
 					frappe.msgprint("could not send")
-
+		except frappe.exceptions.CancelledLinkError:
+			print("Canceled Document " + lp.name)
+			pass
 		# print nowdate()
 
 

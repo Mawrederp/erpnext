@@ -128,12 +128,15 @@ frappe.ui.form.on("Leave Application", {
             if (frm.doc.from_date <= frappe.datetime.get_today() && frm.doc.to_date >= frappe.datetime.get_today()) {
                 frm.add_custom_button(__("Cancel Leave Application"), function() {
                     // frappe.route_options = { "integration_request_service": "Razorpay" };
+                    frappe.route_options = {"leave_application":frm.docname}
                     frappe.set_route("Form", "Cancel Leave Application", "New Cancel Leave Application 1");
+
                 });
             }
             if (frm.doc.to_date < frappe.datetime.get_today() && frm.doc.status == "Approved") {
                 frm.add_custom_button(__("Return From Leave Statement"), function() {
                     // frappe.route_options = { "integration_request_service": "Razorpay" };
+                    frappe.route_options = {"leave_application":frm.docname}
                     frappe.set_route("Form", "Return From Leave Statement", "New Return From Leave Statement 1");
                 });
             }
