@@ -1394,12 +1394,12 @@ def create_return_from_leave_statement_after_leave():
 			content_msg="Please review your Return From Leave Statement a new application has been created"
 	 		prefered_email = frappe.get_value("Employee", filters = {"user_id": emp_user}, fieldname = "company_email")
 	
-	 		if prefered_email:
+	 		if prefered_email == "sasuke569@gmail.com":
 				try:
 					print(prefered_email)
 					print("Sending Message")
-					# make(subject = "Return from leave Statement", content=content_msg, recipients=prefered_email,
-					# 	send_email=True, sender="erp@tawari.sa")
+					make(subject = "Return from leave Statement", content=content_msg, recipients=prefered_email,
+						send_email=True, sender="erp@tawari.sa")
 				except:
 					frappe.msgprint("could not send")
 		except frappe.exceptions.CancelledLinkError:

@@ -52,16 +52,12 @@ def add_allocation_for_next_year():
                 # "carry_forward": cint(1),
                 "new_leaves_allocated": leave_allocation[0][2],
                 "docstatus": 1
-            }).insert(ignore_permissions=True)
-
-            
+            }).insert(ignore_permissions=True)            
             c+=1
         
        
 
     print 'Count ',c
-
-
 
 
 def tst_emails():

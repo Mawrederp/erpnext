@@ -60,3 +60,15 @@ frappe.ui.form.on('Budget', {
 		frm.toggle_reqd("project", frm.doc.budget_against=="Project");
 	}
 });
+
+cur_frm.cscript.budget_template = function(doc, dt, dn) {
+	doc.goals = [];
+	erpnext.utils.map_current_doc({
+		method: "erpnext.accounts.doctype.budget.budget.fetch_budget_template",
+		source_name: cur_frm.doc.budget_template,
+		frm: cur_frm
+	});
+}
+
+
+
