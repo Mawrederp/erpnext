@@ -1012,10 +1012,6 @@ def get_approved_leaves_for_period(employee, leave_type, from_date, to_date):
 		if leave_app.from_date >= getdate(from_date) and leave_app.to_date <= getdate(to_date):
 			return_from_leave = frappe.db.sql(""" select name,from_date,return_date from `tabReturn From Leave Statement` where leave_application='{0}' and docstatus=1""".format(leave_app.name), as_dict=1)
 			if return_from_leave and len(return_from_leave) > 0:
-				print("HELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLO")
-				print("---------------------------------------------------------------------------------------------------------")
-				
-				print( date_diff(return_from_leave[0].return_date,return_from_leave[0].from_date) + 1)
 				leave_days += date_diff(return_from_leave[0].return_date,return_from_leave[0].from_date) + 1
 			else:
 				leave_days += leave_app.total_leave_days
@@ -1026,11 +1022,6 @@ def get_approved_leaves_for_period(employee, leave_type, from_date, to_date):
 				leave_app.to_date = to_date
 			return_from_leave = frappe.db.sql(""" select name,from_date,return_date from `tabReturn From Leave Statement` where leave_application='{0}' and docstatus=1""".format(leave_app.name), as_dict=1)
 			if return_from_leave and len(return_from_leave) > 0:
-				print("HELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLO")
-				
-				print("---------------------------------------------------------------------------------------------------------")
-				print(return_from_leave)
-				print( date_diff(return_from_leave[0].return_date,return_from_leave[0].from_date) + 1)
 				leave_days += date_diff(return_from_leave[0].return_date,return_from_leave[0].from_date) + 1
 			else:
 				leave_days += get_number_of_leave_days(employee, leave_type,
@@ -1355,7 +1346,7 @@ def update_la_from_date():
 def create_return_from_leave_statement_after_leave():
 	''' Create return form leave docfield at 12 pm when the leave application ends  '''
 	
-	lps = frappe.get_list("Leave Application", filters = {"status": "Approved"}, fields = ["name", "to_date", "from_date", "employee", "employee_name", "department", "total_leave_days"])
+	lps = frappe.get_list("Leave Application", filters = {"status": "Approved","is_canceled":0}, fields = ["name", "to_date", "from_date", "employee", "employee_name", "department", "total_leave_days"])
 	for lp in lps:
 		emp_user = frappe.get_value("Employee", filters = {"name": lp.employee}, fieldname = "user_id")
 		rfls = frappe.get_value("Return From Leave Statement", filters = {"leave_application": lp.name}, fieldname = ["name"])
@@ -1392,14 +1383,14 @@ def create_return_from_leave_statement_after_leave():
 			from frappe.core.doctype.communication.email import make
 			frappe.flags.sent_mail = None
 			content_msg="Please review your Return From Leave Statement a new application has been created"
-	 		prefered_email = frappe.get_value("Employee", filters = {"user_id": emp_user}, fieldname = "company_email")
+	 		prefered_email = frappe.get_value("Employee", filters = {"user_id": emp_user}, fieldname = "prefered_email")
 	
-	 		if prefered_email == "sasuke569@gmail.com":
+	 		if prefered_email:
 				try:
-					print(prefered_email)
 					print("Sending Message")
 					make(subject = "Return from leave Statement", content=content_msg, recipients=prefered_email,
 						send_email=True, sender="erp@tawari.sa")
+					print("Sent")
 				except:
 					frappe.msgprint("could not send")
 		except frappe.exceptions.CancelledLinkError:

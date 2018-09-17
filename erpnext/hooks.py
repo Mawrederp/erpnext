@@ -227,7 +227,8 @@ scheduler_events = {
 		'erpnext.hr.doctype.leave_application.leave_application.hooked_leave_allocation_builder',
 		'erpnext.hr.doctype.leave_allocation.leave_allocation.check_max_allocation_balance',
 		'erpnext.hr.doctype.employee.employee.passport_validate_check',
-		'erpnext.hr.doctype.salary_structure.salary_structure.set_salary_structure_active'
+		'erpnext.hr.doctype.salary_structure.salary_structure.set_salary_structure_active',
+		'erpnext.hr.doctype.appraisal.appraisal.appraisal_creation_and_contacting_manager',
 	]
 }
 

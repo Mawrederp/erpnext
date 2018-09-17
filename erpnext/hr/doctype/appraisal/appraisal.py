@@ -198,3 +198,71 @@ def fetch_appraisal_template(source_name, target_doc=None):
 
     return target_doc
 
+def appraisal_creation_and_contacting_manager():
+        from frappe.utils.data import flt, nowdate, getdate, cint
+        import datetime
+        from datetime import date
+        from dateutil.relativedelta import relativedelta
+
+        length=frappe.db.sql("select count(name) from `tabEmployee` where status!='left' ")
+        emp=frappe.db.sql("select name,employee_name,department,date_of_joining,reports_to,employee_name_english from `tabEmployee` where status!='left' ")
+        for i in range(length[0][0]):
+            date_of_joining = datetime.datetime.strptime(str(emp[i][3]), '%Y-%m-%d')
+            next_two_monthes = date(date_of_joining.year, date_of_joining.month, date_of_joining.day) + relativedelta(months=+2)
+            if str(nowdate()) == str(next_two_monthes):
+                if (emp[i][5]):
+                    emp_name = emp[i][5]
+                else:
+                    emp_name = emp[i][1]
+                first_manager_email=None
+                second_manager_email=None
+                workflow_state = "Pending"
+                first_manager = frappe.db.sql("""select line_manager,manager,director,parent_department from `tabDepartment` where name='{0}'""".format(emp[i][2]),as_dict=True)
+                if(first_manager):
+                    second_manager = frappe.db.sql("""select line_manager,manager,director,parent_department from `tabDepartment` where name='{0}'""".format(first_manager[0].parent_department),as_dict=True)
+                    if(first_manager[0].line_manager):
+                        first_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name='{0}'""".format(str(first_manager[0].line_manager)))
+                    elif(first_manager[0].manager):
+                        first_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name='{0}'""".format(str(first_manager[0].manager)))
+                        workflow_state = "Created By Line Manager"
+                    elif(first_manager[0].director):
+                        first_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name='{0}'""".format(str(first_manager[0].director)))
+                        workflow_state = "Created By Manager"
+                    if(second_manager):
+                        if(second_manager[0].line_manager):
+                            second_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name='{0}'""".format(str(second_manager[0].line_manager)))
+                        elif(second_manager[0].manager):
+                            second_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name='{0}'""".format(str(second_manager[0].manager)))
+                        elif(second_manager[0].director):
+                            second_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name='{0}'""".format(str(second_manager[0].director)))
+                recipients = ""
+                if(first_manager_email):
+                    if(first_manager_email[0][0]):
+                        first_manager_email = first_manager_email[0][0]
+                        recipients +=(first_manager_email) + ", "
+                if(second_manager_email):
+                    if(second_manager_email[0][0]):
+                        second_manager_email = second_manager_email[0][0]
+                        recipients+=(second_manager_email) + ", " 
+                recipients = first_manager_email + ", "+second_manager_email
+                appraisal = frappe.get_doc({
+                    "doctype": "Appraisal",
+                    "employee": emp[i][0],
+                    "employee_name":emp[i][1],
+                    "period": "2018 - 2",
+                    "workflow_state":workflow_state,
+                    "department":emp[i][2]
+                    })
+                appraisal.flags.ignore_validate = True
+                appraisal.flags.ignore_mandatory = True
+                appraisal.save()
+                frappe.db.commit()
+                content_msg= "<html><H4>Employee {0} has been here for two monthes, Appraisal Form is created </H4><p> Please follow up at Link: <a href='http://146.185.148.222:8000/desk#Form/Appraisal/{1}'+> {1}</a> </p> </html>".format(emp_name,appraisal.name)
+                from frappe.core.doctype.communication.email import make
+                try:
+                    frappe.flags.sent_mail = None
+                    make(subject = "Appraisal Notification For Employee: " + emp_name, content=content_msg, recipients=recipients,
+                        send_email=True, sender="erp@tawari.sa")
+                    # break
+                except:
+                    print("appraisal_creation_and_contacting_manager"+ " method is broken")

@@ -250,6 +250,7 @@ class SalarySlip(TransactionBase):
         for key in ('earnings', 'deductions'):
             for struct_row in self._salary_structure_doc.get(key):
                 amount = self.eval_condition_and_formula(struct_row, data)
+                struct_row.depends_on_lwp = 1
                 if amount:
                     #~ amount = math.ceil(amount)'
                     # if struct_row.salary_component == "GOSY":
@@ -529,7 +530,7 @@ class SalarySlip(TransactionBase):
             self.calculate_component_amounts()
 
         disable_rounded_total = cint(frappe.db.get_value("Global Defaults", None, "disable_rounded_total"))
-
+        
         self.gross_pay = flt(self.arrear_amount) + flt(self.leave_encashment_amount)
         self.total_deduction = 0
 

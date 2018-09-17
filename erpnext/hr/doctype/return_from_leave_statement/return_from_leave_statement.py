@@ -15,6 +15,7 @@ class ReturnFromLeaveStatement(Document):
 		self.add_leave_details()
 		self.validate_dates()
 		self.validate_emp()
+		self.validate_leave_days()
 		if self.workflow_state:
 			if "Rejected" in self.workflow_state:
 				self.docstatus = 1
@@ -37,6 +38,12 @@ class ReturnFromLeaveStatement(Document):
 			leave_application.flags.ignore_validate_update_after_submit = True
 			leave_application.save()
 
+			
+	def validate_leave_days(self):
+		if getdate(self.return_date) < getdate(self.to_date):
+			self.total_leave_days =  (getdate(self.return_date) - getdate(self.from_date)).days
+			# frappe.msgprint("Total Leave Days Updated")
+			
 	def validate_emp(self):
 		if self.employee:
 			employee_user = frappe.get_value("Employee", filters={"name": self.employee}, fieldname="user_id")
@@ -55,7 +62,8 @@ class ReturnFromLeaveStatement(Document):
 			if not employee_user and self.get('__islocal'):
 				self.workflow_state = "Pending"
 
-
+	def return_date(self):
+		self.validate_leave_days()
 	def validate_dates(self):
 		if getdate(self.return_date) <= getdate(self.from_date):
 			frappe.throw(_("Return date can not be smaller or equal than from date"))
@@ -103,6 +111,10 @@ class ReturnFromLeaveStatement(Document):
 			self.total_leave_days = la.total_leave_days
 			self.leave_approver = la.leave_approver
 			self.leave_approver_name = la.leave_approver_name
+			self.validate_leave_days()
+			la.total_leave_days = self.total_leave_days
+			la.save()
+
 			#self.actual_departure_date = la.actual_departure_date
 			# self.from_date = la.from_date
 			# self.to_date = la.to_date
