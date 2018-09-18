@@ -5,9 +5,9 @@
 from __future__ import unicode_literals
 import frappe
 from frappe import _
-from frappe.utils import flt, getdate, nowdate
+from frappe.utils import flt, getdate, nowdate, date_diff
 from frappe.model.document import Document
-from erpnext.hr.doctype.leave_application.leave_application import get_number_of_leave_days
+from erpnext.hr.doctype.leave_application.leave_application import get_number_of_leave_days,get_holidays
 # from erpnext import get_user_employee
 
 class ReturnFromLeaveStatement(Document):
@@ -15,35 +15,51 @@ class ReturnFromLeaveStatement(Document):
 		self.add_leave_details()
 		self.validate_dates()
 		self.validate_emp()
-		self.validate_leave_days()
 		if self.workflow_state:
 			if "Rejected" in self.workflow_state:
 				self.docstatus = 1
 				self.docstatus = 2
 
-	def on_submit(self):
+	def before_submit(self):
 		self.validate_dates()
 		leave_application = frappe.get_doc("Leave Application",{'name':self.leave_application})
+		returns_for_leave_application = frappe.get_doc("Return From Leave Statement",{'leave_application':self.leave_application})
+		print leave_application.name
+		print("****************************************************************************************************")
 		if leave_application.status == "Returned":
+			leave_application.status = "Returned"
+			print(leave_application.status)
+			leave_application.save()
+			frappe.db.commit()
+			print(leave_application.status)
+			print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 			frappe.throw(_("This Leave Application is already returned"))
 		else:
+			print "Changing Status!!!!!!!!!!!!!!!!!!!!!!!!!"
+			print("///////////////////////////////////////////////////////////////////////////////////////////////////")
 			leave_application.return_date = self.return_date
-			leave_application.status = "Returned"
+			number_of_days = date_diff(leave_application.return_date, leave_application.from_date)
+			if not frappe.db.get_value("Leave Type", leave_application.leave_type, "include_holiday"):
+				number_of_days = flt(number_of_days) - flt(get_holidays(leave_application.employee, leave_application.from_date, leave_application.return_date))
+			leave_application.total_leave_days = number_of_days
+			self.total_leave_days = number_of_days
+			leave_application.flags.ignore_validate_update_after_submit = True
+			leave_application.save()
+			frappe.db.commit()
+
+			frappe.db.set_value("Leave Application", leave_application.name, "status", "Returned")
+
+			print(leave_application.status)
 			# leave_application.cancel_date_hijri= self.cancel_date
 			# leave_application.is_canceled = "Yes"
 			# leave_application.return_from_leave_statement = self.name
 			# employee = get_user_employee().name
 			# leave_application.total_leave_days = get_number_of_leave_days(leave_application.leave_type,
 			# 	leave_application.from_date, self.cancel_date,employee, leave_application.half_day)
-			leave_application.flags.ignore_validate_update_after_submit = True
-			leave_application.save()
+			
+			print(leave_application.status)
+			print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 
-			
-	def validate_leave_days(self):
-		if getdate(self.return_date) < getdate(self.to_date):
-			self.total_leave_days =  (getdate(self.return_date) - getdate(self.from_date)).days
-			# frappe.msgprint("Total Leave Days Updated")
-			
 	def validate_emp(self):
 		if self.employee:
 			employee_user = frappe.get_value("Employee", filters={"name": self.employee}, fieldname="user_id")
@@ -62,8 +78,7 @@ class ReturnFromLeaveStatement(Document):
 			if not employee_user and self.get('__islocal'):
 				self.workflow_state = "Pending"
 
-	def return_date(self):
-		self.validate_leave_days()
+
 	def validate_dates(self):
 		if getdate(self.return_date) <= getdate(self.from_date):
 			frappe.throw(_("Return date can not be smaller or equal than from date"))
@@ -111,10 +126,6 @@ class ReturnFromLeaveStatement(Document):
 			self.total_leave_days = la.total_leave_days
 			self.leave_approver = la.leave_approver
 			self.leave_approver_name = la.leave_approver_name
-			self.validate_leave_days()
-			la.total_leave_days = self.total_leave_days
-			la.save()
-
 			#self.actual_departure_date = la.actual_departure_date
 			# self.from_date = la.from_date
 			# self.to_date = la.to_date
