@@ -227,23 +227,23 @@ erpnext.stock.DeliveryNoteController = erpnext.selling.SellingController.extend(
 							}
 						})
 					}, __("Get items from"));
-					this.frm.add_custom_button(__('Sales Order Approval'),
-					function() {
-						map_current_doc_new({
-							method: "pmo.project_services.doctype.project_sales_order_approval.project_sales_order_approval.make_delivery_note",
-							source_doctype: "Project Sales Order Approval",
-							target: me.frm,
-							setters: {
-								customer: me.frm.doc.customer || undefined,
-							},
-							get_query_filters: {
-								docstatus: 0,
-								workflow_state: "Approved by PMO Director",
-								project_name: me.frm.doc.project || undefined,
-								date_delivered:  undefined
-							}
-						})
-					}, __("Get items from"));
+					// this.frm.add_custom_button(__('Sales Order Approval'),
+					// function() {
+					// 	map_current_doc_new({
+					// 		method: "pmo.project_services.doctype.project_sales_order_approval.project_sales_order_approval.make_delivery_note",
+					// 		source_doctype: "Project Sales Order Approval",
+					// 		target: me.frm,
+					// 		setters: {
+					// 			customer: me.frm.doc.customer || undefined,
+					// 		},
+					// 		get_query_filters: {
+					// 			docstatus: 0,
+					// 			workflow_state: "Approved by PMO Director",
+					// 			project_name: me.frm.doc.project || undefined,
+					// 			date_delivered:  undefined
+					// 		}
+					// 	})
+					// }, __("Get items from"));
 			}
 		}
 
