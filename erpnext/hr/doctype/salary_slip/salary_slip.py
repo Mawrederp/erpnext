@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: GNU General Public License v3. See license.txt
 
@@ -30,6 +31,9 @@ class SalarySlip(TransactionBase):
 
         if self.deduction_done != 1:
         	self.get_join_date_deducted_days()
+
+        if self.add_leave_without_pay_days != 1:
+            self.add_leave_without_pay_days()
 
         self.status = self.get_status()
 
@@ -71,6 +75,14 @@ class SalarySlip(TransactionBase):
         if self.start_date:
             last_day_of_month = get_last_day(getdate(self.start_date))
             self.days_of_month = getdate(last_day_of_month).day
+
+
+    def add_leave_without_pay_days(self):
+        leave_without_pay_days = frappe.db.sql("select sum(total_leave_days) from `tabLeave Application` where docstatus=1 and leave_type='Without Pay - غير مدفوعة' and employee='{0}' and from_date between '{1}' and '{2}' ".format(self.employee,self.start_date,self.end_date))
+        if leave_without_pay_days:
+            self.append('deductions', {"salary_component": i[0] ,"amount": i[1]})
+        self.add_leave_without_pay_days = 1
+
 
     def validate_overtime(self):
         prev_month = getdate(self.start_date).month - 1 if getdate(self.start_date).month - 1 > 0 else 12

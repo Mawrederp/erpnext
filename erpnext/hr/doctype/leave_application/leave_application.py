@@ -972,6 +972,36 @@ def get_number_of_leave_days(employee, leave_type, from_date, to_date, half_day=
 	return number_of_days
 
 @frappe.whitelist()
+def resume_leave_after_return(leave_application,resume_date):
+	# leave_application = frm.doc
+	
+	
+	from ast import literal_eval
+	leave_application = literal_eval(leave_application)
+	
+	print("------------------------------------------------------Leave APP----------------------------------------------------")
+	print(leave_application['leave_type'].encode('utf-8'))
+	employee = leave_application['employee']
+	leave_type = leave_application['leave_type']
+	from_date = leave_application['from_date']
+	to_date = leave_application['to_date']
+	return_date = leave_application['return_date']
+	# resume_date = leave_application.resume_date	
+	half_day = leave_application['half_day']
+	name = leave_application['name']
+	total_days_from_return_to_resume = get_number_of_leave_days(employee, leave_type, from_date, to_date, half_day)
+	total_leave_days_until_return = get_number_of_leave_days(employee, leave_type, from_date, return_date, half_day)
+	total_leave_days_from_resume_date_to_end = get_number_of_leave_days(employee, leave_type, resume_date,to_date, half_day)
+	filtered_total_leave_days = total_leave_days_until_return + total_leave_days_from_resume_date_to_end -1
+	monthly_accumulated_leave_balance = get_monthly_accumulated_leave(from_date, to_date, leave_type, employee, for_report=False)
+
+	frappe.db.set_value("Leave Application", name, "total_leave_days",filtered_total_leave_days)
+	frappe.db.set_value("Leave Application", name, "monthly_accumulated_leave_balance",monthly_accumulated_leave_balance)
+	
+	frappe.db.commit
+	return "Resumed"
+
+@frappe.whitelist()
 def get_leave_balance_on(employee, leave_type, date, allocation_records=None,
 		consider_all_leaves_in_the_allocation_period=False):
 	if allocation_records == None:
@@ -1351,7 +1381,7 @@ def create_return_from_leave_statement_after_leave():
 		emp_user = frappe.get_value("Employee", filters = {"name": lp.employee}, fieldname = "user_id")
 		rfls = frappe.get_value("Return From Leave Statement", filters = {"leave_application": lp.name}, fieldname = ["name"])
 		try:
-			if not rfls and getdate(nowdate()) > getdate(lp.to_date): 
+			if not rfls and getdate(nowdate()) == getdate(lp.to_date): 
 				workflow_state = ""
 				if u'CEO' in frappe.get_roles(emp_user):
 					workflow_state = "Created By CEO"

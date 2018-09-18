@@ -199,60 +199,24 @@ frappe.ui.form.on("Leave Application", {
                             console.log(frm.doc.return_date)
                             console.log( frappe.datetime.get_day_diff( values.resume_date , frm.doc.return_date) - 1 );
                             frappe.call({
-                                method: 'erpnext.hr.doctype.leave_application.leave_application.get_number_of_leave_days',
+                                method: 'erpnext.hr.doctype.leave_application.leave_application.resume_leave_after_return',
                                 args: {
-                                    "employee": frm.doc.employee,
-                                    "leave_type": frm.doc.leave_type,
-                                    "from_date": frm.doc.from_date,
-                                    "to_date": frm.doc.return_date,
-                                    "half_day": frm.doc.half_day
+                                    "leave_application": frm.doc,
+                                    "resume_date": values.resume_date
                                 },
                                 callback: function(result1) {
                                     if (result1 && result1.message) {
-                                        frappe.call({
-                                            method: 'erpnext.hr.doctype.leave_application.leave_application.get_number_of_leave_days',
-                                            args: {
-                                                "employee": frm.doc.employee,
-                                                "leave_type": frm.doc.leave_type,
-                                                "from_date": values.resume_date,
-                                                "to_date": frm.doc.to_date,
-                                                "half_day": frm.doc.half_day
-                                            },
-                                            callback: function(result2) {
-                                                if (result2 && result2.message) {
-                                                    console.log("Result")
-                                                    console.log( parseFloat(result1.message))
-                                                    console.log(parseFloat(result2.message))
-                                                    console.log(parseFloat(result1.message) +parseFloat(result2.message) - 1 )
-                                                    frm.set_value('total_leave_days', parseFloat(result1.message) +parseFloat(result2.message)-1 );
-                                                    frm.set_value('remaining_leave_days', parseFloat(frm.doc.leave_balance)-(parseFloat(result1.message) +parseFloat(result2.message)-1));
-                        
-                                                    frm.trigger("get_leave_balance");
-                                                    frm.trigger("calculate_monthly_accumulated_leave");
-                                                    frappe.call({
-                                                        method: 'erpnext.hr.doctype.leave_application.leave_application.get_number_of_leave_days',
-                                                        args: {
-                                                            "employee": frm.doc.employee,
-                                                            "leave_type": frm.doc.leave_type,
-                                                            "from_date": frm.doc.return_date,
-                                                            "to_date": values.resume_date,
-                                                            "half_day": frm.doc.half_day
-                                                        },
-                                                        callback: function(result3) {
-                                                            if (result3 && result3.message) {
-                                                                frm.set_value("monthly_accumulated_leave_balance",parseFloat(frm.doc.monthly_accumulated_leave_balance) + parseFloat(result3.message)-1 )
-
-                                                            }
-                                                        }
-                                                    });
-                                                }
-                                            }
-                                        });
+                                        console.log(result1.message)
+                                        if(result1.message === "Resumed"){
+                                            frappe.show_alert(__('Leave Application: ' + frm.doc.name + 'is now Resumed'))
+                                        }else{
+                                            // frappe.show_alert(__('Leave Application: ' + frm.doc.name + 'is NOT SURE'))
+                                        }
                                     }
                                 }
                             });
     
-                            frappe.show_alert(__('Leave Application: ' + frm.doc.name + 'is now Resumed'))
+                            
                         },
                         'Resume Leave Date Verification',
                         'Submit'
