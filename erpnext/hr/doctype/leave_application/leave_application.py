@@ -1351,7 +1351,7 @@ def create_return_from_leave_statement_after_leave():
 		emp_user = frappe.get_value("Employee", filters = {"name": lp.employee}, fieldname = "user_id")
 		rfls = frappe.get_value("Return From Leave Statement", filters = {"leave_application": lp.name}, fieldname = ["name"])
 		try:
-			if not rfls and getdate(nowdate()) > getdate(lp.to_date): 
+			if not rfls and getdate(nowdate()) == getdate(lp.to_date): 
 				workflow_state = ""
 				if u'CEO' in frappe.get_roles(emp_user):
 					workflow_state = "Created By CEO"
