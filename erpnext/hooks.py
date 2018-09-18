@@ -209,8 +209,7 @@ scheduler_events = {
 		"erpnext.controllers.recurring_document.create_recurring_documents",
 		'erpnext.hr.doctype.daily_work_summary_settings.daily_work_summary_settings.trigger_emails',
 		"erpnext.hr.doctype.governmental_documents.governmental_documents.hooked_validate_notification_message",
-		"erpnext.hr.doctype.employee.employee.hooked_validate_exp_dates",
-		'erpnext.hr.doctype.leave_application.leave_application.create_return_from_leave_statement_after_leave'
+		"erpnext.hr.doctype.employee.employee.hooked_validate_exp_dates"
 	],
 	"daily": [
 		"erpnext.stock.reorder_item.reorder_item",
@@ -229,6 +228,7 @@ scheduler_events = {
 		'erpnext.hr.doctype.employee.employee.passport_validate_check',
 		'erpnext.hr.doctype.salary_structure.salary_structure.set_salary_structure_active',
 		'erpnext.hr.doctype.appraisal.appraisal.appraisal_creation_and_contacting_manager',
+		'erpnext.hr.doctype.leave_application.leave_application.create_return_from_leave_statement_after_leave'
 	]
 }
 
