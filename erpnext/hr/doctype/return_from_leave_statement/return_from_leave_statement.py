@@ -5,9 +5,9 @@
 from __future__ import unicode_literals
 import frappe
 from frappe import _
-from frappe.utils import flt, getdate, nowdate
+from frappe.utils import flt, getdate, nowdate, date_diff
 from frappe.model.document import Document
-from erpnext.hr.doctype.leave_application.leave_application import get_number_of_leave_days
+from erpnext.hr.doctype.leave_application.leave_application import get_number_of_leave_days,get_holidays
 # from erpnext import get_user_employee
 
 class ReturnFromLeaveStatement(Document):
@@ -20,22 +20,45 @@ class ReturnFromLeaveStatement(Document):
 				self.docstatus = 1
 				self.docstatus = 2
 
-	def on_submit(self):
+	def before_submit(self):
 		self.validate_dates()
 		leave_application = frappe.get_doc("Leave Application",{'name':self.leave_application})
+		returns_for_leave_application = frappe.get_doc("Return From Leave Statement",{'leave_application':self.leave_application})
+		print leave_application.name
+		print("****************************************************************************************************")
 		if leave_application.status == "Returned":
+			leave_application.status = "Returned"
+			print(leave_application.status)
+			leave_application.save()
+			frappe.db.commit()
+			print(leave_application.status)
+			print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 			frappe.throw(_("This Leave Application is already returned"))
 		else:
+			print "Changing Status!!!!!!!!!!!!!!!!!!!!!!!!!"
+			print("///////////////////////////////////////////////////////////////////////////////////////////////////")
 			leave_application.return_date = self.return_date
-			leave_application.status = "Returned"
+			number_of_days = date_diff(leave_application.return_date, leave_application.from_date)
+			if not frappe.db.get_value("Leave Type", leave_application.leave_type, "include_holiday"):
+				number_of_days = flt(number_of_days) - flt(get_holidays(leave_application.employee, leave_application.from_date, leave_application.return_date))
+			leave_application.total_leave_days = number_of_days
+			self.total_leave_days = number_of_days
+			leave_application.flags.ignore_validate_update_after_submit = True
+			leave_application.save()
+			frappe.db.commit()
+
+			frappe.db.set_value("Leave Application", leave_application.name, "status", "Returned")
+
+			print(leave_application.status)
 			# leave_application.cancel_date_hijri= self.cancel_date
 			# leave_application.is_canceled = "Yes"
 			# leave_application.return_from_leave_statement = self.name
 			# employee = get_user_employee().name
 			# leave_application.total_leave_days = get_number_of_leave_days(leave_application.leave_type,
 			# 	leave_application.from_date, self.cancel_date,employee, leave_application.half_day)
-			leave_application.flags.ignore_validate_update_after_submit = True
-			leave_application.save()
+			
+			print(leave_application.status)
+			print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 
 	def validate_emp(self):
 		if self.employee:
