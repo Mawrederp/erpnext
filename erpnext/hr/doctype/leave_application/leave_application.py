@@ -917,7 +917,9 @@ def get_monthly_accumulated_leave(from_date, to_date, leave_type, employee, for_
 		if for_report:
 			total_leave_days=0
 		else:
-			total_leave_days = get_number_of_leave_days(employee, leave_type, from_date, to_date)			
+			total_leave_days = get_number_of_leave_days(employee, leave_type, from_date, to_date)
+
+		print str(total_leave_days) + "for employee " + str(employee)
 
 		date_dif = date_diff(to_date, allocation_records[employee][leave_type].from_date)
 		balance = ""
@@ -971,35 +973,34 @@ def get_number_of_leave_days(employee, leave_type, from_date, to_date, half_day=
 
 	return number_of_days
 
-@frappe.whitelist()
-def resume_leave_after_return(leave_application,resume_date):
-	# leave_application = frm.doc
+# @frappe.whitelist()
+# def resume_leave_after_return(leave_application,resume_date):
+# 	# leave_application = frm.doc
 	
 	
-	from ast import literal_eval
-	leave_application = literal_eval(leave_application)
+# 	from ast import literal_eval
+# 	leave_application = literal_eval(leave_application)
 	
-	print("------------------------------------------------------Leave APP----------------------------------------------------")
-	print(leave_application['leave_type'].encode('utf-8'))
-	employee = leave_application['employee']
-	leave_type = leave_application['leave_type']
-	from_date = leave_application['from_date']
-	to_date = leave_application['to_date']
-	return_date = leave_application['return_date']
-	# resume_date = leave_application.resume_date	
-	half_day = leave_application['half_day']
-	name = leave_application['name']
-	total_days_from_return_to_resume = get_number_of_leave_days(employee, leave_type, from_date, to_date, half_day)
-	total_leave_days_until_return = get_number_of_leave_days(employee, leave_type, from_date, return_date, half_day)
-	total_leave_days_from_resume_date_to_end = get_number_of_leave_days(employee, leave_type, resume_date,to_date, half_day)
-	filtered_total_leave_days = total_leave_days_until_return + total_leave_days_from_resume_date_to_end -1
-	monthly_accumulated_leave_balance = get_monthly_accumulated_leave(from_date, to_date, leave_type, employee, for_report=False)
-
-	frappe.db.set_value("Leave Application", name, "total_leave_days",filtered_total_leave_days)
-	frappe.db.set_value("Leave Application", name, "monthly_accumulated_leave_balance",monthly_accumulated_leave_balance)
+# 	print("------------------------------------------------------Leave APP----------------------------------------------------")
 	
-	frappe.db.commit
-	return "Resumed"
+# 	employee = leave_application['employee']
+# 	leave_type = leave_application['leave_type'].decode("utf-8")
+# 	from_date = leave_application['from_date']
+# 	to_date = leave_application['to_date']
+# 	return_date = leave_application['return_date']
+# 	# resume_date = leave_application.resume_date	
+# 	half_day = leave_application['half_day']
+# 	name = leave_application['name']
+# 	print(name)
+# 	total_days_from_return_to_resume = get_number_of_leave_days(employee, leave_type, from_date, to_date, half_day)
+# 	total_leave_days_until_return = get_number_of_leave_days(employee, leave_type, from_date, return_date, half_day)
+# 	total_leave_days_from_resume_date_to_end = get_number_of_leave_days(employee, leave_type, resume_date,to_date, half_day)
+# 	filtered_total_leave_days = total_leave_days_until_return + total_leave_days_from_resume_date_to_end -1
+# 	frappe.db.set_value("Leave Application", name, "total_leave_days",filtered_total_leave_days)
+# 	frappe.db.commit()
+# 	monthly_accumulated_leave_balance = get_monthly_accumulated_leave(from_date, return_date, leave_type, employee) + get_monthly_accumulated_leave(resume_date, to_date, leave_type, employee)
+# 	frappe.db.set_value("Leave Application", name, "monthly_accumulated_leave_balance",monthly_accumulated_leave_balance)
+# 	return "Resumed"
 
 @frappe.whitelist()
 def get_leave_balance_on(employee, leave_type, date, allocation_records=None,
