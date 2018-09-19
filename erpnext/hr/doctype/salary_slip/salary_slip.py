@@ -33,7 +33,7 @@ class SalarySlip(TransactionBase):
         	self.get_join_date_deducted_days()
 
         if self.add_leave_without_pay_days != 1:
-            self.add_leave_without_pay_days()
+            self.add_leave_without_pay_days_emp()
 
         self.status = self.get_status()
 
@@ -77,10 +77,13 @@ class SalarySlip(TransactionBase):
             self.days_of_month = getdate(last_day_of_month).day
 
 
-    def add_leave_without_pay_days(self):
+    def add_leave_without_pay_days_emp(self):
         leave_without_pay_days = frappe.db.sql("select sum(total_leave_days) from `tabLeave Application` where docstatus=1 and leave_type='Without Pay - غير مدفوعة' and employee='{0}' and from_date between '{1}' and '{2}' ".format(self.employee,self.start_date,self.end_date))
+        day_salary = self.gross_pay/30
         if leave_without_pay_days:
-            self.append('deductions', {"salary_component": i[0] ,"amount": i[1]})
+            total = leave_without_pay_days[0][0] * day_salary
+            if total:
+                self.append('deductions', {"salary_component": 'Leave Without Pay' ,"amount": total })
         self.add_leave_without_pay_days = 1
 
 
@@ -262,7 +265,7 @@ class SalarySlip(TransactionBase):
         for key in ('earnings', 'deductions'):
             for struct_row in self._salary_structure_doc.get(key):
                 amount = self.eval_condition_and_formula(struct_row, data)
-                struct_row.depends_on_lwp = 1
+                # struct_row.depends_on_lwp = 1
                 if amount:
                     #~ amount = math.ceil(amount)'
                     # if struct_row.salary_component == "GOSY":
@@ -444,10 +447,13 @@ class SalarySlip(TransactionBase):
             frappe.msgprint(_("Leave Without Pay does not match with approved Leave Application records"))
 
         self.total_working_days = working_days
-        self.leave_without_pay = lwp
+        # self.leave_without_pay = lwp
 
-        payment_days = flt(self.get_payment_days(joining_date, relieving_date)) - flt(lwp)
+        # payment_days = flt(self.get_payment_days(joining_date, relieving_date)) - flt(lwp)
+
+        payment_days = flt(self.total_working_days)-flt(self.leave_without_pay)
         self.payment_days = payment_days > 0 and payment_days or 0
+
 
     def get_payment_days(self, joining_date, relieving_date):
         start_date = getdate(self.start_date)
