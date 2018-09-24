@@ -18,6 +18,16 @@ from datetime import date
 from dateutil.relativedelta import relativedelta
 
 
+
+def edit_leave():
+    doc = frappe.get_doc("Leave Application","LAP/00178")
+    # doc.total_leave_days = doc.total_leave_days-1
+    doc.from_date = "2018-09-20"
+    doc.save(ignore_permissions=True)
+    print("*********************")
+
+
+
 def appraisal_creation_and_contacting_manager():
     length=frappe.db.sql("select count(name) from `tabEmployee` where status!='left' ")
     emp=frappe.db.sql("select name,employee_name,department,date_of_joining,reports_to,employee_name_english from `tabEmployee` where status!='left' ")
