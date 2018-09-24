@@ -151,6 +151,11 @@ def get_data():
 				},
 				{
 					"type": "doctype",
+					"name": "Leave Claim",
+					"description":_("Leave Claim")
+				},
+				{
+					"type": "doctype",
 					"name": "Exit Re Entry Application",
 					"description": _("Exit Re Entry Application."),
 				},
