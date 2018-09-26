@@ -35,28 +35,28 @@ class Department(Document):
 		# 	ups = frappe.get_list("User permission", filters = {user: user_emp, allow: 'Department'}, fields=[self.name], ignore_permissions=True)
 		# 	for up in ups:
 		if self.director:
-			user_emp = frappe.db.sql("select user_id from `tabEmployee` where name = '{0}'".format(self.director), as_dict = 1)
+			user_emp = frappe.db.sql("""select user_id from `tabEmployee` where name = "{0}" """.format(self.director), as_dict = 1)
 			user = frappe.get_doc("User", user_emp[0].user_id)
 			user.add_roles("Director")
 			frappe.permissions.add_user_permission ("Department", self.name, user_emp[0].user_id)
-			second_level_departments = frappe.db.sql("select name from `tabDepartment` where parent_department = '{0}'".format(self.name), as_dict = 1)
+			second_level_departments = frappe.db.sql("""select name from `tabDepartment` where parent_department = "{0}" """.format(self.name), as_dict = 1)
 			for dp in second_level_departments:
 				frappe.permissions.add_user_permission ("Department", dp.name, user_emp[0].user_id)
-				third_level_departments = frappe.db.sql("select name from `tabDepartment` where parent_department = '{0}'".format(dp.name), as_dict = 1)
+				third_level_departments = frappe.db.sql("""select name from `tabDepartment` where parent_department = "{0}" """.format(dp.name), as_dict = 1)
 				for dp in third_level_departments:
 					frappe.permissions.add_user_permission ("Department", dp.name,user_emp[0].user_id)
 
 		elif self.manager:
-			user_emp = frappe.db.sql("select user_id from `tabEmployee` where name = '{0}'".format(self.manager), as_dict = 1)
+			user_emp = frappe.db.sql("""select user_id from `tabEmployee` where name = "{0}" """.format(self.manager), as_dict = 1)
 			user = frappe.get_doc("User", user_emp[0].user_id)
 			user.add_roles("Manager")
 			frappe.permissions.add_user_permission ("Department", self.name, user_emp[0].user_id)
-			second_level_departments = frappe.db.sql("select name from `tabDepartment` where parent_department = '{0}'".format(self.name), as_dict = 1)
+			second_level_departments = frappe.db.sql("""select name from `tabDepartment` where parent_department = "{0}" """.format(self.name), as_dict = 1)
 			for dp in second_level_departments:
 				frappe.permissions.add_user_permission ("Department", dp.name, user_emp[0].user_id)
 
 		elif self.line_manager:
-			user_emp = frappe.db.sql("select user_id from `tabEmployee` where name = '{0}'".format(self.line_manager), as_dict = 1)
+			user_emp = frappe.db.sql("""select user_id from `tabEmployee` where name = "{0}" """.format(self.line_manager), as_dict = 1)
 			user = frappe.get_doc("User", user_emp[0].user_id)
 			user.add_roles("Line Manager")
 			frappe.permissions.add_user_permission ("Department", self.name, user_emp[0].user_id)
