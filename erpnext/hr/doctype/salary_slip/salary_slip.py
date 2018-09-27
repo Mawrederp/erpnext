@@ -79,8 +79,12 @@ class SalarySlip(TransactionBase):
 
     def add_leave_without_pay_days_emp(self):
         leave_without_pay_days = frappe.db.sql("select sum(total_leave_days) from `tabLeave Application` where docstatus=1 and leave_type='Without Pay - غير مدفوعة' and employee='{0}' and from_date between '{1}' and '{2}' ".format(self.employee,self.start_date,self.end_date))
-        day_salary = self.gross_pay/30
-        if leave_without_pay_days:
+        if self.gross_pay:
+            gross = self.gross_pay
+        else:
+            gross = 0
+        day_salary = gross/30
+        if leave_without_pay_days[0][0]:
             total = leave_without_pay_days[0][0] * day_salary
             if total:
                 self.append('deductions', {"salary_component": 'Leave Without Pay' ,"amount": total })
