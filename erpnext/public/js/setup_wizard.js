@@ -177,6 +177,7 @@ erpnext.setup.slides_settings = [
 					args: { "country": country },
 					callback: function (r) {
 						if (r.message) {
+							r.message.unshift("sa charity");
 							slide.get_input("chart_of_accounts").empty()
 								.add_options(r.message);
 

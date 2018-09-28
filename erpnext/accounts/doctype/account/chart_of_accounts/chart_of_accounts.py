@@ -7,6 +7,10 @@ from frappe.utils import cstr
 from unidecode import unidecode
 
 def create_charts(company, chart_template=None, existing_company=None):
+	if chart_template == "sa charity":
+		add_accs(company)
+		return
+
 	chart = get_chart(chart_template, existing_company)
 	if chart:
 		accounts = []
@@ -53,6 +57,36 @@ def create_charts(company, chart_template=None, existing_company=None):
 					_import_accounts(child, account.name, root_type)
 
 		_import_accounts(chart, None, None, root_account=True)
+
+def add_accs(company):
+
+    # frappe.get_value("Company","test", "abbr")
+    import sys
+    from frappe.utils.csvutils import read_csv_content
+    from frappe.core.doctype.data_import.importer import upload
+    # print "Importing " + path
+    with open('/home/ahmed/charity/apps/charity/charity/accounts.csv', "r") as infile:
+        rows = read_csv_content(infile.read())
+    abbr = frappe.get_value("Company",company, "abbr")
+    for row in rows:
+        acc = frappe.new_doc("Account")
+        print(row[2])
+        acc.update({
+            "account_name": row[0],
+            "parent_account": row[2] + ' - ' + abbr if row[2] else "",
+            "account_number": row[3],
+            "company": company,
+            "is_group": row[5],
+            "root_type": row[6],
+            "report_type": row[7],
+            "account_type": row[8],
+            "freeze_account": row[9]
+            })
+        acc.flags.ignore_mandatory = True
+        acc.flags.ignore_validate = True
+
+        acc.insert()
+        frappe.db.commit()
 
 def add_suffix_if_duplicate(account_name, account_number, accounts):
 	if account_number:
