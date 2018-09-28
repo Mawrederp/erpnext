@@ -51,7 +51,7 @@ def validate_filters(filters):
 		filters.to_date = filters.year_end_date
 
 def get_data(filters):
-	accounts = frappe.db.sql("""select name, account_number, parent_account, account_name, root_type, report_type, lft, rgt
+	accounts = frappe.db.sql("""select name,old_account_number, account_number, parent_account, account_name, root_type, report_type, lft, rgt
 		from `tabAccount` where company=%s order by lft""", filters.company, as_dict=True)
 	company_currency = erpnext.get_company_currency(filters.company)
 
@@ -180,6 +180,7 @@ def prepare_data(accounts, filters, total_row, parent_children_map, company_curr
 		has_value = False
 		row = {
 			"account": d.name,
+			"old_account_number": d.old_account_number,
 			"parent_account": d.parent_account,
 			"indent": d.indent,
 			"from_date": filters.from_date,
@@ -217,6 +218,12 @@ def get_columns():
 			"fieldtype": "Link",
 			"options": "Account",
 			"width": 300
+		},
+		{
+			"fieldname": "old_account_number",
+			"label": _("Old Account Number"),
+			"fieldtype": "Data",
+			"width": 120
 		},
 		{
 			"fieldname": "opening_debit",

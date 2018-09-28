@@ -754,7 +754,7 @@
   }, 
   {
    "allow_bulk_edit": 0, 
-   "allow_on_submit": 0, 
+   "allow_on_submit": 1, 
    "bold": 0, 
    "collapsible": 0, 
    "columns": 0, 
@@ -947,7 +947,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2017-05-02 13:52:30.884154", 
+ "modified": "2018-09-16 15:06:41.824316", 
  "modified_by": "Administrator", 
  "module": "HR", 
  "name": "Employee Loan", 
