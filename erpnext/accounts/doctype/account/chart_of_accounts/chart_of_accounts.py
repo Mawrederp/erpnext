@@ -71,7 +71,7 @@ def add_accs(company):
     abbr = frappe.get_value("Company",company, "abbr")
     for row in rows:
         acc = frappe.new_doc("Account")
-        print(row[2])
+        # print(row[2])
         acc.update({
             "account_name": row[0],
             "parent_account": row[2] + ' - ' + abbr if row[2] else "",
