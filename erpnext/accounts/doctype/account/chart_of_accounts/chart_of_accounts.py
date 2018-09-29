@@ -65,7 +65,8 @@ def add_accs(company):
     from frappe.utils.csvutils import read_csv_content
     from frappe.core.doctype.data_import.importer import upload
     # print "Importing " + path
-    with open('/home/ahmed/charity/apps/charity/charity/accounts.csv', "r") as infile:
+    path = os.path.join(os.path.dirname(__file__), "verified")
+    with open(os.path.join(path, 'accounts.csv'), "r") as infile:
         rows = read_csv_content(infile.read())
     abbr = frappe.get_value("Company",company, "abbr")
     for row in rows:

@@ -1,0 +1,803 @@
+المصروفات ,test,,4,,1,Expense,Profit and Loss,,No
+مصاريف جمع الأموال ,test,4 - المصروفات,44,,1,Expense,Profit and Loss,,No
+المستهلكات  ,test,44 - مصاريف جمع الأموال,443,,1,Expense,Profit and Loss,,No
+المنافع والخدمات والتأمين  ,test,44 - مصاريف جمع الأموال,445,,1,Expense,Profit and Loss,,No
+مزايا وحوافز ,test,44 - مصاريف جمع الأموال,442,,1,Expense,Profit and Loss,,No
+الصيانة والإصلاح  ,test,44 - مصاريف جمع الأموال,444,,1,Expense,Profit and Loss,,No
+الرواتب والأجور النقدية  ,test,44 - مصاريف جمع الأموال,441,,1,Expense,Profit and Loss,,No
+مصاريف الحوكمة ,test,4 - المصروفات,45,,1,Expense,Profit and Loss,,No
+المستهلكات  ,test,45 - مصاريف الحوكمة,453,,1,Expense,Profit and Loss,,No
+المنافع والخدمات والتأمين  ,test,45 - مصاريف الحوكمة,455,,1,Expense,Profit and Loss,,No
+مزايا وحوافز ,test,45 - مصاريف الحوكمة,452,,1,Expense,Profit and Loss,,No
+الصيانة والإصلاح  ,test,45 - مصاريف الحوكمة,454,,1,Expense,Profit and Loss,,No
+الرواتب والأجور النقدية  ,test,45 - مصاريف الحوكمة,451,,1,Expense,Profit and Loss,,No
+المصاريف العمومية والإدارية,test,4 - المصروفات,41,,1,Expense,Profit and Loss,,No
+تكاليف العاملين / الموظفين,test,41 - المصاريف العمومية والإدارية,411,,1,Expense,Profit and Loss,,No
+مزايا وحوافز,test,411 - تكاليف العاملين / الموظفين,4112,,1,Expense,Profit and Loss,,No
+تذاكر السفر,test,4112 - مزايا وحوافز,411202,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف حكومية - تأشيرات ,test,4112 - مزايا وحوافز,411211,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف حكومية - نقل كفالات  ,test,4112 - مزايا وحوافز,411212,,0,Expense,Profit and Loss,Expense Account,No
+تأمين العاملين ,test,4112 - مزايا وحوافز,411216,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف الطعام ,test,4112 - مزايا وحوافز,411208,,0,Expense,Profit and Loss,Expense Account,No
+رسوم المدارس ,test,4112 - مزايا وحوافز,411214,,0,Expense,Profit and Loss,Expense Account,No
+مكافات وحوافز أخرى ,test,4112 - مزايا وحوافز,411207,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف حكومية - تجديد إقامات ,test,4112 - مزايا وحوافز,411210,,0,Expense,Profit and Loss,Expense Account,No
+مكافات وحوافز سنوية ,test,4112 - مزايا وحوافز,411206,,0,Expense,Profit and Loss,Expense Account,No
+ملابس العمال الموحد,test,4112 - مزايا وحوافز,411215,,0,Expense,Profit and Loss,Expense Account,No
+بدل الانتداب,test,4112 - مزايا وحوافز,411219,,0,Expense,Profit and Loss,Expense Account,No
+الإجازات ,test,4112 - مزايا وحوافز,411201,,0,Expense,Profit and Loss,Expense Account,No
+تكاليف العاملين - عمالة مؤقته ,test,4112 - مزايا وحوافز,411217,,0,Expense,Profit and Loss,Expense Account,No
+تكاليف نقل العاملين بين المواقع ,test,4112 - مزايا وحوافز,411218,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف العلاج ,test,4112 - مزايا وحوافز,411204,,0,Expense,Profit and Loss,Expense Account,No
+تعويضات نهاية الخدمة ,test,4112 - مزايا وحوافز,411220,,0,Expense,Profit and Loss,Expense Account,No
+التأمين الطبي ,test,4112 - مزايا وحوافز,411203,,0,Expense,Profit and Loss,Expense Account,No
+بدل اثاث ,test,4112 - مزايا وحوافز,411209,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف حكومية - رسوم ,test,4112 - مزايا وحوافز,411213,,0,Expense,Profit and Loss,Expense Account,No
+مكافات وحوافز موسمية ,test,4112 - مزايا وحوافز,411205,,0,Expense,Profit and Loss,Expense Account,No
+الرواتب والأجور النقدية,test,411 - تكاليف العاملين / الموظفين,4111,,1,Expense,Profit and Loss,,No
+بدل اعاشة ,test,4111 - الرواتب والأجور النقدية,411105,,0,Expense,Profit and Loss,Expense Account,No
+الرواتب والأجور الاساسية ,test,4111 - الرواتب والأجور النقدية,411101,,0,Expense,Profit and Loss,Expense Account,No
+بدل المواصلات ,test,4111 - الرواتب والأجور النقدية,411103,,0,Expense,Profit and Loss,Expense Account,No
+بدل اتصال ,test,4111 - الرواتب والأجور النقدية,411104,,0,Expense,Profit and Loss,Expense Account,No
+بدل السكن ,test,4111 - الرواتب والأجور النقدية,411102,,0,Expense,Profit and Loss,Expense Account,No
+بدل طبيعة عمل ,test,4111 - الرواتب والأجور النقدية,411106,,0,Expense,Profit and Loss,Expense Account,No
+العمل الإضافي ,test,4111 - الرواتب والأجور النقدية,411107,,0,Expense,Profit and Loss,Expense Account,No
+تأمينات اجتماعية ,test,4111 - الرواتب والأجور النقدية,411108,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف الإستهلاك والاستنفاذ,test,41 - المصاريف العمومية والإدارية,413,,1,Expense,Profit and Loss,,No
+مصاريف الاستهلاك -  للموجودات الحيوية ,test,413 - مصاريف الإستهلاك والاستنفاذ,41314,,1,Expense,Profit and Loss,,No
+مصاريف الاستهلاك -   امهات الدواجن ,test,41314 - مصاريف الاستهلاك -  للموجودات الحيوية,4131403,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستهلاك -   الصيصان ,test,41314 - مصاريف الاستهلاك -  للموجودات الحيوية,4131404,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستهلاك -   الاشجار غير المثمرة ,test,41314 - مصاريف الاستهلاك -  للموجودات الحيوية,4131406,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستهلاك -  صغار الابقار,test,41314 - مصاريف الاستهلاك -  للموجودات الحيوية,4131402,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستهلاك -   أمهات الابقار,test,41314 - مصاريف الاستهلاك -  للموجودات الحيوية,4131401,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستهلاك -   الاشجار المثمرة ,test,41314 - مصاريف الاستهلاك -  للموجودات الحيوية,4131405,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستهلاك - أجهزة الاتصال والأمن والحماية,test,413 - مصاريف الإستهلاك والاستنفاذ,41309,,1,Expense,Profit and Loss,,No
+مصاريف الاستهلاك - الأثاث المكتبي ,test,413 - مصاريف الإستهلاك والاستنفاذ,41305,,1,Expense,Profit and Loss,,No
+مصاريف الاستهلاك -  السيارات ,test,413 - مصاريف الإستهلاك والاستنفاذ,41304,,1,Expense,Profit and Loss,,No
+مصروف إهلاك - سيارات مشتراة,test,41304 - مصاريف الاستهلاك -  السيارات,413041,,0,Expense,Profit and Loss,Depreciation,No
+مصروف إهلاك - سيارات ايجار منتهي بالتمليك ,test,41304 - مصاريف الاستهلاك -  السيارات,413043,,0,Expense,Profit and Loss,Depreciation,No
+مصروف إهلاك - سيارات متبرع بها ,test,41304 - مصاريف الاستهلاك -  السيارات,413042,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستهلاك - أدوات وأجهزة العرض ,test,413 - مصاريف الإستهلاك والاستنفاذ,41308,,1,Expense,Profit and Loss,,No
+مصاريف الاستهلاك - اللوحات المعدنية ,test,413 - مصاريف الإستهلاك والاستنفاذ,41312,,1,Expense,Profit and Loss,,No
+مصاريف الاستهلاك  -  الات ومعدات ,test,413 - مصاريف الإستهلاك والاستنفاذ,41303,,1,Expense,Profit and Loss,,No
+مصروف إهلاك - الات ومعدات ,test,41303 - مصاريف الاستهلاك  -  الات ومعدات,413031,,0,Expense,Profit and Loss,Depreciation,No
+مصروف إهلاك - الات ومعدات حاويات ومقطورات ,test,41303 - مصاريف الاستهلاك  -  الات ومعدات,413035,,0,Expense,Profit and Loss,Depreciation,No
+مصروف إهلاك - الات ومعدات ورش,test,41303 - مصاريف الاستهلاك  -  الات ومعدات,413034,,0,Expense,Profit and Loss,Depreciation,No
+مصروف إهلاك - الات ومعدات صناعية ,test,41303 - مصاريف الاستهلاك  -  الات ومعدات,413032,,0,Expense,Profit and Loss,Depreciation,No
+مصروف إهلاك - الات ومعدات صيانو وتشغيل ,test,41303 - مصاريف الاستهلاك  -  الات ومعدات,413033,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستهلاك - اجهزة التدفئة والتبريد والتهوية ,test,413 - مصاريف الإستهلاك والاستنفاذ,41311,,1,Expense,Profit and Loss,,No
+مصاريف الاستهلاك -- عدد وأدوات ,test,413 - مصاريف الإستهلاك والاستنفاذ,41307,,1,Expense,Profit and Loss,,No
+مصاريف الاستهلاك - الأراضي المطورة ,test,413 - مصاريف الإستهلاك والاستنفاذ,41301,,1,Expense,Profit and Loss,,No
+مصروف إهلاك - الأراضي المطورة - تحسينات اراضي ,test,41301 - مصاريف الاستهلاك - الأراضي المطورة,413011,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستهلاك - المباني ,test,413 - مصاريف الإستهلاك والاستنفاذ,41302,,1,Expense,Profit and Loss,,No
+مصروف إهلاك - تحسينات مباني مستأجرة,test,41302 - مصاريف الاستهلاك - المباني,413025,,0,Expense,Profit and Loss,Depreciation,No
+مصروف إهلاك - مباني على ارض مستأجرة ,test,41302 - مصاريف الاستهلاك - المباني,413023,,0,Expense,Profit and Loss,Depreciation,No
+مصروف إهلاك - تجسينات مباني مملوكة ,test,41302 - مصاريف الاستهلاك - المباني,413024,,0,Expense,Profit and Loss,Depreciation,No
+مصروف إهلاك - المباني المشتراة,test,41302 - مصاريف الاستهلاك - المباني,413021,,0,Expense,Profit and Loss,Depreciation,No
+مصروف إهلاك - المباني المتبرع بها ,test,41302 - مصاريف الاستهلاك - المباني,413022,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستهلاك  - الات ومعدات مكتبية,test,413 - مصاريف الإستهلاك والاستنفاذ,41306,,1,Expense,Profit and Loss,,No
+مصاريف الاستنفاذ - الأصول غير الملموسة ,test,413 - مصاريف الإستهلاك والاستنفاذ,41313,,1,Expense,Profit and Loss,,No
+"مصاريف الاستنفاذ - تكاليف ماقبل التشغيل "" مصاريف التأسيس """,test,41313 - مصاريف الاستنفاذ - الأصول غير الملموسة,4131303,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستنفاذ  - تكاليف تطوير المنتجات,test,41313 - مصاريف الاستنفاذ - الأصول غير الملموسة,4131305,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستنفاذ - رخص البرامج والأنظمة,test,41313 - مصاريف الاستنفاذ - الأصول غير الملموسة,4131309,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستنفاذ  - مصاريف الحملات الاعلانية المؤجلة,test,41313 - مصاريف الاستنفاذ - الأصول غير الملموسة,4131306,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستنفاذ - العلامات التجارية,test,41313 - مصاريف الاستنفاذ - الأصول غير الملموسة,4131302,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستنفاذ - براءات الإختراع,test,41313 - مصاريف الاستنفاذ - الأصول غير الملموسة,4131301,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستنفاذ - قيمة التقبيل - خلو رجل,test,41313 - مصاريف الاستنفاذ - الأصول غير الملموسة,4131308,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستنفاذ - مصاريف حقوق الامتياز,test,41313 - مصاريف الاستنفاذ - الأصول غير الملموسة,4131304,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستنفاذ  - مصاريف عمومية وإدارية مؤجلة,test,41313 - مصاريف الاستنفاذ - الأصول غير الملموسة,4131307,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستنفاذ - الخطط الاستراتيجية,test,41313 - مصاريف الاستنفاذ - الأصول غير الملموسة,4131310,,0,Expense,Profit and Loss,Depreciation,No
+مصاريف الاستهلاك - اجهزة الحاسب الالي وملحقاتها ,test,413 - مصاريف الإستهلاك والاستنفاذ,41310,,1,Expense,Profit and Loss,,No
+التكاليف التشغيلية ,test,41 - المصاريف العمومية والإدارية,412,,1,Expense,Profit and Loss,,No
+المستهلكات,test,412 - التكاليف التشغيلية,4121,,1,Expense,Profit and Loss,,No
+مستلزمات المطبخ ,test,4121 - المستهلكات,412107,,0,Expense,Profit and Loss,Expense Account,No
+الوقود والمحروقات ,test,4121 - المستهلكات,412103,,0,Expense,Profit and Loss,Expense Account,No
+مستهلكات أخرى,test,4121 - المستهلكات,412109,,0,Expense,Profit and Loss,Expense Account,No
+مستلزمات مكتبية,test,4121 - المستهلكات,412101,,0,Expense,Profit and Loss,Expense Account,No
+مواد التنظيف,test,4121 - المستهلكات,412106,,0,Expense,Profit and Loss,Expense Account,No
+أدوات مستهلكة مصروفة,test,4121 - المستهلكات,412108,,0,Expense,Profit and Loss,Expense Account,No
+مطبوعات ,test,4121 - المستهلكات,412104,,0,Expense,Profit and Loss,Expense Account,No
+تعبئة وتغليف,test,4121 - المستهلكات,412105,,0,Expense,Profit and Loss,Expense Account,No
+مستلزمات أنظمة المعلومات ,test,4121 - المستهلكات,412102,,0,Expense,Profit and Loss,Expense Account,No
+الصيانة والإصلاح ,test,412 - التكاليف التشغيلية,4122,,1,Expense,Profit and Loss,,No
+صيانة وإصلاح - أجهزة الاتصال والأمن والحماية,test,4122 - الصيانة والإصلاح,412209,,0,Expense,Profit and Loss,Expense Account,No
+صيانة وإصلاح - الأراضي والأراضي المطورة / المحسنة ,test,4122 - الصيانة والإصلاح,412201,,0,Expense,Profit and Loss,Expense Account,No
+صيانة وإصلاح - الات ومعدات ,test,4122 - الصيانة والإصلاح,412203,,1,Expense,Profit and Loss,,No
+الات ومعدات حاويات ومقطورات ,test,412203 - صيانة وإصلاح - الات ومعدات,4122035,,0,Expense,Profit and Loss,Expense Account,No
+الات ومعدات ورش,test,412203 - صيانة وإصلاح - الات ومعدات,4122034,,0,Expense,Profit and Loss,Expense Account,No
+الات ومعدات صيانو وتشغيل ,test,412203 - صيانة وإصلاح - الات ومعدات,4122033,,0,Expense,Profit and Loss,Expense Account,No
+الات ومعدات صناعية ,test,412203 - صيانة وإصلاح - الات ومعدات,4122032,,0,Expense,Profit and Loss,Expense Account,No
+الات ومعدات ,test,412203 - صيانة وإصلاح - الات ومعدات,4122031,,0,Expense,Profit and Loss,Expense Account,No
+صيانة وإصلاح - اللوحات المعدنية ,test,4122 - الصيانة والإصلاح,412212,,0,Expense,Profit and Loss,Expense Account,No
+صيانة وإصلاح - اجهزة الحاسب الالي وملحقاتها ,test,4122 - الصيانة والإصلاح,412210,,0,Expense,Profit and Loss,Expense Account,No
+صيانة وإصلاح - أدوات وأجهزة العرض ,test,4122 - الصيانة والإصلاح,412208,,0,Expense,Profit and Loss,Expense Account,No
+صيانة وإصلاح -المباني ,test,4122 - الصيانة والإصلاح,412202,,1,Expense,Profit and Loss,,No
+مباني على ارض مستأجرة ,test,412202 - صيانة وإصلاح -المباني,4122023,,0,Expense,Profit and Loss,Expense Account,No
+المباني  المشتراة ,test,412202 - صيانة وإصلاح -المباني,4122021,,0,Expense,Profit and Loss,Expense Account,No
+تجسينات مباني مملوكة ,test,412202 - صيانة وإصلاح -المباني,4122024,,0,Expense,Profit and Loss,Expense Account,No
+تحسينات مباني مستأجرة,test,412202 - صيانة وإصلاح -المباني,4122025,,0,Expense,Profit and Loss,Expense Account,No
+المباني المتبرع بها,test,412202 - صيانة وإصلاح -المباني,4122022,,0,Expense,Profit and Loss,Expense Account,No
+صيانة وإصلاح - الأثاث المكتبي ,test,4122 - الصيانة والإصلاح,412205,,0,Expense,Profit and Loss,Expense Account,No
+صيانة وإصلاح - السيارات ,test,4122 - الصيانة والإصلاح,412204,,1,Expense,Profit and Loss,,No
+أجور صيانة ,test,412204 - صيانة وإصلاح - السيارات,4122044,,0,Expense,Profit and Loss,Expense Account,No
+اطارات ,test,412204 - صيانة وإصلاح - السيارات,4122043,,0,Expense,Profit and Loss,Expense Account,No
+صيانة دورية ,test,412204 - صيانة وإصلاح - السيارات,4122042,,0,Expense,Profit and Loss,Expense Account,No
+قطع غيار ,test,412204 - صيانة وإصلاح - السيارات,4122041,,0,Expense,Profit and Loss,Expense Account,No
+صيانة وإصلاح - الات ومعدات مكتبية,test,4122 - الصيانة والإصلاح,412206,,0,Expense,Profit and Loss,Expense Account,No
+صيانة وإصلاح - عدد وأدوات ,test,4122 - الصيانة والإصلاح,412207,,0,Expense,Profit and Loss,Expense Account,No
+صيانة وإصلاح - اجهزة التدفئة والتبريد والتهوية ,test,4122 - الصيانة والإصلاح,412211,,0,Expense,Profit and Loss,Expense Account,No
+المنافع والخدمات والتأمين ,test,412 - التكاليف التشغيلية,4123,,1,Expense,Profit and Loss,,No
+تكاليف مهنية وإستشارات ,test,4123 - المنافع والخدمات والتأمين,412310,,1,Expense,Profit and Loss,,No
+مصاريف استشارات ,test,412310 - تكاليف مهنية وإستشارات,4123102,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف التدريب والتاهيل ,test,412310 - تكاليف مهنية وإستشارات,4123103,,0,Expense,Profit and Loss,Expense Account,No
+رسوم مهنية ,test,412310 - تكاليف مهنية وإستشارات,4123101,,0,Expense,Profit and Loss,Expense Account,No
+تكاليف مهنية - أخرى,test,412310 - تكاليف مهنية وإستشارات,4123104,,0,Expense,Profit and Loss,Expense Account,No
+تكاليف البريد والبرقيات ,test,4123 - المنافع والخدمات والتأمين,412304,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف الشحن ,test,4123 - المنافع والخدمات والتأمين,412306,,1,Expense,Profit and Loss,,No
+اجور تحميل وتنزيل ,test,4123 - المنافع والخدمات والتأمين,412307,,1,Expense,Profit and Loss,,No
+الهاتف والفاكس والإنترنت,test,4123 - المنافع والخدمات والتأمين,412303,,0,Expense,Profit and Loss,Expense Account,No
+الإيجارات,test,4123 - المنافع والخدمات والتأمين,412309,,1,Expense,Profit and Loss,,No
+إيجار ممتلكات - أراضي,test,412309 - الإيجارات,4123091,,0,Expense,Profit and Loss,Expense Account,No
+إيجار ممتلكات - مكاتب,test,412309 - الإيجارات,4123092,,0,Expense,Profit and Loss,Expense Account,No
+إيجارات معدات وآلالات,test,412309 - الإيجارات,4123096,,0,Expense,Profit and Loss,Expense Account,No
+"إيجار ممتلكات - أخرى "" يتم تحليلها "" ",test,412309 - الإيجارات,4123095,,0,Expense,Profit and Loss,Expense Account,No
+إيجارات معدات نقل ,test,412309 - الإيجارات,4123097,,0,Expense,Profit and Loss,Expense Account,No
+إيجار ممتلكات - مستودعات,test,412309 - الإيجارات,4123093,,0,Expense,Profit and Loss,Expense Account,No
+إيجار ممتلكات - منافذ بيعية (محلات),test,412309 - الإيجارات,4123094,,0,Expense,Profit and Loss,Expense Account,No
+إيجارات سيارات ,test,412309 - الإيجارات,4123098,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف التأمين ,test,4123 - المنافع والخدمات والتأمين,412305,,1,Expense,Profit and Loss,,No
+مصاريف التأمين - سيارات ,test,412305 - مصاريف التأمين,4123051,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف التأمين - الحريق,test,412305 - مصاريف التأمين,4123052,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف التأمين - السرقات,test,412305 - مصاريف التأمين,4123053,,0,Expense,Profit and Loss,Expense Account,No
+الكهرباء,test,4123 - المنافع والخدمات والتأمين,412301,,0,Expense,Profit and Loss,Expense Account,No
+منافع وخدمات - أخرى ,test,4123 - المنافع والخدمات والتأمين,412312,,1,Expense,Profit and Loss,,No
+دوريات وصحف ومجلات تخصصية ,test,412312 - منافع وخدمات - أخرى,41231202,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف اشتراكات وتصديقات ,test,412312 - منافع وخدمات - أخرى,41231201,,0,Expense,Profit and Loss,Expense Account,No
+الحملات الإعلانية,test,412312 - منافع وخدمات - أخرى,41231208,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف بنكية وعمولات,test,412312 - منافع وخدمات - أخرى,41231207,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف التراخيص ,test,412312 - منافع وخدمات - أخرى,41231203,,0,Expense,Profit and Loss,Expense Account,No
+العينات والهدايا,test,412312 - منافع وخدمات - أخرى,41231205,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف غرامات ومخالفات ,test,412312 - منافع وخدمات - أخرى,41231206,,0,Expense,Profit and Loss,Expense Account,No
+العروض الخاصة,test,412312 - منافع وخدمات - أخرى,41231210,,0,Expense,Profit and Loss,Expense Account,No
+تكاليف تسويقية - أخرى,test,412312 - منافع وخدمات - أخرى,41231211,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف الدعاية والاعلان ,test,412312 - منافع وخدمات - أخرى,41231204,,0,Expense,Profit and Loss,Expense Account,No
+اليافطات الإعلانية,test,412312 - منافع وخدمات - أخرى,41231209,,0,Expense,Profit and Loss,Expense Account,No
+المياه ومصاريف الصرف الصحي,test,4123 - المنافع والخدمات والتأمين,412302,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف الضيافة ,test,4123 - المنافع والخدمات والتأمين,412308,,0,Expense,Profit and Loss,Expense Account,No
+عقود الصيانة والتشغيل,test,4123 - المنافع والخدمات والتأمين,412311,,1,Expense,Profit and Loss,,No
+عقود  صيانة الات التصوير,test,412311 - عقود الصيانة والتشغيل,4123114,,0,Expense,Profit and Loss,Expense Account,No
+عقود الصيانة والتشغيل - النظافة ,test,412311 - عقود الصيانة والتشغيل,4123111,,0,Expense,Profit and Loss,Expense Account,No
+عقود الصيانة والتشغيل  - الأمن والحراسة ,test,412311 - عقود الصيانة والتشغيل,4123112,,0,Expense,Profit and Loss,Expense Account,No
+عقود صيانة المصاعد,test,412311 - عقود الصيانة والتشغيل,4123113,,0,Expense,Profit and Loss,Expense Account,No
+تكاليف تشغيلة أخرى ,test,412 - التكاليف التشغيلية,4124,,1,Expense,Profit and Loss,,No
+عجز / فائض النقدية,test,4124 - تكاليف تشغيلة أخرى,412403,,0,Expense,Profit and Loss,Expense Account,No
+سفريات عمل - دولية,test,4124 - تكاليف تشغيلة أخرى,412402,,0,Expense,Profit and Loss,Expense Account,No
+سفريات عمل - داخلية,test,4124 - تكاليف تشغيلة أخرى,412401,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف إدارية وعمومية  أخرى ,test,41 - المصاريف العمومية والإدارية,414,,1,Expense,Profit and Loss,,No
+خسائر استثمارات ,test,414 - مصاريف إدارية وعمومية  أخرى,4142,,1,Expense,Profit and Loss,,No
+خسائر استثمارات في الصناديق والمحافظ ,test,4142 - خسائر استثمارات,414203,,0,Expense,Profit and Loss,Round Off,No
+خسائر استثمارات متاحة للبيع ,test,4142 - خسائر استثمارات,414204,,0,Expense,Profit and Loss,Round Off,No
+خسائر استثمارات أخرى ,test,4142 - خسائر استثمارات,414207,,0,Expense,Profit and Loss,Round Off,No
+خسائر استثمارات مقتناة حتى تاريخ الاستحقاق ,test,4142 - خسائر استثمارات,414206,,0,Expense,Profit and Loss,Round Off,No
+خسائر استثمارات في شركات زميلة ,test,4142 - خسائر استثمارات,414202,,0,Expense,Profit and Loss,Round Off,No
+خسائر استثمارات مقتناة بغرض المتاجرة ,test,4142 - خسائر استثمارات,414205,,0,Expense,Profit and Loss,Round Off,No
+خسائراستثمارات عقارية ,test,4142 - خسائر استثمارات,414201,,0,Expense,Profit and Loss,Round Off,No
+مصاريف تمويلية ,test,414 - مصاريف إدارية وعمومية  أخرى,4143,,1,Expense,Profit and Loss,,No
+خسائر  بيع أصول ,test,414 - مصاريف إدارية وعمومية  أخرى,4141,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف المخصصات ,test,414 - مصاريف إدارية وعمومية  أخرى,4145,,1,Expense,Profit and Loss,,No
+مخصصات الاستثمار ,test,4145 - مصاريف المخصصات,41451,,0,Expense,Profit and Loss,Expense Account,No
+مخصصات د. م . في تحصيلها ,test,4145 - مصاريف المخصصات,41452,,0,Expense,Profit and Loss,Round Off,No
+مصاريف ديون معدومة أو المشكوك في تحصيلها,test,414 - مصاريف إدارية وعمومية  أخرى,4144,,1,Expense,Profit and Loss,,No
+ذمم مدينة معدومة - عملاء محافظ إقراضية ,test,4144 - مصاريف ديون معدومة أو المشكوك في تحصيلها,41442,,0,Expense,Profit and Loss,Round Off,No
+ذمم مدينة معدومة - أخرى,test,4144 - مصاريف ديون معدومة أو المشكوك في تحصيلها,41443,,0,Expense,Profit and Loss,Round Off,No
+ذمم مدينة معدومة - مدينون تجاريون ,test,4144 - مصاريف ديون معدومة أو المشكوك في تحصيلها,41441,,0,Expense,Profit and Loss,Round Off,No
+مصروفات  التحويلات واعادة التصنيف ,test,4 - المصروفات,46,,1,Expense,Profit and Loss,,No
+تحويلات وإعادة تصنيف - قيود اخرى ,test,46 - مصروفات  التحويلات واعادة التصنيف,4605,,0,Expense,Profit and Loss,Expense Account,No
+تحويلات وإعادة تصنيف - قيود إدارية ,test,46 - مصروفات  التحويلات واعادة التصنيف,4604,,0,Expense,Profit and Loss,Expense Account,No
+تحويلات وإعادة تصنيف - قيود استخدام ووقت ,test,46 - مصروفات  التحويلات واعادة التصنيف,4603,,0,Expense,Profit and Loss,Expense Account,No
+تحويلات وإعادة تصنيف - قيود وقت ,test,46 - مصروفات  التحويلات واعادة التصنيف,4602,,0,Expense,Profit and Loss,Expense Account,No
+تحويلات وإعادة تصنيف  - قيود استخدام ,test,46 - مصروفات  التحويلات واعادة التصنيف,4601,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف وتوزيعات عوائد الأوقاف ,test,4 - المصروفات,43,,1,Expense,Profit and Loss,,No
+المصروفات العمومية والإدارية - أوقاف,test,43 - مصاريف وتوزيعات عوائد الأوقاف,432,,1,Expense,Profit and Loss,,No
+المستهلكات  ,test,432 - المصروفات العمومية والإدارية - أوقاف,4323,,0,Expense,Profit and Loss,Expense Account,No
+المنافع والخدمات والتأمين  ,test,432 - المصروفات العمومية والإدارية - أوقاف,4325,,0,Expense,Profit and Loss,Expense Account,No
+مزايا وحوافز ,test,432 - المصروفات العمومية والإدارية - أوقاف,4322,,0,Expense,Profit and Loss,Expense Account,No
+الصيانة والإصلاح  ,test,432 - المصروفات العمومية والإدارية - أوقاف,4324,,0,Expense,Profit and Loss,Expense Account,No
+الرواتب والأجور النقدية  ,test,432 - المصروفات العمومية والإدارية - أوقاف,4321,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات النظارة ,test,43 - مصاريف وتوزيعات عوائد الأوقاف,431,,1,Expense,Profit and Loss,,No
+مخصصات واحتياطيات الأوقاف ,test,43 - مصاريف وتوزيعات عوائد الأوقاف,435,,1,Expense,Profit and Loss,,No
+مصاريف الإستهلاك والاستنفاذ للأصول الوقفية,test,43 - مصاريف وتوزيعات عوائد الأوقاف,433,,1,Expense,Profit and Loss,,No
+مصاريف الاستهلاك -  للموجودات الحيوية ,test,433 - مصاريف الإستهلاك والاستنفاذ للأصول الوقفية,4333,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف الاستهلاك للأصول الثابتة الوقفية ,test,433 - مصاريف الإستهلاك والاستنفاذ للأصول الوقفية,4331,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف الاستنفاذ - الأصول غير الملموسة ,test,433 - مصاريف الإستهلاك والاستنفاذ للأصول الوقفية,4332,,0,Expense,Profit and Loss,Expense Account,No
+توزيعات صافي الريع على المستفيدين,test,43 - مصاريف وتوزيعات عوائد الأوقاف,436,,1,Expense,Profit and Loss,,No
+مستفيدي الوقف - أسر محتاجة  ,test,436 - توزيعات صافي الريع على المستفيدين,43602,,0,Expense,Profit and Loss,Expense Account,No
+مستفيدي الوقف - حلقات التحفيظ  ,test,436 - توزيعات صافي الريع على المستفيدين,43603,,0,Expense,Profit and Loss,Expense Account,No
+مستفيدي الوقف - أيتام ,test,436 - توزيعات صافي الريع على المستفيدين,43601,,0,Expense,Profit and Loss,Expense Account,No
+مستفيدي الوقف - تعليم ,test,436 - توزيعات صافي الريع على المستفيدين,43604,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف أوقاف متنوعة  ,test,43 - مصاريف وتوزيعات عوائد الأوقاف,434,,1,Expense,Profit and Loss,,No
+خسائر استثمارات وقفية,test,434 - مصاريف أوقاف متنوعة,4342,,1,Expense,Profit and Loss,,No
+خسائر استثمارات أخرى ,test,4342 - خسائر استثمارات وقفية,434207,,0,Expense,Profit and Loss,Expense Account,No
+خسائراستثمارات  وقفية عقارية ,test,4342 - خسائر استثمارات وقفية,434201,,0,Expense,Profit and Loss,Expense Account,No
+خسائر استثمارات  وقفية في الصناديق والمحافظ ,test,4342 - خسائر استثمارات وقفية,434203,,0,Expense,Profit and Loss,Expense Account,No
+خسائر استثمارات وقفية في شركات زميلة ,test,4342 - خسائر استثمارات وقفية,434202,,0,Expense,Profit and Loss,Expense Account,No
+خسائر استثمارات فائض غلة الوقف ,test,4342 - خسائر استثمارات وقفية,434204,,0,Expense,Profit and Loss,Expense Account,No
+خسائر  بيع واستبدال  أصول وقفية,test,434 - مصاريف أوقاف متنوعة,4341,,1,Expense,Profit and Loss,,No
+تكلفة البضاعة المباعة ,test,434 - مصاريف أوقاف متنوعة,4344,,1,Expense,Profit and Loss,,No
+مصاريف ديون معدومة أو المشكوك في تحصيلها,test,434 - مصاريف أوقاف متنوعة,4343,,1,Expense,Profit and Loss,,No
+ذمم مدينة معدومة - أخرى,test,4343 - مصاريف ديون معدومة أو المشكوك في تحصيلها,434303,,0,Expense,Profit and Loss,Expense Account,No
+ذمم مدينة معدومة - عملاء محافظ إقراضية وقفية,test,4343 - مصاريف ديون معدومة أو المشكوك في تحصيلها,434302,,0,Expense,Profit and Loss,Expense Account,No
+ذمم مدينة معدومة - مدينون تجاريون ,test,4343 - مصاريف ديون معدومة أو المشكوك في تحصيلها,434301,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف البرامج والأنشطة ,test,4 - المصروفات,42,,1,Expense,Profit and Loss,,No
+مصاريف برامج وانشطة غير مقيدة  ,test,42 - مصاريف البرامج والأنشطة,422,,1,Expense,Profit and Loss,,No
+مصروفات برامج وأنشطة غير مقيدة - نقدية,test,422 - مصاريف برامج وانشطة غير مقيدة,4221,,1,Expense,Profit and Loss,,No
+مصروفات برامج وأنشطة غير مقيدة  - عينية ,test,422 - مصاريف برامج وانشطة غير مقيدة,4222,,1,Expense,Profit and Loss,,No
+مصروفات برامج وأنشطة غير مقيدة  - خدمات تطوعية ( مقابل تبرعات التطوع ),test,422 - مصاريف برامج وانشطة غير مقيدة,4223,,1,Expense,Profit and Loss,,No
+مصاريف التشغيل المحملة على النشاط ,test,42 - مصاريف البرامج والأنشطة,423,,1,Expense,Profit and Loss,,No
+المستهلكات  ,test,423 - مصاريف التشغيل المحملة على النشاط,42303,,1,Expense,Profit and Loss,,No
+المنافع والخدمات والتأمين  ,test,423 - مصاريف التشغيل المحملة على النشاط,42305,,1,Expense,Profit and Loss,,No
+مزايا وحوافز ,test,423 - مصاريف التشغيل المحملة على النشاط,42302,,1,Expense,Profit and Loss,,No
+الصيانة والإصلاح  ,test,423 - مصاريف التشغيل المحملة على النشاط,42304,,1,Expense,Profit and Loss,,No
+الرواتب والأجور النقدية  ,test,423 - مصاريف التشغيل المحملة على النشاط,42301,,1,Expense,Profit and Loss,,No
+مصاريف برامج وانشطة  مقيدة ,test,42 - مصاريف البرامج والأنشطة,421,,1,Expense,Profit and Loss,,No
+مصاريف برامج وانشطة عينية مقيدة ,test,421 - مصاريف برامج وانشطة  مقيدة,4213,,1,Expense,Profit and Loss,,No
+مصروفات  عينية - دور نسائية ,test,4213 - مصاريف برامج وانشطة عينية مقيدة,4213004,,0,Expense,Profit and Loss,Stock Adjustment,No
+مصروفات  عينية - ادوية طبية ,test,4213 - مصاريف برامج وانشطة عينية مقيدة,4213007,,0,Expense,Profit and Loss,Stock Adjustment,No
+مصروفات عينية - زكاة ,test,4213 - مصاريف برامج وانشطة عينية مقيدة,4213001,,0,Expense,Profit and Loss,Stock Adjustment,No
+مصروفات عينية - مساعدات زواج ,test,4213 - مصاريف برامج وانشطة عينية مقيدة,4213006,,0,Expense,Profit and Loss,Stock Adjustment,No
+مصروفات  عينية - أيتام ,test,4213 - مصاريف برامج وانشطة عينية مقيدة,4213002,,0,Expense,Profit and Loss,Stock Adjustment,No
+مصروفات  عينية - اندية شبابية ,test,4213 - مصاريف برامج وانشطة عينية مقيدة,4213005,,0,Expense,Profit and Loss,Stock Adjustment,No
+مصروفات  عينية - أسر محتاجة ,test,4213 - مصاريف برامج وانشطة عينية مقيدة,4213003,,0,Expense,Profit and Loss,Stock Adjustment,No
+مصروفات مقيدة - المنح  الحكومي ,test,421 - مصاريف برامج وانشطة  مقيدة,4215,,1,Expense,Profit and Loss,,No
+مصروفات - المنح الحكومي - البحوث والمؤازرة,test,4215 - مصروفات مقيدة - المنح  الحكومي,421509,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات - المنح الحكومي - تأسيس,test,4215 - مصروفات مقيدة - المنح  الحكومي,421501,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات - المنح الحكومي - الدعم الاجتماعي ,test,4215 - مصروفات مقيدة - المنح  الحكومي,421506,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات - المنح الحكومي - التميز المؤسسي ,test,4215 - مصروفات مقيدة - المنح  الحكومي,421503,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات - المنح الحكومي - دعم التشغيل ,test,4215 - مصروفات مقيدة - المنح  الحكومي,421502,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات - المنح الحكومي - مشروعات المرافق,test,4215 - مصروفات مقيدة - المنح  الحكومي,421508,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات - المنح الحكومي - المنتجات المالية والتمويلية,test,4215 - مصروفات مقيدة - المنح  الحكومي,421510,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات - المنح الحكومي - دعم القطاع ,test,4215 - مصروفات مقيدة - المنح  الحكومي,421505,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات - المنح الحكومي - الاستدامة المالية ,test,4215 - مصروفات مقيدة - المنح  الحكومي,421504,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات - المنح الحكومي - التدريب والتعليم ,test,4215 - مصروفات مقيدة - المنح  الحكومي,421507,,0,Expense,Profit and Loss,Expense Account,No
+مصاريف برامج وانشطة نقدية مقيدة ,test,421 - مصاريف برامج وانشطة  مقيدة,4212,,1,Expense,Profit and Loss,,No
+كفالة أسرة محتاجة,test,4212 - مصاريف برامج وانشطة نقدية مقيدة,4212005,,0,Expense,Profit and Loss,Expense Account,No
+كفالة معاق,test,4212 - مصاريف برامج وانشطة نقدية مقيدة,4212006,,0,Expense,Profit and Loss,Expense Account,No
+إعانات زواج ,test,4212 - مصاريف برامج وانشطة نقدية مقيدة,4212007,,0,Expense,Profit and Loss,Expense Account,No
+مساعدات ,test,4212 - مصاريف برامج وانشطة نقدية مقيدة,4212002,,0,Expense,Profit and Loss,Expense Account,No
+كفالات أيتام,test,4212 - مصاريف برامج وانشطة نقدية مقيدة,4212001,,0,Expense,Profit and Loss,Expense Account,No
+السلة الغذائية ,test,4212 - مصاريف برامج وانشطة نقدية مقيدة,4212004,,0,Expense,Profit and Loss,Expense Account,No
+برامج موسمية,test,4212 - مصاريف برامج وانشطة نقدية مقيدة,4212003,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات مقيدة - خدمات تطوعية ( مقابل ايرادات التطوع ),test,421 - مصاريف برامج وانشطة  مقيدة,4214,,1,Expense,Profit and Loss,,No
+مصروفات  خدمات تطوعية - ساعات استشارية,test,4214 - مصروفات مقيدة - خدمات تطوعية ( مقابل ايرادات التطوع ),4214002,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات  خدمات تطوعية - عيادات طبية,test,4214 - مصروفات مقيدة - خدمات تطوعية ( مقابل ايرادات التطوع ),4214003,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات  خدمات تطوعية - تدريب وتأهيل ,test,4214 - مصروفات مقيدة - خدمات تطوعية ( مقابل ايرادات التطوع ),4214004,,0,Expense,Profit and Loss,Expense Account,No
+مصروفات خدمات تطوعية - ( اسم النشاط  ),test,4214 - مصروفات مقيدة - خدمات تطوعية ( مقابل ايرادات التطوع ),4214001,,0,Expense,Profit and Loss,Expense Account,No
+مصارف الزكاة الشرعية,test,421 - مصاريف برامج وانشطة  مقيدة,4211,,1,Expense,Profit and Loss,,No
+ الإيرادات,test,,3,,1,Income,Profit and Loss,,No
+ايرادات وتبرعات اوقاف,test,3 - الإيرادات,33,,1,Income,Profit and Loss,,No
+ارباح استثمارات وقفية ,test,33 - ايرادات وتبرعات اوقاف,3304,,1,Income,Profit and Loss,,No
+ارباح استثمارات وقفية - وقف  ,test,3304 - ارباح استثمارات وقفية,330402,,0,Income,Profit and Loss,Income Account,No
+ارباح استثمارات فائض الغلة ,test,3304 - ارباح استثمارات وقفية,330403,,0,Income,Profit and Loss,Income Account,No
+إيرادات - ريع أوقاف ,test,33 - ايرادات وتبرعات اوقاف,3303,,1,Income,Profit and Loss,,No
+تبرعات نقدية  لبناء أو شراء أوقاف ,test,33 - ايرادات وتبرعات اوقاف,3301,,1,Income,Profit and Loss,,No
+وقف -  ( اسم الوقف ) ,test,3301 - تبرعات نقدية  لبناء أو شراء أوقاف,330103,,0,Income,Profit and Loss,Income Account,No
+وقف الخير ,test,3301 - تبرعات نقدية  لبناء أو شراء أوقاف,330102,,0,Income,Profit and Loss,Income Account,No
+وقف بر الوالدين ,test,3301 - تبرعات نقدية  لبناء أو شراء أوقاف,330101,,0,Income,Profit and Loss,Income Account,No
+تبرعات عينية أوقاف ,test,33 - ايرادات وتبرعات اوقاف,3302,,1,Income,Profit and Loss,,No
+تبرعات عينية - وقف ... ( اسم الوقف ) ,test,3302 - تبرعات عينية أوقاف,330202,,0,Income,Profit and Loss,Income Account,No
+تبرعات عينية - لصالح وقف - ( اسم الوقف ) ,test,3302 - تبرعات عينية أوقاف,330203,,0,Income,Profit and Loss,Income Account,No
+ايرادات وتبرعات غير مقيدة ,test,3 - الإيرادات,32,,1,Income,Profit and Loss,,No
+تبرعات وهبات غير مقيدة - عينية,test,32 - ايرادات وتبرعات غير مقيدة,3202,,1,Income,Profit and Loss,,No
+تبرعات وهبات غير مقيدة - خدمات تطوعية ,test,32 - ايرادات وتبرعات غير مقيدة,3203,,1,Income,Profit and Loss,,No
+تبرعات تخفيض التزام ( خصم ممنوح ),test,32 - ايرادات وتبرعات غير مقيدة,3204,,1,Income,Profit and Loss,,No
+تبرعات  وهبات غير مقيدة - نقدية,test,32 - ايرادات وتبرعات غير مقيدة,3201,,1,Income,Profit and Loss,,No
+التبرع العام ,test,3201 - تبرعات  وهبات غير مقيدة - نقدية,320101,,0,Income,Profit and Loss,Income Account,No
+الاستقطاعات ( الأوامر المستديمة ),test,3201 - تبرعات  وهبات غير مقيدة - نقدية,320102,,0,Income,Profit and Loss,Income Account,No
+ايرادات غير مقيدة ,test,32 - ايرادات وتبرعات غير مقيدة,3205,,1,Income,Profit and Loss,,No
+عوائد شراكات محافظ اقراضية ,test,3205 - ايرادات غير مقيدة,320506,,0,Income,Profit and Loss,Income Account,No
+ايرادات دورات ,test,3205 - ايرادات غير مقيدة,320508,,0,Income,Profit and Loss,Income Account,No
+ارباح استثمارات ,test,3205 - ايرادات غير مقيدة,320503,,0,Income,Profit and Loss,Income Account,No
+الاشتراكات ,test,3205 - ايرادات غير مقيدة,320501,,0,Income,Profit and Loss,Income Account,No
+ايرادات تأجير ,test,3205 - ايرادات غير مقيدة,320507,,0,Income,Profit and Loss,Income Account,No
+رسوم ,test,3205 - ايرادات غير مقيدة,320505,,0,Income,Profit and Loss,Income Account,No
+ارباح بيع اصول ثابته ,test,3205 - ايرادات غير مقيدة,320504,,0,Income,Profit and Loss,Income Account,No
+مبيعات السلع والخدمات ,test,3205 - ايرادات غير مقيدة,320502,,0,Income,Profit and Loss,Income Account,No
+ايرادات وتبرعات مقيدة ,test,3 - الإيرادات,31,,1,Income,Profit and Loss,,No
+تبرعات وهبات  مقيدة - المنح  الحكومي ,test,31 - ايرادات وتبرعات مقيدة,3105,,1,Income,Profit and Loss,,No
+المنح الحكومي - البحوث والمؤازرة,test,3105 - تبرعات وهبات  مقيدة - المنح  الحكومي,3105009,,0,Income,Profit and Loss,Income Account,No
+المنح الحكومي - دعم التشغيل ,test,3105 - تبرعات وهبات  مقيدة - المنح  الحكومي,3105002,,0,Income,Profit and Loss,Income Account,No
+المنح الحكومي - مشروعات المرافق,test,3105 - تبرعات وهبات  مقيدة - المنح  الحكومي,3105008,,0,Income,Profit and Loss,Income Account,No
+المنح الحكومي - دعم القطاع ,test,3105 - تبرعات وهبات  مقيدة - المنح  الحكومي,3105005,,0,Income,Profit and Loss,Income Account,No
+المنح الحكومي - التميز المؤسسي ,test,3105 - تبرعات وهبات  مقيدة - المنح  الحكومي,3105003,,0,Income,Profit and Loss,Income Account,No
+المنح الحكومي - المنتجات المالية والتمويلية,test,3105 - تبرعات وهبات  مقيدة - المنح  الحكومي,3105010,,0,Income,Profit and Loss,Income Account,No
+المنح الحكومي - تأسيس,test,3105 - تبرعات وهبات  مقيدة - المنح  الحكومي,3105001,,0,Income,Profit and Loss,Income Account,No
+المنح الحكومي - الدعم الاجتماعي ,test,3105 - تبرعات وهبات  مقيدة - المنح  الحكومي,3105006,,0,Income,Profit and Loss,Income Account,No
+المنح الحكومي - الاستدامة المالية ,test,3105 - تبرعات وهبات  مقيدة - المنح  الحكومي,3105004,,0,Income,Profit and Loss,Income Account,No
+المنح الحكومي - التدريب والتعليم ,test,3105 - تبرعات وهبات  مقيدة - المنح  الحكومي,3105007,,0,Income,Profit and Loss,Income Account,No
+زكاة ,test,31 - ايرادات وتبرعات مقيدة,3101,,1,Income,Profit and Loss,,No
+زكاة,test,3101 - زكاة,310101,,0,Income,Profit and Loss,Income Account,No
+تبرعات وهبات مقيدة - عينية,test,31 - ايرادات وتبرعات مقيدة,3103,,1,Income,Profit and Loss,,No
+تبرعات عينية - مساعدات زواج ,test,3103 - تبرعات وهبات مقيدة - عينية,3103006,,0,Income,Profit and Loss,Income Account,No
+تبرعات عينية - أسر محتاجة ,test,3103 - تبرعات وهبات مقيدة - عينية,3103003,,0,Income,Profit and Loss,Income Account,No
+زكاة - عينية ,test,3103 - تبرعات وهبات مقيدة - عينية,3103001,,0,Income,Profit and Loss,Income Account,No
+تبرعات عينية - دور نسائية ,test,3103 - تبرعات وهبات مقيدة - عينية,3103004,,0,Income,Profit and Loss,Income Account,No
+تبرعات عينية - اندية شبابية ,test,3103 - تبرعات وهبات مقيدة - عينية,3103005,,0,Income,Profit and Loss,Income Account,No
+تبرعات عينية - ادوية طبية ,test,3103 - تبرعات وهبات مقيدة - عينية,3103007,,0,Income,Profit and Loss,Income Account,No
+تبرعات عينية - أيتام ,test,3103 - تبرعات وهبات مقيدة - عينية,3103002,,0,Income,Profit and Loss,Income Account,No
+تبرعات عينية - زكاة فطر,test,3103 - تبرعات وهبات مقيدة - عينية,3103008,,0,Income,Profit and Loss,Income Account,No
+تبرعات وهبات  مقيدة - خدمات تطوعية ,test,31 - ايرادات وتبرعات مقيدة,3104,,1,Income,Profit and Loss,,No
+تبرعات خدمات تطوعية - تدريب وتأهيل ,test,3104 - تبرعات وهبات  مقيدة - خدمات تطوعية,3104004,,0,Income,Profit and Loss,Income Account,No
+تبرعات خدمات تطوعية - (  إسم النشاط  ) ,test,3104 - تبرعات وهبات  مقيدة - خدمات تطوعية,3104001,,0,Income,Profit and Loss,Income Account,No
+تبرعات خدمات تطوعية - ساعات استشارية,test,3104 - تبرعات وهبات  مقيدة - خدمات تطوعية,3104002,,0,Income,Profit and Loss,Income Account,No
+تبرعات خدمات تطوعية - عيادات طبية,test,3104 - تبرعات وهبات  مقيدة - خدمات تطوعية,3104003,,0,Income,Profit and Loss,Income Account,No
+تبرعات وهبات مقيدة - نقدية,test,31 - ايرادات وتبرعات مقيدة,3102,,1,Income,Profit and Loss,,No
+كفالة أسرة محتاجة  ,test,3102 - تبرعات وهبات مقيدة - نقدية,3102005,,0,Income,Profit and Loss,Income Account,No
+كفالة معاق,test,3102 - تبرعات وهبات مقيدة - نقدية,3102006,,0,Income,Profit and Loss,Income Account,No
+إعانات زواج ,test,3102 - تبرعات وهبات مقيدة - نقدية,3102007,,0,Income,Profit and Loss,Income Account,No
+مساعدات ,test,3102 - تبرعات وهبات مقيدة - نقدية,3102002,,0,Income,Profit and Loss,Income Account,No
+السلة الغذائية ,test,3102 - تبرعات وهبات مقيدة - نقدية,3102004,,0,Income,Profit and Loss,Income Account,No
+كفالات ايتام,test,3102 - تبرعات وهبات مقيدة - نقدية,3102001,,0,Income,Profit and Loss,Income Account,No
+برامج موسمية,test,3102 - تبرعات وهبات مقيدة - نقدية,3102003,,0,Income,Profit and Loss,Income Account,No
+ايرادات مقيدة ,test,31 - ايرادات وتبرعات مقيدة,3106,,1,Income,Profit and Loss,,No
+مبيعات سلع وخدمات مخصصة للبرامج والانشطة ,test,3106 - ايرادات مقيدة,310602,,0,Income,Profit and Loss,Income Account,No
+رسوم برامج وأنشطة مخصصة ,test,3106 - ايرادات مقيدة,310603,,0,Income,Profit and Loss,Income Account,No
+ارباح استثمارات مخصصة للبرامج والانشطة ,test,3106 - ايرادات مقيدة,310601,,0,Income,Profit and Loss,Income Account,No
+إيرادات التحويلات واعادة التصنيف ,test,3 - الإيرادات,34,,1,Income,Profit and Loss,,No
+تحويلات وإعادة تصنيف - قيود اخرى ,test,34 - إيرادات التحويلات واعادة التصنيف,3405,,0,Income,Profit and Loss,Income Account,No
+تحويلات وإعادة تصنيف - قيود إدارية ,test,34 - إيرادات التحويلات واعادة التصنيف,3404,,0,Income,Profit and Loss,Income Account,No
+تحويلات وإعادة تصنيف - قيود استخدام ووقت ,test,34 - إيرادات التحويلات واعادة التصنيف,3403,,0,Income,Profit and Loss,Income Account,No
+تحويلات وإعادة تصنيف - قيود وقت ,test,34 - إيرادات التحويلات واعادة التصنيف,3402,,0,Income,Profit and Loss,Income Account,No
+تحويلات وإعادة تصنيف  - قيود استخدام ,test,34 - إيرادات التحويلات واعادة التصنيف,3401,,0,Income,Profit and Loss,Income Account,No
+أصول,test,,1,,1,Asset,Balance Sheet,,No
+أصول الأوقاف ,test,1 - أصول,13,,1,Asset,Balance Sheet,,No
+الإستثمارات الوقفية,test,13 - أصول الأوقاف,133,,1,Asset,Balance Sheet,,No
+استثمارات وقفية في الصناديق والمحافظ ,test,133 - الإستثمارات الوقفية,1333,,1,Asset,Balance Sheet,,No
+استثمارات فائض غلة الوقف ,test,133 - الإستثمارات الوقفية,1334,,1,Asset,Balance Sheet,,No
+استثمارات وقفية في شركات زميلة ,test,133 - الإستثمارات الوقفية,1332,,1,Asset,Balance Sheet,,No
+استثمارات وقفية - عقارية ,test,133 - الإستثمارات الوقفية,1331,,1,Asset,Balance Sheet,,No
+اسثمارات وقفية عقارية - مباني ,test,1331 - استثمارات وقفية - عقارية,13312,,0,Asset,Balance Sheet,,No
+استثمارات وقفية عقارية - اراضي ,test,1331 - استثمارات وقفية - عقارية,13311,,0,Asset,Balance Sheet,,No
+الأصول الثابتة الوقفية,test,13 - أصول الأوقاف,134,,1,Asset,Balance Sheet,,No
+الأراضي - أوقاف,test,134 - الأصول الثابتة الوقفية,13401,,1,Asset,Balance Sheet,,No
+الاراضي  - أوقاف,test,13401 - الأراضي - أوقاف,134011,,0,Asset,Balance Sheet,Fixed Asset,No
+الأراضي المطورة - تحسينات اراضي - أوقاف,test,13401 - الأراضي - أوقاف,134012,,0,Asset,Balance Sheet,Fixed Asset,No
+الات ومعدات - أوقاف,test,134 - الأصول الثابتة الوقفية,13403,,1,Asset,Balance Sheet,,No
+الات ومعدات حاويات ومقطورات - اوقاف ,test,13403 - الات ومعدات - أوقاف,134035,,0,Asset,Balance Sheet,Fixed Asset,No
+الات ومعدات صيانو وتشغيل - وقفية ,test,13403 - الات ومعدات - أوقاف,134033,,0,Asset,Balance Sheet,Fixed Asset,No
+الات ومعدات- اوقاف ,test,13403 - الات ومعدات - أوقاف,134031,,0,Asset,Balance Sheet,Fixed Asset,No
+الات ومعدات صناعية - وقفية,test,13403 - الات ومعدات - أوقاف,134032,,0,Asset,Balance Sheet,Fixed Asset,No
+الات ومعدات ورش - وقفية,test,13403 - الات ومعدات - أوقاف,134034,,0,Asset,Balance Sheet,Fixed Asset,No
+المباني - أوقاف ,test,134 - الأصول الثابتة الوقفية,13402,,1,Asset,Balance Sheet,,No
+مباني - اوقاف ,test,13402 - المباني - أوقاف,134021,,0,Asset,Balance Sheet,Fixed Asset,No
+تجسينات مباني وقفية,test,13402 - المباني - أوقاف,134022,,0,Asset,Balance Sheet,Fixed Asset,No
+النقدية الموقوفة ,test,13 - أصول الأوقاف,131,,1,Asset,Balance Sheet,,No
+نقدية في البنوك ,test,131 - النقدية الموقوفة,1311,,1,Asset,Balance Sheet,,No
+البنك الاهلي ,test,1311 - نقدية في البنوك,13112,,0,Asset,Balance Sheet,,No
+مصرف الراجحي ,test,1311 - نقدية في البنوك,13113,,0,Asset,Balance Sheet,,No
+بنك الرياض ,test,1311 - نقدية في البنوك,13111,,0,Asset,Balance Sheet,,No
+محافظ إقراضية وتمويلية موقوفة  ,test,13 - أصول الأوقاف,132,,1,Asset,Balance Sheet,,No
+المحافظ الاقراضية الموقوفة - افراد ,test,132 - محافظ إقراضية وتمويلية موقوفة,1323,,1,Asset,Balance Sheet,,No
+المحافظ الإقراضية  الموقوفة - مجموعات ,test,132 - محافظ إقراضية وتمويلية موقوفة,1324,,1,Asset,Balance Sheet,,No
+المحافظ الاقراضية الموقوفة  - مشاريع واعدة ,test,132 - محافظ إقراضية وتمويلية موقوفة,1322,,1,Asset,Balance Sheet,,No
+المحافظ الإقراضية الموقوفة - اسر منتجة ,test,132 - محافظ إقراضية وتمويلية موقوفة,1321,,1,Asset,Balance Sheet,,No
+الموجودات الحيوية - أوقاف,test,13 - أصول الأوقاف,137,,1,Asset,Balance Sheet,,No
+صغار الابقار,test,137 - الموجودات الحيوية - أوقاف,13702,,1,Asset,Balance Sheet,,No
+الاشجار المثمرة ,test,137 - الموجودات الحيوية - أوقاف,13705,,1,Asset,Balance Sheet,,No
+الصيصان ,test,137 - الموجودات الحيوية - أوقاف,13704,,1,Asset,Balance Sheet,,No
+أمهات الابقار,test,137 - الموجودات الحيوية - أوقاف,13701,,1,Asset,Balance Sheet,,No
+امهات الدواجن ,test,137 - الموجودات الحيوية - أوقاف,13703,,1,Asset,Balance Sheet,,No
+الاشجار غير المثمرة ,test,137 - الموجودات الحيوية - أوقاف,13706,,1,Asset,Balance Sheet,,No
+"اعمال رأسمالية تحت الانشاء "" مشاريع وقفية تحت التنفيذ "" ",test,13 - أصول الأوقاف,136,,1,Asset,Balance Sheet,,No
+مشاريع وقفية تحت التنفيذ - مباني,test,"136 - اعمال رأسمالية تحت الانشاء "" مشاريع وقفية تحت التنفيذ """,13602,,1,Asset,Balance Sheet,,No
+مشاريع وقفية تحت التنفيذ - الات ومعدات ,test,"136 - اعمال رأسمالية تحت الانشاء "" مشاريع وقفية تحت التنفيذ """,13603,,1,Asset,Balance Sheet,,No
+مشاريع وقفية تحت التنفيذ - تحسينات أراضي,test,"136 - اعمال رأسمالية تحت الانشاء "" مشاريع وقفية تحت التنفيذ """,13601,,1,Asset,Balance Sheet,,No
+الأصول غير الملموسة - اوقاف ,test,13 - أصول الأوقاف,135,,1,Asset,Balance Sheet,,No
+قيمة التقبيل - خلو رجل ,test,135 - الأصول غير الملموسة - اوقاف,13505,,1,Asset,Balance Sheet,,No
+تكاليف تطوير المنتجات ,test,135 - الأصول غير الملموسة - اوقاف,13504,,1,Asset,Balance Sheet,,No
+براءات الإختراع ,test,135 - الأصول غير الملموسة - اوقاف,13501,,1,Asset,Balance Sheet,,No
+مصاريف حقوق الامتياز ,test,135 - الأصول غير الملموسة - اوقاف,13503,,1,Asset,Balance Sheet,,No
+العلامات التجارية ,test,135 - الأصول غير الملموسة - اوقاف,13502,,1,Asset,Balance Sheet,,No
+الأصول المتداولة ,test,1 - أصول,11,,1,Asset,Balance Sheet,,No
+المخزون ,test,11 - الأصول المتداولة,117,,1,Asset,Balance Sheet,,No
+مخزون مواد خام ,test,117 - المخزون,1173,,1,Asset,Balance Sheet,,No
+مخزون مستهلكات ,test,117 - المخزون,1171,,1,Asset,Balance Sheet,,No
+مخزون مستلزمات مكتبية ,test,1171 - مخزون مستهلكات,11711,,0,Asset,Balance Sheet,Stock,No
+مخزون كتب ,test,1171 - مخزون مستهلكات,11716,,0,Asset,Balance Sheet,Stock,No
+مخزون مطبوعات ,test,1171 - مخزون مستهلكات,11713,,0,Asset,Balance Sheet,Stock,No
+مخزون قطع الغيار,test,1171 - مخزون مستهلكات,11712,,0,Asset,Balance Sheet,Stock,No
+مخزون الوقود ,test,1171 - مخزون مستهلكات,11714,,0,Asset,Balance Sheet,Stock,No
+مخزون مستهلكات أخرى ,test,1171 - مخزون مستهلكات,11717,,0,Asset,Balance Sheet,Stock,No
+مخزون مستلزمات ,test,1171 - مخزون مستهلكات,11715,,0,Asset,Balance Sheet,Stock,No
+مخزون بضائع ومنتجات جاهزة ,test,117 - المخزون,1172,,1,Asset,Balance Sheet,,No
+بضائع جاهزة مصنعة,test,1172 - مخزون بضائع ومنتجات جاهزة,11742,,0,Asset,Balance Sheet,Stock,No
+بضائع ومنتجات للتوزيع الخيري ,test,1172 - مخزون بضائع ومنتجات جاهزة,11741,,0,Asset,Balance Sheet,Stock,No
+بضائع مشتراه بغرض البيع ,test,1172 - مخزون بضائع ومنتجات جاهزة,11743,,0,Asset,Balance Sheet,Stock,No
+"مخزون تحت التشغيل "" قيد التصنيع "" ",test,117 - المخزون,1174,,1,Asset,Balance Sheet,,No
+الذمم المدينة,test,11 - الأصول المتداولة,114,,1,Asset,Balance Sheet,,No
+ذمم مدينة - دفعات مقدمة ,test,114 - الذمم المدينة,1143,,1,Asset,Balance Sheet,,No
+دفعات مقدمة للموردين خدمات ,test,1143 - ذمم مدينة - دفعات مقدمة,11432,,0,Asset,Balance Sheet,Receivable,No
+دفعات مقدمة للموردين تجاريين,test,1143 - ذمم مدينة - دفعات مقدمة,11431,,0,Asset,Balance Sheet,Receivable,No
+دفعات مقدمة للموردين مقاولين ,test,1143 - ذمم مدينة - دفعات مقدمة,11433,,0,Asset,Balance Sheet,Receivable,No
+ذمم مدينة أخرى ,test,114 - الذمم المدينة,1144,,1,Asset,Balance Sheet,,No
+مبالغ مستحقة من جهات ذات علاقة ,test,1144 - ذمم مدينة أخرى,11441,,0,Asset,Balance Sheet,Receivable,No
+تأمينات مستردة ,test,1144 - ذمم مدينة أخرى,11442,,0,Asset,Balance Sheet,Receivable,No
+ذمم مدينة - عملاء ,test,114 - الذمم المدينة,1142,,1,Asset,Balance Sheet,,No
+عملاء - مدينون تجاريون ,test,1142 - ذمم مدينة - عملاء,11421,,0,Asset,Balance Sheet,,No
+عملاء - مديني عقود ,test,1142 - ذمم مدينة - عملاء,11423,,0,Asset,Balance Sheet,Receivable,No
+عملاء - مدينون متنوعون ,test,1142 - ذمم مدينة - عملاء,11424,,0,Asset,Balance Sheet,Receivable,No
+عملاء - أوراق قبض ,test,1142 - ذمم مدينة - عملاء,11422,,0,Asset,Balance Sheet,Receivable,No
+"ذمم مدينة - موظفين "" عاملين "" ",test,114 - الذمم المدينة,1141,,1,Asset,Balance Sheet,,No
+ذمم العاملين حساب جاري ,test,"1141 - ذمم مدينة - موظفين "" عاملين """,11413,,0,Asset,Balance Sheet,Receivable,No
+ذمم العاملين - عهد نقدية ,test,"1141 - ذمم مدينة - موظفين "" عاملين """,11411,,1,Asset,Balance Sheet,,No
+عهد مستديمة ,test,11411 - ذمم العاملين - عهد نقدية,114111,,0,Asset,Balance Sheet,,No
+عهد البرامج والأنشطة ,test,11411 - ذمم العاملين - عهد نقدية,114113,,0,Asset,Balance Sheet,Receivable,No
+عهد مؤقتة ,test,11411 - ذمم العاملين - عهد نقدية,114112,,0,Asset,Balance Sheet,Receivable,No
+ذمم العاملين - السلف والقروض ,test,"1141 - ذمم مدينة - موظفين "" عاملين """,11412,,0,Asset,Balance Sheet,,No
+إيرادات وتبرعات مستحقة ,test,11 - الأصول المتداولة,116,,1,Asset,Balance Sheet,,No
+ايرادات وتبرعات غير مقيدة - مستحقة ,test,116 - إيرادات وتبرعات مستحقة,1162,,1,Asset,Balance Sheet,,No
+تبرعات وهبات غير مقيدة - عينية,test,1162 - ايرادات وتبرعات غير مقيدة - مستحقة,11622,,0,Asset,Balance Sheet,Receivable,No
+تبرعات وهبات غير مقيدة - خدمات تطوعية ,test,1162 - ايرادات وتبرعات غير مقيدة - مستحقة,11623,,0,Asset,Balance Sheet,Receivable,No
+ايرادات غير مقيدة ,test,1162 - ايرادات وتبرعات غير مقيدة - مستحقة,11624,,0,Asset,Balance Sheet,Receivable,No
+تبرعات  وهبات غير مقيدة - نقدية,test,1162 - ايرادات وتبرعات غير مقيدة - مستحقة,11621,,0,Asset,Balance Sheet,Receivable,No
+ايرادات وتبرعات اوقاف - مستحقة ,test,116 - إيرادات وتبرعات مستحقة,1163,,1,Asset,Balance Sheet,,No
+ارباح استثمارات وقفية ,test,1163 - ايرادات وتبرعات اوقاف - مستحقة,11633,,0,Asset,Balance Sheet,Receivable,No
+ريع أوقاف ,test,1163 - ايرادات وتبرعات اوقاف - مستحقة,11632,,0,Asset,Balance Sheet,Receivable,No
+اوقاف ,test,1163 - ايرادات وتبرعات اوقاف - مستحقة,11631,,0,Asset,Balance Sheet,Receivable,No
+ايرادات وتبرعات مقيدة - مستحقة ,test,116 - إيرادات وتبرعات مستحقة,1161,,1,Asset,Balance Sheet,,No
+تبرعات وهبات مقيدة - عينية,test,1161 - ايرادات وتبرعات مقيدة - مستحقة,11612,,0,Asset,Balance Sheet,Receivable,No
+تبرعات وهبات  مقيدة - خدمات تطوعية ,test,1161 - ايرادات وتبرعات مقيدة - مستحقة,11613,,1,Asset,Balance Sheet,,No
+تبرعات وهبات  مقيدة - دعم حكومي ,test,1161 - ايرادات وتبرعات مقيدة - مستحقة,11614,,0,Asset,Balance Sheet,Receivable,No
+تبرعات وهبات مقيدة - نقدية,test,1161 - ايرادات وتبرعات مقيدة - مستحقة,11611,,0,Asset,Balance Sheet,Receivable,No
+ايرادات مقيدة ,test,1161 - ايرادات وتبرعات مقيدة - مستحقة,11615,,0,Asset,Balance Sheet,Receivable,No
+رصيد افتتاحي مؤقت,test,11 - الأصول المتداولة,,,0,Asset,Balance Sheet,Temporary,No
+"الحسابات الجارية للفروع "" أطراف ذات علاقة """,test,11 - الأصول المتداولة,118,,1,Asset,Balance Sheet,,No
+المحافظ الإقراضية والتمويلة,test,11 - الأصول المتداولة,112,,1,Asset,Balance Sheet,,No
+المحافظ الإقراضية - اسر منتجة ,test,112 - المحافظ الإقراضية والتمويلة,1121,,0,Asset,Balance Sheet,Bank,No
+المحافظ الإقراضية - مجموعات ,test,112 - المحافظ الإقراضية والتمويلة,1124,,0,Asset,Balance Sheet,Bank,No
+المحافظ الاقراضية - مشاريع واعدة ,test,112 - المحافظ الإقراضية والتمويلة,1122,,0,Asset,Balance Sheet,Bank,No
+المحافظ الاقراضية - افراد ,test,112 - المحافظ الإقراضية والتمويلة,1123,,0,Asset,Balance Sheet,Bank,No
+النقدية في البنوك والصناديق,test,11 - الأصول المتداولة,111,,1,Asset,Balance Sheet,,No
+النقدية في الصناديق ,test,111 - النقدية في البنوك والصناديق,1112,,1,Asset,Balance Sheet,,No
+الصندوق العام ,test,1112 - النقدية في الصناديق,111201,,0,Asset,Balance Sheet,Cash,No
+"النقدية في الطريق "" شيكات تحت التحصيل """,test,111 - النقدية في البنوك والصناديق,1113,,0,Asset,Balance Sheet,,No
+نقدية  وودائع في البنوك ,test,111 - النقدية في البنوك والصناديق,1111,,1,Asset,Balance Sheet,,No
+حساب ودائع قصيرة الأجل ,test,1111 - نقدية  وودائع في البنوك,11112,,0,Asset,Balance Sheet,Bank,No
+حسابات جارية ,test,1111 - نقدية  وودائع في البنوك,11111,,1,Asset,Balance Sheet,,No
+بنك الإنماء,test,11111 - حسابات جارية,1111104,,0,Asset,Balance Sheet,Bank,No
+البنك الأهلي ,test,11111 - حسابات جارية,1111102,,0,Asset,Balance Sheet,Bank,No
+بنك الرياض,test,11111 - حسابات جارية,1111101,,0,Asset,Balance Sheet,Bank,No
+مصرف الراجحي ,test,11111 - حسابات جارية,1111103,,1,Asset,Balance Sheet,,No
+مصرف الراجحي الرئيسي,test,1111103 - مصرف الراجحي,1111103001,,0,Asset,Balance Sheet,Bank,No
+مصرف الراجحي - عام,test,1111103 - مصرف الراجحي,1111103002,,0,Asset,Balance Sheet,Bank,No
+مصرف الراجحي - أوقاف,test,1111103 - مصرف الراجحي,1111103004,,0,Asset,Balance Sheet,,No
+مصرف الراجحي - زكاة,test,1111103 - مصرف الراجحي,1111103003,,0,Asset,Balance Sheet,Bank,No
+تأمينات محتجزة (Blocked Deposits),test,1111 - نقدية  وودائع في البنوك,11113,,0,Asset,Balance Sheet,Bank,No
+مصروفات مدفوعة مقدماً ,test,11 - الأصول المتداولة,115,,1,Asset,Balance Sheet,,No
+مصاريف جمع الاموال المدفوعة مقدماً ,test,115 - مصروفات مدفوعة مقدماً,1152,,1,Asset,Balance Sheet,,No
+مزايا وحوافز - المقدمة ,test,1152 - مصاريف جمع الاموال المدفوعة مقدماً,11522,,0,Asset,Balance Sheet,Receivable,No
+المستهلكات  - المقدمة ,test,1152 - مصاريف جمع الاموال المدفوعة مقدماً,11523,,0,Asset,Balance Sheet,Receivable,No
+الصيانة والإصلاح  - المقدمة ,test,1152 - مصاريف جمع الاموال المدفوعة مقدماً,11524,,0,Asset,Balance Sheet,Receivable,No
+الرواتب والأجور النقدية  - المقدمة ,test,1152 - مصاريف جمع الاموال المدفوعة مقدماً,11521,,0,Asset,Balance Sheet,Receivable,No
+المنافع والخدمات والتأمين  - المقدمة ,test,1152 - مصاريف جمع الاموال المدفوعة مقدماً,11525,,0,Asset,Balance Sheet,,No
+مصاريف التشغيل المحملة على  البرامج والانشطة المقدمة ,test,115 - مصروفات مدفوعة مقدماً,1153,,1,Asset,Balance Sheet,,No
+مزايا وحوافز - المقدمة ,test,1153 - مصاريف التشغيل المحملة على  البرامج والانشطة المقدمة,11532,,0,Asset,Balance Sheet,Receivable,No
+المستهلكات  - المقدمة ,test,1153 - مصاريف التشغيل المحملة على  البرامج والانشطة المقدمة,11533,,0,Asset,Balance Sheet,Receivable,No
+الصيانة والإصلاح  - المقدمة ,test,1153 - مصاريف التشغيل المحملة على  البرامج والانشطة المقدمة,11534,,0,Asset,Balance Sheet,Receivable,No
+الرواتب والأجور النقدية  - المقدمة ,test,1153 - مصاريف التشغيل المحملة على  البرامج والانشطة المقدمة,11531,,0,Asset,Balance Sheet,Receivable,No
+المنافع والخدمات والتأمين  - المقدمة ,test,1153 - مصاريف التشغيل المحملة على  البرامج والانشطة المقدمة,11535,,0,Asset,Balance Sheet,Receivable,No
+مصاريف الحوكمة المقدمة ,test,115 - مصروفات مدفوعة مقدماً,1154,,1,Asset,Balance Sheet,,No
+مزايا وحوافز - المقدمة ,test,1154 - مصاريف الحوكمة المقدمة,11542,,0,Asset,Balance Sheet,Receivable,No
+المستهلكات  - المقدمة ,test,1154 - مصاريف الحوكمة المقدمة,11543,,0,Asset,Balance Sheet,Receivable,No
+الصيانة والإصلاح  - المقدمة ,test,1154 - مصاريف الحوكمة المقدمة,11544,,0,Asset,Balance Sheet,Receivable,No
+الرواتب والأجور النقدية  - المقدمة ,test,1154 - مصاريف الحوكمة المقدمة,11541,,0,Asset,Balance Sheet,Receivable,No
+المنافع والخدمات والتأمين  - المقدمة ,test,1154 - مصاريف الحوكمة المقدمة,11545,,0,Asset,Balance Sheet,Receivable,No
+مصاريف عمومية وادارية مدفوهة مقدماً  ,test,115 - مصروفات مدفوعة مقدماً,1151,,1,Asset,Balance Sheet,,No
+المستهلكات - المقدمة,test,1151 - مصاريف عمومية وادارية مدفوهة مقدماً,11513,,0,Asset,Balance Sheet,Receivable,No
+مزايا وحوافز - المقدمة ,test,1151 - مصاريف عمومية وادارية مدفوهة مقدماً,11512,,0,Asset,Balance Sheet,Receivable,No
+مصروات مدفوعة مقدماً - التأمين الطبي,test,1151 - مصاريف عمومية وادارية مدفوهة مقدماً,11516,,0,Asset,Balance Sheet,,No
+الرواتب والأجور النقدية - المقدمة ,test,1151 - مصاريف عمومية وادارية مدفوهة مقدماً,11511,,0,Asset,Balance Sheet,Receivable,No
+مصروفات مدفوعة مقدماً - أخرى,test,1151 - مصاريف عمومية وادارية مدفوهة مقدماً,11599,,0,Asset,Balance Sheet,Expense Account,No
+الصيانة والإصلاح  - المقدمة ,test,1151 - مصاريف عمومية وادارية مدفوهة مقدماً,11514,,0,Asset,Balance Sheet,Receivable,No
+المنافع والخدمات والتأمين  - المقدمة ,test,1151 - مصاريف عمومية وادارية مدفوهة مقدماً,11515,,0,Asset,Balance Sheet,Receivable,No
+الإستثمارات ( المتداولة ) ,test,11 - الأصول المتداولة,113,,1,Asset,Balance Sheet,,No
+استثمارات متداولة -  عقارية ,test,113 - الإستثمارات ( المتداولة ),1131,,1,Asset,Balance Sheet,,No
+اسثمارات عقارية - مباني ,test,1131 - استثمارات متداولة -  عقارية,11312,,0,Asset,Balance Sheet,Bank,No
+استثمارات عقارية - اراضي ,test,1131 - استثمارات متداولة -  عقارية,11311,,0,Asset,Balance Sheet,Bank,No
+استثمارات متداولة -  مقتناة بغرض المتاجرة ,test,113 - الإستثمارات ( المتداولة ),1135,,1,Asset,Balance Sheet,,No
+استثمارات متداولة -  متاحة للبيع ,test,113 - الإستثمارات ( المتداولة ),1134,,1,Asset,Balance Sheet,,No
+استثمارات متداولة -  في شركات زميلة ( بطريقة حقوق الملكية ),test,113 - الإستثمارات ( المتداولة ),1132,,1,Asset,Balance Sheet,,No
+استثمارات متداولة -  في الصناديق والمحافظ ,test,113 - الإستثمارات ( المتداولة ),1133,,1,Asset,Balance Sheet,,No
+استثمارات متداولة -  أخرى ,test,113 - الإستثمارات ( المتداولة ),1136,,1,Asset,Balance Sheet,,No
+الأصول غير المتداولة ,test,1 - أصول,12,,1,Asset,Balance Sheet,,No
+الأصول غير الملموسة ,test,12 - الأصول غير المتداولة,122,,1,Asset,Balance Sheet,,No
+رخص البرامج والأنظمة,test,122 - الأصول غير الملموسة,12209,,1,Asset,Balance Sheet,,No
+مصاريف عمومية وإدارية مؤجلة,test,122 - الأصول غير الملموسة,12207,,1,Asset,Balance Sheet,,No
+قيمة التقبيل - خلو رجل ,test,122 - الأصول غير الملموسة,12208,,1,Asset,Balance Sheet,,No
+تكاليف تطوير المنتجات ,test,122 - الأصول غير الملموسة,12205,,1,Asset,Balance Sheet,,No
+مصاريف الحملات الاعلانية المؤجلة,test,122 - الأصول غير الملموسة,12206,,1,Asset,Balance Sheet,,No
+"تكاليف ماقبل التشغيل "" مصاريف التأسيس """,test,122 - الأصول غير الملموسة,12203,,1,Asset,Balance Sheet,,No
+براءات الإختراع ,test,122 - الأصول غير الملموسة,12201,,1,Asset,Balance Sheet,,No
+مصاريف حقوق الامتياز ,test,122 - الأصول غير الملموسة,12204,,1,Asset,Balance Sheet,,No
+العلامات التجارية ,test,122 - الأصول غير الملموسة,12202,,1,Asset,Balance Sheet,,No
+الخطة الاستراتيجية ,test,122 - الأصول غير الملموسة,12210,,1,Asset,Balance Sheet,,No
+الموجودات الحيوية ,test,12 - الأصول غير المتداولة,125,,1,Asset,Balance Sheet,,No
+صغار الابقار,test,125 - الموجودات الحيوية,12502,,1,Asset,Balance Sheet,,No
+الاشجار المثمرة ,test,125 - الموجودات الحيوية,12505,,1,Asset,Balance Sheet,,No
+الصيصان ,test,125 - الموجودات الحيوية,12504,,1,Asset,Balance Sheet,,No
+أمهات الابقار,test,125 - الموجودات الحيوية,12501,,1,Asset,Balance Sheet,,No
+امهات الدواجن ,test,125 - الموجودات الحيوية,12503,,1,Asset,Balance Sheet,,No
+الاشجار غير المثمرة ,test,125 - الموجودات الحيوية,12506,,1,Asset,Balance Sheet,,No
+الإستثمارات ( غير المتداولة ) ,test,12 - الأصول غير المتداولة,123,,1,Asset,Balance Sheet,,No
+استثمارات  غير متداولة  - متاحة للبيع ,test,123 - الإستثمارات ( غير المتداولة ),1234,,1,Asset,Balance Sheet,,No
+استثمارات غير متداولة  في شركات زميلة ,test,123 - الإستثمارات ( غير المتداولة ),1232,,1,Asset,Balance Sheet,,No
+استثمارات غير متداولة  -  مقتناة بغرض المتاجرة ,test,123 - الإستثمارات ( غير المتداولة ),1235,,1,Asset,Balance Sheet,,No
+استثمارات غير متداولة  - عقارية,test,123 - الإستثمارات ( غير المتداولة ),1231,,1,Asset,Balance Sheet,,No
+استثمارات غير متداولة  عقارية - اراضي ,test,1231 - استثمارات غير متداولة  - عقارية,12311,,0,Asset,Balance Sheet,,No
+اسثمارات غير متداولة عقارية - مباني ,test,1231 - استثمارات غير متداولة  - عقارية,12312,,0,Asset,Balance Sheet,,No
+استثمارات غير متداولة - أخرى ,test,123 - الإستثمارات ( غير المتداولة ),1236,,1,Asset,Balance Sheet,,No
+استثمارات غير متداولة -  صافي التغير في قيمة الأسهم,test,1236 - استثمارات غير متداولة - أخرى,12361,,0,Asset,Balance Sheet,,No
+استثمارات  غير متداولة - في الصناديق والمحافظ ,test,123 - الإستثمارات ( غير المتداولة ),1233,,0,Asset,Balance Sheet,,No
+الأصول الثابتة ,test,12 - الأصول غير المتداولة,121,,1,Asset,Balance Sheet,,No
+الأراضي,test,121 - الأصول الثابتة,12101,,1,Asset,Balance Sheet,,No
+اراضي متبرع بها ,test,12101 - الأراضي,121013,,0,Asset,Balance Sheet,Fixed Asset,No
+الاراضي مشتراه ,test,12101 - الأراضي,121011,,0,Asset,Balance Sheet,Fixed Asset,No
+الأراضي المطورة - تحسينات اراضي ,test,12101 - الأراضي,121012,,0,Asset,Balance Sheet,Fixed Asset,No
+أجهزة الاتصال والأمن والحماية,test,121 - الأصول الثابتة,12109,,1,Asset,Balance Sheet,,No
+اجهزة الحاسب الالي وملحقاتها ,test,121 - الأصول الثابتة,12110,,1,Asset,Balance Sheet,,No
+أدوات وأجهزة العرض ,test,121 - الأصول الثابتة,12108,,1,Asset,Balance Sheet,,No
+اجهزة التدفئة والتبريد والتهوية ,test,121 - الأصول الثابتة,12111,,1,Asset,Balance Sheet,,No
+المباني ,test,121 - الأصول الثابتة,12102,,1,Asset,Balance Sheet,,No
+المباني مشتراه ,test,12102 - المباني,121021,,0,Asset,Balance Sheet,Fixed Asset,No
+مباني على ارض مستأجرة ,test,12102 - المباني,121023,,0,Asset,Balance Sheet,Fixed Asset,No
+تحسينات مباني مستأجرة,test,12102 - المباني,121024,,0,Asset,Balance Sheet,Fixed Asset,No
+مباني متبرع بها ,test,12102 - المباني,121022,,0,Asset,Balance Sheet,Fixed Asset,No
+الأثاث المكتبي ,test,121 - الأصول الثابتة,12105,,1,Asset,Balance Sheet,,No
+الأثات المكتبي,test,12105 - الأثاث المكتبي,121051,,0,Asset,Balance Sheet,,No
+عدد وأدوات ,test,121 - الأصول الثابتة,12107,,1,Asset,Balance Sheet,,No
+لوحات الدعاية والإعلان ,test,121 - الأصول الثابتة,12112,,1,Asset,Balance Sheet,,No
+السيارات ,test,121 - الأصول الثابتة,12104,,1,Asset,Balance Sheet,,No
+سيارات مشتراة,test,12104 - السيارات,121041,,0,Asset,Balance Sheet,Fixed Asset,No
+سيارات متبرع بها ,test,12104 - السيارات,121042,,0,Asset,Balance Sheet,Fixed Asset,No
+سيارات ايجار منتهي بالتمليك,test,12104 - السيارات,121043,,0,Asset,Balance Sheet,Fixed Asset,No
+الات ومعدات مكتبية,test,121 - الأصول الثابتة,12106,,1,Asset,Balance Sheet,,No
+أجهزة,test,12106 - الات ومعدات مكتبية,121061,,0,Asset,Balance Sheet,,No
+كمبيوترات,test,12106 - الات ومعدات مكتبية,121062,,0,Asset,Balance Sheet,,No
+الات ومعدات ,test,121 - الأصول الثابتة,12103,,1,Asset,Balance Sheet,,No
+الات ومعدات حاويات ومقطورات ,test,12103 - الات ومعدات,121035,,0,Asset,Balance Sheet,Fixed Asset,No
+الات ومعدات ورش,test,12103 - الات ومعدات,121034,,0,Asset,Balance Sheet,Fixed Asset,No
+الات ومعدات صيانو وتشغيل ,test,12103 - الات ومعدات,121033,,0,Asset,Balance Sheet,,No
+الات ومعدات صناعية ,test,12103 - الات ومعدات,121032,,0,Asset,Balance Sheet,Fixed Asset,No
+الات ومعدات ,test,12103 - الات ومعدات,121031,,0,Asset,Balance Sheet,Fixed Asset,No
+"اعمال رأسمالية تحت الانشاء "" مشاريع تحت التنفيذ "" ",test,12 - الأصول غير المتداولة,124,,1,Asset,Balance Sheet,,No
+مشاريع تحت التنفيذ - تحسينات أراضي,test,"124 - اعمال رأسمالية تحت الانشاء "" مشاريع تحت التنفيذ """,12401,,1,Asset,Balance Sheet,,No
+مشاريع تحت التنفيذ - مباني,test,"124 - اعمال رأسمالية تحت الانشاء "" مشاريع تحت التنفيذ """,12402,,0,Asset,Balance Sheet,,No
+مشاريع تحت التنفيذ - أخرى,test,"124 - اعمال رأسمالية تحت الانشاء "" مشاريع تحت التنفيذ """,12403,,1,Asset,Balance Sheet,,No
+الخصوم وصافي الأصول ,test,,2,,1,Liability,Balance Sheet,,No
+صافي الأصول ,test,2 - الخصوم وصافي الأصول,23,,1,Liability,Balance Sheet,,No
+صافي اللأصول المقيدة ,test,23 - صافي الأصول,232,,1,Liability,Balance Sheet,,No
+صافي أصول الأوقاف ,test,23 - صافي الأصول,233,,1,Liability,Balance Sheet,,No
+فائض ريع الوقف ,test,233 - صافي أصول الأوقاف,23305,,1,Liability,Balance Sheet,,No
+خسائر,test,23305 - فائض ريع الوقف,2330502,,0,Liability,Balance Sheet,,No
+مكاسب,test,23305 - فائض ريع الوقف,2330501,,0,Liability,Balance Sheet,,No
+صافي أصول أوقاف - تبرعات  نقدية لبناء وشراء أوقاف ,test,233 - صافي أصول الأوقاف,23302,,1,Liability,Balance Sheet,,No
+ احتياطيات الوقف ,test,233 - صافي أصول الأوقاف,23304,,1,Liability,Balance Sheet,,No
+احتياطيات الوقف,test,23304 - احتياطيات الوقف,233041,,0,Liability,Balance Sheet,,No
+صافي ريع أوقاف تحت التوزيع ,test,233 - صافي أصول الأوقاف,23303,,1,Liability,Balance Sheet,,No
+صافي أصول أوقاف - عينية ,test,233 - صافي أصول الأوقاف,23301,,1,Liability,Balance Sheet,,No
+صافي الأصول غير المقيدة ,test,23 - صافي الأصول,231,,1,Liability,Balance Sheet,,No
+الإلتزامات المتداولة ,test,2 - الخصوم وصافي الأصول,21,,1,Liability,Balance Sheet,,No
+أوراق الدفع ,test,21 - الإلتزامات المتداولة,212,,1,Liability,Balance Sheet,,No
+ايرادات وتبرعات مقدمة,test,21 - الإلتزامات المتداولة,215,,1,Liability,Balance Sheet,,No
+ايرادات وتبرعات غير مقيدة - مقدمة,test,215 - ايرادات وتبرعات مقدمة,2152,,1,Liability,Balance Sheet,,No
+ايرادات غير مقيدة - مقدمة ,test,2152 - ايرادات وتبرعات غير مقيدة - مقدمة,21524,,0,Liability,Balance Sheet,,No
+تبرعات وهبات غير مقيدة - عينية- مقدمة ,test,2152 - ايرادات وتبرعات غير مقيدة - مقدمة,21522,,0,Liability,Balance Sheet,,No
+تبرعات  وهبات غير مقيدة - نقدية-مقدمة,test,2152 - ايرادات وتبرعات غير مقيدة - مقدمة,21521,,0,Liability,Balance Sheet,,No
+تبرعات وهبات غير مقيدة - خدمات تطوعية - مقدمة ,test,2152 - ايرادات وتبرعات غير مقيدة - مقدمة,21523,,0,Liability,Balance Sheet,,No
+ايرادات وتبرعات اوقاف - مقدمة,test,215 - ايرادات وتبرعات مقدمة,2153,,1,Liability,Balance Sheet,,No
+ريع أوقاف - مقدمة,test,2153 - ايرادات وتبرعات اوقاف - مقدمة,21532,,0,Liability,Balance Sheet,,No
+ارباح استثمارات وقفية - مقدمة ,test,2153 - ايرادات وتبرعات اوقاف - مقدمة,21533,,0,Liability,Balance Sheet,,No
+ايرادات وتبرعات للاوقاف م مقدمة,test,2153 - ايرادات وتبرعات اوقاف - مقدمة,21531,,0,Liability,Balance Sheet,,No
+ايرادات وتبرعات مقيدة - مقدمة,test,215 - ايرادات وتبرعات مقدمة,2151,,1,Liability,Balance Sheet,,No
+تبرعات وهبات  مقيدة - خدمات تطوعية - مقدمة ,test,2151 - ايرادات وتبرعات مقيدة - مقدمة,21513,,0,Liability,Balance Sheet,,No
+ايرادات مقيدة - مقدمة ,test,2151 - ايرادات وتبرعات مقيدة - مقدمة,21515,,0,Liability,Balance Sheet,,No
+تبرعات وهبات  مقيدة - المنح  الحكومي - مقدمة ,test,2151 - ايرادات وتبرعات مقيدة - مقدمة,21514,,0,Liability,Balance Sheet,,No
+تبرعات وهبات مقيدة - عينية -مقدمة ,test,2151 - ايرادات وتبرعات مقيدة - مقدمة,21512,,0,Liability,Balance Sheet,,No
+تبرعات وهبات مقيدة - نقدية -مقدمة,test,2151 - ايرادات وتبرعات مقيدة - مقدمة,21511,,0,Liability,Balance Sheet,,No
+مصروفات مستحقة ,test,21 - الإلتزامات المتداولة,214,,1,Liability,Balance Sheet,,No
+مصاريف الحوكمة المستحقة ,test,214 - مصروفات مستحقة,2144,,1,Liability,Balance Sheet,,No
+الصيانة والإصلاح  - مستحقة ,test,2144 - مصاريف الحوكمة المستحقة,21444,,0,Liability,Balance Sheet,Payable,No
+مزايا وحوافز - مستحقة ,test,2144 - مصاريف الحوكمة المستحقة,21442,,0,Liability,Balance Sheet,Payable,No
+المنافع والخدمات والتأمين  - مستحقة ,test,2144 - مصاريف الحوكمة المستحقة,21445,,0,Liability,Balance Sheet,Payable,No
+الرواتب والأجور النقدية  - مستحقة ,test,2144 - مصاريف الحوكمة المستحقة,21441,,0,Liability,Balance Sheet,Payable,No
+المستهلكات  - مستحقة ,test,2144 - مصاريف الحوكمة المستحقة,21443,,0,Liability,Balance Sheet,Payable,No
+مصاريف عمومية وادارية مستحقة,test,214 - مصروفات مستحقة,2141,,1,Liability,Balance Sheet,,No
+الصيانة والإصلاح  - مستحقة ,test,2141 - مصاريف عمومية وادارية مستحقة,21414,,0,Liability,Balance Sheet,Payable,No
+تأمينات اجتماعية مستحقة,test,2141 - مصاريف عمومية وادارية مستحقة,21415,,0,Liability,Balance Sheet,Payable,No
+مزايا وحوافز - مستحقة ,test,2141 - مصاريف عمومية وادارية مستحقة,21412,,0,Liability,Balance Sheet,Payable,No
+الرواتب والأجور النقدية - مستحقة ,test,2141 - مصاريف عمومية وادارية مستحقة,21411,,0,Liability,Balance Sheet,,No
+المستهلكات - مستحقة,test,2141 - مصاريف عمومية وادارية مستحقة,21413,,0,Liability,Balance Sheet,Payable,No
+مصاريف البرامج والانشطة المستحقة,test,214 - مصروفات مستحقة,2143,,1,Liability,Balance Sheet,,No
+الصيانة والإصلاح  - مستحقة ,test,2143 - مصاريف البرامج والانشطة المستحقة,21437,,0,Liability,Balance Sheet,Payable,No
+مزايا وحوافز - مستحقة ,test,2143 - مصاريف البرامج والانشطة المستحقة,21435,,0,Liability,Balance Sheet,Payable,No
+البرامج والأانشطة الوقفية المستحقة,test,2143 - مصاريف البرامج والانشطة المستحقة,21433,,0,Liability,Balance Sheet,Payable,No
+البرامج والأانشطةغير  المقيدة المستحقة,test,2143 - مصاريف البرامج والانشطة المستحقة,21432,,0,Liability,Balance Sheet,Payable,No
+المنافع والخدمات والتأمين  - مستحقة ,test,2143 - مصاريف البرامج والانشطة المستحقة,21438,,0,Liability,Balance Sheet,Payable,No
+الرواتب والأجور النقدية  - مستحقة ,test,2143 - مصاريف البرامج والانشطة المستحقة,21434,,0,Liability,Balance Sheet,Payable,No
+المستهلكات  - مستحقة ,test,2143 - مصاريف البرامج والانشطة المستحقة,21436,,0,Liability,Balance Sheet,Payable,No
+البرامج والأانشطة المقيدة المستحقة,test,2143 - مصاريف البرامج والانشطة المستحقة,21431,,0,Liability,Balance Sheet,Payable,No
+مصاريف جمع الاموال المستحقة,test,214 - مصروفات مستحقة,2142,,1,Liability,Balance Sheet,,No
+الصيانة والإصلاح  - مستحقة ,test,2142 - مصاريف جمع الاموال المستحقة,21424,,0,Liability,Balance Sheet,Payable,No
+مزايا وحوافز - مستحقة ,test,2142 - مصاريف جمع الاموال المستحقة,21422,,0,Liability,Balance Sheet,Payable,No
+المنافع والخدمات والتأمين  - مستحقة ,test,2142 - مصاريف جمع الاموال المستحقة,21425,,0,Liability,Balance Sheet,Payable,No
+الرواتب والأجور النقدية  - مستحقة ,test,2142 - مصاريف جمع الاموال المستحقة,21421,,0,Liability,Balance Sheet,Payable,No
+المستهلكات  - مستحقة ,test,2142 - مصاريف جمع الاموال المستحقة,21423,,0,Liability,Balance Sheet,Payable,No
+الذمم الدائنة ,test,21 - الإلتزامات المتداولة,213,,1,Liability,Balance Sheet,,No
+ذمم دائنة - مدفوعات مقدمة من العملاء ,test,213 - الذمم الدائنة,2133,,1,Liability,Balance Sheet,,No
+مدفوعات مقدمة من العملاء - خدمات ,test,2133 - ذمم دائنة - مدفوعات مقدمة من العملاء,21332,,0,Liability,Balance Sheet,Payable,No
+مدفوعات مقدمة من العملاء - تجاريون ,test,2133 - ذمم دائنة - مدفوعات مقدمة من العملاء,21331,,0,Liability,Balance Sheet,Payable,No
+ذمم دائنة - موردون  ,test,213 - الذمم الدائنة,2132,,1,Liability,Balance Sheet,,No
+موردون - مقاولون ,test,2132 - ذمم دائنة - موردون,21323,,0,Liability,Balance Sheet,Payable,No
+موردون - خدمات ,test,2132 - ذمم دائنة - موردون,21322,,0,Liability,Balance Sheet,Payable,No
+موردون - متنوعون ,test,2132 - ذمم دائنة - موردون,21324,,0,Liability,Balance Sheet,Payable,No
+موردون - تجاريون ,test,2132 - ذمم دائنة - موردون,21321,,0,Liability,Balance Sheet,Payable,No
+"ذمم دائنة  - موظفين "" عاملين "" ",test,213 - الذمم الدائنة,2131,,1,Liability,Balance Sheet,,No
+ذمم العاملين  الدائنة - عهد نقدية ,test,"2131 - ذمم دائنة  - موظفين "" عاملين """,21311,,1,Liability,Balance Sheet,,No
+عهد مستديمة ,test,21311 - ذمم العاملين  الدائنة - عهد نقدية,213111,,0,Liability,Balance Sheet,Payable,No
+عهد مؤقتة ,test,21311 - ذمم العاملين  الدائنة - عهد نقدية,213112,,0,Liability,Balance Sheet,Payable,No
+ذمم العاملين الدائنة  - السلف والقروض ,test,"2131 - ذمم دائنة  - موظفين "" عاملين """,21312,,0,Liability,Balance Sheet,Payable,No
+ذمم العاملين الدائنة  حساب جاري ,test,"2131 - ذمم دائنة  - موظفين "" عاملين """,21313,,0,Liability,Balance Sheet,Payable,No
+ذمم دائنة أخرى ,test,213 - الذمم الدائنة,2134,,1,Liability,Balance Sheet,,No
+التزامات بموجب عقود ايجار راسمالي متداولة,test,2134 - ذمم دائنة أخرى,21342,,0,Liability,Balance Sheet,Payable,No
+تأمينات إجتماعية ,test,2134 - ذمم دائنة أخرى,21344,,0,Liability,Balance Sheet,Payable,No
+مبالغ مستحقة إلى جهات ذات علاقة ,test,2134 - ذمم دائنة أخرى,21341,,0,Liability,Balance Sheet,Payable,No
+ضمانات مودعة  دائنة ,test,2134 - ذمم دائنة أخرى,21343,,0,Liability,Balance Sheet,Payable,No
+القروض قصيرة الأجل ,test,21 - الإلتزامات المتداولة,211,,1,Liability,Balance Sheet,,No
+قروض قصيرة الأجل من جهات مانحة,test,211 - القروض قصيرة الأجل,21102,,1,Liability,Balance Sheet,,No
+قروض قصيرة الأجل من الشركات والمؤسسات ,test,211 - القروض قصيرة الأجل,21104,,1,Liability,Balance Sheet,,No
+مرابحة قصيرة الأجل ,test,211 - القروض قصيرة الأجل,21105,,1,Liability,Balance Sheet,,No
+قروض قصيرة الاجل أخرى ,test,211 - القروض قصيرة الأجل,21107,,1,Liability,Balance Sheet,,No
+قروض قصيرة الأجل من البنوك,test,211 - القروض قصيرة الأجل,21103,,1,Liability,Balance Sheet,,No
+قروض التورق الاسلامي ,test,211 - القروض قصيرة الأجل,21106,,1,Liability,Balance Sheet,,No
+قروض قصيرة الأجل من جهات حكومية ,test,211 - القروض قصيرة الأجل,21101,,1,Liability,Balance Sheet,,No
+التزامات متداولة أخرى ,test,21 - الإلتزامات المتداولة,216,,1,Liability,Balance Sheet,,No
+الإلتزامات غير متداولة  ,test,2 - الخصوم وصافي الأصول,22,,1,Liability,Balance Sheet,,No
+المخصصات للأصول الوقفية ,test,22 - الإلتزامات غير متداولة,226,,1,Liability,Balance Sheet,,No
+مخصص خسائر استثمارات وقفية ,test,226 - المخصصات للأصول الوقفية,2262,,1,Liability,Balance Sheet,,No
+مخصص خسائر -استثمارات متاحة للبيع ,test,2262 - مخصص خسائر استثمارات وقفية,22624,,1,Liability,Balance Sheet,,No
+مخصص خسائر -استثمارات أخرى ,test,2262 - مخصص خسائر استثمارات وقفية,22628,,1,Liability,Balance Sheet,,No
+مخصص خسائر -استثمارات في شركات زميلة ,test,2262 - مخصص خسائر استثمارات وقفية,22622,,1,Liability,Balance Sheet,,No
+مخصص خسائر  استثمارات فائض الغلة ,test,2262 - مخصص خسائر استثمارات وقفية,22625,,1,Liability,Balance Sheet,,No
+مخصص خسائر -استثمارات في الصناديق والمحافظ ,test,2262 - مخصص خسائر استثمارات وقفية,22623,,1,Liability,Balance Sheet,,No
+مخصص خسائر - استثمارات عقارية وقفية,test,2262 - مخصص خسائر استثمارات وقفية,22621,,1,Liability,Balance Sheet,,No
+مخصص خسائر - اسثمارات عقارية وقفية  - مباني ,test,22621 - مخصص خسائر - استثمارات عقارية وقفية,226212,,0,Liability,Balance Sheet,,No
+مخصص خسائر - استثمارات عقارية وقفية - اراضي ,test,22621 - مخصص خسائر - استثمارات عقارية وقفية,226211,,0,Liability,Balance Sheet,,No
+مخصص قروض محافظ اقراضية وقفية مشكوك في تحصيلها ,test,226 - المخصصات للأصول الوقفية,2261,,1,Liability,Balance Sheet,,No
+مخصص قروض مشكوك  في تحصيلها - محافظ اقراضية وقفية - افراد ,test,2261 - مخصص قروض محافظ اقراضية وقفية مشكوك في تحصيلها,226 103,,0,Liability,Balance Sheet,,No
+مخصص قروض مشكوك في تحصيلها - محافظ اقراضية وقفية - مجموعات ,test,2261 - مخصص قروض محافظ اقراضية وقفية مشكوك في تحصيلها,226 104,,0,Liability,Balance Sheet,,No
+مخصص قروض مشكوك في تحصيلها - محافظ اقراضية وقفية - مشاريع واعدة ,test,2261 - مخصص قروض محافظ اقراضية وقفية مشكوك في تحصيلها,226 102,,0,Liability,Balance Sheet,,No
+مخصص قروض مشكوك في تحصيلها - محافظ اقراضية وقفية- اسر منتجة ,test,2261 - مخصص قروض محافظ اقراضية وقفية مشكوك في تحصيلها,226 101,,0,Liability,Balance Sheet,,No
+القروض طويلة الأجل ,test,22 - الإلتزامات غير متداولة,221,,1,Liability,Balance Sheet,,No
+قروض طويلة الأجل من جهات حكومية ,test,221 - القروض طويلة الأجل,22101,,1,Liability,Balance Sheet,,No
+قروض طويلة الأجل من جهات مانحة,test,221 - القروض طويلة الأجل,22102,,1,Liability,Balance Sheet,,No
+قروض طويلة  الأجل من الشركات والمؤسسات ,test,221 - القروض طويلة الأجل,22104,,1,Liability,Balance Sheet,,No
+قروض التورق الاسلامي طويل الأجل ,test,221 - القروض طويلة الأجل,22106,,1,Liability,Balance Sheet,,No
+قروض اخرى طويلة الاجل ,test,221 - القروض طويلة الأجل,22107,,1,Liability,Balance Sheet,,No
+مرابحة طويلة الأجل ,test,221 - القروض طويلة الأجل,22105,,1,Liability,Balance Sheet,,No
+قروض طويلة الأجل من البنوك,test,221 - القروض طويلة الأجل,22103,,1,Liability,Balance Sheet,,No
+أوراق الدفع  طويلة الأجل ,test,22 - الإلتزامات غير متداولة,222,,1,Liability,Balance Sheet,,No
+الذمم الدائنة - طويلة الأجل ,test,22 - الإلتزامات غير متداولة,223,,1,Liability,Balance Sheet,,No
+ذمم دائنة طويلة الأجل - موردون  ,test,223 - الذمم الدائنة - طويلة الأجل,2232,,1,Liability,Balance Sheet,,No
+ذمم دائنة أخرى - طويلة الأجل,test,223 - الذمم الدائنة - طويلة الأجل,2234,,1,Liability,Balance Sheet,,No
+ذمم دائنة طويلة الأجل - مدفوعات مقدمة من العملاء ,test,223 - الذمم الدائنة - طويلة الأجل,2233,,1,Liability,Balance Sheet,,No
+"ذمم دائنة طويلة الأجل - موظفين "" عاملين "" ",test,223 - الذمم الدائنة - طويلة الأجل,2231,,1,Liability,Balance Sheet,,No
+"ذمم دائنة طويلة الأجل - موظفين "" عاملين """,test,"2231 - ذمم دائنة طويلة الأجل - موظفين "" عاملين """,223101,,0,Liability,Balance Sheet,Payable,No
+المخصصات ,test,22 - الإلتزامات غير متداولة,224,,1,Liability,Balance Sheet,,No
+مخصص مكافات نهاية الخدمة ,test,224 - المخصصات,2241,,1,Liability,Balance Sheet,,No
+مخصص مكافات نهاية الخدمة,test,2241 - مخصص مكافات نهاية الخدمة,22411,,0,Liability,Balance Sheet,Payable,No
+مخصص ديون مشكوك في تحصيلها ,test,224 - المخصصات,2244,,1,Liability,Balance Sheet,,No
+مخصص ديون مشكوك في تحصيلها - ذمم العملاء  ,test,2244 - مخصص ديون مشكوك في تحصيلها,22442,,0,Liability,Balance Sheet,,No
+مخصص ديون مشكوك في تحصيلها - ذمم العاملين ,test,2244 - مخصص ديون مشكوك في تحصيلها,22441,,0,Liability,Balance Sheet,,No
+مخصصات المخزون ,test,224 - المخصصات,2245,,1,Liability,Balance Sheet,,No
+مخصص مخزون مواد خام ,test,2245 - مخصصات المخزون,22452,,1,Liability,Balance Sheet,,No
+مخصص مخزون بضائع ومنتجات جاهزة ,test,2245 - مخصصات المخزون,22454,,1,Liability,Balance Sheet,,No
+مخصص بضائع ومنتجات للتوزيع الخيري ,test,22454 - مخصص مخزون بضائع ومنتجات جاهزة,224541,,0,Liability,Balance Sheet,,No
+مخصص بضائع مشتراه بغرض البيع ,test,22454 - مخصص مخزون بضائع ومنتجات جاهزة,224543,,0,Liability,Balance Sheet,,No
+مخصص بضائع جاهزة مصنعة,test,22454 - مخصص مخزون بضائع ومنتجات جاهزة,224542,,0,Liability,Balance Sheet,,No
+مخصص مخزون مستهلكات ,test,2245 - مخصصات المخزون,22451,,1,Liability,Balance Sheet,,No
+مخصص مخزون الوقود ,test,22451 - مخصص مخزون مستهلكات,224514,,0,Liability,Balance Sheet,,No
+مخصص مخزون مستلزمات ,test,22451 - مخصص مخزون مستهلكات,224515,,0,Liability,Balance Sheet,,No
+مخصص مخزون مستلزمات مكتبية ,test,22451 - مخصص مخزون مستهلكات,224511,,0,Liability,Balance Sheet,,No
+مخصص مخزون مستهلكات أخرى ,test,22451 - مخصص مخزون مستهلكات,224517,,0,Liability,Balance Sheet,,No
+مخصص مخزون كتب ,test,22451 - مخصص مخزون مستهلكات,224516,,0,Liability,Balance Sheet,,No
+مخصص مخزون قطع الغيار,test,22451 - مخصص مخزون مستهلكات,224512,,0,Liability,Balance Sheet,,No
+مخصص مخزون مطبوعات ,test,22451 - مخصص مخزون مستهلكات,224513,,0,Liability,Balance Sheet,,No
+"مخصص مخزون تحت التشغيل "" قيد التصنيع "" ",test,2245 - مخصصات المخزون,22453,,1,Liability,Balance Sheet,,No
+مخصصات أخرى ,test,224 - المخصصات,2246,,1,Liability,Balance Sheet,,No
+مخصص تذاكر ,test,2246 - مخصصات أخرى,22462,,0,Liability,Balance Sheet,,No
+مخصص إجازات ,test,2246 - مخصصات أخرى,22461,,0,Liability,Balance Sheet,,No
+مخصص ديون محافظ اقراضية  مشكوك في تحصيلها ,test,224 - المخصصات,2242,,1,Liability,Balance Sheet,,No
+مخصص د. م . في تحصيلها - محافظ اقراضية - مشاريع واعدة ,test,2242 - مخصص ديون محافظ اقراضية  مشكوك في تحصيلها,224202,,0,Liability,Balance Sheet,,No
+مخصص د. م . في تحصيلها - محافظ اقراضية - مجموعات ,test,2242 - مخصص ديون محافظ اقراضية  مشكوك في تحصيلها,224204,,0,Liability,Balance Sheet,,No
+مخصص د. م . في تحصيلها - محافظ اقراضية - اسر منتجة ,test,2242 - مخصص ديون محافظ اقراضية  مشكوك في تحصيلها,224201,,0,Liability,Balance Sheet,,No
+مخصص د. م . في تحصيلها - محافظ اقراضية - افراد ,test,2242 - مخصص ديون محافظ اقراضية  مشكوك في تحصيلها,224203,,0,Liability,Balance Sheet,,No
+مخصص خسائر استثمارات ,test,224 - المخصصات,2243,,1,Liability,Balance Sheet,,No
+مخصص خسائر -استثمارات مقتناة حتى تاريخ الاستحقاق ,test,2243 - مخصص خسائر استثمارات,22436,,0,Liability,Balance Sheet,,No
+مخصص خسائر -دفعات مقدمة لحساب الاستثمار,test,2243 - مخصص خسائر استثمارات,22437,,0,Liability,Balance Sheet,,No
+مخصص خسائر -استثمارات متاحة للبيع ,test,2243 - مخصص خسائر استثمارات,22434,,0,Liability,Balance Sheet,,No
+مخصص خسائر -استثمارات مقتناة بغرض المتاجرة ,test,2243 - مخصص خسائر استثمارات,22435,,0,Liability,Balance Sheet,,No
+مخصص خسائر -استثمارات في شركات زميلة ,test,2243 - مخصص خسائر استثمارات,22432,,0,Liability,Balance Sheet,,No
+مخصص خسائر -استثمارات في الصناديق والمحافظ ,test,2243 - مخصص خسائر استثمارات,22433,,0,Liability,Balance Sheet,Payable,No
+مخصص خسائر - استثمارات عقارية ,test,2243 - مخصص خسائر استثمارات,22431,,1,Liability,Balance Sheet,,No
+اسثمارات عقارية - مباني ,test,22431 - مخصص خسائر - استثمارات عقارية,224312,,0,Liability,Balance Sheet,,No
+استثمارات عقارية - اراضي ,test,22431 - مخصص خسائر - استثمارات عقارية,224311,,0,Liability,Balance Sheet,,No
+مجمعات الإهلاك والاستنفاذ,test,22 - الإلتزامات غير متداولة,225,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك - للموجودات الحيوية ,test,225 - مجمعات الإهلاك والاستنفاذ,2253,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك - الاشجار غير المثمرة ,test,2253 - مجمع الإهلاك - للموجودات الحيوية,225306,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك - الصيصان ,test,2253 - مجمع الإهلاك - للموجودات الحيوية,225304,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك - أمهات الابقار,test,2253 - مجمع الإهلاك - للموجودات الحيوية,225301,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك - امهات الدواجن ,test,2253 - مجمع الإهلاك - للموجودات الحيوية,225303,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك - صغار الابقار,test,2253 - مجمع الإهلاك - للموجودات الحيوية,225302,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك - الاشجار المثمرة ,test,2253 - مجمع الإهلاك - للموجودات الحيوية,225305,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك للأصول الثابتة ,test,225 - مجمعات الإهلاك والاستنفاذ,2251,,1,Liability,Balance Sheet,,No
+مجمع إهلاك - المباني ,test,2251 - مجمع الإهلاك للأصول الثابتة,225102,,1,Liability,Balance Sheet,,No
+مجمع إهلاك - المباني المتبرع بها ,test,225102 - مجمع إهلاك - المباني,2251022,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - المباني المشتراه,test,225102 - مجمع إهلاك - المباني,2251021,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - تحسينات مباني مستأجرة,test,225102 - مجمع إهلاك - المباني,2251025,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - مباني على ارض مستأجرة ,test,225102 - مجمع إهلاك - المباني,2251023,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - تجسينات مباني مملوكة ,test,225102 - مجمع إهلاك - المباني,2251024,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - أجهزة الاتصال والأمن والحماية,test,2251 - مجمع الإهلاك للأصول الثابتة,225109,,1,Liability,Balance Sheet,,No
+مجمع إهلاك - اجهزة الحاسب الالي وملحقاتها ,test,2251 - مجمع الإهلاك للأصول الثابتة,225110,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - الأثاث المكتبي ,test,2251 - مجمع الإهلاك للأصول الثابتة,225105,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+"مجمع إهلاك - الأراضي المطورة "" تحسينات أراضي """,test,2251 - مجمع الإهلاك للأصول الثابتة,225101,,1,Liability,Balance Sheet,,No
+مجمع إهلاك - الأراضي المطورة - تحسينات اراضي ,test,"225101 - مجمع إهلاك - الأراضي المطورة "" تحسينات أراضي """,2251011,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - اجهزة التدفئة والتبريد والتهوية ,test,2251 - مجمع الإهلاك للأصول الثابتة,225111,,1,Liability,Balance Sheet,,No
+مجمع إهلاك - الات ومعدات ,test,2251 - مجمع الإهلاك للأصول الثابتة,225103,,1,Liability,Balance Sheet,,No
+مجمع إهلاك - الات ومعدات حاويات ومقطورات ,test,225103 - مجمع إهلاك - الات ومعدات,2251035,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - الات ومعدات ورش,test,225103 - مجمع إهلاك - الات ومعدات,2251034,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - الات ومعدات ,test,225103 - مجمع إهلاك - الات ومعدات,2251031,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - الات ومعدات صناعية ,test,225103 - مجمع إهلاك - الات ومعدات,2251032,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - الات ومعدات صيانو وتشغيل ,test,225103 - مجمع إهلاك - الات ومعدات,2251033,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - اللوحات المعدنية ,test,2251 - مجمع الإهلاك للأصول الثابتة,225112,,1,Liability,Balance Sheet,,No
+مجمع إهلاك - أدوات وأجهزة العرض ,test,2251 - مجمع الإهلاك للأصول الثابتة,225108,,1,Liability,Balance Sheet,,No
+مجمع إهلاك - الات ومعدات مكتبية,test,2251 - مجمع الإهلاك للأصول الثابتة,225106,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - عدد وأدوات ,test,2251 - مجمع الإهلاك للأصول الثابتة,225107,,1,Liability,Balance Sheet,,No
+مجمع إهلاك - السيارات ,test,2251 - مجمع الإهلاك للأصول الثابتة,225104,,1,Liability,Balance Sheet,,No
+مجمع اهلاك سيارات متبرع بها ,test,225104 - مجمع إهلاك - السيارات,2251042,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع اهلاك - سيارات ايجار منتهي بالتمليك,test,225104 - مجمع إهلاك - السيارات,2251043,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع اهلاك سيارات مشتراة,test,225104 - مجمع إهلاك - السيارات,2251041,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع استنفاذ - الأصول غير الملموسة ,test,225 - مجمعات الإهلاك والاستنفاذ,2252,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - مصاريف عمومية وإدارية مؤجلة,test,2252 - مجمع استنفاذ - الأصول غير الملموسة,225207,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - براءات الإختراع ,test,2252 - مجمع استنفاذ - الأصول غير الملموسة,225201,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - مصاريف حقوق الامتياز ,test,2252 - مجمع استنفاذ - الأصول غير الملموسة,225204,,1,Liability,Balance Sheet,,No
+"مجمع استنفاذ - تكاليف ماقبل التشغيل "" مصاريف التأسيس """,test,2252 - مجمع استنفاذ - الأصول غير الملموسة,225203,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - قيمة التقبيل - خلو رجل ,test,2252 - مجمع استنفاذ - الأصول غير الملموسة,225208,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - تكاليف تطوير المنتجات ,test,2252 - مجمع استنفاذ - الأصول غير الملموسة,225205,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - رخص البرامج والأنظمة ,test,2252 - مجمع استنفاذ - الأصول غير الملموسة,225209,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - العلامات التجارية ,test,2252 - مجمع استنفاذ - الأصول غير الملموسة,225202,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - الخطة الاستراتيجية ,test,2252 - مجمع استنفاذ - الأصول غير الملموسة,225210,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - مصاريف الحملات الاعلانية المؤجلة,test,2252 - مجمع استنفاذ - الأصول غير الملموسة,225206,,1,Liability,Balance Sheet,,No
+مجمعات الإهلاك والاستنفاذ للأصول الوقفية ,test,22 - الإلتزامات غير متداولة,227,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك للأصول الثابتة الوقفية ,test,227 - مجمعات الإهلاك والاستنفاذ للأصول الوقفية,2271,,1,Liability,Balance Sheet,,No
+مجمع إهلاك - الات ومعدات  - أوقاف ,test,2271 - مجمع الإهلاك للأصول الثابتة الوقفية,227103,,1,Liability,Balance Sheet,,No
+مجمع إهلاك - الات ومعدات صيانو وتشغيل  - أوقاف ,test,227103 - مجمع إهلاك - الات ومعدات  - أوقاف,2271033,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - الات ومعدات ورش  - أوقاف ,test,227103 - مجمع إهلاك - الات ومعدات  - أوقاف,2271034,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - الات ومعدات  - أوقاف ,test,227103 - مجمع إهلاك - الات ومعدات  - أوقاف,2271031,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - الات ومعدات حاويات ومقطورات  - أوقاف  ,test,227103 - مجمع إهلاك - الات ومعدات  - أوقاف,2271035,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - الات ومعدات صناعية  - أوقاف ,test,227103 - مجمع إهلاك - الات ومعدات  - أوقاف,2271032,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - الأراضي المطورة - اوقاف,test,2271 - مجمع الإهلاك للأصول الثابتة الوقفية,227101,,1,Liability,Balance Sheet,,No
+مجمع إهلاك - الأراضي المطورة - تحسينات اراضي اوقاف ,test,227101 - مجمع إهلاك - الأراضي المطورة - اوقاف,2271011,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - المباني - أوقاف ,test,2271 - مجمع الإهلاك للأصول الثابتة الوقفية,227102,,1,Liability,Balance Sheet,,No
+مجمع إهلاك - المباني  - أوقاف ,test,227102 - مجمع إهلاك - المباني - أوقاف,2271021,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع إهلاك - تجسينات مباني مملوكة  - أوقاف ,test,227102 - مجمع إهلاك - المباني - أوقاف,2271022,,0,Liability,Balance Sheet,Accumulated Depreciation,No
+مجمع الإهلاك - للموجودات الحيوية الوقفية,test,227 - مجمعات الإهلاك والاستنفاذ للأصول الوقفية,2273,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك - الاشجار غير المثمرة  - أوقاف ,test,2273 - مجمع الإهلاك - للموجودات الحيوية الوقفية,227306,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك - الصيصان  - أوقاف ,test,2273 - مجمع الإهلاك - للموجودات الحيوية الوقفية,227304,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك - صغار الابقار - أوقاف ,test,2273 - مجمع الإهلاك - للموجودات الحيوية الوقفية,227302,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك - الاشجار المثمرة  - أوقاف ,test,2273 - مجمع الإهلاك - للموجودات الحيوية الوقفية,227305,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك - أمهات الابقار - أوقاف ,test,2273 - مجمع الإهلاك - للموجودات الحيوية الوقفية,227301,,1,Liability,Balance Sheet,,No
+مجمع الإهلاك - امهات الدواجن  - أوقاف ,test,2273 - مجمع الإهلاك - للموجودات الحيوية الوقفية,227303,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - الأصول غير الملموسة الوقفية,test,227 - مجمعات الإهلاك والاستنفاذ للأصول الوقفية,2272,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - قيمة التقبيل - خلو رجل  - أوقاف ,test,2272 - مجمع استنفاذ - الأصول غير الملموسة الوقفية,227209,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - مصاريف حقوق الامتياز  - أوقاف ,test,2272 - مجمع استنفاذ - الأصول غير الملموسة الوقفية,227204,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - براءات الإختراع  - أوقاف ,test,2272 - مجمع استنفاذ - الأصول غير الملموسة الوقفية,227201,,1,Liability,Balance Sheet,,No
+مجمع استنفاذ - العلامات التجارية  - أوقاف ,test,2272 - مجمع استنفاذ - الأصول غير الملموسة الوقفية,227202,,1,Liability,Balance Sheet,,No
