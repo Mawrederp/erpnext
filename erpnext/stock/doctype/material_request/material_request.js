@@ -147,9 +147,9 @@ frappe.ui.form.on('Material Request', {
 	        });
     	}
         frm.fields_dict['project'].get_query = function() {
-            if (!frm.doc.material_requester) {
-                frappe.throw(__("Please select a requester"));
-            }
+            // if (!frm.doc.material_requester) {
+            //     frappe.throw(__("Please select a requester"));
+            // }
             return {
                 filters: {
                     "project_manager": frm.doc.material_requester
