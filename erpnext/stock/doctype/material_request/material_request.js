@@ -30,6 +30,7 @@ frappe.ui.form.on('Material Request', {
             // cur_frm.reload_doc();
         }
         cur_frm.toggle_display("project", cur_frm.doc.purchase_workflow == "Project");
+        cur_frm.toggle_display("main_project_procurement", cur_frm.doc.purchase_workflow == "Project");
         cur_frm.toggle_display("default_warehouse", cur_frm.doc.purchase_workflow == "Project");
 
         frappe.call({
@@ -100,13 +101,17 @@ frappe.ui.form.on('Material Request', {
         frm.clear_table("items");
         refresh_many(['items']);
         frm.set_value("project", undefined);
+        frm.set_value("main_project_procurement", undefined);
         frm.set_value("default_warehouse", undefined);
         frm.toggle_display("project", frm.doc.purchase_workflow == "Project");
+        frm.toggle_display("main_project_procurement", frm.doc.purchase_workflow == "Project");
         frm.toggle_display("default_warehouse", frm.doc.purchase_workflow == "Project");
         frm.toggle_reqd("project", frm.doc.purchase_workflow == "Project");
+        frm.toggle_reqd("main_project_procurement", frm.doc.purchase_workflow == "Project");
         frm.toggle_reqd("default_warehouse", frm.doc.purchase_workflow == "Project");
         
         frm.refresh_field('project');
+        frm.refresh_field('main_project_procurement');
         frm.refresh_field('warehouse');
         frm.refresh_field('default_warehouse');
         frm.set_df_property("default_warehouse", "read_only", 1);
@@ -130,6 +135,42 @@ frappe.ui.form.on('Material Request', {
             }
         }
     },
+    project: function(frm) {
+        if(cur_frm.doc.purchase_workflow=='Project'){
+        	frm.set_query("main_project_procurement", function() {
+	    		return {
+	    			query: "erpnext.stock.doctype.material_request.material_request.get_project_main_items",
+	    			filters: {
+                        "project": cur_frm.doc.project
+                 	}  
+	    		};
+	    	});
+
+            cur_frm.set_df_property("default_warehouse", "read_only", false);
+
+            // frappe.call({
+            //     method: "get_project_items",
+            //     doc: frm.doc,
+            //     callback: function(r) {
+            //         frm.refresh_field('items');
+            //     }
+            // });
+
+
+        }
+    },
+    main_project_procurement: function(frm) {
+    	if(cur_frm.doc.purchase_workflow=='Project' && cur_frm.doc.project && cur_frm.doc.main_project_procurement){
+            frappe.call({
+                method: "get_project_items",
+                doc: frm.doc,
+                callback: function(r) {
+                    frm.refresh_field('items');
+                }
+            });
+
+        }
+    },
     onload: function(frm) {
     	if(cur_frm.doc.__islocal){
 	        frappe.call({
@@ -146,18 +187,18 @@ frappe.ui.form.on('Material Request', {
 	            }
 	        });
     	}
-        frm.fields_dict['project'].get_query = function() {
-            // if (!frm.doc.material_requester) {
-            //     frappe.throw(__("Please select a requester"));
-            // }
-            return {
-                filters: {
-                    "project_manager": frm.doc.material_requester
-                    // "status": "Open"
-                }
+        // frm.fields_dict['project'].get_query = function() {
+        //     // if (!frm.doc.material_requester) {
+        //     //     frappe.throw(__("Please select a requester"));
+        //     // }
+        //     return {
+        //         filters: {
+        //             "project_manager": frm.doc.material_requester
+        //             // "status": "Open"
+        //         }
 
-            }
-        }
+        //     }
+        // }
         // add item, if previous view was item
         erpnext.utils.add_item(frm);
 
