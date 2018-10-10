@@ -23,9 +23,7 @@ class LeaveClaim(Document):
         if self.employee:
             employee_user = frappe.get_value("Employee", filters={"name": self.employee}, fieldname="user_id")
             if self.get('__islocal') and employee_user:
-                if u'CEO' in frappe.get_roles(employee_user):
-                    self.workflow_state = "Created By CEO"
-                elif u'Director' in frappe.get_roles(employee_user):
+                if u'Director' in frappe.get_roles(employee_user):
                     self.workflow_state = "Created By Director"
                 elif u'Manager' in frappe.get_roles(employee_user):
                     self.workflow_state = "Created By Manager"
