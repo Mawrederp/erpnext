@@ -208,6 +208,22 @@ class MaterialRequest(BuyingController):
                 "schedule_date": frappe.utils.get_last_day(utils.today())
             })
 
+            product_bundle = frappe.db.sql("""select t1.item_code, t1.qty, t1.uom, t1.description
+                from `tabProduct Bundle Item` t1, `tabProduct Bundle` t2
+                where t2.new_item_code=%s and t1.parent = t2.name order by t1.idx""", doc.items, as_dict=1)
+
+            for bundle in product_bundle:
+                self.append("items", {
+                    "item_code": bundle.item_code,
+                    "item_name": bundle.item_name,
+                    "description": bundle.description,
+                    "uom": bundle.uom,
+                    "qty": flt(bundle.qty)*flt(qty),
+                    "project": self.project,
+                    "schedule_date": frappe.utils.get_last_day(utils.today()),
+                    "is_product_bundle_item": 1 ,
+                    "product_bundle": doc.items
+                })
 
 
     def validate_project(self):

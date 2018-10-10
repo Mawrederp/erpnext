@@ -160,11 +160,26 @@ frappe.ui.form.on('Material Request', {
         }
     },
     main_project_procurement: function(frm) {
+        var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+        var lastDay = new Date(y, m + 1, 0);
+
     	if(cur_frm.doc.purchase_workflow=='Project' && cur_frm.doc.project && cur_frm.doc.main_project_procurement){
             frappe.call({
                 method: "get_project_items",
                 doc: frm.doc,
                 callback: function(r) {
+                    // if(r.message){
+                    //     for (let i = 0; i < r.message.length; i++) {
+                    //         var row = frm.add_child("items");
+                    //         row.item_code = r.message[i].item_code
+                    //         row.item_name = r.message[i].item_code
+                    //         row.description = r.message[i].description
+                    //         row.uom = r.message[i].uom
+                    //         row.qty = r.message[i].qty
+                    //         row.project = cur_frm.doc.project
+                    //         row.schedule_date = lastDay
+                    //     }
+                    // }
                     frm.refresh_field('items');
                 }
             });
