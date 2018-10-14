@@ -144,7 +144,7 @@ def add_allocation_for_next_year():
                 "leave_type": 'Annual Leave - اجازة اعتيادية',
                 "from_date": first_next_year,
                 "to_date": second_next_year,
-                # "carry_forward": cint(1),
+                "carry_forward": cint(1),
                 "new_leaves_allocated": leave_allocation[0][2],
                 "docstatus": 1
             }).insert(ignore_permissions=True)            
