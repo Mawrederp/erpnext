@@ -3,7 +3,7 @@
 
 {% include 'erpnext/buying/doctype/purchase_common/purchase_common.js' %};
 cur_frm.add_fetch("material_requester", "department", "department");
-// cur_frm.add_fetch("project", "default_warehouse", "default_warehouse");
+cur_frm.add_fetch("project", "default_warehouse", "default_warehouse");
 frappe.ui.form.on('Material Request', {
 
     refresh: function(frm) {
@@ -33,17 +33,17 @@ frappe.ui.form.on('Material Request', {
         cur_frm.toggle_display("main_project_procurement", cur_frm.doc.purchase_workflow == "Project");
         cur_frm.toggle_display("default_warehouse", cur_frm.doc.purchase_workflow == "Project");
 
-        frappe.call({
-            method: "unallowed_actions",
-            doc: cur_frm.doc,
-            freeze: true,
-            callback: function(r) {
-                // console.log(r.message);
-                if (r.message && frappe.session.user != "Administrator") {
-                    cur_frm.page.clear_actions_menu();
-                }
-            }
-        });
+        // frappe.call({
+        //     method: "unallowed_actions",
+        //     doc: cur_frm.doc,
+        //     freeze: true,
+        //     callback: function(r) {
+        //         console.log(r.message);
+        //         if (r.message && frappe.session.user != "Administrator") {
+        //             cur_frm.page.clear_actions_menu();
+        //         }
+        //     }
+        // });
         if(cur_frm.doc.workflow_state && (cur_frm.doc.workflow_state == "Pending" || cur_frm.doc.workflow_state == "Modified")){
             frappe.call({
                 method: "validate_director_actions",
