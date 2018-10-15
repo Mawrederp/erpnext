@@ -3,7 +3,7 @@
 
 {% include 'erpnext/buying/doctype/purchase_common/purchase_common.js' %};
 cur_frm.add_fetch("material_requester", "department", "department");
-cur_frm.add_fetch("project", "default_warehouse", "default_warehouse");
+// cur_frm.add_fetch("project", "default_warehouse", "default_warehouse");
 frappe.ui.form.on('Material Request', {
 
     refresh: function(frm) {
