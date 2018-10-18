@@ -275,7 +275,7 @@ erpnext.stock.DeliveryNoteController = erpnext.selling.SellingController.extend(
 
 		// unhide expense_account and cost_center is auto_accounting_for_stock enabled
 		var aii_enabled = cint(sys_defaults.auto_accounting_for_stock)
-		cur_frm.fields_dict["items"].grid.set_column_disp(["expense_account", "cost_center"], aii_enabled);
+		// cur_frm.fields_dict["items"].grid.set_column_disp(["expense_account", "cost_center"], aii_enabled);
 	},
 
 	make_sales_invoice: function() {

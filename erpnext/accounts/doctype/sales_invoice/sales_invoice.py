@@ -54,7 +54,7 @@ class SalesInvoice(SellingController):
 		
 		super(SalesInvoice, self).validate()
 		self.validate_posting_time()
-		self.so_dn_required()
+		# self.so_dn_required()
 		self.validate_proj_cust()
 		self.validate_with_previous_doc()
 		self.validate_uom_is_integer("stock_uom", "qty")
