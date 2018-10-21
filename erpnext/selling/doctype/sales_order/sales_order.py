@@ -34,7 +34,7 @@ class SalesOrder(SellingController):
 		self.validate_po()
 		self.validate_uom_is_integer("stock_uom", "qty")
 		self.validate_for_items()
-		self.validate_warehouse()
+		# self.validate_warehouse()
 		self.validate_drop_ship()
 
 		from erpnext.stock.doctype.packed_item.packed_item import make_packing_list
