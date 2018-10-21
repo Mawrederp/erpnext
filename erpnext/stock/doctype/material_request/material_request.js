@@ -7,55 +7,56 @@ cur_frm.add_fetch("project", "default_warehouse", "default_warehouse");
 frappe.ui.form.on('Material Request', {
 
     refresh: function(frm) {
-
-        if (cur_frm.doc.__islocal || (cur_frm.doc.state == "To Modify" && cur_frm.doc.user_id == frappe.session.user)) {
-            for (var key in cur_frm.fields_dict) {
-                cur_frm.set_df_property(key, "read_only", 0);
-                // cur_frm.fields_dict[key].df.read_only = 0;
-            }
-            cur_frm.enable_save();
-            cur_frm.set_df_property("material_requester", "read_only", 1);
-            cur_frm.set_df_property("state", "read_only", 1);
-            cur_frm.set_df_property("suggested_grand_total", "read_only", 1);
-            cur_frm.set_df_property("handled_by", "read_only", 1);
-            cur_frm.set_df_property("rejection_reason", "read_only", 1);
-        }
-        else {
-            for (var key in cur_frm.fields_dict) {
-                cur_frm.set_df_property(key, "read_only", 1);
-            // cur_frm.fields_dict[key].df.read_only = 1;
-            }
-            // cur_frm.save();
-            cur_frm.disable_save();
-            // cur_frm.reload_doc();
-        }
-        cur_frm.toggle_display("project", cur_frm.doc.purchase_workflow == "Project");
-        cur_frm.toggle_display("main_project_procurement", cur_frm.doc.purchase_workflow == "Project");
-        cur_frm.toggle_display("default_warehouse", cur_frm.doc.purchase_workflow == "Project");
-
-        // frappe.call({
-        //     method: "unallowed_actions",
-        //     doc: cur_frm.doc,
-        //     freeze: true,
-        //     callback: function(r) {
-        //         console.log(r.message);
-        //         if (r.message && frappe.session.user != "Administrator") {
-        //             cur_frm.page.clear_actions_menu();
-        //         }
-        //     }
-        // });
-        if(cur_frm.doc.workflow_state && (cur_frm.doc.workflow_state == "Pending" || cur_frm.doc.workflow_state == "Modified")){
-            frappe.call({
-                method: "validate_director_actions",
-                doc: cur_frm.doc,
-                freeze: true,
-                callback: function(r) {
-                    // console.log(r.message);
-                    if (r.message && frappe.session.user != "Administrator") {
-                        cur_frm.page.clear_actions_menu();
-                    }
+        if(cur_frm.doc.purchase_workflow != "Project"){
+            if (cur_frm.doc.__islocal || (cur_frm.doc.state == "To Modify" && cur_frm.doc.user_id == frappe.session.user)) {
+                for (var key in cur_frm.fields_dict) {
+                    cur_frm.set_df_property(key, "read_only", 0);
+                    // cur_frm.fields_dict[key].df.read_only = 0;
                 }
-            });
+                cur_frm.enable_save();
+                cur_frm.set_df_property("material_requester", "read_only", 1);
+                cur_frm.set_df_property("state", "read_only", 1);
+                cur_frm.set_df_property("suggested_grand_total", "read_only", 1);
+                cur_frm.set_df_property("handled_by", "read_only", 1);
+                cur_frm.set_df_property("rejection_reason", "read_only", 1);
+            }
+            else {
+                for (var key in cur_frm.fields_dict) {
+                    cur_frm.set_df_property(key, "read_only", 1);
+                // cur_frm.fields_dict[key].df.read_only = 1;
+                }
+                // cur_frm.save();
+                cur_frm.disable_save();
+                // cur_frm.reload_doc();
+            }
+            cur_frm.toggle_display("project", cur_frm.doc.purchase_workflow == "Project");
+            cur_frm.toggle_display("main_project_procurement", cur_frm.doc.purchase_workflow == "Project");
+            cur_frm.toggle_display("default_warehouse", cur_frm.doc.purchase_workflow == "Project");
+
+            // frappe.call({
+            //     method: "unallowed_actions",
+            //     doc: cur_frm.doc,
+            //     freeze: true,
+            //     callback: function(r) {
+            //         console.log(r.message);
+            //         if (r.message && frappe.session.user != "Administrator") {
+            //             cur_frm.page.clear_actions_menu();
+            //         }
+            //     }
+            // });
+            if(cur_frm.doc.workflow_state && (cur_frm.doc.workflow_state == "Pending" || cur_frm.doc.workflow_state == "Modified")){
+                frappe.call({
+                    method: "validate_director_actions",
+                    doc: cur_frm.doc,
+                    freeze: true,
+                    callback: function(r) {
+                        // console.log(r.message);
+                        if (r.message && frappe.session.user != "Administrator") {
+                            cur_frm.page.clear_actions_menu();
+                        }
+                    }
+                });
+            }
         }
     },
     setup: function(frm) {
