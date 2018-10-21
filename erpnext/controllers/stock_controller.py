@@ -51,7 +51,7 @@ class StockController(AccountsController):
 					if warehouse_account.get(sle.warehouse):
 						# from warehouse account
 						
-						self.check_expense_account(item_row)
+						# self.check_expense_account(item_row)
 
 						# If item is not a sample item 
 						# and ( valuation rate not mentioned in an incoming entry

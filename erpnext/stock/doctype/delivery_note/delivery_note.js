@@ -8,6 +8,11 @@ frappe.provide("erpnext.stock.delivery_note");
 
 
 frappe.ui.form.on("Delivery Note", {
+	refresh: function(frm,cdt,cdn){
+		cur_frm.fields_dict["items"].grid.set_column_disp(["price_list_rate","discount_and_margin","section_break_1","section_break_25","billed_amt"]);
+		cur_frm.fields_dict["taxes"].grid.set_column_disp(["section_break_8","section_break_9"]);
+		cur_frm.toggle_display(["section_break_31","section_break_44","section_break_49","totals","sales_team_section_break","currency_and_price_list"], false);
+	},
 	project: function(frm,cdt,cdn){
 		if (frm.doc.project && frm.doc.project != "" ){
 		frm.script_manager.trigger("customer");
