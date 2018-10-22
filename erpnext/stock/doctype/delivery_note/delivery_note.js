@@ -322,6 +322,48 @@ erpnext.stock.DeliveryNoteController = erpnext.selling.SellingController.extend(
 
 });
 
+
+
+
+
+frappe.ui.form.on('Delivery Note Item', {
+    qty: function (frm, cdt, cdn) {
+        var row = locals[cdt][cdn];
+
+        for(var row= 0;row<cur_frm.doc.items.length;row++){
+
+	        var qty = cur_frm.doc.items[row].qty
+			if(qty){
+				qty=qty
+			}else{
+				qty=0
+			}
+
+		}
+
+
+        frappe.call({
+            "method": "validate_bundle_qty_number",
+            args: {
+                'qty': qty,
+            },
+            doc: cur_frm.doc,
+            callback: function(r){
+				if(r.message==1){
+					frappe.model.set_value(cdt, cdn, "qty", );
+				}
+			},
+        });
+        
+    
+    }
+    
+
+});
+
+
+
+
 // for backward compatibility: combine new and previous states
 $.extend(cur_frm.cscript, new erpnext.stock.DeliveryNoteController({frm: cur_frm}));
 
