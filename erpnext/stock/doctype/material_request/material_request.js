@@ -57,6 +57,8 @@ frappe.ui.form.on('Material Request', {
                     }
                 });
             }
+        }else{
+            cur_frm.fields_dict["items"].grid.set_column_disp("suggested_price_per_unit");
         }
     },
     setup: function(frm) {
@@ -117,6 +119,8 @@ frappe.ui.form.on('Material Request', {
         frm.refresh_field('default_warehouse');
         frm.set_df_property("default_warehouse", "read_only", 1);
         if (frm.doc.purchase_workflow == "Project") {
+            cur_frm.fields_dict["items"].grid.set_column_disp("suggested_price_per_unit");
+
             frappe.call({
                 method: "get_project_manager",
                 doc: frm.doc,
