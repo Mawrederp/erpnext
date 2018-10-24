@@ -81,6 +81,7 @@ class MaterialRequest(BuyingController):
         # self.validate_project()
         # self.validate_project_items()
         # self.set_title()
+
         if self.get("__islocal") :
                 self.title = self.get_title()
                 self.set_user_emp()
@@ -97,7 +98,22 @@ class MaterialRequest(BuyingController):
                         row.warehouse = warehouse
                     elif row.warehouse !=warehouse : 
                         frappe.throw(_("Bad Warehouse in row  %s default warehouse is %s"%(row.idx,warehouse)))
-                    
+        
+
+
+    def validate_suggested_price(self,item_name):
+        resources_details_name = frappe.db.sql("select name from `tabItems Details` where parenttype='Project Initiation' and parent='{0}' and section_name='{1}' ".format(self.project,self.main_project_procurement))
+        result = 0 
+        for resource in resources_details_name:     
+            doc = frappe.get_doc("Items Details",resource[0])
+            if doc.items == item_name:
+                result = doc.total_cost_price
+        return result
+            
+
+
+
+
     def get_title(self):
         from frappe.utils import getdate
         
