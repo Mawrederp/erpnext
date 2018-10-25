@@ -217,7 +217,7 @@ scheduler_events = {
 		"erpnext.support.doctype.issue.issue.auto_close_tickets",
 		"erpnext.controllers.accounts_controller.update_invoice_status",
 		"erpnext.accounts.doctype.fiscal_year.fiscal_year.auto_create_fiscal_year",
-		"erpnext.hr.doctype.employee.employee.send_birthday_reminders",
+		# "erpnext.hr.doctype.employee.employee.send_birthday_reminders",
 		"erpnext.projects.doctype.task.task.set_tasks_as_overdue",
 		"erpnext.hr.doctype.health_insurance_info.health_insurance_info.hooked_validate_exp_date",
 		#~ "erpnext.accounts.doctype.asset.depreciation.post_depreciation_entries",
