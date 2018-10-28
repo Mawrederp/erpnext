@@ -30,7 +30,7 @@ class Warehouse(NestedSet):
 		if self.email_id:
 			validate_email_add(self.email_id, True)
 
-		self.update_parent_account()
+		#~ self.update_parent_account()
 
 	def update_parent_account(self):
 		if not getattr(self, "__islocal", None) \
@@ -49,7 +49,7 @@ class Warehouse(NestedSet):
 					acc_doc.save()
 
 	def on_update(self):
-		self.create_account_head()
+		#~ self.create_account_head()
 		self.update_nsm_model()
 
 	def create_account_head(self):

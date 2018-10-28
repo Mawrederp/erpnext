@@ -395,9 +395,16 @@ def get_voucherwise_gl_entries(future_stock_vouchers, posting_date):
 
 def get_warehouse_account():
 	warehouse_account = frappe._dict()
-
-	for d in frappe.db.sql("""select warehouse, name, account_currency from tabAccount
-		where account_type = 'Stock' and (warehouse is not null and warehouse != ''
-		and is_group != 1) and is_group=0 """, as_dict=1):
+	
+	for d in frappe.db.sql("""select w.name as warehouse, w.account as name, ac.account_currency 
+		from `tabWarehouse` as w  
+		left join tabAccount as ac 
+		on w.account = ac.name 
+		where ac.account_type = 'Stock' 
+		and ac.is_group=0 """, as_dict=1):
+			
+	#~ for d in frappe.db.sql("""select warehouse, name, account_currency from tabAccount
+		#~ where account_type = 'Stock' and (warehouse is not null and warehouse != ''
+		#~ and is_group != 1) and is_group=0 """, as_dict=1):
 			warehouse_account.setdefault(d.warehouse, d)
 	return warehouse_account
