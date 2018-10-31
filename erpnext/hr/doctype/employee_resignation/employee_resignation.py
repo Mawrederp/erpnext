@@ -63,7 +63,6 @@ class EmployeeResignation(Document):
         
 
     def validate(self):
-
         if not self.last_working_date:
             frappe.throw("Please enter your last working date")
 
