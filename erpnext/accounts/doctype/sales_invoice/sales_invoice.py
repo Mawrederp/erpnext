@@ -651,47 +651,60 @@ class SalesInvoice(SellingController):
                 ignore_permissions=True)
             
         status = "All"
+        self.make_customer_gl_entry(gl_entries)
+
+        self.make_tax_gl_entries(gl_entries)
+
+        self.make_item_gl_entries(gl_entries)
+
+        # merge gl entries before adding pos entries
+        gl_entries = merge_similar_entries(gl_entries)
+
+        self.make_pos_gl_entries(gl_entries)
+        self.make_gle_for_change_amount(gl_entries)
+        self.make_write_off_gl_entry(gl_entries)
         
-        if detail :
-            if detail[0]["is_advance"] ==1:
-                status = "Advance"
-            elif detail[0]["is_retention"] ==1:
-                status = "Retention"
+        #~ if detail :
+            #~ if detail[0]["is_advance"] ==1:
+                #~ status = "Advance"
+            #~ elif detail[0]["is_retention"] ==1:
+                #~ status = "Retention"
                     
-        if status == "Advance" or status == "Retention":
-            self.make_customer_gl_entry(gl_entries)
+        #~ if status == "Advance" or status == "Retention":
+            #~ self.make_customer_gl_entry(gl_entries)
 
-            self.make_tax_gl_entries(gl_entries)
+            #~ self.make_tax_gl_entries(gl_entries)
 
-            self.make_item_gl_entries(gl_entries)
+            #~ self.make_item_gl_entries(gl_entries)
 
-            # merge gl entries before adding pos entries
-            gl_entries = merge_similar_entries(gl_entries)
+            #~ # merge gl entries before adding pos entries
+            #~ gl_entries = merge_similar_entries(gl_entries)
 
-            self.make_pos_gl_entries(gl_entries)
-            self.make_gle_for_change_amount(gl_entries)
+            #~ self.make_pos_gl_entries(gl_entries)
+            #~ self.make_gle_for_change_amount(gl_entries)
 
-            self.make_write_off_gl_entry(gl_entries)
+            #~ self.make_write_off_gl_entry(gl_entries)
         
-        elif  status == "All" : 
-            self.make_payment_term_gl_entry(gl_entries)
-            self.make_tax_gl_entries(gl_entries)
-            self.make_item_gl_entries(gl_entries)
+        #~ elif  status == "All" : 
+            #~ self.make_payment_term_gl_entry(gl_entries)
+            #~ self.make_tax_gl_entries(gl_entries)
+            #~ self.make_item_gl_entries(gl_entries)
         
-        else:
-            self.make_customer_gl_entry(gl_entries)
+        #~ else:
+            #~ self.make_customer_gl_entry(gl_entries)
 
-            self.make_tax_gl_entries(gl_entries)
+            #~ self.make_tax_gl_entries(gl_entries)
 
-            self.make_item_gl_entries(gl_entries)
+            #~ self.make_item_gl_entries(gl_entries)
 
-            # merge gl entries before adding pos entries
-            gl_entries = merge_similar_entries(gl_entries)
+            #~ # merge gl entries before adding pos entries
+            #~ gl_entries = merge_similar_entries(gl_entries)
 
-            self.make_pos_gl_entries(gl_entries)
-            self.make_gle_for_change_amount(gl_entries)
+            #~ self.make_pos_gl_entries(gl_entries)
+            #~ self.make_gle_for_change_amount(gl_entries)
 
-            self.make_write_off_gl_entry(gl_entries)
+			#~ self.make_write_off_gl_entry(gl_entries)
+        
 
         return gl_entries
 
