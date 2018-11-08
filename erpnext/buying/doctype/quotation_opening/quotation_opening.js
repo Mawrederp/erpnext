@@ -1,5 +1,6 @@
 // Copyright (c) 2016, Frappe Technologies Pvt. Ltd. and contributors
 // For license information, please see license.txt
+cur_frm.add_fetch("supplier_quotation", "delivery", "delivery");
 
 frappe.ui.form.on('Quotation Opening', {
     refresh: function(frm) {

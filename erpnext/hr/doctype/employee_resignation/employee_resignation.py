@@ -19,6 +19,13 @@ class EmployeeResignation(Document):
         emp.save(ignore_permissions=True)
 
 
+        sal_structure = frappe.db.sql("select parent from `tabSalary Structure Employee` where parenttype='Salary Structure' and employee='{0}'".format(self.employee))
+        if sal_structure:
+            sal = frappe.get_doc("Salary Structure", sal_structure[0][0])
+            sal.is_active = 'No'
+            sal.save(ignore_permissions=True)
+
+
         salary = self.get_salary()
         award_info = get_award(self.date_of_joining, self.last_working_date, salary,self.employment_type, "استقالة العامل")
 
@@ -63,7 +70,6 @@ class EmployeeResignation(Document):
         
 
     def validate(self):
-
         if not self.last_working_date:
             frappe.throw("Please enter your last working date")
 

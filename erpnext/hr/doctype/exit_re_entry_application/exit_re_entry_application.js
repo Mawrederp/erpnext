@@ -9,13 +9,13 @@ frappe.ui.form.on('Exit Re Entry Application', {
             frm.enable_save();
         }
 
-        showEditor(frm, "exit_re_entry_family_members_editor",
-            __("Exit ReEntry Family Members"),
-            	"family_members_html", {
-                "method": "get_family_exit_re_entry",
-                "self_field": "has_self_exit_re_entry",
-                "dt_field": "family_members"
-            });
+        // showEditor(frm, "exit_re_entry_family_members_editor",
+        //     __("Exit ReEntry Family Members"),
+        //     	"family_members_html", {
+        //         "method": "get_family_exit_re_entry",
+        //         "self_field": "has_self_exit_re_entry",
+        //         "dt_field": "family_members"
+        //     });
     }
 });
 

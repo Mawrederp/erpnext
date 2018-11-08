@@ -6,37 +6,36 @@ cur_frm.add_fetch("material_requester", "department", "department");
 cur_frm.add_fetch("project", "default_warehouse", "default_warehouse");
 frappe.ui.form.on('Material Request', {
 
-    // validate: function(frm) {
-    //     if(cur_frm.doc.purchase_workflow == "Project"){
+    validate: function(frm) {
+        if(cur_frm.doc.purchase_workflow == "Project"){
             
-    //         var total = 0
-    //         $.each(cur_frm.doc.items, function(i, d) {
-    //             total += flt(d.suggested_total_price);
-    //             console.log(d.suggested_total_price)
-    //         });
-    //         cur_frm.set_value("suggested_grand_total", total);
+            var total = 0
+            $.each(cur_frm.doc.items, function(i, d) {
+                total += flt(d.suggested_total_price);
+            });
+            cur_frm.set_value("suggested_grand_total", total);
 
 
-    //         // $.each(cur_frm.doc.items, function (i, d) {
-    //         //     frappe.call({
-    //         //         method: "validate_suggested_price",
-    //         //         doc: cur_frm.doc,
-    //         //         args: {
-    //         //             "item_name": d.item_code
-    //         //         },
-    //         //         callback: function(r) {
-    //         //             console.log(d.item_code +'-> ' +r.message);
-    //         //             if (r.message) {
-    //         //                 frappe.model.set_value(d.doctype, d.name, "suggested_price_per_unit", r.message)
-    //         //             }
-    //         //         }
-    //         //     });
+            // $.each(cur_frm.doc.items, function (i, d) {
+            //     frappe.call({
+            //         method: "validate_suggested_price",
+            //         doc: cur_frm.doc,
+            //         args: {
+            //             "item_name": d.item_code
+            //         },
+            //         callback: function(r) {
+            //             console.log(d.item_code +'-> ' +r.message);
+            //             if (r.message) {
+            //                 frappe.model.set_value(d.doctype, d.name, "suggested_price_per_unit", r.message)
+            //             }
+            //         }
+            //     });
 
-    //         // });
+            // });
  
             
-    //     }
-    // },
+        }
+    },
     refresh: function(frm) {
         if(cur_frm.doc.purchase_workflow != "Project"){
             if (cur_frm.doc.__islocal || (cur_frm.doc.state == "To Modify" && cur_frm.doc.user_id == frappe.session.user)) {
