@@ -29,7 +29,7 @@ class SalesOrder(SellingController):
 
 		self.validate_order_type()
 		self.validate_delivery_date()
-		self.validate_mandatory()
+		# self.validate_mandatory()
 		self.validate_proj_cust()
 		self.validate_po()
 		self.validate_uom_is_integer("stock_uom", "qty")

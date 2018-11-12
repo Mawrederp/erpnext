@@ -55,7 +55,7 @@ class AccountsController(TransactionBase):
 			self.validate_all_documents_schedule()
 		
 		if self.doctype in ("Sales Invoice", "Purchase Invoice") and not self.is_return:
-			self.validate_due_date()
+			# self.validate_due_date()
 			self.validate_advance_entries()
 
 		if self.meta.get_field("taxes_and_charges"):
@@ -75,16 +75,16 @@ class AccountsController(TransactionBase):
 			self.validate_paid_amount()
 
 	def validate_invoice_documents_schedule(self):
-		self.validate_payment_schedule_dates()
-		self.set_due_date()
+		# self.validate_payment_schedule_dates()
+		# self.set_due_date()
 		self.set_payment_schedule()
 		self.validate_payment_schedule_amount()
-		self.validate_due_date()
+		# self.validate_due_date()
 		self.validate_advance_entries()
 
 	def validate_non_invoice_documents_schedule(self):
 		self.set_payment_schedule()
-		self.validate_payment_schedule_dates()
+		# self.validate_payment_schedule_dates()
 		self.validate_payment_schedule_amount()
 
 	def validate_all_documents_schedule(self):
@@ -114,10 +114,10 @@ class AccountsController(TransactionBase):
 			else:
 				frappe.db.set(self,'paid_amount',0)
 
-	def on_update_after_submit(self):
-		if self.meta.get_field("is_recurring"):
-			validate_recurring_document(self)
-			convert_to_recurring(self, self.get("posting_date") or self.get("transaction_date"))
+	# def on_update_after_submit(self):
+	# 	if self.meta.get_field("is_recurring"):
+	# 		validate_recurring_document(self)
+	# 		convert_to_recurring(self, self.get("posting_date") or self.get("transaction_date"))
 
 	def set_missing_values(self, for_validate=False):
 		if frappe.flags.in_test:
