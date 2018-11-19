@@ -27,6 +27,16 @@ def process_gl_map(gl_map, merge_entries=False):
 		gl_map = merge_similar_entries(gl_map)
 	for entry in gl_map:
 		# toggle debit, credit if negative entry
+		if entry.voucher_type in ("Sales Invoice", "Sales Order","Delivery Note","Payment Request"):
+			if entry.cost_center:
+				entry.cost_center = None
+		
+		if entry.voucher_type in ("Purchase Invoice", "Purchase Order"):
+			if entry.project:
+				entry.cost_center = None 
+		
+			
+		
 		if flt(entry.debit) < 0:
 			entry.credit = flt(entry.credit) - flt(entry.debit)
 			entry.debit = 0.0

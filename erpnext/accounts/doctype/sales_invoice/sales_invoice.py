@@ -858,7 +858,24 @@ class SalesInvoice(SellingController):
         # income account gl entries
         for item in self.get("items"):
             if flt(item.base_net_amount):
-                if item.is_fixed_asset:
+                if frappe.db.get_value('Item', item.item_code, 'is_advance_item')  ==1:
+					account_currency = get_account_currency(item.income_account)
+					gl_entries.append(self.get_gl_dict({
+							"account": item.income_account,
+							"against": self.customer,
+							"party_type": "Customer",
+							"party": self.customer,
+							"credit": item.base_net_amount ,
+                            "credit_in_account_currency": item.base_net_amount \
+                                if account_currency==self.company_currency else item.net_amount,
+                            "cost_center": item.cost_center if not self.project else None,
+                            "project":self.project,
+                            "against_voucher": self.return_against if cint(self.is_return) else self.name,
+                            "against_voucher_type": self.doctype
+                        }, account_currency)
+                    )
+                    
+                elif item.is_fixed_asset:
                     asset = frappe.get_doc("Asset", item.asset)
 
                     fixed_asset_gl_entries = get_gl_entries_on_asset_disposal(asset, item.base_net_amount)
@@ -877,7 +894,8 @@ class SalesInvoice(SellingController):
                             "credit": item.base_net_amount ,
                             "credit_in_account_currency": item.base_net_amount \
                                 if account_currency==self.company_currency else item.net_amount,
-                            "cost_center": item.cost_center
+                            "cost_center": item.cost_center if not self.project else None,
+                            "project":self.project
                         }, account_currency)
                     )
 
@@ -971,7 +989,7 @@ class SalesInvoice(SellingController):
                     "debit": self.base_write_off_amount,
                     "debit_in_account_currency": self.base_write_off_amount \
                         if write_off_account_currency==self.company_currency else self.write_off_amount,
-                    "cost_center": self.write_off_cost_center or default_cost_center
+                    #~ "cost_center": self.write_off_cost_center or default_cost_center
                 }, write_off_account_currency)
             )
 
