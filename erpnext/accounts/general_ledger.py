@@ -86,7 +86,10 @@ def check_if_in_list(gle, gl_map):
 			and cstr(e.get('against_voucher_type')) == cstr(gle.get('against_voucher_type')) \
 			and cstr(e.get('cost_center')) == cstr(gle.get('cost_center')) \
 			and cstr(e.get('project')) == cstr(gle.get('project')):
-				return e
+				if flt(e.get('credit')) * flt(gle.get('credit')) > 0.0 and flt(e.get('debit')) * flt(gle.get('debit')) <= 0.0:
+					return e
+				if flt(e.get('debit')) * flt(gle.get('debit')) > 0.0 and flt(e.get('credit')) * flt(gle.get('credit')) <= 0.0:
+					return e
 
 def save_entries(gl_map, adv_adj, update_outstanding):
 	validate_account_for_auto_accounting_for_stock(gl_map)
