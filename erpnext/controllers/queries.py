@@ -363,7 +363,7 @@ def get_income_account(doctype, txt, searchfield, start, page_len, filters):
 
 	return frappe.db.sql("""select tabAccount.name from `tabAccount`
 			where (tabAccount.report_type = "Profit and Loss"
-					or tabAccount.account_type in ("Income Account", "Temporary"))
+					or tabAccount.account_type in ("Income Account", "Temporary","Payable"))
 				and tabAccount.is_group=0
 				and tabAccount.`{key}` LIKE %(txt)s
 				{condition} {match_condition}
