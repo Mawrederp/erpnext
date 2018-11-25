@@ -30,7 +30,7 @@ class SalarySlip(TransactionBase):
         self.validate_return_from_leave_deduction()
 
         if self.deduction_done != 1:
-        	self.get_join_date_deducted_days()
+            self.get_join_date_deducted_days()
 
         if self.add_leave_without_pay_days != 1:
             self.add_leave_without_pay_days_emp()
@@ -177,7 +177,7 @@ class SalarySlip(TransactionBase):
 
     #         frappe.throw(str(date_dif))
     #         if date_dif > 0:
-            	
+                
     #             self.deducted_days = date_dif    
     #             # ss = frappe.get_doc("Salary Structure", self.salary_structure)
     #             # for doc in ss.get("earnings"):
@@ -192,16 +192,23 @@ class SalarySlip(TransactionBase):
         doj = self.get_emp_join_date()
         if getdate(doj).month == getdate(self.start_date).month and getdate(doj).year == getdate(self.start_date).year:
             date_dif = getdate(get_last_day(getdate(doj))).day - date_diff(doj , get_first_day(getdate(doj)))
-            day_value = self.gross_pay/30
+            if self.gross_pay:
+                day_value = self.gross_pay/30
+            else:
+                day_value = 0
             month_value_all = day_value*date_dif
             gozi_deduction = 0
             for i in  self.deductions:
-            	if i.salary_component=='GOSI':
-            		gozi_deduction = i.amount
-            		break
+                if i.salary_component=='GOSI':
+                    gozi_deduction = i.amount
+                    break
 
             total_all = month_value_all - gozi_deduction
-            total_deducted_days = self.gross_pay-total_all-gozi_deduction
+
+            if self.gross_pay:
+                total_deducted_days = self.gross_pay-total_all-gozi_deduction
+            else:
+                total_deducted_days = 0
             self.append('deductions', {"salary_component": 'Deducted Days' ,"amount": str(round(total_deducted_days,1))})
             self.deduction_done = 1
 

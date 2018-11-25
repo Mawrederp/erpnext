@@ -1382,19 +1382,19 @@ def create_return_from_leave_statement_after_leave():
 
                 frappe.db.commit()
         
-            from frappe.core.doctype.communication.email import make
-            frappe.flags.sent_mail = None
-            content_msg="Please review your Return From Leave Statement a new application has been created"
-            prefered_email = frappe.get_value("Employee", filters = {"user_id": emp_user}, fieldname = "prefered_email")
-    
-            if prefered_email:
-                try:
-                    print("Sending Message")
-                    make(subject = "Return from leave Statement", content=content_msg, recipients=prefered_email,
-                        send_email=True, sender="erp@tawari.sa")
-                    print("Sent")
-                except:
-                    frappe.msgprint("could not send")
+                from frappe.core.doctype.communication.email import make
+                frappe.flags.sent_mail = None
+                content_msg="Please review your Return From Leave Statement a new application has been created"
+                prefered_email = frappe.get_value("Employee", filters = {"user_id": emp_user}, fieldname = "prefered_email")
+        
+                if prefered_email:
+                    try:
+                        print("Sending Message")
+                        make(subject = "Return from leave Statement", content=content_msg, recipients=prefered_email,
+                            send_email=True, sender="erp@tawari.sa")
+                        print("Sent")
+                    except:
+                        frappe.msgprint("could not send")
         except frappe.exceptions.CancelledLinkError:
             print("Canceled Document " + lp.name)
             pass

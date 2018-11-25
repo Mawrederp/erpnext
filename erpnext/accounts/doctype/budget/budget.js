@@ -63,6 +63,9 @@ frappe.ui.form.on('Budget', {
 
 cur_frm.cscript.budget_template = function(doc, dt, dn) {
 	doc.goals = [];
+	cur_frm.clear_table("accounts")
+	cur_frm.refresh_field("accounts")
+
 	erpnext.utils.map_current_doc({
 		method: "erpnext.accounts.doctype.budget.budget.fetch_budget_template",
 		source_name: cur_frm.doc.budget_template,
