@@ -142,12 +142,14 @@ class SalesInvoice(SellingController):
             return title
         
     def set_items_income_account(self):
+		#~ if self.get("__islocal"):
 		customer_group = frappe.db.get_value("Customer", self.customer, "customer_group")
 		if customer_group:
 			customer_group_income_account = frappe.db.get_value("Customer Group", self.customer_group, "default_income_account")
 		if customer_group_income_account :
 			for item in self.get("items"):
-				item.income_account=customer_group_income_account
+				if frappe.db.get_value("Item", item.item_code, "is_advance_item") == 0:
+					item.income_account=customer_group_income_account
         #~ if self.get("payment_schedule") : 
             #~ payment_schedule = self.get("payment_schedule")
             #~ for pt in payment_schedule : 
