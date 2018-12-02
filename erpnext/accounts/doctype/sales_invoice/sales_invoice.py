@@ -142,17 +142,23 @@ class SalesInvoice(SellingController):
             return title
         
     def set_items_income_account(self):
-        if self.get("payment_schedule") : 
-            payment_schedule = self.get("payment_schedule")
-            for pt in payment_schedule : 
+		customer_group = frappe.db.get_value("Customer", self.customer, "customer_group")
+		if customer_group:
+			customer_group_income_account = frappe.db.get_value("Customer Group", self.customer_group, "default_income_account")
+		if customer_group_income_account :
+			for item in self.get("items"):
+				item.income_account=customer_group_income_account
+        #~ if self.get("payment_schedule") : 
+            #~ payment_schedule = self.get("payment_schedule")
+            #~ for pt in payment_schedule : 
                 
-                if pt.is_advance == 1 and pt.payment_term == self.payment_term:
-                    for item in self.get("items"):
-                        item.income_account=pt.account
+                #~ if pt.is_advance == 1 and pt.payment_term == self.payment_term:
+                    #~ for item in self.get("items"):
+                        #~ item.income_account=pt.account
                 
-                if pt.is_retention == 1 and pt.payment_term == self.payment_term:
-                    for item in self.get("items"):
-                        item.income_account=pt.account
+                #~ if pt.is_retention == 1 and pt.payment_term == self.payment_term:
+                    #~ for item in self.get("items"):
+                        #~ item.income_account=pt.account
             
         
     def get_payment_units_share(self):
