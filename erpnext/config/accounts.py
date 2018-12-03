@@ -241,6 +241,11 @@ def get_data():
 					"description": _("Define budget for a financial year.")
 				},
 				{
+					"type": "doctype",
+					"name": "Budget Adjustment",
+					"description": _("Define budget for a financial year.")
+				},
+				{
 					"type": "report",
 					"name": "Budget Variance Report",
 					"is_query_report": True,
