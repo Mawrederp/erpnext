@@ -22,9 +22,10 @@ def execute(filters=None):
 		if cost_center_items:
 			for account, monthwise_data in cost_center_items.items():
 				row = [cost_center, account]
-				totals = [0, 0, 0]
+				totals = [0, 0, 0, 0]
+				accumulative = 0.00
 				for relevant_months in period_month_ranges:
-					period_data = [0, 0, 0]
+					period_data = [0, 0, 0, 0]
 					for month in relevant_months:
 						month_data = monthwise_data.get(month, {})
 						for i, fieldname in enumerate(["target", "actual", "variance"]):
@@ -32,8 +33,13 @@ def execute(filters=None):
 							period_data[i] += value
 							totals[i] += value
 					period_data[2] = period_data[0] - period_data[1]
+					accumulative += period_data[2]
+					period_data[3] = accumulative
+
+					
 					row += period_data
 				totals[2] = totals[0] - totals[1]
+				totals[3] = accumulative
 				row += totals
 				data.append(row)
 
@@ -45,7 +51,7 @@ def get_columns(filters):
 	group_months = False if filters["period"] == "Monthly" else True
 
 	for from_date, to_date in get_period_date_ranges(filters["period"], filters["fiscal_year"]):
-		for label in [_("Target") + " (%s)", _("Actual") + " (%s)", _("Variance") + " (%s)"]:
+		for label in [_("Target") + " (%s)", _("Actual") + " (%s)", _("Variance") + " (%s)", _("Accumulative") + " (%s)"]:
 			if group_months:
 				label = label % (formatdate(from_date, format_string="MMM") + " - " + formatdate(to_date, format_string="MMM"))
 			else:
@@ -54,7 +60,7 @@ def get_columns(filters):
 			columns.append(label+":Float:120")
 
 	return columns + [_("Total Target") + ":Float:120", _("Total Actual") + ":Float:120",
-		_("Total Variance") + ":Float:120"]
+		_("Total Variance") + ":Float:120",_("Accumulative") + ":Float:120"]
 		
 def get_cost_centers(filters):
 	cond = "and 1=1"
