@@ -119,16 +119,17 @@ frappe.ui.form.on('End of Service Award', {
     },
     validate: function(frm) {
         frm.trigger("get_award");
-        cur_frm.set_value('total', flt(cur_frm.doc.award)+flt(cur_frm.doc.total_month_salary)+flt(cur_frm.doc.adjustment));
+
+        var total = 0;
+        $.each(frm.doc.end_of_service_award_adjustment || [], function (i, d) {
+            total += flt(d.adjustment);
+        });
+        cur_frm.set_value("total", flt(cur_frm.doc.award)+flt(cur_frm.doc.total_month_salary)+flt(total));
+
     },
 
     find: function(frm) {
         frm.trigger("get_award");
-    },
-    adjustment: function(frm) {
-        if(cur_frm.doc.adjustment){
-            cur_frm.set_value('total', flt(cur_frm.doc.award)+flt(cur_frm.doc.total_month_salary)+flt(cur_frm.doc.adjustment));
-        }
     },
 
     get_award: function(frm) {
@@ -227,3 +228,22 @@ frappe.ui.form.on('End of Service Award', {
     }
 
 });
+
+
+
+
+frappe.ui.form.on('End of Service Award Adjustment', {
+    adjustment: function (frm, cdt, cdn) {
+        var row = locals[cdt][cdn];
+        
+        var total = 0;
+        $.each(frm.doc.end_of_service_award_adjustment || [], function (i, d) {
+            total += flt(d.adjustment);
+        });
+        cur_frm.set_value("total", flt(cur_frm.doc.award)+flt(cur_frm.doc.total_month_salary)+flt(total));
+
+    }
+
+});
+
+
