@@ -77,7 +77,7 @@ class EmployeeResignation(Document):
         #     frappe.throw("لا يوجد قسيمة راتب لهذا الموظف")
     
 
-        grosspay = frappe.db.sql("select rounded_total from `tabSalary Slip` where employee='{0}' order by start_date desc limit 1".format(self.employee))[0][0]
+        grosspay = frappe.db.sql("select gross_pay from `tabSalary Slip` where employee='{0}' order by start_date desc limit 1".format(self.employee))[0][0]
         if grosspay:
             return grosspay
         else:
