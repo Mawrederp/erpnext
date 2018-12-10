@@ -9,6 +9,8 @@ from frappe import msgprint, _
 from erpnext.hr.doctype.end_of_service_award.end_of_service_award import get_award
 from frappe.utils import cint, cstr, date_diff, flt, formatdate, getdate, get_link_to_form, \
     comma_or, get_fullname, add_years, add_months, add_days, nowdate, get_first_day, get_last_day
+import math
+import datetime
 
 class EmployeeResignation(Document):
 
@@ -27,19 +29,29 @@ class EmployeeResignation(Document):
 
 
         salary = self.get_salary()
-        award_info = get_award(self.date_of_joining, self.last_working_date, salary,self.employment_type, "استقالة العامل")
+        award_info = get_award(self.date_of_joining, self.last_working_date, salary,self.employment_type, "استقالة الموظف")
+
+        month_worked_days = datetime.datetime.strptime(self.last_working_date, '%Y-%m-%d')
 
         eos_award = frappe.new_doc("End of Service Award")
         eos_award.employee = self.employee
         eos_award.end_date = self.last_working_date
         eos_award.salary = salary
-        eos_award.reason="استقالة العامل"
+        eos_award.reason="استقالة الموظف"
         eos_award.workflow_state="Pending"
         eos_award.days = award_info['days']
         eos_award.months = award_info['months']
         eos_award.years = award_info['years']
         eos_award.award = award_info['award']
+
+        eos_award.days_number = int(month_worked_days.day)
+        eos_award.day_value = salary/30
+        eos_award.total_month_salary = eos_award.days_number*eos_award.day_value
+        eos_award.total = flt(eos_award.award) + flt(eos_award.total_month_salary)
+
         eos_award.insert()
+        msg = """تم انشاء مكافأة نهاية الخدمة: <b><a href="#Form/End of Service Award/{0}">{0}</a></b>""".format(eos_award.name)
+        frappe.msgprint(msg)
 
     def get_salary(self):
         # award_info = get_award(self)

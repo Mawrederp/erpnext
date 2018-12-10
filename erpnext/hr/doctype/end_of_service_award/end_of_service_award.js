@@ -8,20 +8,20 @@ cur_frm.add_fetch("employee", "date_of_joining", "work_start_date");
 
 frappe.ui.form.on('End of Service Award', {
     refresh: function(frm) {
-        if(!frm.doc.__islocal){
-            frm.disable_save();
-        }else{
-            frm.enable_save();
-        }
+        // if(!frm.doc.__islocal){
+        //     frm.disable_save();
+        // }else{
+        //     frm.enable_save();
+        // }
         
-        if (!cur_frm.doc.__islocal) {
-            for (var key in cur_frm.fields_dict) {
-                cur_frm.fields_dict[key].df.read_only = 1;
-            }
-            cur_frm.disable_save();
-        } else {
-            cur_frm.enable_save();
-        }
+        // if (!cur_frm.doc.__islocal) {
+        //     for (var key in cur_frm.fields_dict) {
+        //         cur_frm.fields_dict[key].df.read_only = 1;
+        //     }
+        //     cur_frm.disable_save();
+        // } else {
+        //     cur_frm.enable_save();
+        // }
         frappe.call({
             method: "unallowed_actions",
             doc: frm.doc,
@@ -119,10 +119,16 @@ frappe.ui.form.on('End of Service Award', {
     },
     validate: function(frm) {
         frm.trigger("get_award");
+
     },
 
     find: function(frm) {
         frm.trigger("get_award");
+    },
+    adjustment: function(frm) {
+        if(cur_frm.doc.adjustment){
+            cur_frm.set_value('total', flt(cur_frm.doc.award)+flt(cur_frm.doc.total_month_salary)+flt(cur_frm.doc.adjustment));
+        }
     },
 
     get_award: function(frm) {

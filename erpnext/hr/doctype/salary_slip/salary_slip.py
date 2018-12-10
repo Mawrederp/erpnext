@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: GNU General Public License v3. See license.txt
 
@@ -209,8 +209,10 @@ class SalarySlip(TransactionBase):
                 total_deducted_days = self.gross_pay-total_all-gozi_deduction
             else:
                 total_deducted_days = 0
-            self.append('deductions', {"salary_component": 'Deducted Days' ,"amount": str(round(total_deducted_days,1))})
-            self.deduction_done = 1
+
+            if total_deducted_days>0:
+                self.append('deductions', {"salary_component": 'Deducted Days' ,"amount": str(round(total_deducted_days,1))})
+                self.deduction_done = 1
 
 
 
