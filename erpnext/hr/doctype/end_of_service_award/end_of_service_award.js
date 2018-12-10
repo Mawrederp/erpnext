@@ -119,7 +119,7 @@ frappe.ui.form.on('End of Service Award', {
     },
     validate: function(frm) {
         frm.trigger("get_award");
-
+        cur_frm.set_value('total', flt(cur_frm.doc.award)+flt(cur_frm.doc.total_month_salary)+flt(cur_frm.doc.adjustment));
     },
 
     find: function(frm) {
