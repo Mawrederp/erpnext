@@ -13,6 +13,8 @@ from erpnext.accounts.doctype.asset.depreciation \
 from frappe.model.naming import make_autoname
 
 import barcode
+from PIL import Image
+
 from barcode.writer import ImageWriter
 from erpnext.accounts.general_ledger import make_gl_entries
 from erpnext.controllers.accounts_controller import AccountsController
@@ -42,26 +44,26 @@ class Asset(AccountsController):
 	# API for Generate Barcode Button 
 	# js calls api and give it name of image
 	def barcode_attach2(self,name):
-		try:
-			# frappe.throw(str(name))
-			barcode_class = barcode.get_barcode_class('code39')
-			ean = barcode_class(name, ImageWriter(), add_checksum=False)
-			barcode_path = frappe.get_site_path()+'/public/files/'
-			ean.save(barcode_path+name)
-			# ean.save(barcode_path+self.name+'.png')
+		#~ try:
+		# frappe.throw(str(name))
+		barcode_class = barcode.get_barcode_class('code39')
+		ean = barcode_class(name, ImageWriter(), add_checksum=False)
+		barcode_path = frappe.get_site_path()+'/public/files/'
+		ean.save(barcode_path+name)
+		# ean.save(barcode_path+self.name+'.png')
 
-			self.save_image("/files/", name + '.png')
+		self.save_image("/files/", name + '.png')
 
-			img_path = "/files/" + name + ".png"
+		img_path = "/files/" + name + ".png"
 
-			frappe.db.sql("""update `tabAsset` set barcode_img = %s
-				where name = %s""", (img_path, name))
-			frappe.db.commit()
+		frappe.db.sql("""update `tabAsset` set barcode_img = %s
+			where name = %s""", (img_path, name))
+		frappe.db.commit()
 
-			return img_path
+		return img_path
 
-		except Exception as e:
-			raise e
+		#~ except Exception as e:
+			#~ raise e
 		
 
 	def barcode_attach(self):
@@ -84,7 +86,11 @@ class Asset(AccountsController):
 	    })
 
 	    attach_image.insert()
-
+	    barcode_path = frappe.get_site_path()+'/public/files/'
+	    im = Image.open(barcode_path +name)
+	    #~ im.thumbnail((200,60),Image.ANTIALIAS)
+	    im = im.resize((300,120),Image.ANTIALIAS)
+	    im.save(barcode_path +name,quality=90)
 
 	def after_insert(self):
 	    img_path = "/files/" + self.name + ".png"
