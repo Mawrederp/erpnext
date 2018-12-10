@@ -28,16 +28,36 @@ class Appraisal(Document):
         self.validate_emp()
 
 
+    # def validate_emp(self):
+    #     if self.get('__islocal'):
+    #         if u'CEO' in frappe.get_roles(frappe.session.user):
+    #             self.workflow_state = "Created By CEO"
+    #         elif u'Director' in frappe.get_roles(frappe.session.user):
+    #             self.workflow_state = "Created By Director"
+    #         elif u'Manager' in frappe.get_roles(frappe.session.user):
+    #             self.workflow_state = "Created By Manager"
+    #         elif u'Line Manager' in frappe.get_roles(frappe.session.user):
+    #             self.workflow_state = "Created By Line Manager"
+
+
     def validate_emp(self):
-        if self.get('__islocal'):
-            if u'CEO' in frappe.get_roles(frappe.session.user):
-                self.workflow_state = "Created By CEO"
-            elif u'Director' in frappe.get_roles(frappe.session.user):
-                self.workflow_state = "Created By Director"
-            elif u'Manager' in frappe.get_roles(frappe.session.user):
-                self.workflow_state = "Created By Manager"
-            elif u'Line Manager' in frappe.get_roles(frappe.session.user):
+        if self.employee:
+            employee_user = frappe.get_value("Employee", filters={"name": self.employee}, fieldname="user_id")
+            frappe.msgprint(str(employee_user))
+            frappe.msgprint(str(frappe.session.user))
+            if self.get('__islocal') and employee_user:
+                if u'Director' in frappe.get_roles(employee_user) and u'CEO' in frappe.get_roles(frappe.session.user):
+                    self.workflow_state = "Created By CEO"
+                elif u'Manager' in frappe.get_roles(employee_user) and u'Director' in frappe.get_roles(frappe.session.user):
+                    self.workflow_state = "Created By Director"
+                elif u'Line Manager' in frappe.get_roles(employee_user) and u'Manager' in frappe.get_roles(frappe.session.user):
+                    self.workflow_state = "Created By Manager"
+                elif u'Employee' in frappe.get_roles(employee_user) and u'Line Manager' in frappe.get_roles(frappe.session.user):
+                    self.workflow_state = "Created By Line Manager"
+
+            if not employee_user and self.get('__islocal'):
                 self.workflow_state = "Created By Line Manager"
+
 
     def get_employee_name(self):
         self.employee_name = frappe.db.get_value("Employee", self.employee, "employee_name")
