@@ -884,3 +884,9 @@ def add_items_group():
             }).insert(ignore_permissions=True)
 
     print c
+
+def set_barcodes ():
+	asset_list = frappe,get_list("Asset")
+	print (len(asset_list))
+	for asset in asset_list :
+		print asset
