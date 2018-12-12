@@ -46,15 +46,22 @@ class Asset(AccountsController):
 	def barcode_attach2(self,name):
 		#~ try:
 		# frappe.throw(str(name))
-		barcode_class = barcode.get_barcode_class('code39')
-		ean = barcode_class(name, ImageWriter(), add_checksum=False)
 		barcode_path = frappe.get_site_path()+'/public/files/'
-		ean.save(barcode_path+name)
-		# ean.save(barcode_path+self.name+'.png')
+		print (name)
+		
+		code39 = barcode.codex.Code39( name, None,  add_checksum=False)
+		#~ code39 = barcode.get('code39', name, writer=None, add_checksum=False)
+		print (code39.get_fullcode())
+		filename = code39.save(barcode_path+name)
+		
+		
+		#~ barcode_class = barcode.get_barcode_class('code39')
+		#~ ean = barcode_class(name, ImageWriter(), add_checksum=False)
+		#~ ean.save(barcode_path+name)
 
-		self.save_image("/files/", name + '.png')
+		self.save_image("/files/", name + '.svg')
 
-		img_path = "/files/" + name + ".png"
+		img_path = "/files/" + name + ".svg"
 
 		frappe.db.sql("""update `tabAsset` set barcode_img = %s
 			where name = %s""", (img_path, name))
@@ -86,11 +93,11 @@ class Asset(AccountsController):
 	    })
 
 	    attach_image.insert()
-	    barcode_path = frappe.get_site_path()+'/public/files/'
-	    im = Image.open(barcode_path +name)
+	    #~ barcode_path = frappe.get_site_path()+'/public/files/'
+	    #~ im = Image.open(barcode_path +name)
 	    #~ im.thumbnail((200,60),Image.ANTIALIAS)
-	    im = im.resize((300,120),Image.ANTIALIAS)
-	    im.save(barcode_path +name,quality=90)
+	    #~ im = im.resize((300,120),Image.ANTIALIAS)
+	    #~ im.save(barcode_path +name,quality=90)
 
 	def after_insert(self):
 	    img_path = "/files/" + self.name + ".png"

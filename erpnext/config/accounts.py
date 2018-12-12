@@ -123,6 +123,10 @@ def get_data():
 				},
 				{
 					"type": "doctype",
+					"name": "Assets Barcode",
+				},
+				{
+					"type": "doctype",
 					"name": "Fixed Asset Custody",
 				},
 				{
