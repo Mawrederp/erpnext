@@ -63,7 +63,7 @@ class MaterialRequest(BuyingController):
     def validate(self):
         super(MaterialRequest, self).validate()
 
-        self.validate_schedule_date()
+        # self.validate_schedule_date()
         self.validate_uom_is_integer("uom", "qty")
 
         if not self.status:
