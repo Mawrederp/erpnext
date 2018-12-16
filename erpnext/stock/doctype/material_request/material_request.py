@@ -83,8 +83,8 @@ class MaterialRequest(BuyingController):
         # self.set_title()
 
         if self.get("__islocal") :
-                self.title = self.get_title()
-                self.set_user_emp()
+            self.title = self.get_title()
+            self.set_user_emp()
     
     def validate_project_items(self):
         if self.project : 
@@ -607,5 +607,5 @@ def raise_production_orders(material_request):
 
 @frappe.whitelist()
 def get_project_main_items(doctype, txt, searchfield, start, page_len, filters):
-	return frappe.db.sql("""select distinct scope_item from `tabProject Costing Schedule`
-		where parenttype='Project Initiation' and type_of_cost='External Expenses' and parent='{0}' """.format(filters.get('project')))
+    return frappe.db.sql("""select distinct scope_item from `tabProject Costing Schedule`
+        where parenttype='Project Initiation' and type_of_cost='External Expenses' and parent='{0}' """.format(filters.get('project')))
