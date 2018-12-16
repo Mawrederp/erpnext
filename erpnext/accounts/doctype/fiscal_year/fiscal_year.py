@@ -29,17 +29,17 @@ class FiscalYear(Document):
 			year_start_end_dates = frappe.db.sql("""select year_start_date, year_end_date
 				from `tabFiscal Year` where name=%s""", (self.name))
 
-			if year_start_end_dates:
-				if getdate(self.year_start_date) != year_start_end_dates[0][0] or getdate(self.year_end_date) != year_start_end_dates[0][1]:
-					frappe.throw(_("Cannot change Fiscal Year Start Date and Fiscal Year End Date once the Fiscal Year is saved."))
+			#~ if year_start_end_dates:
+				#~ if getdate(self.year_start_date) != year_start_end_dates[0][0] or getdate(self.year_end_date) != year_start_end_dates[0][1]:
+					#~ frappe.throw(_("Cannot change Fiscal Year Start Date and Fiscal Year End Date once the Fiscal Year is saved."))
 
 	def validate_dates(self):
 		if getdate(self.year_start_date) > getdate(self.year_end_date):
 			frappe.throw(_("Fiscal Year Start Date should not be greater than Fiscal Year End Date"))
 
-		if (getdate(self.year_end_date) - getdate(self.year_start_date)).days > 366:
-			date = getdate(self.year_start_date) + relativedelta(years=1) - relativedelta(days=1)
-			self.year_end_date = date.strftime("%Y-%m-%d")
+		#~ if (getdate(self.year_end_date) - getdate(self.year_start_date)).days > 366:
+			#~ date = getdate(self.year_start_date) + relativedelta(years=1) - relativedelta(days=1)
+			#~ self.year_end_date = date.strftime("%Y-%m-%d")
 
 	def on_update(self):
 		check_duplicate_fiscal_year(self)
