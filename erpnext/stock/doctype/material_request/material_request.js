@@ -81,7 +81,7 @@ frappe.ui.form.on('Material Request', {
                     freeze: true,
                     callback: function(r) {
                         // console.log(r.message);
-                        if (r.message && frappe.session.user != "Administrator") {
+                        if (!r.message) {
                             cur_frm.page.clear_actions_menu();
                         }
                     }
