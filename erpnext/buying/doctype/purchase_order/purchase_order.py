@@ -57,7 +57,7 @@ class PurchaseOrder(BuyingController):
 		if self.get("__islocal"):
 			self.validate_project()
 			self.title = self.get_title()
-		self.validate_project_items()
+		# self.validate_project_items()
 		self.vallidate_workflow_transition()
 
 		mr = frappe.get_value('Quotation Opening', filters = {"name": self.quotation_opening, "docstatus": 1}, fieldname = "material_request")
@@ -84,6 +84,8 @@ class PurchaseOrder(BuyingController):
 						row.warehouse = warehouse
 					elif row.warehouse !=warehouse : 
 						frappe.throw(_("Bad Warehouse in row  %s default warehouse is %s"%(row.idx,warehouse)))
+
+						
 	def get_title(self):
 		from frappe.utils import getdate
 		
