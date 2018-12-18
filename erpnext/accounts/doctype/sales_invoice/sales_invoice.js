@@ -88,7 +88,17 @@ erpnext.accounts.SalesInvoiceController = erpnext.selling.SellingController.exte
 			cur_frm.cscript.sales_order_btn();
 			cur_frm.cscript.delivery_note_btn();
 		}
+		
+		if(in_list(frappe.user_roles, "Accounts Manager")) {
+			console.log("HIT");
+			cur_frm.set_df_property('posting_date', 'read_only', 0);
+			cur_frm.set_df_property('due_date', 'read_only', 0);
+			cur_frm.set_df_property('delivery_date', 'read_only', 0);
+			cur_frm.refresh_field("posting_date")
+			console.log("HIT2");
 
+		}
+		
 		this.set_default_print_format();
 	},
 
