@@ -336,15 +336,15 @@ frappe.ui.form.on('Payment Entry', {
 				frappe.set_route("query-report", "General Ledger");
 			}, "fa fa-table");
 		
-			// if (in_list(frappe.user_roles, "Accounts Manager") && ! frm.doc.is_canceled)
-			// 	{
-			// 		frm.add_custom_button(__('Revarse'), function() {
-			// 		frappe.model.open_mapped_doc({
-			// 			method: "erpnext.accounts.doctype.payment_entry.payment_entry.make_reverse",
-			// 			frm: frm
-			// 		});
-			// 		}, "fa fa-table");
-			// 	}
+			if (in_list(frappe.user_roles, "Accounts Manager") && ! frm.doc.is_canceled)
+				{
+					frm.add_custom_button(__('Revarse'), function() {
+					frappe.model.open_mapped_doc({
+						method: "erpnext.accounts.doctype.payment_entry.payment_entry.make_reverse",
+						frm: frm
+					});
+					}, "fa fa-table");
+				}
 		
 		}
 	},
