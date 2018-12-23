@@ -84,13 +84,13 @@ class StockController(AccountsController):
 					elif sle.warehouse not in warehouse_with_no_account:
 						warehouse_with_no_account.append(sle.warehouse)
 
-		if warehouse_with_no_account:
-			for wh in warehouse_with_no_account:
-				if frappe.db.get_value("Warehouse", wh, "company"):
-					frappe.throw(_("Warehouse {0} is not linked to any account, please create/link the corresponding (Asset) account for the warehouse.").format(wh))
+		# if warehouse_with_no_account:
+		# 	for wh in warehouse_with_no_account:
+		# 		if frappe.db.get_value("Warehouse", wh, "company"):
+		# 			frappe.throw(_("Warehouse {0} is not linked to any account, please create/link the corresponding (Asset) account for the warehouse.").format(wh))
 					
-			msgprint(_("No accounting entries for the following warehouses") + ": \n" +
-				"\n".join(warehouse_with_no_account))
+		# 	msgprint(_("No accounting entries for the following warehouses") + ": \n" +
+		# 		"\n".join(warehouse_with_no_account))
 
 		return process_gl_map(gl_list)
 
