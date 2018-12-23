@@ -112,6 +112,7 @@ class DeliveryNote(SellingController):
         if not self.installation_status: self.installation_status = 'Not Installed'
         # self.validate_project()
     
+
     def after_insert(self):
         if self.project_sales_order_approval:
             doc = frappe.get_doc('Project Sales Order Approval', self.project_sales_order_approval)
@@ -184,11 +185,6 @@ class DeliveryNote(SellingController):
                 if not d['warehouse']:
                     frappe.throw(_("Warehouse required for stock Item {0}").format(d["item_code"]))
 
-    def refresh(self):
-        from selenium import webdriver
-        driver = webdriver.Firefox()
-        frappe.msgprint(str(driver.current_url))
-        print (driver.current_url)
 
     def update_current_stock(self):
         if self.get("_action") and self._action != "update_after_submit":
@@ -280,7 +276,7 @@ class DeliveryNote(SellingController):
 
     def send_notifications_when_done(self):
         from frappe.core.doctype.communication.email import make
-        content_msg="""Delivery Note <b><a href="http://95.85.8.23:8000/desk#Form/Delivery%20Note/{cc}">{cc}</a></b> has been submitted""".format(self.name)
+        content_msg="""Delivery Note <b><a href="http://95.85.8.23:8000/desk#Form/Delivery%20Note/{cc}">{cc}</a></b> has been submitted""".format(cc=self.name)
 
         prefered_email = frappe.get_value("Employee", filters = {"name": 'EMP/1006'}, fieldname = "prefered_email")
 
