@@ -184,6 +184,11 @@ class DeliveryNote(SellingController):
                 if not d['warehouse']:
                     frappe.throw(_("Warehouse required for stock Item {0}").format(d["item_code"]))
 
+    def refresh(self):
+        from selenium import webdriver
+        driver = webdriver.Firefox()
+        frappe.msgprint(str(driver.current_url))
+        print (driver.current_url)
 
     def update_current_stock(self):
         if self.get("_action") and self._action != "update_after_submit":
@@ -215,6 +220,7 @@ class DeliveryNote(SellingController):
         # because updating reserved qty in bin depends upon updated delivered qty in SO
         self.update_stock_ledger()
         self.make_gl_entries()
+        self.send_notifications_when_done()
 
     def on_cancel(self):
         self.check_close_sales_order("against_sales_order")
@@ -270,6 +276,24 @@ class DeliveryNote(SellingController):
             (self.name))
         if submit_in:
             frappe.throw(_("Installation Note {0} has already been submitted").format(submit_in[0][0]))
+
+
+    def send_notifications_when_done(self):
+        from frappe.core.doctype.communication.email import make
+        content_msg="""Delivery Note <b><a href="http://95.85.8.23:8000/desk#Form/Delivery%20Note/{cc}">{cc}</a></b> has been submitted""".format(self.name)
+
+        prefered_email = frappe.get_value("Employee", filters = {"name": 'EMP/1006'}, fieldname = "prefered_email")
+
+        if prefered_email:
+            try:
+                make(subject = "Delivery Note Submitted", content=content_msg, recipients=prefered_email,
+                    send_email=True, sender="erp@tawari.sa")
+                
+                msg = """Email send successfully to Employee : <b><a href="#Form/Employee/{cc}">{cc}</a></b>""".format(cc=emp)
+                frappe.msgprint(msg)
+            except:
+                frappe.msgprint("could not send")
+
 
     def cancel_packing_slips(self):
         """
