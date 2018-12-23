@@ -125,7 +125,8 @@ class Item(WebsiteGenerator):
 		self.validate_website_image()
 		self.make_thumbnail()
 		self.validate_fixed_asset()
-
+		if self.is_stock_item == 0 :
+			self.default_warehouse = None
 		if not self.get("__islocal"):
 			self.old_item_group = frappe.db.get_value(self.doctype, self.name, "item_group")
 			self.old_website_item_groups = frappe.db.sql_list("""select item_group

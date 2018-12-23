@@ -10,6 +10,7 @@ frappe.ui.form.on("Item", {
 		frm.add_fetch('attribute', 'to_range', 'to_range');
 		frm.add_fetch('attribute', 'increment', 'increment');
 		frm.add_fetch('tax_type', 'tax_rate', 'tax_rate');
+		frm.add_fetch('item_group', 'default_warehouse', 'default_warehouse');
 	},
 	onload: function(frm) {
 		erpnext.item.setup_queries(frm);
