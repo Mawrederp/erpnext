@@ -250,10 +250,13 @@ def get_account_currency(account):
 	if not account:
 		return
 	def generator():
-		account_currency, company = frappe.db.get_value("Account", account, ["account_currency", "company"])
-		if not account_currency:
-			account_currency = frappe.db.get_value("Company", company, "default_currency")
+		try :
+			account_currency, company = frappe.db.get_value("Account", account, ["account_currency", "company"])
+			if not account_currency:
+				account_currency = frappe.db.get_value("Company", company, "default_currency")
 
-		return account_currency
+			return account_currency
+		except : 
+			return "SAR"
 
 	return frappe.local_cache("account_currency", account, generator)

@@ -685,8 +685,9 @@ class SalesInvoice(SellingController):
                 ignore_permissions=True)
 			if adv_ps_list :
 				for i in adv_ps_list:
-					i.billing_percentage=ps_doc.billing_percentage
-					res.append(i)
+					if i.name != ps_doc.name:
+						i.billing_percentage=ps_doc.billing_percentage
+						res.append(i)
 		
 		adv_ps_docs = res
 		#~ adv_ps_docs = [i for n, i in enumerate(res) if i not in res[n + 1:]]

@@ -506,10 +506,10 @@ function check_account_type_for_mandatory(d){
             console.log(r.message);
             if (!r.exc) {
                 if (r.message){
-                    cur_frm.fields_dict.items.grid.toggle_reqd("cost_center", r.message.account_type == "Income Account");
+                    //~ cur_frm.fields_dict.items.grid.toggle_reqd("cost_center", r.message.account_type == "Income Account");
                 }
                 else{
-                    cur_frm.fields_dict.items.grid.toggle_reqd("cost_center", false);
+                    //~ cur_frm.fields_dict.items.grid.toggle_reqd("cost_center", false);
                 }
             }
         }
