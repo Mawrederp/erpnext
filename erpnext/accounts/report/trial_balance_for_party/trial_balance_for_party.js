@@ -17,7 +17,7 @@ frappe.query_reports["Trial Balance for Party"] = {
 			"fieldtype": "Link",
 			"options": "Fiscal Year",
 			"default": frappe.defaults.get_user_default("fiscal_year"),
-			"reqd": 1,
+			//~ "reqd": 1,
 			"on_change": function(query_report) {
 				var fiscal_year = query_report.get_values().fiscal_year;
 				if (!fiscal_year) {

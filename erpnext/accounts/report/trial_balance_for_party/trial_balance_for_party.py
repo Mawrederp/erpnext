@@ -5,8 +5,7 @@ from __future__ import unicode_literals
 import frappe
 from frappe import _
 from frappe.utils import flt, cint
-from erpnext.accounts.report.trial_balance.trial_balance import validate_filters
-
+from frappe.utils import flt, getdate, formatdate, cstr
 
 def execute(filters=None):
 	validate_filters(filters)
@@ -314,3 +313,25 @@ def get_supplier_type(doctype, txt, searchfield, start, page_len, filters):
 
 def get_customer_group(doctype, txt, searchfield, start, page_len, filters):
     return frappe.db.sql(""" select name from `tabCustomer Group` """)
+
+
+
+def validate_filters(filters):
+	if filters.fiscal_year:
+		fiscal_year = frappe.db.get_value("Fiscal Year", filters.fiscal_year, ["year_start_date", "year_end_date"], as_dict=True)
+		if fiscal_year:
+			filters.year_start_date = getdate(fiscal_year.year_start_date)
+			filters.year_end_date = getdate(fiscal_year.year_end_date)
+
+	if not filters.from_date:
+		filters.from_date = filters.year_start_date
+
+	if not filters.to_date:
+		filters.to_date = filters.year_end_date
+
+	filters.from_date = getdate(filters.from_date)
+	filters.to_date = getdate(filters.to_date)
+
+	if filters.from_date > filters.to_date:
+		frappe.throw(_("From Date cannot be greater than To Date"))
+
