@@ -2,12 +2,35 @@
     {%= frappe.boot.letter_heads[frappe.defaults.get_default("letter_head")] %}
 </div>
 <h2 class="text-center">{%= __(report.report_name) %}</h2>
-<h4 class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {% if (frappe.boot.lang == "ar") { %}
+
+<!-- <h4 class="text-center">{%= filters.account && (filters.account + ", "+filters.report_date)  || "" %} {% if (frappe.boot.lang == "ar") { %}
         {%= ("شركة تواري") %}
          {% } else { %}
          {%= __("Tawari") %}
          {% }
-         %}</h4>
+         %}</h4> -->
+
+
+<h4>
+{% if(filters.company) { %}Company: {%= filters.company %}<br>{% } %}
+{% if(filters.fiscal_year) { %}Fiscal Year: {%= filters.fiscal_year %}<br>{% } %}
+{% if(filters.from_date) { %}From Date: {%= filters.from_date %}<br>{% } %}
+{% if(filters.to_date) { %}To Date: {%= filters.to_date %}<br>{% } %}
+{% if(filters.party_type) { %}Party Type: {%= filters.party_type %}<br>{% } %}
+{% if(filters.party) { %} {%= filters.party_type %}: {%= filters.party %}<br>{% } %}
+{% if(filters.party_group_or_type) { %}Party Group or Type: {%= filters.party_group_or_type %}<br>{% } %}
+<br>
+<br><br>
+
+
+
+{%= frappe.db.get_value("Customer", "CUST-GOV-00002", "customer_name") %}
+{%= frappe.db.get_value("Customer", "CUST-GOV-00002", "customer_name")[0] %}
+
+</h4>
+
+
+
 <hr>
 <table class="table table-bordered" {% if (frappe.boot.lang == "ar") { %} style="direction: rtl" {% } %}>
 
