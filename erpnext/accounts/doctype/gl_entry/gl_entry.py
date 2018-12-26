@@ -108,7 +108,12 @@ class GLEntry(Document):
 		if self.cost_center and _get_cost_center_company() != self.company:
 			frappe.throw(_("{0} {1}: Cost Center {2} does not belong to Company {3}")
 				.format(self.voucher_type, self.voucher_no, self.cost_center, self.company))
-
+		
+		if self.cost_center :
+			cc_doc = frappe.get_doc("Cost Center",self.cost_center)
+			if cc_doc.is_active != 1:
+				frappe.throw(_("Cost Center {0} is not acitve select another one")
+					.format(self.cost_center))
 	def validate_party(self):
 		validate_party_frozen_disabled(self.party_type, self.party)
 

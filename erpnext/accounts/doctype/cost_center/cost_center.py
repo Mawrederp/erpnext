@@ -65,3 +65,6 @@ class CostCenter(NestedSet):
 		else:
 			super(CostCenter, self).after_rename(olddn, newdn, merge)
 
+
+def get_permission_query_conditions(user):
+	return """(is_active = 1)"""
