@@ -66,7 +66,7 @@ class PurchaseReceipt(BuyingController):
 		if self.get("__islocal") :
 				self.title = self.get_title()
 		self.validate_assets()
-		self.validate_project_items()
+		# self.validate_project_items()
 	
 	def validate_project_items(self):
 		if self.project : 
