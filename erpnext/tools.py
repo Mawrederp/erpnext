@@ -893,3 +893,10 @@ def set_barcodes ():
 		asset_doc= frappe.get_doc("Asset",asset["name"])
 		asset_doc.barcode_attach2(asset["name"])
 		print ("DOne:")
+
+def upload_jes():
+    import sys
+    from frappe.utils.csvutils import read_csv_content
+    from frappe.core.doctype.data_import.importer import upload
+    with open("/home/frappe/frappe-bench/apps/erpnext/erpnext/jes.csv", "r") as infile:
+        rows = read_csv_content(infile.read())
