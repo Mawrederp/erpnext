@@ -363,7 +363,7 @@ frappe.ui.form.on("Journal Entry Account", {
 					if(r.message) {
 						$.extend(d, r.message);
 						console.log("tttttttttttttttttttt",r.message);
-						frm.fields_dict.accounts.grid.toggle_reqd("cost_center", r.message.root_type == "Expense");
+						//~ frm.fields_dict.accounts.grid.toggle_reqd("cost_center", r.message.root_type == "Expense");
 						erpnext.journal_entry.set_debit_credit_in_company_currency(frm, dt, dn);
 						refresh_field('accounts');
 					}
