@@ -327,7 +327,23 @@ erpnext.stock.DeliveryNoteController = erpnext.selling.SellingController.extend(
 
 
 frappe.ui.form.on('Delivery Note Item', {
-    qty: function (frm, cdt, cdn) {
+	 item_code: function(frm, cdt, cdn){
+	 	var d = locals[cdt][cdn];
+          frappe.call({
+              method: "frappe.client.get_list",
+             args: {
+                  doctype: "Item",
+                  fields: ["name", "default_warehouse"],
+                 filters: { "name": d.item_code }
+              },
+              callback: function(r, rt) {
+                 if (r.message) {
+                     frappe.model.set_value(cdt, cdn, "warehouse", r.message[0].default_warehouse);
+                 }
+            }
+         });
+ },
+	qty: function (frm, cdt, cdn) {
         var row = locals[cdt][cdn];
 
         for(var row= 0;row<cur_frm.doc.items.length;row++){
@@ -494,23 +510,5 @@ if (sys_defaults.auto_accounting_for_stock) {
 		}
 	}
 	
-	cur_frm.cscript.custom_item_code = function(doc, cdt, cdn){
-     var d = locals[cdt][cdn];
-     if (cur_frm.doc.project){
-         frappe.call({
-             method: "frappe.client.get_list",
-             args: {
-                 doctype: "Project",
-                 fields: ["name", "default_warehouse"],
-                 filters: { "name": cur_frm.doc.project }
-             },
-             callback: function(r, rt) {
-                 if (r.message) {
-                     frappe.model.set_value(d.doctype, d.name, "project", r.message[0].name);
-                     frappe.model.set_value(d.doctype, d.name, "warehouse", r.message[0].default_warehouse);
-                 }
-             }
-         });
-     }
-}
+
 }

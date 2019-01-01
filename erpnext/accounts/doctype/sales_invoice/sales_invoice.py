@@ -817,13 +817,16 @@ class SalesInvoice(SellingController):
 				adv_total = flt(0,self.precision("total"))
 				for ps in ps_l : 
 					adv_sales_invoice_doc = frappe.get_doc("Sales Invoice",ps.sales_invoice)
+					adv_income_account = frappe.get_all("Sales Invoice Item", filters={"parent":ps.sales_invoice , "project_payment_schedule":ps.name},
+						fields = ['income_account'], limit=1)[0]["income_account"]
+					
 					adv_grand_total_in_company_currency = flt(adv_sales_invoice_doc.total * adv_sales_invoice_doc.conversion_rate,
 						adv_sales_invoice_doc.precision("total"))
 					adv_value = flt(adv_grand_total_in_company_currency * flt(ps.billing_percentage) / 100.0000,self.precision("total"))
 					adv_total += adv_value
 					gl_entries.append(
 						self.get_gl_dict({
-						"account": adv_sales_invoice_doc.against_income_account,
+						"account": adv_income_account,
 						"party_type": "Customer",
 						"party": self.customer,
 						"against": self.against_income_account,
