@@ -690,7 +690,7 @@ class SalesInvoice(SellingController):
 						res.append(i)
 		
 		adv_ps_docs = res
-		#~ adv_ps_docs = [i for n, i in enumerate(res) if i not in res[n + 1:]]
+		adv_ps_docs = [i for n, i in enumerate(res) if i not in res[n + 1:]]
 		print (adv_ps_docs)
 		for r in adv_ps_docs :
 			if not r.sales_invoice:
@@ -817,13 +817,23 @@ class SalesInvoice(SellingController):
 				adv_total = flt(0,self.precision("total"))
 				for ps in ps_l : 
 					adv_sales_invoice_doc = frappe.get_doc("Sales Invoice",ps.sales_invoice)
-					adv_income_account = frappe.get_all("Sales Invoice Item", filters={"parent":ps.sales_invoice , "project_payment_schedule":ps.name},
-						fields = ['income_account'], limit=1)[0]["income_account"]
+					adv_sales_item_doc = frappe.get_all("Sales Invoice Item", filters={"parent":ps.sales_invoice , "project_payment_schedule":ps.name},
+						fields = ['income_account',"base_amount","amount"], limit=1)
 					
-					adv_grand_total_in_company_currency = flt(adv_sales_invoice_doc.total * adv_sales_invoice_doc.conversion_rate,
-						adv_sales_invoice_doc.precision("total"))
+					adv_income_account = adv_sales_item_doc[0]["income_account"]
+					adv_base_amount = adv_sales_item_doc[0]["base_amount"]
+					adv_amount = adv_sales_item_doc[0]["base_amount"]
+					
+					adv_grand_total_in_company_currency = flt(adv_base_amount)
 					adv_value = flt(adv_grand_total_in_company_currency * flt(ps.billing_percentage) / 100.0000,self.precision("total"))
 					adv_total += adv_value
+					
+					print("ffffffffffffffffffffffffffffFF")
+					print(adv_grand_total_in_company_currency)
+					print(adv_value)
+					print(adv_total)
+					print("gggggggggggggggggggggggggggggggggg")
+					
 					gl_entries.append(
 						self.get_gl_dict({
 						"account": adv_income_account,
@@ -880,10 +890,16 @@ class SalesInvoice(SellingController):
 			total_tax = flt(0,self.precision("grand_total"))
 			for ps in ps_l : 
 				adv_sales_invoice_doc = frappe.get_doc("Sales Invoice",ps.sales_invoice)
+				adv_sales_item_doc = frappe.get_all("Sales Invoice Item", filters={"parent":ps.sales_invoice , "project_payment_schedule":ps.name},
+						fields = ['income_account',"base_amount","amount"], limit=1)
+						
+						
 				for tax in adv_sales_invoice_doc.get("taxes"):
 					if flt(tax.base_tax_amount_after_discount_amount):
 						account_currency = get_account_currency(tax.account_head)
-						adv_vat = flt(flt(tax.base_tax_amount_after_discount_amount)* flt(ps.billing_percentage) / 100.0000,self.precision("total"))
+						#~ adv_vat = flt(flt(tax.base_tax_amount_after_discount_amount)* flt(ps.billing_percentage) / 100.0000,self.precision("total"))
+						adv_vat = flt(flt(adv_sales_item_doc[0]["base_amount"]) * flt(ps.billing_percentage) / 100.000,self.precision("total"))
+						adv_vat = flt(adv_vat * flt(tax.rate) / 100.000,self.precision("total"))
 						gl_entries.append(
 							self.get_gl_dict({
 								"account": tax.account_head,
@@ -895,6 +911,7 @@ class SalesInvoice(SellingController):
 							}, account_currency)
 						)
 						adv_total_tax += adv_vat
+						
 			for tax in self.get("taxes"):
 				if flt(tax.base_tax_amount_after_discount_amount):
 					account_currency = get_account_currency(tax.account_head)
