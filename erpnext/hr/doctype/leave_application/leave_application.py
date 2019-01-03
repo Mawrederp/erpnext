@@ -1012,24 +1012,24 @@ def get_approved_leaves_for_period(employee, leave_type, from_date, to_date):
 
     leave_days = 0
     for leave_app in leave_applications:
-        # leave_days += leave_app.total_leave_days
-        if leave_app.from_date >= getdate(from_date) and leave_app.to_date <= getdate(to_date):
-            return_from_leave = frappe.db.sql(""" select name,from_date,return_date from `tabReturn From Leave Statement` where leave_application='{0}' and docstatus=1""".format(leave_app.name), as_dict=1)
-            if return_from_leave and len(return_from_leave) > 0:
-                leave_days += date_diff(return_from_leave[0].return_date,return_from_leave[0].from_date) + 1
-            else:
-                leave_days += leave_app.total_leave_days
-        else:
-            if leave_app.from_date < getdate(from_date):
-                leave_app.from_date = from_date
-            if leave_app.to_date > getdate(to_date):
-                leave_app.to_date = to_date
-            return_from_leave = frappe.db.sql(""" select name,from_date,return_date from `tabReturn From Leave Statement` where leave_application='{0}' and docstatus=1""".format(leave_app.name), as_dict=1)
-            if return_from_leave and len(return_from_leave) > 0:
-                leave_days += date_diff(return_from_leave[0].return_date,return_from_leave[0].from_date) + 1
-            else:
-                leave_days += get_number_of_leave_days(employee, leave_type,
-                    leave_app.from_date, leave_app.to_date)
+        leave_days += leave_app.total_leave_days
+        # if leave_app.from_date >= getdate(from_date) and leave_app.to_date <= getdate(to_date):
+        #     return_from_leave = frappe.db.sql(""" select name,from_date,return_date from `tabReturn From Leave Statement` where leave_application='{0}' and docstatus=1""".format(leave_app.name), as_dict=1)
+        #     if return_from_leave and len(return_from_leave) > 0:
+        #         leave_days += date_diff(return_from_leave[0].return_date,return_from_leave[0].from_date) + 1
+        #     else:
+        #         leave_days += leave_app.total_leave_days
+        # else:
+        #     if leave_app.from_date < getdate(from_date):
+        #         leave_app.from_date = from_date
+        #     if leave_app.to_date > getdate(to_date):
+        #         leave_app.to_date = to_date
+        #     return_from_leave = frappe.db.sql(""" select name,from_date,return_date from `tabReturn From Leave Statement` where leave_application='{0}' and docstatus=1""".format(leave_app.name), as_dict=1)
+        #     if return_from_leave and len(return_from_leave) > 0:
+        #         leave_days += date_diff(return_from_leave[0].return_date,return_from_leave[0].from_date) + 1
+        #     else:
+        #         leave_days += get_number_of_leave_days(employee, leave_type,
+        #             leave_app.from_date, leave_app.to_date)
 
     return leave_days
 
