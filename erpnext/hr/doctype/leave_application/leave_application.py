@@ -963,6 +963,7 @@ def get_monthly_accumulated_leave(from_date, to_date, leave_type, employee, for_
                 frappe.throw(_("Invalid Dates"))
 
         return str(balance)
+
 @frappe.whitelist()
 def get_number_of_leave_days(employee, leave_type, from_date, to_date, half_day=None):
     if half_day==1:
@@ -1011,6 +1012,7 @@ def get_approved_leaves_for_period(employee, leave_type, from_date, to_date):
 
     leave_days = 0
     for leave_app in leave_applications:
+        # leave_days += leave_app.total_leave_days
         if leave_app.from_date >= getdate(from_date) and leave_app.to_date <= getdate(to_date):
             return_from_leave = frappe.db.sql(""" select name,from_date,return_date from `tabReturn From Leave Statement` where leave_application='{0}' and docstatus=1""".format(leave_app.name), as_dict=1)
             if return_from_leave and len(return_from_leave) > 0:

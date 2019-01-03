@@ -681,20 +681,22 @@ class SalesInvoice(SellingController):
                 fields=["name","sales_invoice"],
                 filters={"parent":ps_doc.parent,"advance_project_items  ":ps_doc.scope_item},
                 ignore_permissions=True)
-            if adv_ps_list :
-                for i in adv_ps_list:
-                    if i.name != ps_doc.name:
-                        i.billing_percentage=ps_doc.billing_percentage
-                        res.append(i)
-        
-        adv_ps_docs = res
-        #~ adv_ps_docs = [i for n, i in enumerate(res) if i not in res[n + 1:]]
-        print (adv_ps_docs)
-        for r in adv_ps_docs :
-            if not r.sales_invoice:
-                frappe.throw("Make sure that advance invoice is made ")
-        return adv_ps_docs
-        
+
+			if adv_ps_list :
+				for i in adv_ps_list:
+					if i.name != ps_doc.name:
+						i.billing_percentage=ps_doc.billing_percentage
+						res.append(i)
+		
+		adv_ps_docs = res
+		adv_ps_docs = [i for n, i in enumerate(res) if i not in res[n + 1:]]
+		print (adv_ps_docs)
+		for r in adv_ps_docs :
+			if not r.sales_invoice:
+				frappe.throw("Make sure that advance invoice is made ")
+		return adv_ps_docs
+		
+
     def make_payment_term_gl_entry(self, gl_entries):
         if self.total :
             # Didnot use base_grand_total to book rounding loss gle
@@ -807,137 +809,155 @@ class SalesInvoice(SellingController):
             
     def make_customer_gl_entry(self, gl_entries):
         if self.grand_total:
-            ps_l = self.get_payment_schdual()
-            
-            if ps_l:
-                
-                grand_total_in_company_currency = flt(self.total * self.conversion_rate,self.precision("total"))
-                adv_total = flt(0,self.precision("total"))
-                for ps in ps_l : 
-                    adv_sales_invoice_doc = frappe.get_doc("Sales Invoice",ps.sales_invoice)
-                    adv_income_account = frappe.get_all("Sales Invoice Item", filters={"parent":ps.sales_invoice , "project_payment_schedule":ps.name},
-                        fields = ['income_account'], limit=1)[0]["income_account"]
-                    
-                    adv_grand_total_in_company_currency = flt(adv_sales_invoice_doc.total * adv_sales_invoice_doc.conversion_rate,
-                        adv_sales_invoice_doc.precision("total"))
-                    adv_value = flt(adv_grand_total_in_company_currency * flt(ps.billing_percentage) / 100.0000,self.precision("total"))
-                    adv_total += adv_value
-                    gl_entries.append(
-                        self.get_gl_dict({
-                        "account": adv_income_account,
-                        "party_type": "Customer",
-                        "party": self.customer,
-                        "against": self.against_income_account,
-                        "debit": adv_value,
-                        "title": self.title,
-                        "debit_in_account_currency": adv_value \
-                            if self.party_account_currency==self.company_currency else adv_grand_total_in_company_currency,
-                        "against_voucher": self.return_against if cint(self.is_return) else self.name,
-                        "against_voucher_type": self.doctype
-                        }, self.party_account_currency)
-                    )
-                    
-                gl_entries.append(
-                    self.get_gl_dict({
-                    "account": self.debit_to,
-                    "party_type": "Customer",
-                    "party": self.customer,
-                    "against": self.against_income_account,
-                    "debit": grand_total_in_company_currency-adv_total,
-                    "title": self.title,
-                    "debit_in_account_currency": grand_total_in_company_currency-adv_total \
-                        if self.party_account_currency==self.company_currency else self.grand_total-adv_total,
-                    "against_voucher": self.return_against if cint(self.is_return) else self.name,
-                    "against_voucher_type": self.doctype
-                    }, self.party_account_currency)
-                )
-                    
-            else :
-                # Didnot use base_grand_total to book rounding loss gle
-                grand_total_in_company_currency = flt(self.grand_total * self.conversion_rate,
-                    self.precision("grand_total"))
-                gl_entries.append(
-                    self.get_gl_dict({
-                    "account": self.debit_to,
-                    "party_type": "Customer",
-                    "party": self.customer,
-                    "against": self.against_income_account,
-                    "debit": grand_total_in_company_currency,
-                    "title": self.title,
-                    "debit_in_account_currency": grand_total_in_company_currency \
-                        if self.party_account_currency==self.company_currency else self.grand_total,
-                    "against_voucher": self.return_against if cint(self.is_return) else self.name,
-                    "against_voucher_type": self.doctype
-                    }, self.party_account_currency)
-                )
+
+			ps_l = self.get_payment_schdual()
+			
+			if ps_l:
+				
+				grand_total_in_company_currency = flt(self.total * self.conversion_rate,self.precision("total"))
+				adv_total = flt(0,self.precision("total"))
+				for ps in ps_l : 
+					adv_sales_invoice_doc = frappe.get_doc("Sales Invoice",ps.sales_invoice)
+					adv_sales_item_doc = frappe.get_all("Sales Invoice Item", filters={"parent":ps.sales_invoice , "project_payment_schedule":ps.name},
+						fields = ['income_account',"base_amount","amount"], limit=1)
+					
+					adv_income_account = adv_sales_item_doc[0]["income_account"]
+					adv_base_amount = adv_sales_item_doc[0]["base_amount"]
+					adv_amount = adv_sales_item_doc[0]["base_amount"]
+					
+					adv_grand_total_in_company_currency = flt(adv_base_amount)
+					adv_value = flt(adv_grand_total_in_company_currency * flt(ps.billing_percentage) / 100.0000,self.precision("total"))
+					adv_total += adv_value
+					
+					print("ffffffffffffffffffffffffffffFF")
+					print(adv_grand_total_in_company_currency)
+					print(adv_value)
+					print(adv_total)
+					print("gggggggggggggggggggggggggggggggggg")
+					
+					gl_entries.append(
+						self.get_gl_dict({
+						"account": adv_income_account,
+						"party_type": "Customer",
+						"party": self.customer,
+						"against": self.against_income_account,
+						"debit": adv_value,
+						"title": self.title,
+						"debit_in_account_currency": adv_value \
+							if self.party_account_currency==self.company_currency else adv_grand_total_in_company_currency,
+						"against_voucher": self.return_against if cint(self.is_return) else self.name,
+						"against_voucher_type": self.doctype
+						}, self.party_account_currency)
+					)
+					
+				gl_entries.append(
+					self.get_gl_dict({
+					"account": self.debit_to,
+					"party_type": "Customer",
+					"party": self.customer,
+					"against": self.against_income_account,
+					"debit": grand_total_in_company_currency-adv_total,
+					"title": self.title,
+					"debit_in_account_currency": grand_total_in_company_currency-adv_total \
+						if self.party_account_currency==self.company_currency else self.grand_total-adv_total,
+					"against_voucher": self.return_against if cint(self.is_return) else self.name,
+					"against_voucher_type": self.doctype
+					}, self.party_account_currency)
+				)
+					
+			else :
+				# Didnot use base_grand_total to book rounding loss gle
+				grand_total_in_company_currency = flt(self.grand_total * self.conversion_rate,
+					self.precision("grand_total"))
+				gl_entries.append(
+					self.get_gl_dict({
+					"account": self.debit_to,
+					"party_type": "Customer",
+					"party": self.customer,
+					"against": self.against_income_account,
+					"debit": grand_total_in_company_currency,
+					"title": self.title,
+					"debit_in_account_currency": grand_total_in_company_currency \
+						if self.party_account_currency==self.company_currency else self.grand_total,
+					"against_voucher": self.return_against if cint(self.is_return) else self.name,
+					"against_voucher_type": self.doctype
+					}, self.party_account_currency)
+				)
 
     def make_tax_gl_entries(self, gl_entries):
-        ps_l = self.get_payment_schdual()
-        if ps_l:
-            adv_total_tax = flt(0,self.precision("grand_total"))
-            total_tax = flt(0,self.precision("grand_total"))
-            for ps in ps_l : 
-                adv_sales_invoice_doc = frappe.get_doc("Sales Invoice",ps.sales_invoice)
-                for tax in adv_sales_invoice_doc.get("taxes"):
-                    if flt(tax.base_tax_amount_after_discount_amount):
-                        account_currency = get_account_currency(tax.account_head)
-                        adv_vat = flt(flt(tax.base_tax_amount_after_discount_amount)* flt(ps.billing_percentage) / 100.0000,self.precision("total"))
-                        gl_entries.append(
-                            self.get_gl_dict({
-                                "account": tax.account_head,
-                                "against": self.customer,
-                                "debit": adv_vat,
-                                "debit_in_account_currency": adv_vat \
-                                    if account_currency==self.company_currency else adv_vat,
-                                "cost_center": tax.cost_center
-                            }, account_currency)
-                        )
-                        adv_total_tax += adv_vat
-            for tax in self.get("taxes"):
-                if flt(tax.base_tax_amount_after_discount_amount):
-                    account_currency = get_account_currency(tax.account_head)
-                    gl_entries.append(
-                        self.get_gl_dict({
-                            "account": tax.account_head,
-                            "against": self.customer,
-                            "credit": flt(tax.base_tax_amount_after_discount_amount),
-                            "credit_in_account_currency": flt(tax.base_tax_amount_after_discount_amount) \
-                                if account_currency==self.company_currency else flt(tax.tax_amount_after_discount_amount),
-                            "cost_center": tax.cost_center
-                        }, account_currency)
-                    )
-                    total_tax += flt(tax.base_tax_amount_after_discount_amount)
-                    
-            gl_entries.append(
-                    self.get_gl_dict({
-                    "account": self.debit_to,
-                    "party_type": "Customer",
-                    "party": self.customer,
-                    "against": self.against_income_account,
-                    "debit": total_tax -adv_total_tax ,
-                    "title": self.title,
-                    "debit_in_account_currency": total_tax -adv_total_tax \
-                        if self.party_account_currency==self.company_currency else total_tax -adv_total_tax,
-                    "against_voucher": self.return_against if cint(self.is_return) else self.name,
-                    "against_voucher_type": self.doctype
-                    }, self.party_account_currency)
-                )
+		ps_l = self.get_payment_schdual()
+		if ps_l:
+			adv_total_tax = flt(0,self.precision("grand_total"))
+			total_tax = flt(0,self.precision("grand_total"))
+			for ps in ps_l : 
+				adv_sales_invoice_doc = frappe.get_doc("Sales Invoice",ps.sales_invoice)
+				adv_sales_item_doc = frappe.get_all("Sales Invoice Item", filters={"parent":ps.sales_invoice , "project_payment_schedule":ps.name},
+						fields = ['income_account',"base_amount","amount"], limit=1)
+						
+						
+				for tax in adv_sales_invoice_doc.get("taxes"):
+					if flt(tax.base_tax_amount_after_discount_amount):
+						account_currency = get_account_currency(tax.account_head)
+						#~ adv_vat = flt(flt(tax.base_tax_amount_after_discount_amount)* flt(ps.billing_percentage) / 100.0000,self.precision("total"))
+						adv_vat = flt(flt(adv_sales_item_doc[0]["base_amount"]) * flt(ps.billing_percentage) / 100.000,self.precision("total"))
+						adv_vat = flt(adv_vat * flt(tax.rate) / 100.000,self.precision("total"))
+						gl_entries.append(
+							self.get_gl_dict({
+								"account": tax.account_head,
+								"against": self.customer,
+								"debit": adv_vat,
+								"debit_in_account_currency": adv_vat \
+									if account_currency==self.company_currency else adv_vat,
+								"cost_center": tax.cost_center
+							}, account_currency)
+						)
+						adv_total_tax += adv_vat
+						
+			for tax in self.get("taxes"):
+				if flt(tax.base_tax_amount_after_discount_amount):
+					account_currency = get_account_currency(tax.account_head)
+					gl_entries.append(
+						self.get_gl_dict({
+							"account": tax.account_head,
+							"against": self.customer,
+							"credit": flt(tax.base_tax_amount_after_discount_amount),
+							"credit_in_account_currency": flt(tax.base_tax_amount_after_discount_amount) \
+								if account_currency==self.company_currency else flt(tax.tax_amount_after_discount_amount),
+							"cost_center": tax.cost_center
+						}, account_currency)
+					)
+					total_tax += flt(tax.base_tax_amount_after_discount_amount)
+					
+			gl_entries.append(
+					self.get_gl_dict({
+					"account": self.debit_to,
+					"party_type": "Customer",
+					"party": self.customer,
+					"against": self.against_income_account,
+					"debit": total_tax -adv_total_tax ,
+					"title": self.title,
+					"debit_in_account_currency": total_tax -adv_total_tax \
+						if self.party_account_currency==self.company_currency else total_tax -adv_total_tax,
+					"against_voucher": self.return_against if cint(self.is_return) else self.name,
+					"against_voucher_type": self.doctype
+					}, self.party_account_currency)
+				)
 
 
-        else :
-            for tax in self.get("taxes"):
-                if flt(tax.base_tax_amount_after_discount_amount):
-                    account_currency = get_account_currency(tax.account_head)
-                    gl_entries.append(
-                        self.get_gl_dict({
-                            "account": tax.account_head,
-                            "against": self.customer,
-                            "credit": flt(tax.base_tax_amount_after_discount_amount),
-                            "credit_in_account_currency": flt(tax.base_tax_amount_after_discount_amount) \
-                                if account_currency==self.company_currency else flt(tax.tax_amount_after_discount_amount),
-                            "cost_center": tax.cost_center
-                        }, account_currency)
-                    )
+		else :
+			for tax in self.get("taxes"):
+				if flt(tax.base_tax_amount_after_discount_amount):
+					account_currency = get_account_currency(tax.account_head)
+					gl_entries.append(
+						self.get_gl_dict({
+							"account": tax.account_head,
+							"against": self.customer,
+							"credit": flt(tax.base_tax_amount_after_discount_amount),
+							"credit_in_account_currency": flt(tax.base_tax_amount_after_discount_amount) \
+								if account_currency==self.company_currency else flt(tax.tax_amount_after_discount_amount),
+							"cost_center": tax.cost_center
+						}, account_currency)
+					)
 
     def make_item_gl_entries(self, gl_entries):
         # income account gl entries
