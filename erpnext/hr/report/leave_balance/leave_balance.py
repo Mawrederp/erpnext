@@ -69,7 +69,6 @@ def get_data(filters):
 			used_annual = frappe.db.sql(""" select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='Annual Leave - اجازة اعتيادية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' """.format(emp.name,annual_leave[0][0],filters.get("date")))
 
 
-
 		sick_leave=frappe.db.sql("select from_date from `tabLeave Allocation` where employee='{0}' and leave_type='Sick Leave - مرضية' order by creation desc limit 1".format(emp.name))
 		if sick_leave:
 			remain_sick = frappe.db.sql(""" select (select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'Sick Leave - مرضية' and docstatus =1 order by creation desc limit 1 ) - ( select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='Sick Leave - مرضية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' )""".format(emp.name,sick_leave[0][0],filters.get("date")))
@@ -90,7 +89,45 @@ def get_data(filters):
 			max_educational = frappe.db.sql(""" select total_leaves_allocated from `tabLeave Allocation` where employee='{0}' and leave_type = 'Educational - تعليمية' and docstatus =1 order by creation desc limit 1 """.format(emp.name))
 			used_educational = frappe.db.sql(""" select SUM(total_leave_days) from `tabLeave Application` where employee='{0}' and leave_type='Educational - تعليمية' and docstatus=1 and from_date >= '{1}' and to_date <= '{2}' """.format(emp.name,educational_leave[0][0],filters.get("date")))
 
-	
+		try:
+			if used_annual[0][0] and annual_leave[0][0]:
+				annual_leave_balance = remain_annual[0][0]
+			elif max_annual[0][0]:
+				annual_leave_balance = max_annual[0][0]
+		except:
+			annual_leave_balance = 0
+
+
+		try:
+			if used_sick[0][0] and sick_leave[0][0]:
+				sick_leave_balance = remain_sick[0][0]
+			elif max_sick[0][0]:
+				sick_leave_balance = max_sick[0][0]
+		except:
+			sick_leave_balance = 0
+
+
+
+		try:
+			if used_emergency[0][0] and emergency_leave[0][0]:
+				emergency_leave_balance = remain_emergency[0][0]
+			elif max_sick[0][0]:
+				emergency_leave_balance = max_emergency[0][0]
+		except:
+			emergency_leave_balance = 0
+
+
+
+		try:
+			if used_educational[0][0] and educational_leave[0][0]:
+				educational_leave_balance = remain_educational[0][0]
+			elif max_sick[0][0]:
+				educational_leave_balance = max_educational[0][0]
+		except:
+			educational_leave_balance = 0
+
+			
+
 
 		row = [
 		emp.name,
@@ -98,11 +135,11 @@ def get_data(filters):
 		emp.department,
 		emp.date_of_joining,
 
-		remain_annual if used_annual[0][0] and annual_leave[0][0] else max_annual,
+		annual_leave_balance,
 		get_monthly_accumulated_leave(filters.get("date"),filters.get("date"),'Annual Leave - اجازة اعتيادية',emp.name),
-		remain_sick if used_sick[0][0] and sick_leave[0][0] else max_sick,
-		remain_emergency if used_emergency[0][0] and emergency_leave[0][0] else max_emergency,
-		remain_educational if used_educational[0][0] and educational_leave[0][0] else max_educational,
+		sick_leave_balance,
+		emergency_leave_balance,
+		educational_leave_balance,
 		
     	]
 		data.append(row)
