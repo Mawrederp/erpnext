@@ -27,6 +27,9 @@ class Appraisal(Document):
         self.calculate_total()
         self.validate_emp()
 
+        self.check_employee_approval()
+
+
 
     # def validate_emp(self):
     #     if self.get('__islocal'):
@@ -43,8 +46,9 @@ class Appraisal(Document):
     def validate_emp(self):
         if self.employee:
             employee_user = frappe.get_value("Employee", filters={"name": self.employee}, fieldname="user_id")
-            frappe.msgprint(str(employee_user))
-            frappe.msgprint(str(frappe.session.user))
+            # frappe.msgprint(str(employee_user))
+            # frappe.msgprint(str(frappe.session.user))
+
             if self.get('__islocal') and employee_user:
                 if u'Director' in frappe.get_roles(employee_user) and u'CEO' in frappe.get_roles(frappe.session.user):
                     self.workflow_state = "Created By CEO"
@@ -57,6 +61,12 @@ class Appraisal(Document):
 
             if not employee_user and self.get('__islocal'):
                 self.workflow_state = "Created By Line Manager"
+
+    def check_employee_approval(self):
+        if self.employee_approval == 1:
+            if self.user_id != frappe.session.user:
+                frappe.throw("Current Appraisal need an approval from employee {0}".format(self.employee_name))
+        self.employee_approval=self.employee_approval+1
 
 
     def get_employee_name(self):

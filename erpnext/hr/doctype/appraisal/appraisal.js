@@ -4,6 +4,7 @@
 cur_frm.add_fetch('employee', 'company', 'company');
 cur_frm.add_fetch('employee', 'employee_name', 'employee_name');
 cur_frm.add_fetch('employee', 'department', 'department');
+cur_frm.add_fetch('employee', 'user_id', 'user_id');
 
 frappe.ui.form.on('Appraisal', {
     refresh: function(frm) {
