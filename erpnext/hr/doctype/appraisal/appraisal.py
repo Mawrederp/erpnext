@@ -63,8 +63,10 @@ class Appraisal(Document):
                 self.workflow_state = "Created By Line Manager"
 
     def check_employee_approval(self):
+        employee_user = frappe.get_value("Employee", filters={"name": self.employee}, fieldname="user_id")
+        
         if self.employee_approval == 1:
-            if self.user_id != frappe.session.user:
+            if employee_user != frappe.session.user:
                 frappe.throw("Current Appraisal need an approval from employee {0}".format(self.employee_name))
         self.employee_approval=self.employee_approval+1
 
