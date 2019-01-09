@@ -10,5 +10,11 @@ frappe.query_reports["Asset Report"] = {
 			"fieldtype": "Link",
 			"options": "Asset Category"
 		},
+		{
+			"fieldname":"total_only",
+			"label": __("Show Group Total Only"),
+			"fieldtype": "Check",
+			"default": 0
+		},
 	]
 }
