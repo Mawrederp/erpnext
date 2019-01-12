@@ -48,6 +48,10 @@ frappe.ui.form.on('Asset', {
 					erpnext.asset.transfer_asset(frm);
 				});
 				
+				frm.add_custom_button("Set Employee", function() {
+					erpnext.asset.set_employee(frm);
+				});
+				
 				frm.add_custom_button("Scrap Asset", function() {
 					erpnext.asset.scrap_asset(frm);
 				});
@@ -257,7 +261,6 @@ erpnext.asset.scrap_asset = function(frm) {
 		primary_action: function(){
 			d.hide();
 			var data = d.get_values();
-			console.log("DATA ",data)
 			frappe.call({
 				args: {
 					"asset_name": frm.doc.name,
@@ -272,20 +275,41 @@ erpnext.asset.scrap_asset = function(frm) {
 	});
 	d.fields_dict.ht.$wrapper.html(__("Do you really want to scrap this asset?"));
 	d.show();
-	
-	
-	
-	//~ frappe.confirm(__("Do you really want to scrap this asset?"), function () {
-		//~ frappe.call({
-			//~ args: {
-				//~ "asset_name": frm.doc.name
-			//~ },
-			//~ method: "erpnext.accounts.doctype.asset.depreciation.scrap_asset",
-			//~ callback: function(r) {
-				//~ cur_frm.reload_doc();
-			//~ }
-		//~ })
-	//~ })
+}
+
+erpnext.asset.set_employee = function(frm) {
+
+	var d = new frappe.ui.Dialog({
+    'fields': [
+        {'fieldname': 'ht', 'fieldtype': 'HTML'},
+				{
+				"label": __("Employee"), 
+				"fieldname": "target_empoyee",
+				"fieldtype": "Link",
+				"options": "Employee",
+				"default": frm.doc.employee,
+				"get_query": "erpnext.controllers.queries.employee_query"
+			},
+			
+	],
+		primary_action: function(){
+			d.hide();
+			var data = d.get_values();
+			frappe.call({
+				args: {
+					"asset_name": frm.doc.name,
+					"employee":data.target_empoyee
+				},
+				method: "erpnext.accounts.doctype.asset.depreciation.set_employee",
+				callback: function(r) {
+					cur_frm.reload_doc();
+				}
+			})
+		}
+	});
+	d.fields_dict.ht.$wrapper.html(__("Assign Employee to Asset"));
+	d.show();
+
 }
 
 erpnext.asset.restore_asset = function(frm) {
