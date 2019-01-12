@@ -156,6 +156,26 @@ def get_depreciation_accounts(asset):
 	return fixed_asset_account, accumulated_depreciation_account, depreciation_expense_account
 
 @frappe.whitelist()
+def set_employee(employee,asset_name):
+	fixed_asset_list = frappe.get_list("Fixed Asset Custody", filters= {"fixed_asset":asset_name})
+	if fixed_asset_list :
+		fixed_asset_doc = frappe.get_doc("Fixed Asset Custody",fixed_asset_list[0])
+		fixed_asset_doc.employee = employee
+		fixed_asset_doc.save()
+	else :
+		#~ fixed_asset_doc = frappe.get_doc({
+			#~ 'doctype': 'Fixed Asset Custody',
+			#~ 'employee': employee,
+			#~ 'fixed_asset': asset_name,
+			#~ 'company': frappe.db.get_value("Asset", asset_name, "company"),
+		#~ })
+		#~ fixed_asset_doc.save()
+		#~ fixed_asset_doc.submit()
+		#~ frappe.msgprint(_("new Fixed Asset Custody for the asset %s Created")%asset_name)
+		frappe.throw(_("Please Create new Fixed Asset Custody for the asset %s"),asset_name)
+
+	
+@frappe.whitelist()
 def scrap_asset(asset_name,posting_date=None):
 	asset = frappe.get_doc("Asset", asset_name)
 	asset.freez=1
