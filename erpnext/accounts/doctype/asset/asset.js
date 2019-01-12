@@ -249,17 +249,43 @@ erpnext.asset.make_sales_invoice = function(frm) {
 }
 
 erpnext.asset.scrap_asset = function(frm) {
-	frappe.confirm(__("Do you really want to scrap this asset?"), function () {
-		frappe.call({
-			args: {
-				"asset_name": frm.doc.name
-			},
-			method: "erpnext.accounts.doctype.asset.depreciation.scrap_asset",
-			callback: function(r) {
-				cur_frm.reload_doc();
-			}
-		})
-	})
+	var d = new frappe.ui.Dialog({
+    'fields': [
+        {'fieldname': 'ht', 'fieldtype': 'HTML'},
+        {'label':__("Posting Date"),'fieldname': 'posting_date', 'fieldtype': 'Date', 'default': frappe.datetime.nowdate()}
+    ],
+		primary_action: function(){
+			d.hide();
+			var data = d.get_values();
+			console.log("DATA ",data)
+			frappe.call({
+				args: {
+					"asset_name": frm.doc.name,
+					"posting_date":data.posting_date
+				},
+				method: "erpnext.accounts.doctype.asset.depreciation.scrap_asset",
+				callback: function(r) {
+					cur_frm.reload_doc();
+				}
+			})
+		}
+	});
+	d.fields_dict.ht.$wrapper.html(__("Do you really want to scrap this asset?"));
+	d.show();
+	
+	
+	
+	//~ frappe.confirm(__("Do you really want to scrap this asset?"), function () {
+		//~ frappe.call({
+			//~ args: {
+				//~ "asset_name": frm.doc.name
+			//~ },
+			//~ method: "erpnext.accounts.doctype.asset.depreciation.scrap_asset",
+			//~ callback: function(r) {
+				//~ cur_frm.reload_doc();
+			//~ }
+		//~ })
+	//~ })
 }
 
 erpnext.asset.restore_asset = function(frm) {
