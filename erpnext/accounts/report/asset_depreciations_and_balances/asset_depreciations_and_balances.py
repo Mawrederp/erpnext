@@ -13,31 +13,123 @@ def execute(filters=None):
 	
 def get_data(filters):
 	data = []
+	group_data = []
 	
+	asset_categories_groups = get_asset_categories_groups(filters)
 	asset_categories = get_asset_categories(filters)
 	assets = get_assets(filters)
 	asset_costs = get_asset_costs(assets, filters)
 	asset_depreciations = get_accumulated_depreciations(assets, filters)
-	
-	for asset_category in asset_categories:
-		row = frappe._dict()
-		row.asset_category = asset_category
-		row.update(asset_costs.get(asset_category))
+	print("+++++++++++++++++++++++++++")
+	print(asset_categories_groups)
+	print("+++++++++++++++++++++++++++")
 
-		row.cost_as_on_to_date = (flt(row.cost_as_on_from_date) + flt(row.cost_of_new_purchase)
-			- flt(row.cost_of_sold_asset) - flt(row.cost_of_scrapped_asset))
+
+	#~ for asset_category_main in asset_categories_groups:
+		#~ print("1-------------------------------------------")
+		#~ print(asset_category_main)
+		#~ for asset_category in asset_categories_groups.get(asset_category_main):
+			#~ print("2---------------------")
+			#~ print(asset_category)
+			#~ try:
+				#~ row = frappe._dict()
+				#~ row.asset_category = asset_category
+				#~ print("3--------------")
+				#~ print(asset_costs.get(asset_category))
+				#~ row.update(asset_costs.get(asset_category))
+
+				#~ row.cost_as_on_to_date = (flt(row.cost_as_on_from_date) + flt(row.cost_of_new_purchase)
+					#~ - flt(row.cost_of_sold_asset) - flt(row.cost_of_scrapped_asset))
+					
+				#~ row.update(asset_depreciations.get(asset_category))
+				#~ row.accumulated_depreciation_as_on_to_date = (flt(row.accumulated_depreciation_as_on_from_date) + 
+					#~ flt(row.depreciation_amount_during_the_period) - flt(row.depreciation_eliminated))
+				
+				#~ row.net_asset_value_as_on_from_date = (flt(row.cost_as_on_from_date) - 
+					#~ flt(row.accumulated_depreciation_as_on_from_date))
+				
+				#~ row.net_asset_value_as_on_to_date = (flt(row.cost_as_on_to_date) - 
+					#~ flt(row.accumulated_depreciation_as_on_to_date))
 			
-		row.update(asset_depreciations.get(asset_category))
-		row.accumulated_depreciation_as_on_to_date = (flt(row.accumulated_depreciation_as_on_from_date) + 
-			flt(row.depreciation_amount_during_the_period) - flt(row.depreciation_eliminated))
-		
-		row.net_asset_value_as_on_from_date = (flt(row.cost_as_on_from_date) - 
-			flt(row.accumulated_depreciation_as_on_from_date))
-		
-		row.net_asset_value_as_on_to_date = (flt(row.cost_as_on_to_date) - 
-			flt(row.accumulated_depreciation_as_on_to_date))
+				#~ data.append(row)
+			#~ except:
+				#~ data.append([asset_category])
+				#~ print("error")
+			#~ print ("_________________________________________________________________\n\n\n")
+
+	for asset_category_main in asset_categories_groups:
+		print("1-------------------------------------------")
+		print(asset_category_main)
+		group_row = frappe._dict()
+		for asset_category in asset_categories_groups.get(asset_category_main):
+			print("2---------------------")
+			print(asset_category)
+			try:
+				row = frappe._dict()
+				row.asset_category = asset_category
+				print("3--------------")
+				print(asset_costs.get(asset_category))
+				row.update(asset_costs.get(asset_category))
+
+				row.cost_as_on_to_date = (flt(row.cost_as_on_from_date) + flt(row.cost_of_new_purchase)
+					- flt(row.cost_of_sold_asset) - flt(row.cost_of_scrapped_asset))
+					
+				row.update(asset_depreciations.get(asset_category))
+				row.accumulated_depreciation_as_on_to_date = (flt(row.accumulated_depreciation_as_on_from_date) + 
+					flt(row.depreciation_amount_during_the_period) - flt(row.depreciation_eliminated))
+				
+				row.net_asset_value_as_on_from_date = (flt(row.cost_as_on_from_date) - 
+					flt(row.accumulated_depreciation_as_on_from_date))
+				
+				row.net_asset_value_as_on_to_date = (flt(row.cost_as_on_to_date) - 
+					flt(row.accumulated_depreciation_as_on_to_date))
+				
+				data.append(row)
+				group_row.asset_category = asset_category_main
+
+				for k in row:
+					if k in group_row and k!="asset_category":
+						group_row[k] += row[k]
+					else:
+						if k!="asset_category":
+							group_row[k] = row[k]
+			
+			except Exception as e: 
+				print(e)
+				print("error")
+				
+			print ("_________________________________________________________________\n\n\n")
+
+		print("jjjjjjjjjjjjjjjjjjjjjj")
+		print(group_row)
+		print("jjjjjjjjjjjjjjjjjjjjjj")
+		group_data.append(group_row)
+			
+	total_row = frappe._dict()	
+	total_row.asset_category = _("Total")
+
 	
-		data.append(row)
+	if filters.show_by_group ==1:
+		for row in group_data:
+			for k in row:
+				if k in total_row and k!="asset_category":
+					total_row[k] += row[k]
+				else:
+					if k!="asset_category":
+						total_row[k] = row[k]
+		group_data.append([])
+		group_data.append(total_row)
+		return group_data
+	
+	for row in data:
+		for k in row:
+			if k in total_row and k!="asset_category":
+				total_row[k] += row[k]
+			else:
+				if k!="asset_category":
+					total_row[k] = row[k]
+	data.append([])
+	data.append(total_row)
 		
 	return data
 	
@@ -54,6 +146,20 @@ def get_assets(filters):
 		where docstatus=1 and company=%s and purchase_date <= %s""", 
 		(filters.company, filters.to_date), as_dict=1)
 		
+def get_asset_categories_groups(filters):
+	result = frappe._dict()
+	main_cat =  frappe.db.sql_list("""
+		select name from `tabAsset Category` 
+		where is_group=1 and parent_asset_category is not null
+	""")
+	for m_cat in main_cat:
+		child_cats = frappe.db.sql_list("""select name from `tabAsset Category` 
+		where parent_asset_category =%s and is_group=0""",(m_cat))
+		if child_cats : 
+			result.setdefault(m_cat,child_cats)
+	return result
+	
+	
 def get_asset_costs(assets, filters):
 	asset_costs = frappe._dict()
 	for d in assets:
@@ -72,12 +178,12 @@ def get_asset_costs(assets, filters):
 		else:
 			costs.cost_of_new_purchase += flt(d.gross_purchase_amount)
 			
-			if d.disposal_date and getdate(d.disposal_date) >= getdate(filters.from_date) \
-					and getdate(d.disposal_date) <= getdate(filters.to_date):
-				if d.status == "Sold":
-					costs.cost_of_sold_asset += flt(d.gross_purchase_amount)
-				elif d.status == "Scrapped":
-					costs.cost_of_scrapped_asset += flt(d.gross_purchase_amount)
+		if d.disposal_date and getdate(d.disposal_date) >= getdate(filters.from_date) \
+				and getdate(d.disposal_date) <= getdate(filters.to_date):
+			if d.status == "Sold":
+				costs.cost_of_sold_asset += flt(d.gross_purchase_amount)
+			elif d.status == "Scrapped":
+				costs.cost_of_scrapped_asset += flt(d.gross_purchase_amount)
 			
 	return asset_costs
 	

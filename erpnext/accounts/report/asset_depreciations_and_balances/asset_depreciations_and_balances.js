@@ -30,6 +30,12 @@ frappe.query_reports["Asset Depreciations and Balances"] = {
 			"label": __("Asset Category"),
 			"fieldtype": "Link",
 			"options": "Asset Category"
-		}
+		},
+		{
+			"fieldname":"show_by_group",
+			"label": __("Group"),
+			"fieldtype": "Check",
+			"default": 1
+		},
 	]
 }
