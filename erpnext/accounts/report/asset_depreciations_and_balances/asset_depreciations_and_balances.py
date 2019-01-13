@@ -225,8 +225,8 @@ def get_accumulated_depreciations(assets, filters):
 			elif getdate(schedule.schedule_date) <= getdate(filters.to_date):
 				depr.depreciation_amount_during_the_period += flt(schedule.depreciation_amount, precision=2)
 				
-				if asset.disposal_date and getdate(schedule.schedule_date) > getdate(asset.disposal_date):
-					depr.depreciation_eliminated_during_the_period += flt(schedule.depreciation_amount, precision=2)
+				if asset.disposal_date and getdate(schedule.schedule_date) >= getdate(asset.disposal_date):
+					depr.depreciation_eliminated_during_the_period += flt(schedule.accumulated_depreciation_amount, precision=2)
 		
 	return asset_depreciations
 	
