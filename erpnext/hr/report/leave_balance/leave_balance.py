@@ -151,7 +151,7 @@ def get_data(filters):
 
 
 @frappe.whitelist()
-def get_monthly_accumulated_leave(from_date, to_date, leave_type, employee, for_report=False):
+def get_monthly_accumulated_leave(from_date, to_date, leave_type, employee, for_report=True):
     allocation_records = get_leave_allocation_records(from_date, employee, leave_type)
     if allocation_records:
         applied_days = get_approved_leaves_for_period(employee, leave_type, allocation_records[employee][leave_type].from_date, to_date)
@@ -182,12 +182,13 @@ def get_monthly_accumulated_leave(from_date, to_date, leave_type, employee, for_
             else:
                 prev_year_remain_balance = 0
             # frappe.throw(str((date_dif) * (22/360)))
+
             period_balance = ((date_dif) * (0.061111111)) + prev_year_remain_balance
             # if period_balance > 33:
             #   period_balance=33
+
             balance = period_balance - applied_days - total_leave_days
             # getdate(to_date).month
-            
 
         elif leave_type == "Compensatory off - تعويضية":
             al_from_date = getdate(allocation_records[employee][leave_type].from_date)

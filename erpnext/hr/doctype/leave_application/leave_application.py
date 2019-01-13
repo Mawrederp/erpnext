@@ -910,7 +910,7 @@ def get_approvers(doctype, txt, searchfield, start, page_len, filters):
     return approvers_list
 
 @frappe.whitelist()
-def get_monthly_accumulated_leave(from_date, to_date, leave_type, employee, for_report=False):
+def get_monthly_accumulated_leave(from_date, to_date, leave_type, employee, for_report=True):
     allocation_records = get_leave_allocation_records(from_date, employee, leave_type)
     if allocation_records:
         applied_days = get_approved_leaves_for_period(employee, leave_type, allocation_records[employee][leave_type].from_date, to_date)
