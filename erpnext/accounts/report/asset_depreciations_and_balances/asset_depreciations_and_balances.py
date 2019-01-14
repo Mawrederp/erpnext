@@ -76,7 +76,7 @@ def get_data(filters):
 					
 				row.update(asset_depreciations.get(asset_category))
 				row.accumulated_depreciation_as_on_to_date = (flt(row.accumulated_depreciation_as_on_from_date, precision=2) + 
-					flt(row.depreciation_amount_during_the_period, precision=2) - flt(row.depreciation_eliminated, precision=2))
+					flt(row.depreciation_amount_during_the_period, precision=2) - flt(row.depreciation_eliminated_during_the_period, precision=2))
 				
 				row.net_asset_value_as_on_from_date = (flt(row.cost_as_on_from_date, precision=2) - 
 					flt(row.accumulated_depreciation_as_on_from_date, precision=2))

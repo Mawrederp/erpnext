@@ -62,7 +62,7 @@ def get_data(filters):
 	li_list=frappe.db.sql("""select name, asset_name, item_code, asset_category,
 		purchase_date,expected_value_after_useful_life, gross_purchase_amount, next_depreciation_date, total_number_of_depreciations,
 		project ,depreciation_cost_center,employee,employee_name from `tabAsset`
-		where docstatus = 1 {0} """.format(conditions),as_dict=1)
+		where docstatus = 1 and status not in ("Draft","Sold","Scrapped") {0} """.format(conditions),as_dict=1)
 
 	data=[]
 	asset_parent_categories=set()
