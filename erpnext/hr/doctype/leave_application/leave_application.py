@@ -1167,172 +1167,173 @@ def hooked_leave_allocation_builder():
     # prev_year_date = frappe.utils.data.add_years (frappe.utils.data.nowdate(), -1)
         emps = frappe.get_all("Employee",filters = {"status": "Active"}, fields = ["name", "date_of_joining"])
         for emp in emps:
-            lts = frappe.get_list("Leave Type", fields = ["name"])
-            for lt in lts:
-                allocation_records = get_leave_allocation_records(nowdate(), emp.name, lt.name)
+            if 'EMP/1' in emp.name:
+                lts = frappe.get_list("Leave Type", fields = ["name"])
+                for lt in lts:
+                    allocation_records = get_leave_allocation_records(nowdate(), emp.name, lt.name)
 
-                if not allocation_records:
-                    allocation_from_date = ""
-                    allocation_to_date = ""
-                    new_leaves_allocated = 0
-                    if getdate(add_years(emp.date_of_joining,1)) > getdate(nowdate()):
-                        allocation_from_date = emp.date_of_joining
-                        allocation_to_date = add_days(add_years(emp.date_of_joining,1),-1)
-                        # if emp.name == "EMP/1007":
-                        #   print("sssss"  "  " + allocation_from_date)
-                    else:
-                        day = "0" + str(getdate(emp.date_of_joining).day) if len(str(getdate(emp.date_of_joining).day)) == 1 else str(getdate(emp.date_of_joining).day)
-                        month = "0" + str(getdate(emp.date_of_joining).month) if len(str(getdate(emp.date_of_joining).month)) == 1 else str(getdate(emp.date_of_joining).month)
-                        year = str(getdate(nowdate()).year)
-                        allocation_from_date = year + "-" + month + "-" + day
-                        allocation_to_date = add_days(add_years(allocation_from_date,1),-1)
-                        # if emp.name == "EMP/1007":
-                        #   print("mmmmm"+ "  " + allocation_from_date)
+                    if not allocation_records:
+                        allocation_from_date = ""
+                        allocation_to_date = ""
+                        new_leaves_allocated = 0
+                        if getdate(add_years(emp.date_of_joining,1)) > getdate(nowdate()):
+                            allocation_from_date = emp.date_of_joining
+                            allocation_to_date = add_days(add_years(emp.date_of_joining,1),-1)
+                            # if emp.name == "EMP/1007":
+                            #   print("sssss"  "  " + allocation_from_date)
+                        else:
+                            day = "0" + str(getdate(emp.date_of_joining).day) if len(str(getdate(emp.date_of_joining).day)) == 1 else str(getdate(emp.date_of_joining).day)
+                            month = "0" + str(getdate(emp.date_of_joining).month) if len(str(getdate(emp.date_of_joining).month)) == 1 else str(getdate(emp.date_of_joining).month)
+                            year = str(getdate(nowdate()).year)
+                            allocation_from_date = year + "-" + month + "-" + day
+                            allocation_to_date = add_days(add_years(allocation_from_date,1),-1)
+                            # if emp.name == "EMP/1007":
+                            #   print("mmmmm"+ "  " + allocation_from_date)
 
-                    if lt.name == "Annual Leave - اجازة اعتيادية":
-                        if getdate(nowdate()) > getdate(add_months(emp.date_of_joining,3)):
-                            prev_year_date = frappe.utils.data.add_years(frappe.utils.data.nowdate(), -1)
-                            prev_year_allocation_records = get_leave_allocation_records(prev_year_date, emp.name, "Annual Leave - اجازة اعتيادية")
-                            if prev_year_allocation_records:
-                                from_date = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].from_date
-                                to_date = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].to_date
-                                prev_year_total_leaves_allocated = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].total_leaves_allocated
-                                prev_year_applied_days = get_approved_leaves_for_period(emp.name, "Annual Leave - اجازة اعتيادية", from_date, to_date)
+                        if lt.name == "Annual Leave - اجازة اعتيادية":
+                            if getdate(nowdate()) > getdate(add_months(emp.date_of_joining,3)):
+                                prev_year_date = frappe.utils.data.add_years(frappe.utils.data.nowdate(), -1)
+                                prev_year_allocation_records = get_leave_allocation_records(prev_year_date, emp.name, "Annual Leave - اجازة اعتيادية")
+                                if prev_year_allocation_records:
+                                    from_date = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].from_date
+                                    to_date = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].to_date
+                                    prev_year_total_leaves_allocated = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].total_leaves_allocated
+                                    prev_year_applied_days = get_approved_leaves_for_period(emp.name, "Annual Leave - اجازة اعتيادية", from_date, to_date)
 
-                                if prev_year_total_leaves_allocated == prev_year_applied_days:
+                                    if prev_year_total_leaves_allocated == prev_year_applied_days:
+                                        new_leaves_allocated = 22
+                                    elif prev_year_total_leaves_allocated > prev_year_applied_days:
+                                        remain_days = prev_year_total_leaves_allocated - prev_year_applied_days
+                                        new_leaves_allocated = remain_days + 22
+                                        print(new_leaves_allocated)
+                                        if new_leaves_allocated > 33:
+                                            new_leaves_allocated = 33
+                                else:
                                     new_leaves_allocated = 22
-                                elif prev_year_total_leaves_allocated > prev_year_applied_days:
-                                    remain_days = prev_year_total_leaves_allocated - prev_year_applied_days
-                                    new_leaves_allocated = remain_days + 22
-                                    print(new_leaves_allocated)
-                                    if new_leaves_allocated > 33:
-                                        new_leaves_allocated = 33
-                            else:
-                                new_leaves_allocated = 22
-                                # print "hey----------"
+                                    # print "hey----------"
+                                su = frappe.new_doc("Leave Allocation")
+                                su.update({
+                                    "leave_type": "Annual Leave - اجازة اعتيادية",
+                                    "employee": emp.name,
+                                    "from_date": allocation_from_date,
+                                    "to_date": allocation_to_date,
+                                    "new_leaves_allocated": new_leaves_allocated
+                                    })
+                                su.save(ignore_permissions=True)
+                                su.submit()
+                                frappe.db.commit()
+                        if lt.name == "emergency -اضطرارية":
                             su = frappe.new_doc("Leave Allocation")
                             su.update({
-                                "leave_type": "Annual Leave - اجازة اعتيادية",
-                                "employee": emp.name,
-                                "from_date": allocation_from_date,
-                                "to_date": allocation_to_date,
-                                "new_leaves_allocated": new_leaves_allocated
-                                })
+                                    "leave_type": "emergency -اضطرارية",
+                                    "employee": emp.name,
+                                    "from_date": allocation_from_date,
+                                    "to_date": allocation_to_date,
+                                    "new_leaves_allocated": 3
+                                    })
                             su.save(ignore_permissions=True)
                             su.submit()
                             frappe.db.commit()
-                    if lt.name == "emergency -اضطرارية":
-                        su = frappe.new_doc("Leave Allocation")
-                        su.update({
-                                "leave_type": "emergency -اضطرارية",
-                                "employee": emp.name,
-                                "from_date": allocation_from_date,
-                                "to_date": allocation_to_date,
-                                "new_leaves_allocated": 3
-                                })
-                        su.save(ignore_permissions=True)
-                        su.submit()
-                        frappe.db.commit()
 
-                    if lt.name == "New Born - مولود جديد":
-                        su = frappe.new_doc("Leave Allocation")
-                        su.update({
-                                "leave_type": "New Born - مولود جديد",
-                                "employee": emp.name,
-                                "from_date": allocation_from_date,
-                                "to_date": allocation_to_date,
-                                "new_leaves_allocated": 9
-                                })
-                        su.save(ignore_permissions=True)
-                        su.submit()
-                        frappe.db.commit()
+                        if lt.name == "New Born - مولود جديد":
+                            su = frappe.new_doc("Leave Allocation")
+                            su.update({
+                                    "leave_type": "New Born - مولود جديد",
+                                    "employee": emp.name,
+                                    "from_date": allocation_from_date,
+                                    "to_date": allocation_to_date,
+                                    "new_leaves_allocated": 9
+                                    })
+                            su.save(ignore_permissions=True)
+                            su.submit()
+                            frappe.db.commit()
 
-                    if lt.name == "Educational - تعليمية":
-                        su = frappe.new_doc("Leave Allocation")
-                        su.update({
-                                "leave_type": "Educational - تعليمية",
-                                "employee": emp.name,
-                                "from_date": allocation_from_date,
-                                "to_date": allocation_to_date,
-                                "new_leaves_allocated": 90
-                                })
-                        su.save(ignore_permissions=True)
-                        su.submit()
-                        frappe.db.commit()
+                        if lt.name == "Educational - تعليمية":
+                            su = frappe.new_doc("Leave Allocation")
+                            su.update({
+                                    "leave_type": "Educational - تعليمية",
+                                    "employee": emp.name,
+                                    "from_date": allocation_from_date,
+                                    "to_date": allocation_to_date,
+                                    "new_leaves_allocated": 90
+                                    })
+                            su.save(ignore_permissions=True)
+                            su.submit()
+                            frappe.db.commit()
 
-                    if lt.name == "Death - وفاة":
-                        su = frappe.new_doc("Leave Allocation")
-                        su.update({
-                                "leave_type": "Death - وفاة",
-                                "employee": emp.name,
-                                "from_date": allocation_from_date,
-                                "to_date": allocation_to_date,
-                                "new_leaves_allocated": 15
-                                })
-                        su.save(ignore_permissions=True)
-                        su.submit()
-                        frappe.db.commit()
-
-                    if lt.name == "Hajj leave - حج":
-                        su = frappe.new_doc("Leave Allocation")
-                        su.update({
-                                    "leave_type": "Hajj leave - حج",
+                        if lt.name == "Death - وفاة":
+                            su = frappe.new_doc("Leave Allocation")
+                            su.update({
+                                    "leave_type": "Death - وفاة",
                                     "employee": emp.name,
                                     "from_date": allocation_from_date,
                                     "to_date": allocation_to_date,
                                     "new_leaves_allocated": 15
                                     })
-                        su.save(ignore_permissions=True)
-                        su.submit()
-                        frappe.db.commit()
+                            su.save(ignore_permissions=True)
+                            su.submit()
+                            frappe.db.commit()
 
-                    if lt.name == "Marriage - زواج":
-                        su = frappe.new_doc("Leave Allocation")
-                        su.update({
-                                    "leave_type": "Marriage - زواج",
-                                    "employee": emp.name,
-                                    "from_date": allocation_from_date,
-                                    "to_date": allocation_to_date,
-                                    "new_leaves_allocated": 5
-                                    })
-                        su.save(ignore_permissions=True)
-                        su.submit()
-                        frappe.db.commit()
+                        if lt.name == "Hajj leave - حج":
+                            su = frappe.new_doc("Leave Allocation")
+                            su.update({
+                                        "leave_type": "Hajj leave - حج",
+                                        "employee": emp.name,
+                                        "from_date": allocation_from_date,
+                                        "to_date": allocation_to_date,
+                                        "new_leaves_allocated": 15
+                                        })
+                            su.save(ignore_permissions=True)
+                            su.submit()
+                            frappe.db.commit()
 
-                    if lt.name == "Sick Leave - مرضية":
-                        su = frappe.new_doc("Leave Allocation")
-                        su.update({
-                                    "leave_type": "Sick Leave - مرضية",
-                                    "employee": emp.name,
-                                    "from_date": allocation_from_date,
-                                    "to_date": allocation_to_date,
-                                    "new_leaves_allocated": 150
-                                    })
-                        su.save(ignore_permissions=True)
-                        su.submit()
-                        frappe.db.commit()
+                        if lt.name == "Marriage - زواج":
+                            su = frappe.new_doc("Leave Allocation")
+                            su.update({
+                                        "leave_type": "Marriage - زواج",
+                                        "employee": emp.name,
+                                        "from_date": allocation_from_date,
+                                        "to_date": allocation_to_date,
+                                        "new_leaves_allocated": 5
+                                        })
+                            su.save(ignore_permissions=True)
+                            su.submit()
+                            frappe.db.commit()
 
-                    if lt.name == "Compensatory off - تعويضية":
-                        su = frappe.new_doc("Leave Allocation")
-                        su.update({
-                                    "leave_type": "Compensatory off - تعويضية",
-                                    "employee": emp.name,
-                                    "from_date": allocation_from_date,
-                                    "to_date": allocation_to_date,
-                                    "new_leaves_allocated": 120
-                                    })
-                        su.save(ignore_permissions=True)
-                        su.submit()
-                        frappe.db.commit()
+                        if lt.name == "Sick Leave - مرضية":
+                            su = frappe.new_doc("Leave Allocation")
+                            su.update({
+                                        "leave_type": "Sick Leave - مرضية",
+                                        "employee": emp.name,
+                                        "from_date": allocation_from_date,
+                                        "to_date": allocation_to_date,
+                                        "new_leaves_allocated": 150
+                                        })
+                            su.save(ignore_permissions=True)
+                            su.submit()
+                            frappe.db.commit()
 
-                    # frappe.utils.data.getdate(frappe.utils.data.nowdate()).month
-                    # print lt.name + "--" + emp.name
+                        if lt.name == "Compensatory off - تعويضية":
+                            su = frappe.new_doc("Leave Allocation")
+                            su.update({
+                                        "leave_type": "Compensatory off - تعويضية",
+                                        "employee": emp.name,
+                                        "from_date": allocation_from_date,
+                                        "to_date": allocation_to_date,
+                                        "new_leaves_allocated": 120
+                                        })
+                            su.save(ignore_permissions=True)
+                            su.submit()
+                            frappe.db.commit()
 
-                
-                # from_date = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].from_date
-                # to_date = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].to_date
+                        # frappe.utils.data.getdate(frappe.utils.data.nowdate()).month
+                        # print lt.name + "--" + emp.name
 
-                # prev_year_applied_days = get_approved_leaves_for_period(emp.name, "Annual Leave - اجازة اعتيادية", from_date, to_date)
+                    
+                    # from_date = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].from_date
+                    # to_date = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].to_date
+
+                    # prev_year_applied_days = get_approved_leaves_for_period(emp.name, "Annual Leave - اجازة اعتيادية", from_date, to_date)
 
     # lts = frappe.get_list("Leave Type", fields = ["name"])
     # for lt in lts:

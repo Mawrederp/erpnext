@@ -20,8 +20,8 @@
 <table class="table table-bordered" {% if (frappe.boot.lang == "ar") { %} style="direction: rtl" {% } %}>
     <thead>
 		<tr>
-			{% for(var i=1, l=report.columns.length; i<l; i++) { %}
-				<th class="text-right" {% if (frappe.boot.lang == "ar") { %} style="width: 15%;text-align: right!important" {% } else { %} style="width: 15%" {% } %}>{%= __(report.columns[i].label) %}</th>
+			{% for(var i=1, l=report.columns.length; i<12; i++) { %}
+				<th class="text-right" {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>{%= __(report.columns[i].label) %}</th>
 			{% } %}
 		</tr>
 	</thead>
@@ -31,8 +31,8 @@
 				var row = data[j];
 			%}
 			<tr>
-				{% for(var i=1, l=report.columns.length; i<l; i++) { %}
-					<td class="text-right" {% if (frappe.boot.lang == "ar") { %} style="width: 15%;text-align: right!important" {% } else { %} style="width: 15%" {% } %}>
+				{% for(var i=1, l=report.columns.length; i<12; i++) { %}
+					<td class="text-right" {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>
 						{% var fieldname = report.columns[i].field; %}
 						{% if (report.columns[i].fieldtype=='Currency' && !isNaN(row[fieldname])) { %}
 							{% if (frappe.boot.lang == "ar") { %}
@@ -52,7 +52,7 @@
 		{% } %}
 	</tbody>
 </table>
-<p class="text-right text-muted">{%= __("Printed On") %}: {%= dateutil.str_to_user(dateutil.get_datetime_as_string()) %}</p>
+<p class="text-right text-muted">{%= __("Printed On") %}: {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}</p>
 
 <br>
 
