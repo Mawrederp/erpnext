@@ -76,7 +76,7 @@ def get_data(filters):
 		if jes:
 			for je in jes:
 				try : 
-					ds_total += frappe.db.sql("select credit from `tabGL Entry` where voucher_no='{0}' and against_voucher='{1}'".format(je[0], asset.name))[0][0]
+					ds_total += flt(frappe.db.sql("select credit from `tabGL Entry` where voucher_no='{0}' and against_voucher='{1}'".format(je[0], asset.name))[0][0],precision=2)
 				except:
 					pass
 
