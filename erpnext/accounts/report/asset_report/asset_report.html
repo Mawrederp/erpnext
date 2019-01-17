@@ -4,6 +4,20 @@
 	.print-format{
 		max-width: 14.3in;
 	}
+	.text-right{
+		max-width: 70px;
+		word-wrap: break-word
+	}
+	.text-left{
+		max-width: 70px;
+		word-wrap: break-word
+	}
+	td{
+		word-wrap: break-word;
+	}
+	table{
+		width: 0!important;
+	}
 </style>
 <div style="margin-bottom: 7px;">
     {%= frappe.boot.letter_heads[frappe.defaults.get_default("letter_head")] %}
@@ -20,8 +34,8 @@
 <table class="table table-bordered" {% if (frappe.boot.lang == "ar") { %} style="direction: rtl" {% } %}>
     <thead>
 		<tr>
-			{% for(var i=1, l=report.columns.length; i<12; i++) { %}
-				<th class="text-right" {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>{%= __(report.columns[i].label) %}</th>
+			{% for(var i=1, l=report.columns.length; i<l; i++) { %}
+				<th  {% if (frappe.boot.lang == "ar") { %} class="text-right" style="width: {{report.columns.length /12}}%;text-align: right!important" {% } else { %} class="text-left" style="width: {{report.columns.length /12}}%" {% } %}><p>{%= __(report.columns[i].label)%}</p></th>
 			{% } %}
 		</tr>
 	</thead>
@@ -31,19 +45,19 @@
 				var row = data[j];
 			%}
 			<tr>
-				{% for(var i=1, l=report.columns.length; i<12; i++) { %}
-					<td class="text-right" {% if (frappe.boot.lang == "ar") { %} style="width: 10%;text-align: right!important" {% } else { %} style="width: 10%" {% } %}>
+				{% for(var i=1, l=report.columns.length; i<l; i++) { %}
+					<td {% if (frappe.boot.lang == "ar") { %} class="text-right" style="width: {{report.columns.length /12}}%;text-align: right!important" {% } else { %} class="text-left" style="width: {{report.columns.length /12}}%" {% } %}>
 						{% var fieldname = report.columns[i].field; %}
 						{% if (report.columns[i].fieldtype=='Currency' && !isNaN(row[fieldname])) { %}
 							{% if (frappe.boot.lang == "ar") { %}
-						{%= format_currency(row[fieldname], "ر.س") %}
+							<p>{%= format_currency(row[fieldname], "ر.س")%}</p>
 							{% } else { %}
-									{%= format_currency(row[fieldname], " ") + " SAR " %}
+									<p>{%= format_currency(row[fieldname], " ") + " SAR "%}</p>
 							{% }
 						%}	
 						{% } else { %}
 							{% if (!is_null(row[fieldname])) { %}
-								{%= __(row[fieldname]) %}
+								<p>{%= __(row[fieldname])%}</p>
 							{% } %}
 						{% } %}
 					</td>

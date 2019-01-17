@@ -16,5 +16,25 @@ frappe.query_reports["Asset Report"] = {
 			"fieldtype": "Check",
 			"default": 0
 		},
+		{
+			"fieldname":"date_filter",
+			"label": __("Date Filter"),
+			"fieldtype": "Select",
+			"options":["Purchase Date","Next Depreciation Date"],
+			"default": "Purchase Date"
+		},
+		{
+			"fieldname":"from_date",
+			"label": __("From Date"),
+			"fieldtype": "Date",
+			"default": ""
+		},
+		{
+			"fieldname":"to_date",
+			"label": __("To Date"),
+			"fieldtype": "Date",
+			"default": ""
+		},
+		
 	]
 }

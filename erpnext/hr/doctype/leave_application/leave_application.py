@@ -60,6 +60,7 @@ class LeaveApplication(Document):
         self.validate_leave_submission_dates()
         self.validate_conditional_workflow_transition()
         self.get_department()
+        self.validate_three_month_joining()
 
         #~ # self.update_leaves_allocated()
         #~ result=frappe.db.sql("select name from tabCommunication where reference_name='{0}' and subject='Approved By Line Manager'".format(self.name))
@@ -143,6 +144,13 @@ class LeaveApplication(Document):
             frappe.throw(_("The department should be set to this employee in the Employee form"))
         else:   
             self.department = dep
+
+
+    def validate_three_month_joining(self):
+        if self.leave_type == 'Annual Leave - اجازة اعتيادية':
+            if getdate(nowdate()) < getdate(add_months(self.date_of_joining,3)):
+                frappe.throw("You cant apply for leave application of type Annual Leave - اجازة اعتيادية before {0}".format(getdate(add_months(self.date_of_joining,3))))
+
 
     def validate_conditional_workflow_transition(self):
 
@@ -1191,37 +1199,37 @@ def hooked_leave_allocation_builder():
                             #   print("mmmmm"+ "  " + allocation_from_date)
 
                         if lt.name == "Annual Leave - اجازة اعتيادية":
-                            if getdate(nowdate()) > getdate(add_months(emp.date_of_joining,3)):
-                                prev_year_date = frappe.utils.data.add_years(frappe.utils.data.nowdate(), -1)
-                                prev_year_allocation_records = get_leave_allocation_records(prev_year_date, emp.name, "Annual Leave - اجازة اعتيادية")
-                                if prev_year_allocation_records:
-                                    from_date = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].from_date
-                                    to_date = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].to_date
-                                    prev_year_total_leaves_allocated = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].total_leaves_allocated
-                                    prev_year_applied_days = get_approved_leaves_for_period(emp.name, "Annual Leave - اجازة اعتيادية", from_date, to_date)
+                            # if getdate(nowdate()) > getdate(add_months(emp.date_of_joining,3)):
+                            prev_year_date = frappe.utils.data.add_years(frappe.utils.data.nowdate(), -1)
+                            prev_year_allocation_records = get_leave_allocation_records(prev_year_date, emp.name, "Annual Leave - اجازة اعتيادية")
+                            if prev_year_allocation_records:
+                                from_date = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].from_date
+                                to_date = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].to_date
+                                prev_year_total_leaves_allocated = prev_year_allocation_records[emp.name]["Annual Leave - اجازة اعتيادية"].total_leaves_allocated
+                                prev_year_applied_days = get_approved_leaves_for_period(emp.name, "Annual Leave - اجازة اعتيادية", from_date, to_date)
 
-                                    if prev_year_total_leaves_allocated == prev_year_applied_days:
-                                        new_leaves_allocated = 22
-                                    elif prev_year_total_leaves_allocated > prev_year_applied_days:
-                                        remain_days = prev_year_total_leaves_allocated - prev_year_applied_days
-                                        new_leaves_allocated = remain_days + 22
-                                        print(new_leaves_allocated)
-                                        if new_leaves_allocated > 33:
-                                            new_leaves_allocated = 33
-                                else:
+                                if prev_year_total_leaves_allocated == prev_year_applied_days:
                                     new_leaves_allocated = 22
-                                    # print "hey----------"
-                                su = frappe.new_doc("Leave Allocation")
-                                su.update({
-                                    "leave_type": "Annual Leave - اجازة اعتيادية",
-                                    "employee": emp.name,
-                                    "from_date": allocation_from_date,
-                                    "to_date": allocation_to_date,
-                                    "new_leaves_allocated": new_leaves_allocated
-                                    })
-                                su.save(ignore_permissions=True)
-                                su.submit()
-                                frappe.db.commit()
+                                elif prev_year_total_leaves_allocated > prev_year_applied_days:
+                                    remain_days = prev_year_total_leaves_allocated - prev_year_applied_days
+                                    new_leaves_allocated = remain_days + 22
+                                    print(new_leaves_allocated)
+                                    # if new_leaves_allocated > 33:
+                                    #     new_leaves_allocated = 33
+                            else:
+                                new_leaves_allocated = 22
+                                # print "hey----------"
+                            su = frappe.new_doc("Leave Allocation")
+                            su.update({
+                                "leave_type": "Annual Leave - اجازة اعتيادية",
+                                "employee": emp.name,
+                                "from_date": allocation_from_date,
+                                "to_date": allocation_to_date,
+                                "new_leaves_allocated": new_leaves_allocated
+                                })
+                            su.save(ignore_permissions=True)
+                            su.submit()
+                            frappe.db.commit()
                         if lt.name == "emergency -اضطرارية":
                             su = frappe.new_doc("Leave Allocation")
                             su.update({

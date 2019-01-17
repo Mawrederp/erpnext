@@ -41,6 +41,21 @@ def get_columns(filters):
 def get_conditions(filters):
 	conditions = ""
 
+
+	# if filters.get("employee"): conditions += " and employee = %(employee)s"
+
+	date_filter = filters.get("date_filter")
+	date = "purchase_date"
+	
+	if date_filter:
+		if date_filter == "Purchase Date":
+			date = "purchase_date"
+		elif date_filter == "Next Depreciation Date":
+			date = "next_depreciation_date"
+
+	if filters.get("from_date"): conditions += " and " + date +">= %(from_date)s" 
+	if filters.get("to_date"): conditions += " and " + date +"<= %(to_date)s"
+
 	if filters.get("asset_category"):
 		lft, rgt = frappe.db.get_value("Asset Category",filters.get("asset_category"),
 				["lft", "rgt"])
@@ -48,11 +63,6 @@ def get_conditions(filters):
 		conditions += """ and asset_category in (select name from `tabAsset Category`
 			where lft >= {0} and rgt <= {1}
 			order by lft asc ) """.format(lft, rgt)
-
-	# if filters.get("employee"): conditions += " and employee = %(employee)s"
-
-	# if filters.get("from_date"): conditions += " and date_of_joining>=%(from_date)s"
-	# if filters.get("to_date"): conditions += " and date_of_joining<=%(to_date)s"
 
 	return conditions
 
@@ -62,7 +72,7 @@ def get_data(filters):
 	li_list=frappe.db.sql("""select name, asset_name, item_code, asset_category,
 		purchase_date,expected_value_after_useful_life, gross_purchase_amount, next_depreciation_date, total_number_of_depreciations,
 		project ,depreciation_cost_center,employee,employee_name from `tabAsset`
-		where docstatus = 1 and status not in ("Draft","Sold","Scrapped") {0} """.format(conditions),as_dict=1)
+		where docstatus = 1 and status not in ("Draft","Sold","Scrapped") {0} """.format(conditions),filters,as_dict=1)
 
 	data=[]
 	asset_parent_categories=set()
