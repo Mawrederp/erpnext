@@ -15,70 +15,143 @@ def diff_month(d1, d2):
 def get_period_list(from_fiscal_year, to_fiscal_year, periodicity, company):
 	"""Get a list of dict {"from_date": from_date, "to_date": to_date, "key": key, "label": label}
 		Periodicity can be (Yearly, Quarterly, Monthly)"""
-
-	fiscal_year = get_fiscal_year_data(from_fiscal_year, to_fiscal_year)
-	validate_fiscal_year(fiscal_year, from_fiscal_year, to_fiscal_year)
-	
-	# start with first day, so as to avoid year to_dates like 2-April if ever they occur]
-	year_start_date = getdate(fiscal_year.year_start_date)
-	year_end_date = getdate(fiscal_year.year_end_date)
-
-	months_to_add = {
-		"Yearly": get_months(year_start_date, year_end_date),
-		"Half-Yearly": get_months(year_start_date, year_end_date) /2,
-		"Quarterly": 3,
-		"Monthly": 1
-	}[periodicity]
-
-	period_list = []
-
-	start_date = year_start_date
-	months = get_months(year_start_date, year_end_date)
-	limit = months / months_to_add
-	for i in xrange(limit):
-		period = frappe._dict({
-			"from_date": start_date
-		})
-
-		to_date = add_months(start_date, months_to_add)
-		start_date = to_date
-
-		if to_date == get_first_day(to_date):
-			# if to_date is the first day, get the last day of previous month
-			to_date = add_days(to_date, -1)
-
-		if to_date <= year_end_date:
-			# the normal case
-			period.to_date = to_date
-			if i == limit : 
-				period.to_date = year_end_date
-		else:
-			# if a fiscal year ends before a 12 month period
-			period.to_date = year_end_date
-
-		period.to_date_fiscal_year = get_date_fiscal_year(period.to_date, company)
-
-		period_list.append(period)
-
-		if period.to_date == year_end_date:
-			break
-
-	# common processing
-	for opts in period_list:
-		key = opts["to_date"].strftime("%b_%Y").lower()
-		if periodicity == "Monthly":
-			label = formatdate(opts["to_date"], "MMM YYYY")
-		else:
-			label = get_label(periodicity, opts["from_date"], opts["to_date"])
+	if periodicity == "Yearly" and from_fiscal_year != to_fiscal_year :
+		period_list = []
+		fy_list = get_fiscal_year_range(from_fiscal_year, to_fiscal_year)
+		for fy in fy_list :
+			print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+			print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+			print(fy)
+			print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+			print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+			print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+			fiscal_year = get_fiscal_year_data(fy, fy)
+			validate_fiscal_year(fiscal_year, fy, fy)
 			
-		opts.update({
-			"key": key.replace(" ", "_").replace("-", "_"),
-			"label": label,
-			"year_start_date": year_start_date,
-			"year_end_date": year_end_date
-		})
+			# start with first day, so as to avoid year to_dates like 2-April if ever they occur]
+			year_start_date = getdate(fiscal_year.year_start_date)
+			year_end_date = getdate(fiscal_year.year_end_date)
 
-	return period_list
+			months_to_add = {
+				"Yearly": get_months(year_start_date, year_end_date),
+				"Half-Yearly": get_months(year_start_date, year_end_date) /2,
+				"Quarterly": 3,
+				"Monthly": 1
+			}[periodicity]
+
+
+			start_date = year_start_date
+			months = get_months(year_start_date, year_end_date)
+			limit = months / months_to_add
+			for i in xrange(limit):
+				period = frappe._dict({
+					"from_date": start_date
+				})
+
+				to_date = add_months(start_date, months_to_add)
+				start_date = to_date
+
+				if to_date == get_first_day(to_date):
+					# if to_date is the first day, get the last day of previous month
+					to_date = add_days(to_date, -1)
+
+				if to_date <= year_end_date:
+					# the normal case
+					period.to_date = to_date
+					if i == limit : 
+						period.to_date = year_end_date
+				else:
+					# if a fiscal year ends before a 12 month period
+					period.to_date = year_end_date
+
+				period.to_date_fiscal_year = get_date_fiscal_year(period.to_date, company)
+
+				period_list.append(period)
+
+				if period.to_date == year_end_date:
+					break
+
+			# common processing
+			for opts in period_list:
+				key = opts["to_date"].strftime("%b_%Y").lower()
+				if periodicity == "Monthly":
+					label = formatdate(opts["to_date"], "MMM YYYY")
+				else:
+					label = get_label(periodicity, opts["from_date"], opts["to_date"])
+					
+				opts.update({
+					"key": key.replace(" ", "_").replace("-", "_"),
+					"label": label,
+					"year_start_date": year_start_date,
+					"year_end_date": year_end_date
+				})
+
+		return period_list
+
+	else : 
+		fiscal_year = get_fiscal_year_data(from_fiscal_year, to_fiscal_year)
+		validate_fiscal_year(fiscal_year, from_fiscal_year, to_fiscal_year)
+		
+		# start with first day, so as to avoid year to_dates like 2-April if ever they occur]
+		year_start_date = getdate(fiscal_year.year_start_date)
+		year_end_date = getdate(fiscal_year.year_end_date)
+
+		months_to_add = {
+			"Yearly": get_months(year_start_date, year_end_date),
+			"Half-Yearly": get_months(year_start_date, year_end_date) /2,
+			"Quarterly": 3,
+			"Monthly": 1
+		}[periodicity]
+
+		period_list = []
+
+		start_date = year_start_date
+		months = get_months(year_start_date, year_end_date)
+		limit = months / months_to_add
+		for i in xrange(limit):
+			period = frappe._dict({
+				"from_date": start_date
+			})
+
+			to_date = add_months(start_date, months_to_add)
+			start_date = to_date
+
+			if to_date == get_first_day(to_date):
+				# if to_date is the first day, get the last day of previous month
+				to_date = add_days(to_date, -1)
+
+			if to_date <= year_end_date:
+				# the normal case
+				period.to_date = to_date
+				if i == limit : 
+					period.to_date = year_end_date
+			else:
+				# if a fiscal year ends before a 12 month period
+				period.to_date = year_end_date
+
+			period.to_date_fiscal_year = get_date_fiscal_year(period.to_date, company)
+
+			period_list.append(period)
+
+			if period.to_date == year_end_date:
+				break
+
+		# common processing
+		for opts in period_list:
+			key = opts["to_date"].strftime("%b_%Y").lower()
+			if periodicity == "Monthly":
+				label = formatdate(opts["to_date"], "MMM YYYY")
+			else:
+				label = get_label(periodicity, opts["from_date"], opts["to_date"])
+				
+			opts.update({
+				"key": key.replace(" ", "_").replace("-", "_"),
+				"label": label,
+				"year_start_date": year_start_date,
+				"year_end_date": year_end_date
+			})
+
+		return period_list
 
 def get_fiscal_year_data(from_fiscal_year, to_fiscal_year):
 	fiscal_year = frappe.db.sql("""select min(year_start_date) as year_start_date, 
@@ -87,6 +160,21 @@ def get_fiscal_year_data(from_fiscal_year, to_fiscal_year):
 		{'from_fiscal_year': from_fiscal_year, 'to_fiscal_year': to_fiscal_year}, as_dict=1)
 
 	return fiscal_year[0] if fiscal_year else {}
+
+def get_fiscal_year_range(from_fiscal_year, to_fiscal_year):
+	from_fiscal_year_dates = get_fiscal_year_data(from_fiscal_year, from_fiscal_year)
+	to_fiscal_year_dates = get_fiscal_year_data(to_fiscal_year, to_fiscal_year)
+	min_max_fiscal_year_dates = get_fiscal_year_data(from_fiscal_year, to_fiscal_year)
+
+	fiscal_years = frappe.db.sql("""select name from `tabFiscal Year` where 
+		year_end_date between %(from_fiscal_year)s and %(to_fiscal_year)s order by year_end_date ASC""",
+		{'from_fiscal_year': min_max_fiscal_year_dates.year_start_date, 'to_fiscal_year': min_max_fiscal_year_dates.year_end_date})
+	print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+	print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+	print(fiscal_years)
+	print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+	print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+	return fiscal_years if fiscal_years else {}
 
 def validate_fiscal_year(fiscal_year, from_fiscal_year, to_fiscal_year):
 	if not fiscal_year.get('year_start_date') and not fiscal_year.get('year_end_date'):

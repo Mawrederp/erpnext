@@ -111,6 +111,12 @@ def get_data():
 				},
 				{
 					"type": "doctype",
+					"name": "Promotion and Merit",
+					"label": _("Employees Promotion and Merit"),
+					"description":_("Promotion and Merit")
+				},
+				{
+					"type": "doctype",
 					"name": "Employee Badge Request",
 					"description":_("Employee Badge Request")
 				},
