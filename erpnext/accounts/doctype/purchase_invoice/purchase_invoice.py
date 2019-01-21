@@ -105,6 +105,7 @@ class PurchaseInvoice(BuyingController):
 			nammeing_doc.index_value = 1
 			nammeing_doc.year = str(getdate(self.posting_date).year)
 			nammeing_doc.name_of_doc = self.doctype
+			nammeing_doc.naming_series = self.naming_series
 			nammeing_doc.save()
 			return title
 			

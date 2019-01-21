@@ -58,7 +58,7 @@ def get_columns(filters):
 def get_data(filters):
 	data =[]
 	# conditions = get_conditions(filters)
-	li_list=frappe.db.sql(""" select name,employee_name,department,date_of_joining from `tabEmployee` where name like '%EMP/1%' order by name asc""",as_dict=1)
+	li_list=frappe.db.sql(""" select name,employee_name,department,date_of_joining from `tabEmployee` where status='Active' and name like '%EMP/1%' order by name asc""",as_dict=1)
 
 	for emp in li_list:
 		
