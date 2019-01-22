@@ -31,7 +31,7 @@ frappe.ui.form.on('Promotion and Merit Employee', {
         }
 
         next_level=d.current_level
-        if(d.level_increase && (d.level_increase+d.current_level)>=100){
+        if(d.level_increase && (d.level_increase+d.current_level)>100){
 			frappe.call({
 	            "method": "get_new_grade_level",
 	            args: {
@@ -71,12 +71,17 @@ frappe.ui.form.on('Promotion and Merit Employee', {
 	        });
 			
 		}else{
-			
+
 			frappe.model.set_value(cdt, cdn, "new_grade", d.current_grade);
 			frappe.model.set_value(cdt, cdn, "new_level", d.level_increase+d.current_level);
 			frappe.model.set_value(cdt, cdn, "new_base", d.current_base);
 
-			new_package = ((d.current_base/100)*d.new_level)+d.current_base
+			salary = d.new_base
+            for(l=1;l<d.new_level ;l++){
+                salary += (salary*0.01)
+            }
+            new_package = Math.ceil(salary)
+
 			frappe.model.set_value(cdt, cdn, "new_total_package", new_package);
 		}
 

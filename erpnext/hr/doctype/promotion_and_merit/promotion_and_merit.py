@@ -37,7 +37,7 @@ class PromotionandMerit(Document):
 
 
     def after_insert(self):
-        employees = frappe.db.sql("select emp.name,emp.employee_name,emp.grade,emp.level,grade.base from `tabEmployee` as emp join `tabGrade` as grade on emp.grade=grade.name where emp.status='Active'")
+        employees = frappe.db.sql("select emp.name,emp.employee_name,emp.grade,emp.level,grade.base from `tabEmployee` as emp join `tabGrade` as grade on emp.grade=grade.name where emp.status='Active' and emp.name like '%EMP/1%' and emp.name!='EMP/1012' ")
         for employee in employees:
 
             salary = employee[4]
