@@ -15,7 +15,7 @@ class OvertimeRequest(Document):
         self.validate_dates()
         self.validate_emp()
         self.validate_max_hours()
-        self.validate_approvals()
+        # self.validate_approvals()
         if self.workflow_state:
             if "Rejected" in self.workflow_state:
                 self.docstatus = 1
