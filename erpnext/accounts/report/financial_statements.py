@@ -19,19 +19,13 @@ def get_period_list(from_fiscal_year, to_fiscal_year, periodicity, company):
 		period_list = []
 		fy_list = get_fiscal_year_range(from_fiscal_year, to_fiscal_year)
 		for fy in fy_list :
-			print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
-			print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
-			print(fy)
-			print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
-			print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
-			print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+
 			fiscal_year = get_fiscal_year_data(fy, fy)
 			validate_fiscal_year(fiscal_year, fy, fy)
-			
+		
 			# start with first day, so as to avoid year to_dates like 2-April if ever they occur]
 			year_start_date = getdate(fiscal_year.year_start_date)
 			year_end_date = getdate(fiscal_year.year_end_date)
-
 			months_to_add = {
 				"Yearly": get_months(year_start_date, year_end_date),
 				"Half-Yearly": get_months(year_start_date, year_end_date) /2,
@@ -64,8 +58,10 @@ def get_period_list(from_fiscal_year, to_fiscal_year, periodicity, company):
 					# if a fiscal year ends before a 12 month period
 					period.to_date = year_end_date
 
-				period.to_date_fiscal_year = get_date_fiscal_year(period.to_date, company)
 
+				period.to_date_fiscal_year = get_date_fiscal_year(period.to_date, company)
+				period.year_start_date= year_start_date
+				period.year_end_date= year_end_date
 				period_list.append(period)
 
 				if period.to_date == year_end_date:
@@ -81,11 +77,12 @@ def get_period_list(from_fiscal_year, to_fiscal_year, periodicity, company):
 					
 				opts.update({
 					"key": key.replace(" ", "_").replace("-", "_"),
-					"label": label,
-					"year_start_date": year_start_date,
-					"year_end_date": year_end_date
+					"label": label,	
 				})
+		print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+		print(period_list)
 
+		print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq")	
 		return period_list
 
 	else : 
@@ -207,6 +204,12 @@ def get_data(company, root_type, balance_must_be, period_list, filters=None,
 	company_currency = frappe.db.get_value("Company", company, "default_currency")
 
 	gl_entries_by_account = {}
+	print("AAAAAAAAAAAAAAAAAAAAAAAA")
+	print("AAAAAAAAAAAAAAAAAAAAAAAA")
+	print("AAAAAAAAAAAAAAAAAAAAAAAA")
+	print(period_list)
+	print("AAAAAAAAAAAAAAAAAAAAAAAA")
+	print("AAAAAAAAAAAAAAAAAAAAAAAA")
 	for root in frappe.db.sql("""select lft, rgt from tabAccount
 			where root_type=%s and ifnull(parent_account, '') = ''""", root_type, as_dict=1):
 			
