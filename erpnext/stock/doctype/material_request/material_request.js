@@ -80,8 +80,7 @@ frappe.ui.form.on('Material Request', {
                     doc: cur_frm.doc,
                     freeze: true,
                     callback: function(r) {
-                        // console.log(r.message);
-                        if (!r.message) {
+                        if (r.message=='False') {
                             cur_frm.page.clear_actions_menu();
                         }
                     }

@@ -174,8 +174,11 @@ class MaterialRequest(BuyingController):
         if hasattr(self,'workflow_state'):
             if "Director" in frappe.get_roles(frappe.session.user) and not self.project:
                 pu = frappe.get_value("User Permission", filters = {"allow": "Department", "for_value": self.department}, fieldname = "user")
+                frappe.msgprint(str(pu))
                 if pu != frappe.session.user:
-                    return True
+                    return 'False'
+                else:
+                    return 'True'
 
         # if u'Director' in frappe.get_roles(frappe.session.user) and self.purchase_workflow != "Project" and self.workflow_state == "Approved By Project Budget Controller":
         #   if frappe.permissions.has_permission("Department", ptype='read', doc=self.department, verbose=False, user=frappe.session.user):
