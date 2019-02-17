@@ -156,7 +156,27 @@ def get_depreciation_accounts(asset):
 	return fixed_asset_account, accumulated_depreciation_account, depreciation_expense_account
 
 @frappe.whitelist()
-def scrap_asset(asset_name):
+def set_employee(employee,asset_name):
+	fixed_asset_list = frappe.get_list("Fixed Asset Custody", filters= {"fixed_asset":asset_name})
+	if fixed_asset_list :
+		fixed_asset_doc = frappe.get_doc("Fixed Asset Custody",fixed_asset_list[0])
+		fixed_asset_doc.employee = employee
+		fixed_asset_doc.save()
+	else :
+		#~ fixed_asset_doc = frappe.get_doc({
+			#~ 'doctype': 'Fixed Asset Custody',
+			#~ 'employee': employee,
+			#~ 'fixed_asset': asset_name,
+			#~ 'company': frappe.db.get_value("Asset", asset_name, "company"),
+		#~ })
+		#~ fixed_asset_doc.save()
+		#~ fixed_asset_doc.submit()
+		#~ frappe.msgprint(_("new Fixed Asset Custody for the asset %s Created")%asset_name)
+		frappe.throw(_("Please Create new Fixed Asset Custody for the asset %s"),asset_name)
+
+	
+@frappe.whitelist()
+def scrap_asset(asset_name,posting_date=None):
 	asset = frappe.get_doc("Asset", asset_name)
 	asset.freez=1
 	asset.flags.ignore_permissions=True
@@ -165,10 +185,13 @@ def scrap_asset(asset_name):
 		frappe.throw(_("Asset {0} must be submitted").format(asset.name))
 	elif asset.status in ("Cancelled", "Sold", "Scrapped"):
 		frappe.throw(_("Asset {0} cannot be scrapped, as it is already {1}").format(asset.name, asset.status))
-
+	jv_date = today()
+	if posting_date:
+		jv_date = posting_date
+	
 	je = frappe.new_doc("Journal Entry")
 	je.voucher_type = "Journal Entry"
-	je.posting_date = today()
+	je.posting_date = jv_date
 	je.company = asset.company
 	je.remark = "Scrap Entry for asset {0}".format(asset_name)
 
@@ -182,7 +205,7 @@ def scrap_asset(asset_name):
 	je.flags.ignore_permissions = True
 	je.save()
 	
-	frappe.db.set_value("Asset", asset_name, "disposal_date", today())
+	frappe.db.set_value("Asset", asset_name, "disposal_date", jv_date)
 	frappe.db.set_value("Asset", asset_name, "journal_entry_for_scrap", je.name)
 	asset.set_status("Scrapped")
 	
@@ -197,7 +220,11 @@ def restore_asset(asset_name):
 	asset.db_set("disposal_date", None)
 	asset.db_set("journal_entry_for_scrap", None)
 	
-	frappe.get_doc("Journal Entry", je).cancel()
+	try : frappe.get_doc("Journal Entry", je).cancel()
+	except : 
+		jv_doc = frappe.get_doc("Journal Entry", je)
+		if jv_doc.docstatus == 0:
+			frappe.db.sql("""update `tabJournal Entry` set docstatus = 0 where name = %s""", jv_doc.name)
 
 	asset.set_status()
 

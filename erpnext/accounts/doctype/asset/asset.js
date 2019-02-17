@@ -48,6 +48,10 @@ frappe.ui.form.on('Asset', {
 					erpnext.asset.transfer_asset(frm);
 				});
 				
+				frm.add_custom_button("Set Employee", function() {
+					erpnext.asset.set_employee(frm);
+				});
+				
 				frm.add_custom_button("Scrap Asset", function() {
 					erpnext.asset.scrap_asset(frm);
 				});
@@ -249,17 +253,63 @@ erpnext.asset.make_sales_invoice = function(frm) {
 }
 
 erpnext.asset.scrap_asset = function(frm) {
-	frappe.confirm(__("Do you really want to scrap this asset?"), function () {
-		frappe.call({
-			args: {
-				"asset_name": frm.doc.name
+	var d = new frappe.ui.Dialog({
+    'fields': [
+        {'fieldname': 'ht', 'fieldtype': 'HTML'},
+        {'label':__("Posting Date"),'fieldname': 'posting_date', 'fieldtype': 'Date', 'default': frappe.datetime.nowdate()}
+    ],
+		primary_action: function(){
+			d.hide();
+			var data = d.get_values();
+			frappe.call({
+				args: {
+					"asset_name": frm.doc.name,
+					"posting_date":data.posting_date
+				},
+				method: "erpnext.accounts.doctype.asset.depreciation.scrap_asset",
+				callback: function(r) {
+					cur_frm.reload_doc();
+				}
+			})
+		}
+	});
+	d.fields_dict.ht.$wrapper.html(__("Do you really want to scrap this asset?"));
+	d.show();
+}
+
+erpnext.asset.set_employee = function(frm) {
+
+	var d = new frappe.ui.Dialog({
+    'fields': [
+        {'fieldname': 'ht', 'fieldtype': 'HTML'},
+				{
+				"label": __("Employee"), 
+				"fieldname": "target_empoyee",
+				"fieldtype": "Link",
+				"options": "Employee",
+				"default": frm.doc.employee,
+				"get_query": "erpnext.controllers.queries.employee_query"
 			},
-			method: "erpnext.accounts.doctype.asset.depreciation.scrap_asset",
-			callback: function(r) {
-				cur_frm.reload_doc();
-			}
-		})
-	})
+			
+	],
+		primary_action: function(){
+			d.hide();
+			var data = d.get_values();
+			frappe.call({
+				args: {
+					"asset_name": frm.doc.name,
+					"employee":data.target_empoyee
+				},
+				method: "erpnext.accounts.doctype.asset.depreciation.set_employee",
+				callback: function(r) {
+					cur_frm.reload_doc();
+				}
+			})
+		}
+	});
+	d.fields_dict.ht.$wrapper.html(__("Assign Employee to Asset"));
+	d.show();
+
 }
 
 erpnext.asset.restore_asset = function(frm) {
@@ -270,6 +320,7 @@ erpnext.asset.restore_asset = function(frm) {
 			},
 			method: "erpnext.accounts.doctype.asset.depreciation.restore_asset",
 			callback: function(r) {
+				
 				cur_frm.reload_doc();
 			}
 		})
@@ -285,6 +336,7 @@ erpnext.asset.transfer_asset = function(frm) {
 				"fieldname": "target_warehouse",
 				"fieldtype": "Link", 
 				"options": "Warehouse",
+				"default": frm.doc.warehouse,
 				"get_query": function () {
 					return {
 						filters: [
@@ -294,6 +346,34 @@ erpnext.asset.transfer_asset = function(frm) {
 					}
 				}, 
 				"reqd": 1 
+			},
+			{
+				"label": __("Target Cost Center"), 
+				"fieldname": "target_cost_center",
+				"fieldtype": "Link", 
+				"options": "Cost Center",
+				"default": frm.doc.depreciation_cost_center,
+				"onchange": function(e) {
+					$('input[data-fieldname="target_project"]').val(null);
+				},
+				"get_query": function () {
+					return {
+						filters: [
+							["Cost Center", "is_group", "=", 0],
+							["Cost Center", "is_active", "=", 1]
+						]
+					}
+				}
+			},
+			{
+				"label": __("Target Project"), 
+				"fieldname": "target_project",
+				"fieldtype": "Link",
+				"onchange": function(e) {
+					$('input[data-fieldname="target_cost_center"]').val(null);
+				},
+				"options": "Project",
+				"default": frm.doc.project
 			},
 			{
 				"label": __("Date"), 
@@ -318,6 +398,8 @@ erpnext.asset.transfer_asset = function(frm) {
 					"transaction_date": args.transfer_date,
 					"source_warehouse": frm.doc.warehouse,
 					"target_warehouse": args.target_warehouse,
+					"cost_center": args.target_cost_center,
+					"project": args.target_project,
 					"company": frm.doc.company
 				}
 			},

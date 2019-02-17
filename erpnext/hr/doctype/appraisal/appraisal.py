@@ -27,6 +27,9 @@ class Appraisal(Document):
         self.calculate_total()
         self.validate_emp()
 
+        self.check_employee_approval()
+
+
 
     # def validate_emp(self):
     #     if self.get('__islocal'):
@@ -43,8 +46,9 @@ class Appraisal(Document):
     def validate_emp(self):
         if self.employee:
             employee_user = frappe.get_value("Employee", filters={"name": self.employee}, fieldname="user_id")
-            frappe.msgprint(str(employee_user))
-            frappe.msgprint(str(frappe.session.user))
+            # frappe.msgprint(str(employee_user))
+            # frappe.msgprint(str(frappe.session.user))
+
             if self.get('__islocal') and employee_user:
                 if u'Director' in frappe.get_roles(employee_user) and u'CEO' in frappe.get_roles(frappe.session.user):
                     self.workflow_state = "Created By CEO"
@@ -57,6 +61,14 @@ class Appraisal(Document):
 
             if not employee_user and self.get('__islocal'):
                 self.workflow_state = "Created By Line Manager"
+
+    def check_employee_approval(self):
+        employee_user = frappe.get_value("Employee", filters={"name": self.employee}, fieldname="user_id")
+        
+        if self.employee_approval == 1:
+            if employee_user != frappe.session.user:
+                frappe.throw("Current Appraisal need an approval from employee {0}".format(self.employee_name))
+        self.employee_approval=self.employee_approval+1
 
 
     def get_employee_name(self):
@@ -217,11 +229,12 @@ def appraisal_creation_and_contacting_manager():
     from datetime import date
     from dateutil.relativedelta import relativedelta
 
-    length=frappe.db.sql("select count(name) from `tabEmployee` where status!='left' and name='EMP/1020'")
-    emp=frappe.db.sql("select name,employee_name,department,date_of_joining,reports_to,employee_name_english from `tabEmployee` where status!='left' and name='EMP/1020'")
+    length=frappe.db.sql("select count(name) from `tabEmployee` where status!='left'")
+    emp=frappe.db.sql("select name,employee_name,department,date_of_joining,reports_to,employee_name_english from `tabEmployee` where status!='left'")
     for i in range(length[0][0]):
         date_of_joining = datetime.datetime.strptime(str(emp[i][3]), '%Y-%m-%d')
         next_two_monthes = date(date_of_joining.year, date_of_joining.month, date_of_joining.day) + relativedelta(months=+2)
+        print emp[i][0],emp[i][3],next_two_monthes
         if str(nowdate()) == str(next_two_monthes):
             if (emp[i][5]):
                 emp_name = emp[i][5]
@@ -235,24 +248,24 @@ def appraisal_creation_and_contacting_manager():
             first_manager_email=None
             second_manager_email=None
             workflow_state = "Created By Line Manager"
-            first_manager = frappe.db.sql("""select line_manager,manager,director,parent_department from `tabDepartment` where name='{0}'""".format(emp[i][2]),as_dict=True)
+            first_manager = frappe.db.sql("""select line_manager,manager,director,parent_department from `tabDepartment` where name="{0}" """.format(emp[i][2]),as_dict=True)
             if(first_manager):
-                second_manager = frappe.db.sql("""select line_manager,manager,director,parent_department from `tabDepartment` where name='{0}'""".format(first_manager[0].parent_department),as_dict=True)
+                second_manager = frappe.db.sql("""select line_manager,manager,director,parent_department from `tabDepartment` where name="{0}" """.format(first_manager[0].parent_department),as_dict=True)
                 if(first_manager[0].line_manager):
-                    first_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name='{0}'""".format(str(first_manager[0].line_manager)))
+                    first_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name="{0}" """.format(str(first_manager[0].line_manager)))
                 elif(first_manager[0].manager):
-                    first_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name='{0}'""".format(str(first_manager[0].manager)))
+                    first_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name="{0}" """.format(str(first_manager[0].manager)))
                     workflow_state = "Created By Line Manager"
                 elif(first_manager[0].director):
-                    first_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name='{0}'""".format(str(first_manager[0].director)))
+                    first_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name="{0}" """.format(str(first_manager[0].director)))
                     workflow_state = "Created By Manager"
                 if(second_manager):
                     if(second_manager[0].line_manager):
-                        second_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name='{0}'""".format(str(second_manager[0].line_manager)))
+                        second_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name="{0}" """.format(str(second_manager[0].line_manager)))
                     elif(second_manager[0].manager):
-                        second_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name='{0}'""".format(str(second_manager[0].manager)))
+                        second_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name="{0}" """.format(str(second_manager[0].manager)))
                     elif(second_manager[0].director):
-                        second_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name='{0}'""".format(str(second_manager[0].director)))
+                        second_manager_email = frappe.db.sql("""select prefered_email from `tabEmployee` where name="{0}" """.format(str(second_manager[0].director)))
             recipients = ""
             if(first_manager_email):
                 if(first_manager_email[0][0]):

@@ -65,7 +65,6 @@ def get_item_details(args):
 
 	if out.get("warehouse"):
 		out.update(get_bin_details(args.item_code, out.warehouse))
-		out.warehouse = None
 
 	# update args with out, if key or value not exists
 	for key, value in out.iteritems():

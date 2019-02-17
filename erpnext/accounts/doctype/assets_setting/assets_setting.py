@@ -19,14 +19,16 @@ def make_depreciation_entry_bulk_manage(date=None):
 	if not date:
 		date = today()
 		
-	depreciation_schedule=frappe.get_all("Depreciation Schedule",['*'],filters={"schedule_date":date ,"journal_entry":None})
+	depreciation_schedule= frappe.db.sql("""select * from `tabDepreciation Schedule` where schedule_date =date(%s) and isnull(journal_entry) and parent not in 
+		(select name from `tabAsset` where freez != 0 or docstatus != 1 )""",
+		date, as_dict=1)
+
 	je = frappe.new_doc("Journal Entry")
 	je.voucher_type = "Depreciation Entry"
 	je.posting_date = date
 	je.company = frappe.db.get_value("Global Defaults", None, "default_company")
 	
 	for ds in depreciation_schedule:
-		print("Asst", ds.parent)
 		asset = frappe.get_doc("Asset", ds.parent)
 		fixed_asset_account, accumulated_depreciation_account, depreciation_expense_account = \
 			get_depreciation_accounts(asset)
@@ -106,7 +108,10 @@ def get_scrapped_assets(sc_date,settings):
 	from datetime import timedelta
 	import dateutil.parser
 	dep=[]
-	schedules=frappe.get_all("Depreciation Schedule",['*'],filters={"schedule_date":sc_date,"journal_entry":None,"docstatus":1})
+	schedules= frappe.db.sql("""select * from `tabDepreciation Schedule` where schedule_date =date(%s) and isnull(journal_entry) and parent not in 
+		(select name from `tabAsset` where freez != 0 or docstatus != 1 )""",
+		sc_date, as_dict=1)
+	#~ schedules= frappe.get_all("Depreciation Schedule",['*'],filters={"schedule_date":sc_date,"journal_entry":None,"docstatus":1})
 	if schedules:
 		for l in schedules:
 			if not l.journal_entry:
@@ -115,6 +120,7 @@ def get_scrapped_assets(sc_date,settings):
 						'asset_name':l.parent,
 						'depreciation_amount':l.depreciation_amount,
 						'accumulated_depreciation_amount':l.accumulated_depreciation_amount,
+						'schedule_name':l.name,
 						'journal_entry':l.journal_entry,
 						})
 	return dep

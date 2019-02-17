@@ -133,7 +133,7 @@ def get_data():
 					"type": "report",
 					"name": "Fixed Asset Custody Report",
 					"doctype": "Fixed Asset Custody",
-					"is_query_report": False,
+					"is_query_report": True,
 					
 				}
 			]

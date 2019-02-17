@@ -147,10 +147,10 @@ class MaterialRequest(BuyingController):
         if self.get('__islocal') or self.state == "Initiated":
             if self.material_requester:
                 user = frappe.get_value("Employee", filters = {'name' : self.material_requester}, fieldname = "user_id")
-                if u'Project Manager' in frappe.get_roles(user) and self.purchase_workflow == "Project":
-                    self.workflow_state = "Created By Project Manager"
-                else:
-                    self.workflow_state = "Pending"
+                # if u'Project Manager' in frappe.get_roles(user) and self.purchase_workflow == "Project":
+                #     self.workflow_state = "Created By Project Manager"
+                # else:
+                self.workflow_state = "Pending"
 
     def unallowed_actions(self):
         if self.state == "To Modify" or self.state == "Rejected":   
@@ -174,8 +174,11 @@ class MaterialRequest(BuyingController):
         if hasattr(self,'workflow_state'):
             if "Director" in frappe.get_roles(frappe.session.user) and not self.project:
                 pu = frappe.get_value("User Permission", filters = {"allow": "Department", "for_value": self.department}, fieldname = "user")
+                frappe.msgprint(str(pu))
                 if pu != frappe.session.user:
-                    return True
+                    return 'False'
+                else:
+                    return 'True'
 
         # if u'Director' in frappe.get_roles(frappe.session.user) and self.purchase_workflow != "Project" and self.workflow_state == "Approved By Project Budget Controller":
         #   if frappe.permissions.has_permission("Department", ptype='read', doc=self.department, verbose=False, user=frappe.session.user):

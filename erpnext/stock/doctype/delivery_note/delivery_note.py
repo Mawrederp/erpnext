@@ -449,6 +449,13 @@ def make_sales_invoice(source_name, target_doc=None):
             "postprocess": update_item,
             "filter": lambda d: abs(d.qty) - abs(invoiced_qty_map.get(d.name, 0))<=0
         },
+        "Project Payment Schedule": {
+            "doctype": "Project Payment Schedule",
+            "field_map": {
+                "name": "dn_detail",
+                "parent": "delivery_note"
+            },
+        },
         "Sales Taxes and Charges": {
             "doctype": "Sales Taxes and Charges",
             "add_if_empty": True

@@ -71,16 +71,17 @@ class PurchaseInvoice(BuyingController):
 		self.validate_project_items()
 	
 	def validate_project_items(self):
-		if self.project : 
-			warehouse = frappe.db.get_value("Project", self.project, "default_warehouse")
-			if not warehouse :
-				frappe.throw(_("Set Default Warehouse in Project %s"%self.project))
-			else:
-				for row in self.get("items"):
-					if not row.warehouse :
-						row.warehouse = warehouse
-					elif row.warehouse !=warehouse : 
-						frappe.throw(_("Bad Warehouse in row  %s default warehouse is %s"%(row.idx,warehouse)))
+		pass
+		#~ if self.project : 
+			#~ warehouse = frappe.db.get_value("Project", self.project, "default_warehouse")
+			#~ if not warehouse :
+				#~ frappe.throw(_("Set Default Warehouse in Project %s"%self.project))
+			#~ else:
+				#~ for row in self.get("items"):
+					#~ if not row.warehouse :
+						#~ row.warehouse = warehouse
+					#~ elif row.warehouse !=warehouse : 
+						#~ frappe.throw(_("Bad Warehouse in row  %s default warehouse is %s"%(row.idx,warehouse)))
 	
 	def get_title(self):
 		from frappe.utils import getdate
@@ -104,6 +105,7 @@ class PurchaseInvoice(BuyingController):
 			nammeing_doc.index_value = 1
 			nammeing_doc.year = str(getdate(self.posting_date).year)
 			nammeing_doc.name_of_doc = self.doctype
+			nammeing_doc.naming_series = self.naming_series
 			nammeing_doc.save()
 			return title
 			
