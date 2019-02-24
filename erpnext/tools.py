@@ -19,6 +19,30 @@ from dateutil.relativedelta import relativedelta
 
 
 
+
+def screen_shot():
+    import pdfcrowd
+    import sys
+
+    try:
+        # create the API client instance
+        client = pdfcrowd.HtmlToImageClient('Administrator', '123')
+
+        # configure the conversion
+        client.setOutputFormat('png')
+
+        # run the conversion and write the result to a file
+        client.convertUrlToFile('http://37.139.26.137:8000/desk#Form/Employee/EMP%2F1008', 'example.png')
+    except pdfcrowd.Error as why:
+        # report the error
+        sys.stderr.write('Pdfcrowd Error: {}\n'.format(why))
+
+        # handle the exception here or rethrow and handle it at a higher level
+        raise
+
+
+
+
 def edit_leave():
     doc = frappe.get_doc("Leave Application","LAP/00178")
     # doc.total_leave_days = doc.total_leave_days-1
