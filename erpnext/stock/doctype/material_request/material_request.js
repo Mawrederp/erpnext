@@ -80,6 +80,7 @@ frappe.ui.form.on('Material Request', {
                     doc: cur_frm.doc,
                     freeze: true,
                     callback: function(r) {
+                    	// console.log(r.message)
                         if (r.message=='False') {
                             cur_frm.page.clear_actions_menu();
                         }
@@ -149,28 +150,28 @@ frappe.ui.form.on('Material Request', {
         frm.refresh_field('warehouse');
         frm.refresh_field('default_warehouse');
         frm.set_df_property("default_warehouse", "read_only", 1);
-        if (frm.doc.purchase_workflow == "Project") {
+        // if (frm.doc.purchase_workflow == "Project") {
             // var df = frappe.meta.get_docfield("Material Request Item","suggested_price_per_unit", cur_frm.doc.name);
             // df.read_only = 1; 
 
-            frappe.call({
-                method: "get_project_manager",
-                doc: frm.doc,
-                callback: function(r) {
-                    frm.fields_dict['material_requester'].get_query = function() {
-                        return {
-                            filters: [
-                                ['name', 'in', r.message]
-                            ]
-                        }
-                    }
-                }
-            });
-        } else {
-            frm.fields_dict['material_requester'].get_query = function() {
-                return "";
-            }
-        }
+            // frappe.call({
+            //     method: "get_project_manager",
+            //     doc: frm.doc,
+            //     callback: function(r) {
+            //         frm.fields_dict['material_requester'].get_query = function() {
+            //             return {
+            //                 filters: [
+            //                     ['name', 'in', r.message]
+            //                 ]
+            //             }
+            //         }
+            //     }
+            // });
+        // } else {
+        //     frm.fields_dict['material_requester'].get_query = function() {
+        //         return "";
+        //     }
+        // }
     },
     project: function(frm) {
         if(cur_frm.doc.purchase_workflow=='Project'){

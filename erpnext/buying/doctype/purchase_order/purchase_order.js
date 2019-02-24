@@ -20,6 +20,10 @@ frappe.ui.form.on("Purchase Order", {
                     "doc": cur_frm.doc,
                     "freeze": true,
                     callback: function(r) {
+                    	console.log('**************')
+                    	console.log(r.message)
+                    	console.log('**************')
+                    	
                         if(frappe.session.user != "Administrator"){
                             if (frappe.session.user != r.message){
                                 cur_frm.page.clear_actions_menu();
