@@ -910,13 +910,13 @@ def add_items_group():
     print c
 
 def set_barcodes ():
-	asset_list = frappe.get_list("Asset")
-	print (len(asset_list))
-	for asset in asset_list :
-		print asset["name"]
-		asset_doc= frappe.get_doc("Asset",asset["name"])
-		asset_doc.barcode_attach2(asset["name"])
-		print ("DOne:")
+    asset_list = frappe.get_list("Asset")
+    print (len(asset_list))
+    for asset in asset_list :
+        print asset["name"]
+        asset_doc= frappe.get_doc("Asset",asset["name"])
+        asset_doc.barcode_attach2(asset["name"])
+        print ("DOne:")
 
 def upload_jes():
     import sys
@@ -924,3 +924,24 @@ def upload_jes():
     from frappe.core.doctype.data_import.importer import upload
     with open("/home/frappe/frappe-bench/apps/erpnext/erpnext/jes.csv", "r") as infile:
         rows = read_csv_content(infile.read())
+
+
+
+
+def validate_notifications():
+    notification_docs = frappe.get_all("User Notification",
+                                        fields=["target_doctype",
+                                                "target_docname",
+                                                "name","status"]) 
+    for doc in notification_docs:
+        print("checking ...")
+        doc_exists = frappe.get_all(doc.target_doctype,
+                                        filters={"name":doc.target_docname})
+        if(not doc_exists):
+            if(doc.status =="Active"):
+                print("no document, delete notification")
+                un_doc = frappe.get_doc("User Notification",doc.name)
+                un_doc.status = "Disabled"
+                un_doc.save()
+
+                
