@@ -952,25 +952,20 @@ def validate_handled_notifications():
     notification_docs = frappe.get_all("User Notification",
                                         fields=["target_doctype",
                                                 "target_docname",
-                                                "name","status","user"]) 
+                                                "name","status","user","message"]) 
     for doc in notification_docs:
-        if doc.target_doctype =='Material Request':
-            action = frappe.db.get_value(doc.target_doctype, doc.target_docname, "handled_by")
-            handle_message = frappe.db.sql("select name from `tab{0}` where notification_message like '%Rejected%'".format(doc.target_doctype))
-            user_role = frappe.get_roles(doc.user)
-            if action not in user_role:
-                if(doc.status =="Active"):
-                    print("no document, delete notification")
-                    un_doc = frappe.get_doc("User Notification",doc.name)
-                    un_doc.status = "Disabled"
-                    un_doc.save()
+        if 'Rejected' in str(doc.message) and doc.status =="Active":
+            print doc.message
+            print("no document, delete notification")
+            un_doc = frappe.get_doc("User Notification",doc.name)
+            un_doc.status = "Disabled"
+            un_doc.save()
 
-            for rejected in handle_message:
-                notification_name = frappe.db.sql("select name,status from `tabUser Notification` where target_docname='{0}'".format(rejected[0]))
-                if notification_name:
-                    if(notification_name[0][1] =="Active"):
-                        print("no document, delete notification")
-                        un_doc = frappe.get_doc("User Notification", notification_name[0][0])
-                        un_doc.status = "Disabled"
-                        un_doc.save()
-        
+        action = frappe.db.get_value(doc.target_doctype, doc.target_docname, "handled_by")
+        user_role = frappe.get_roles(doc.user)
+        if action not in user_role:
+            if doc.status =="Active":
+                print("no document, delete notification")
+                un_doc = frappe.get_doc("User Notification",doc.name)
+                un_doc.status = "Disabled"
+                un_doc.save()
