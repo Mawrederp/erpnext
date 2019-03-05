@@ -927,7 +927,6 @@ def upload_jes():
 
 
 
-
 def validate_notifications():
     notification_docs = frappe.get_all("User Notification",
                                         fields=["target_doctype",
@@ -943,8 +942,6 @@ def validate_notifications():
                 un_doc = frappe.get_doc("User Notification",doc.name)
                 un_doc.status = "Disabled"
                 un_doc.save()
-
-
 
 
 
@@ -969,3 +966,4 @@ def validate_handled_notifications():
                 un_doc = frappe.get_doc("User Notification",doc.name)
                 un_doc.status = "Disabled"
                 un_doc.save()
+
