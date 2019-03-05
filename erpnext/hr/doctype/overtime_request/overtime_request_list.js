@@ -1,10 +1,6 @@
 frappe.listview_settings['Overtime Request'] = {
 	onload: function (listview) {
 		var arr=[]
-		frappe.route_options = {
-			
-		};
-
 		frappe.call({
 			method:"frappe.client.get_list",
 			args:{
@@ -13,7 +9,7 @@ frappe.listview_settings['Overtime Request'] = {
 					"target_doctype": 'Overtime Request',
 					"status": 'Active',
 					"user": frappe.user.name
-				},		
+				},
 				fields: "target_docname",
 			},
 			callback: function(r) {
