@@ -235,7 +235,7 @@ def appraisal_creation_and_contacting_manager():
         date_of_joining = datetime.datetime.strptime(str(emp[i][3]), '%Y-%m-%d')
         next_two_monthes = date(date_of_joining.year, date_of_joining.month, date_of_joining.day) + relativedelta(months=+2)
         print emp[i][0],emp[i][3],next_two_monthes
-        if str(nowdate()) == str(next_two_monthes):
+        if getdate(nowdate()) == getdate(next_two_monthes):
             if (emp[i][5]):
                 emp_name = emp[i][5]
             else:
