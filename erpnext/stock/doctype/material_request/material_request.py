@@ -77,7 +77,7 @@ class MaterialRequest(BuyingController):
         self.validate_department()
         # self.validate_director()
         self.validate_emp_requester()
-        self.validate_project_manager()
+        # self.validate_project_manager()
         # self.validate_project()
         # self.validate_project_items()
         # self.set_title()
@@ -183,24 +183,24 @@ class MaterialRequest(BuyingController):
         # if u'Director' in frappe.get_roles(frappe.session.user) and self.purchase_workflow != "Project" and self.workflow_state == "Approved By Project Budget Controller":
         #   if frappe.permissions.has_permission("Department", ptype='read', doc=self.department, verbose=False, user=frappe.session.user):
         #       self.workflow_state = "Approved By Director" if self.state == "Approved" else   "Rejected By Director"
-    def validate_project_manager(self):
-            pms_str = self.get_project_manager()
-            if pms_str:
-                pms_list = pms_str.split(",")
-                if self.material_requester not in pms_list:
-                    frappe.throw(_("The selected Material Requester is not valid as a Project Manager"))
+    # def validate_project_manager(self):
+    #         pms_str = self.get_project_manager()
+    #         if pms_str:
+    #             pms_list = pms_str.split(",")
+    #             if self.material_requester not in pms_list:
+    #                 frappe.throw(_("The selected Material Requester is not valid as a Project Manager"))
 
 
-    def get_project_manager(self):
-        if self.project:
-            pms = frappe.db.sql("""select name from tabEmployee where user_id in 
-                (select parent from `tabUserRole` where role = 'Project Manager')""", as_dict = True)
-            if pms :
-                pms_str = ""
-                for pm in pms:
-                    pms_str += pm.name+","
-                pms_str = pms_str[:-1]
-                return pms_str
+    # def get_project_manager(self):
+    #     if self.project:
+    #         pms = frappe.db.sql("""select name from tabEmployee where user_id in 
+    #             (select parent from `tabUserRole` where role = 'Project Manager')""", as_dict = True)
+    #         if pms :
+    #             pms_str = ""
+    #             for pm in pms:
+    #                 pms_str += pm.name+","
+    #             pms_str = pms_str[:-1]
+    #             return pms_str
 
 
     def get_project_items(self):
