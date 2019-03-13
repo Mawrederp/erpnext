@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: GNU General Public License v3. See license.txt
 
 # ERPNext - web based ERP (http://erpnext.com)
 # For license information, please see license.txt
+
 
 from __future__ import unicode_literals
 import frappe
@@ -173,12 +175,35 @@ class MaterialRequest(BuyingController):
     def validate_director_actions(self):
         if hasattr(self,'workflow_state'):
             if "Director" in frappe.get_roles(frappe.session.user) and not self.project:
-                pu = frappe.get_value("User Permission", filters = {"allow": "Department", "for_value": self.department}, fieldname = "user")
                 # frappe.msgprint(str(pu))
-                if pu != frappe.session.user:
-                    return 'False'
-                else:
-                    return 'True'
+
+                department_info = frappe.db.sql("""select rgt,lft from `tabDepartment` where name ='{0}' """.format(self.department),as_dict=True)
+                if department_info:
+                    director_department = frappe.db.sql("""select name,director from `tabDepartment` where lft <= {lft} and rgt >= {rgt} and director is not null""".format(rgt=department_info[0].rgt,lft=department_info[0].lft),as_dict=True) 
+                    if director_department:
+                        emp = frappe.get_doc("Employee",director_department[0].director)
+                        if emp:
+                            if emp.user_id == frappe.session.user:
+                                return 'True'
+                
+        return 'False'
+
+
+                # department = frappe.get_doc("Department",self.department)
+                # while(department.parent_department != 'الادارة العليا'):
+                #     if(department.director):
+                #         director = frappe.get_doc("Employee",department.director)
+                #         if(director.user_id == frappe.session.user):
+                #             pu = frappe.get_value("User Permission", filters = {"allow": "Department", "for_value": self.department}, fieldname = "user")
+                #             return 'True'
+                #     department = frappe.get_doc("Department",department.parent_department)
+                
+                # return 'False'
+
+                # if pu != frappe.session.user:
+                #     return 'False'
+                # else:
+                #     return 'True'
 
         # if u'Director' in frappe.get_roles(frappe.session.user) and self.purchase_workflow != "Project" and self.workflow_state == "Approved By Project Budget Controller":
         #   if frappe.permissions.has_permission("Department", ptype='read', doc=self.department, verbose=False, user=frappe.session.user):
