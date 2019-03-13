@@ -38,7 +38,9 @@ frappe.ui.form.on('Material Request', {
     },
     refresh: function(frm) {
         if(cur_frm.doc.purchase_workflow != "Project"){
-            if (cur_frm.doc.__islocal || ((cur_frm.doc.state == "To Modify"||cur_frm.doc.workflow_state == "Pending") && cur_frm.doc.user_id == frappe.session.user)) {
+            if (cur_frm.doc.__islocal || 
+               (cur_frm.doc.state == "To Modify" && cur_frm.doc.user_id == frappe.session.user) ||
+               (cur_frm.doc.workflow_state == "Pending" &&  (frappe.session.user == "fa.alghurais@tawari.sa" || frappe.session.user == "Sm.almahfouz@tawari.sa"))) {
                 for (var key in cur_frm.fields_dict) {
                     cur_frm.set_df_property(key, "read_only", 0);
                     // cur_frm.fields_dict[key].df.read_only = 0;
