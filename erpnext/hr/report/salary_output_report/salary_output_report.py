@@ -19,7 +19,7 @@ def execute(filters=None):
 	data = []
 	for ss in salary_slips:
 		
-		row = [ ss.employee, ss.employee_name, ss.department, ss.designation]
+		row = [ ss.employee, ss.employee_name, ss.posting_date, ss.department, ss.designation]
 		
 		if ss.leave_withut_pay:
 			row.append(ss.leave_withut_pay)
@@ -58,7 +58,7 @@ def execute(filters=None):
 	return columns, data
 
 def get_columns(salary_slips):
-	columns = [_("Employee") + ":Link/Employee:120", _("Employee Name") + "::140", 
+	columns = [_("Employee") + ":Link/Employee:120", _("Employee Name") + "::140",  _("Slip Month") + "::140", 
 		_("Department") + ":Link/Department:120", _("Designation") + ":Link/Designation:120",
 	]
 
