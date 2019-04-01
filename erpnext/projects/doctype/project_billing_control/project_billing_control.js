@@ -4,7 +4,7 @@
 frappe.ui.form.on('Project Billing Control', {
 	refresh: function(frm) {
 		if(!frm.doc.__islocal) {
-	       frm.add_custom_button(__('Issue Invoice Request'), function() { 
+	       frm.add_custom_button(__('Issue Invoice Request'), function() {
 	        // click
 	      });
 	    }
@@ -72,6 +72,7 @@ frappe.ui.form.on('Project Billing Control', {
 
 	},
 	scope_item: function(frm) {
+		console.log("scope item");
 		cur_frm.set_value("items_value", '0');
 		cur_frm.set_value("description", );
 		cur_frm.set_value("billing_percentage", '0');
@@ -108,6 +109,5 @@ frappe.ui.form.on('Project Billing Control', {
 
 	}
 
-	
-});
 
+});
