@@ -112,8 +112,8 @@ class SalesInvoice(SellingController):
             
 
     def validate_project_item_advance(self):
-        if self.get('__islocal'):
-            self.total_demand = self.grand_total-self.item_advance_amount
+        # if self.get('__islocal'):
+        self.total_demand = self.grand_total-flt(self.item_advance_amount)
         
 
   
