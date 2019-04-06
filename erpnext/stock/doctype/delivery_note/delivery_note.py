@@ -220,7 +220,7 @@ class DeliveryNote(SellingController):
 
     def on_cancel(self):
         self.check_close_sales_order("against_sales_order")
-        self.check_next_docstatus()
+        #~ self.check_next_docstatus()
 
         self.update_prevdoc_status()
         self.update_billing_status()
