@@ -14,8 +14,32 @@ source_link = "https://github.com/frappe/erpnext"
 
 error_report_email = "support@erpnext.com"
 
-app_include_js = "assets/js/erpnext.min.js"
-app_include_css = "assets/css/erpnext.css"
+app_include_js = [
+		"assets/js/erpnext.min.js",'assets/erpnext/assets/plugins/morris/raphael.min.js',
+		'assets/erpnext/assets/plugins/morris/morris.min.js',
+		'assets/erpnext/assets/plugins/morris/morris-data.js',
+		'assets/erpnext/assets/plugins/lobipanel/lobipanel.min.js',
+		'assets/erpnext/assets/plugins/fastclick/fastclick.min.js',
+		'assets/erpnext/assets/plugins/toastr/toastr.min.js',
+		'assets/erpnext/assets/plugins/sparkline/sparkline.min.js',
+		'assets/erpnext/assets/plugins/counterup/jquery.counterup.min.js',
+		'assets/erpnext/assets/plugins/counterup/waypoints.js',
+		'assets/erpnext/assets/plugins/emojionearea/emojionearea.min.js',
+		'assets/erpnext/assets/plugins/monthly/monthly.min.js',
+		'assets/erpnext/assets/plugins/footable-bootstrap/js/footable.all.min.js',
+		'assets/erpnext/assets/dist/js/page/dashboard2.js',
+		'assets/erpnext/assets/dist/js/page/theme.js',
+		]
+app_include_css = [
+		"assets/css/erpnext.css",
+		'assets/erpnext/assets/plugins/morris/morris.css',
+		"assets/erpnext/css/component_ui.css",
+		"assets/erpnext/css/component_ui_projects.css",
+]
+#~ 'assets/erpnext/assets/dist/css/base.css',
+#~ 'assets/erpnext/assets/dist/css/base_rtl.css',
+#~ 'assets/erpnext/assets/dist/css/style.css',
+
 web_include_js = "assets/js/erpnext-web.min.js"
 web_include_css = "assets/erpnext/css/website.css"
 
