@@ -446,6 +446,11 @@ class PaymentEntry(AccountsController):
 			})
 			
 			dr_or_cr = "credit" if self.party_type == "Customer" else "debit"
+			if self.is_reverse :
+				if dr_or_cr == "credit":
+					dr_or_cr = "debit"
+				elif dr_or_cr == "debit":
+					dr_or_cr = "credit"
 			
 			for d in self.get("references"):
 				gle = party_gl_dict.copy()
