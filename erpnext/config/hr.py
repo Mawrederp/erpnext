@@ -135,6 +135,11 @@ def get_data():
 					"name": "Medical Insurance Application",
 					"description": _("Medical Insurance Application."),
 				},
+				{
+					"type": "doctype",
+					"name": "Correspondence Request",
+					"description": _("Correspondence Request."),
+				},
 			]
 		},
 		{

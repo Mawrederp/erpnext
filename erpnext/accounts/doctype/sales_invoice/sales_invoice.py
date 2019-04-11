@@ -95,6 +95,7 @@ class SalesInvoice(SellingController):
 
 
         self.validate_emp()
+        self.validate_project_item_advance()
         
         if self.workflow_state:
             if "Rejected" in self.workflow_state:
@@ -110,7 +111,10 @@ class SalesInvoice(SellingController):
                 self.workflow_state = "Pending"
             
 
-
+    def validate_project_item_advance(self):
+        # if self.get('__islocal'):
+        self.total_demand = self.grand_total-flt(self.item_advance_amount)
+        
 
   
     def get_title(self):

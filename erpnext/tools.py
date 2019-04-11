@@ -19,6 +19,30 @@ from dateutil.relativedelta import relativedelta
 
 
 
+
+def screen_shot():
+    import pdfcrowd
+    import sys
+
+    try:
+        # create the API client instance
+        client = pdfcrowd.HtmlToImageClient('Administrator', '123')
+
+        # configure the conversion
+        client.setOutputFormat('png')
+
+        # run the conversion and write the result to a file
+        client.convertUrlToFile('http://37.139.26.137:8000/desk#Form/Employee/EMP%2F1008', 'example.png')
+    except pdfcrowd.Error as why:
+        # report the error
+        sys.stderr.write('Pdfcrowd Error: {}\n'.format(why))
+
+        # handle the exception here or rethrow and handle it at a higher level
+        raise
+
+
+
+
 def edit_leave():
     doc = frappe.get_doc("Leave Application","LAP/00178")
     # doc.total_leave_days = doc.total_leave_days-1
@@ -886,13 +910,13 @@ def add_items_group():
     print c
 
 def set_barcodes ():
-	asset_list = frappe.get_list("Asset")
-	print (len(asset_list))
-	for asset in asset_list :
-		print asset["name"]
-		asset_doc= frappe.get_doc("Asset",asset["name"])
-		asset_doc.barcode_attach2(asset["name"])
-		print ("DOne:")
+    asset_list = frappe.get_list("Asset")
+    print (len(asset_list))
+    for asset in asset_list :
+        print asset["name"]
+        asset_doc= frappe.get_doc("Asset",asset["name"])
+        asset_doc.barcode_attach2(asset["name"])
+        print ("DOne:")
 
 def upload_jes():
     import sys
@@ -900,3 +924,46 @@ def upload_jes():
     from frappe.core.doctype.data_import.importer import upload
     with open("/home/frappe/frappe-bench/apps/erpnext/erpnext/jes.csv", "r") as infile:
         rows = read_csv_content(infile.read())
+
+
+
+def validate_notifications():
+    notification_docs = frappe.get_all("User Notification",
+                                        fields=["target_doctype",
+                                                "target_docname",
+                                                "name","status"]) 
+    for doc in notification_docs:
+        print("checking ...")
+        doc_exists = frappe.get_all(doc.target_doctype,
+                                        filters={"name":doc.target_docname})
+        if(not doc_exists):
+            if(doc.status =="Active"):
+                print("no document, delete notification")
+                un_doc = frappe.get_doc("User Notification",doc.name)
+                un_doc.status = "Disabled"
+                un_doc.save()
+
+
+
+def validate_handled_notifications():
+    notification_docs = frappe.get_all("User Notification",
+                                        fields=["target_doctype",
+                                                "target_docname",
+                                                "name","status","user","message"]) 
+    for doc in notification_docs:
+        if 'Rejected' in str(doc.message) and doc.status =="Active":
+            print doc.message
+            print("no document, delete notification")
+            un_doc = frappe.get_doc("User Notification",doc.name)
+            un_doc.status = "Disabled"
+            un_doc.save()
+
+        action = frappe.db.get_value(doc.target_doctype, doc.target_docname, "handled_by")
+        user_role = frappe.get_roles(doc.user)
+        if action not in user_role:
+            if doc.status =="Active":
+                print("no document, delete notification")
+                un_doc = frappe.get_doc("User Notification",doc.name)
+                un_doc.status = "Disabled"
+                un_doc.save()
+

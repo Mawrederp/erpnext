@@ -237,6 +237,8 @@ scheduler_events = {
 		"erpnext.hr.doctype.employee.employee.hooked_validate_exp_dates"
 	],
 	"daily": [
+		"erpnext.tools.validate_notifications",
+		"erpnext.tools.validate_handled_notifications",
 		"erpnext.stock.reorder_item.reorder_item",
 		"erpnext.setup.doctype.email_digest.email_digest.send",
 		"erpnext.support.doctype.issue.issue.auto_close_tickets",
