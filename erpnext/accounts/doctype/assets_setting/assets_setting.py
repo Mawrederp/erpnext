@@ -43,6 +43,7 @@ def make_depreciation_entry_bulk_manage(date=None):
 					"reference_type": "Asset",
 					"reference_name": asset.name,
 					"cost_center": asset.depreciation_cost_center,
+					"project": asset.project,
 					"description":"Depreciation Entry against {0} worth {1}".format(ds.parent, d.depreciation_amount)		
 				})
 
@@ -52,6 +53,7 @@ def make_depreciation_entry_bulk_manage(date=None):
 					"reference_type": "Asset",
 					"reference_name": asset.name,
 					"cost_center": asset.depreciation_cost_center,
+					"project": asset.project,
 					"description":"Depreciation Entry against {0} worth {1}".format(ds.parent, d.depreciation_amount)
 				})
 

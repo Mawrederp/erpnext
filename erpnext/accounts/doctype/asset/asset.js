@@ -345,7 +345,7 @@ erpnext.asset.transfer_asset = function(frm) {
 						]
 					}
 				}, 
-				"reqd": 1 
+				"reqd": 0
 			},
 			{
 				"label": __("Target Cost Center"), 

@@ -484,6 +484,7 @@ class PurchaseInvoice(BuyingController):
 							"account": supplier_warehouse_account,
 							"against": item.expense_account,
 							"cost_center": item.cost_center,
+							"project": item.project,
 							"remarks": self.get("remarks") or _("Accounting Entry for Stock"),
 							"credit": flt(item.rm_supp_cost)
 						}, warehouse_account[self.supplier_warehouse]["account_currency"]))
