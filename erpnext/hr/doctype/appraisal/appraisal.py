@@ -242,7 +242,8 @@ def appraisal_creation_and_contacting_manager():
 
         print emp[i][0],emp[i][3],next_two_monthes
 
-        if getdate(nowdate) == getdate(next_two_monthes):
+        # if getdate(nowdate) == getdate(next_two_monthes):
+        if emp[i][0]=='EMP/1024':
             if (emp[i][5]):
                 emp_name = emp[i][5]
             else:
@@ -284,6 +285,12 @@ def appraisal_creation_and_contacting_manager():
                     recipients+=(second_manager_email) + ", " 
             recipients1 = first_manager_email
             recipients2 = second_manager_email
+
+            print '****************************'
+            print recipients1
+            print recipients2
+            print '****************************'
+
             appraisal = frappe.get_doc({
                 "doctype": "Appraisal",
                 "employee": emp[i][0],
@@ -301,11 +308,11 @@ def appraisal_creation_and_contacting_manager():
             try:
                 frappe.flags.sent_mail = None
                 if recipients1:
-                    make(subject = "Appraisal Notification For Employee: " + emp_name, content=content_msg, recipients=recipients1,
+                    make(subject = "Appraisal Notification For Employee: {0}".format(emp_name) , content=content_msg, recipients=recipients1,
                         send_email=True, sender="erp@tawari.sa")
                 if recipients2:
-                    make(subject = "Appraisal Notification For Employee: " + emp_name, content=content_msg, recipients=recipients2,
+                    make(subject = "Appraisal Notification For Employee: {0}".format(emp_name) , content=content_msg, recipients=recipients2,
                         send_email=True, sender="erp@tawari.sa")
                 # break
             except:
-                print("appraisal_creation_and_contacting_manager"+ " method is broken")
+                frappe.msgprint("appraisal_creation_and_contacting_manager"+ " method is broken")
