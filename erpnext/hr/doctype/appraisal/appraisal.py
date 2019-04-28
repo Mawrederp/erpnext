@@ -9,6 +9,7 @@ from frappe.utils import flt, getdate
 from frappe import _
 from frappe.model.mapper import get_mapped_doc
 from frappe.model.document import Document
+from frappe.utils import date_diff, add_months, today, getdate, add_days, flt
 from erpnext.hr.utils import set_employee_name
 
 class Appraisal(Document):
@@ -232,10 +233,16 @@ def appraisal_creation_and_contacting_manager():
     length=frappe.db.sql("select count(name) from `tabEmployee` where status!='left'")
     emp=frappe.db.sql("select name,employee_name,department,date_of_joining,reports_to,employee_name_english from `tabEmployee` where status!='left'")
     for i in range(length[0][0]):
-        date_of_joining = datetime.datetime.strptime(str(emp[i][3]), '%Y-%m-%d')
-        next_two_monthes = date(date_of_joining.year, date_of_joining.month, date_of_joining.day) + relativedelta(months=+2)
+        # date_of_joining = datetime.datetime.strptime(str(emp[i][3]), '%Y-%m-%d')
+        # next_two_monthes = date(date_of_joining.year, date_of_joining.month, date_of_joining.day) + relativedelta(months=+2)
+        
+        nowdate = frappe.utils.nowdate()
+
+        next_two_monthes = frappe.utils.add_months(getdate(emp[i][3]), +2)
+
         print emp[i][0],emp[i][3],next_two_monthes
-        if getdate(nowdate()) == getdate(next_two_monthes):
+
+        if getdate(nowdate) == getdate(next_two_monthes):
             if (emp[i][5]):
                 emp_name = emp[i][5]
             else:
