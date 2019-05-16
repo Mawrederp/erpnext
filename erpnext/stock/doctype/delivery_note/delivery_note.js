@@ -358,18 +358,18 @@ frappe.ui.form.on('Delivery Note Item', {
 		}
 
 
-        frappe.call({
-            "method": "validate_bundle_qty_number",
-            args: {
-                'qty': qty,
-            },
-            doc: cur_frm.doc,
-            callback: function(r){
-				if(r.message==1){
-					frappe.model.set_value(cdt, cdn, "qty", );
-				}
-			},
-        });
+   //      frappe.call({
+   //          "method": "validate_bundle_qty_number",
+   //          args: {
+   //              'qty': qty,
+   //          },
+   //          doc: cur_frm.doc,
+   //          callback: function(r){
+			// 	if(r.message==1){
+			// 		frappe.model.set_value(cdt, cdn, "qty", );
+			// 	}
+			// },
+   //      });
         
     
     }
