@@ -8,7 +8,7 @@ frappe.ui.form.on('Material Request', {
 
     validate: function(frm) {
         if(cur_frm.doc.purchase_workflow == "Project"){
-            
+
             var total = 0
             $.each(cur_frm.doc.items, function(i, d) {
                 total += flt(d.suggested_total_price);
@@ -32,13 +32,13 @@ frappe.ui.form.on('Material Request', {
             //     });
 
             // });
- 
-            
+
+
         }
     },
     refresh: function(frm) {
         if(cur_frm.doc.purchase_workflow != "Project"){
-            if (cur_frm.doc.__islocal || 
+            if (cur_frm.doc.__islocal ||
                (cur_frm.doc.state == "To Modify" && cur_frm.doc.user_id == frappe.session.user) ||
                (cur_frm.doc.workflow_state == "Pending" &&  (frappe.session.user == "fa.alghurais@tawari.sa" || frappe.session.user == "Sm.almahfouz@tawari.sa"))) {
                 for (var key in cur_frm.fields_dict) {
@@ -92,7 +92,7 @@ frappe.ui.form.on('Material Request', {
         }
         // else{
         //     var df = frappe.meta.get_docfield("Material Request Item","suggested_price_per_unit", cur_frm.doc.name);
-        //     df.read_only = 1; 
+        //     df.read_only = 1;
         // }
     },
     setup: function(frm) {
@@ -123,7 +123,7 @@ frappe.ui.form.on('Material Request', {
         //         }
         //     });
         // }
-       
+
         frm.custom_make_buttons = {
             'Stock Entry': 'Issue Material',
             'Purchase Order': 'Purchase Order',
@@ -134,7 +134,7 @@ frappe.ui.form.on('Material Request', {
     },
     purchase_workflow: function(frm) {
         // frm.set_value("material_requester", undefined);
-        
+
         frm.clear_table("items");
         refresh_many(['items']);
         frm.set_value("project", undefined);
@@ -146,7 +146,7 @@ frappe.ui.form.on('Material Request', {
         frm.toggle_reqd("project", frm.doc.purchase_workflow == "Project");
         frm.toggle_reqd("main_project_procurement", frm.doc.purchase_workflow == "Project");
         frm.toggle_reqd("default_warehouse", frm.doc.purchase_workflow == "Project");
-        
+
         frm.refresh_field('project');
         frm.refresh_field('main_project_procurement');
         frm.refresh_field('warehouse');
@@ -154,7 +154,7 @@ frappe.ui.form.on('Material Request', {
         frm.set_df_property("default_warehouse", "read_only", 1);
         // if (frm.doc.purchase_workflow == "Project") {
             // var df = frappe.meta.get_docfield("Material Request Item","suggested_price_per_unit", cur_frm.doc.name);
-            // df.read_only = 1; 
+            // df.read_only = 1;
 
             // frappe.call({
             //     method: "get_project_manager",
@@ -182,7 +182,7 @@ frappe.ui.form.on('Material Request', {
 	    			query: "erpnext.stock.doctype.material_request.material_request.get_project_main_items",
 	    			filters: {
                         "project": cur_frm.doc.project
-                 	}  
+                 	}
 	    		};
 	    	});
 
@@ -371,7 +371,7 @@ erpnext.buying.MaterialRequestController = erpnext.buying.BuyingController.exten
         cur_frm.refresh();
     },
     purchase_workflow: function(){
-        
+
         cur_frm.trigger('filter_items');
     },
     filter_items: function(){
