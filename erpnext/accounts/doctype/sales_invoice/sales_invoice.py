@@ -903,14 +903,14 @@ class SalesInvoice(SellingController):
                     if flt(tax.base_tax_amount_after_discount_amount):
                         account_currency = get_account_currency(tax.account_head)
                         #~ adv_vat = flt(flt(tax.base_tax_amount_after_discount_amount)* flt(ps.billing_percentage) / 100.0000,self.precision("total"))
-                        adv_vat = flt(flt(adv_sales_item_doc[0]["base_amount"]) * flt(ps.billing_percentage) / 100.000,self.precision("total"))
-                        adv_vat = flt(adv_vat * flt(tax.rate) / 100.000,self.precision("total"))
+                        adv_vat = flt(flt(adv_sales_item_doc[0]["base_amount"],4) * flt(ps.billing_percentage,4) / 100.000,4)
+                        adv_vat = flt(adv_vat * flt(tax.rate) / 100.0000,4)
                         gl_entries.append(
                             self.get_gl_dict({
                                 "account": tax.account_head,
                                 "against": self.customer,
-                                "debit": adv_vat,
-                                "debit_in_account_currency": adv_vat \
+                                "credit": adv_vat,
+                                "credit_in_account_currency": adv_vat \
                                     if account_currency==self.company_currency else adv_vat,
                                 "cost_center": tax.cost_center
                             }, account_currency)
@@ -919,17 +919,17 @@ class SalesInvoice(SellingController):
                         
             for tax in self.get("taxes"):
                 if flt(tax.base_tax_amount_after_discount_amount):
-                    account_currency = get_account_currency(tax.account_head)
-                    gl_entries.append(
-                        self.get_gl_dict({
-                            "account": tax.account_head,
-                            "against": self.customer,
-                            "credit": flt(tax.base_tax_amount_after_discount_amount),
-                            "credit_in_account_currency": flt(tax.base_tax_amount_after_discount_amount) \
-                                if account_currency==self.company_currency else flt(tax.tax_amount_after_discount_amount),
-                            "cost_center": tax.cost_center
-                        }, account_currency)
-                    )
+                    #~ account_currency = get_account_currency(tax.account_head)
+                    #~ gl_entries.append(
+                        #~ self.get_gl_dict({
+                            #~ "account": tax.account_head,
+                            #~ "against": self.customer,
+                            #~ "credit": flt(tax.base_tax_amount_after_discount_amount),
+                            #~ "credit_in_account_currency": flt(tax.base_tax_amount_after_discount_amount) \
+                                #~ if account_currency==self.company_currency else flt(tax.tax_amount_after_discount_amount),
+                            #~ "cost_center": tax.cost_center
+                        #~ }, account_currency)
+                    #~ )
                     total_tax += flt(tax.base_tax_amount_after_discount_amount)
                     
             gl_entries.append(
