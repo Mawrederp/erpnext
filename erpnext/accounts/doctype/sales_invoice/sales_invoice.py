@@ -891,8 +891,8 @@ class SalesInvoice(SellingController):
     def make_tax_gl_entries(self, gl_entries):
         ps_l = self.get_payment_schdual()
         if ps_l:
-            adv_total_tax = flt(0,self.precision("grand_total"))
-            total_tax = flt(0,self.precision("grand_total"))
+            adv_total_tax = flt(0,4)
+            total_tax = flt(0,2)
             for ps in ps_l : 
                 adv_sales_invoice_doc = frappe.get_doc("Sales Invoice",ps.sales_invoice)
                 adv_sales_item_doc = frappe.get_all("Sales Invoice Item", filters={"parent":ps.sales_invoice , "project_payment_schedule":ps.name},
@@ -903,36 +903,57 @@ class SalesInvoice(SellingController):
                     if flt(tax.base_tax_amount_after_discount_amount):
                         account_currency = get_account_currency(tax.account_head)
                         #~ adv_vat = flt(flt(tax.base_tax_amount_after_discount_amount)* flt(ps.billing_percentage) / 100.0000,self.precision("total"))
-                        adv_vat = flt(flt(adv_sales_item_doc[0]["base_amount"],4) * flt(ps.billing_percentage,4) / 100.000,4)
-                        adv_vat = flt(adv_vat * flt(tax.rate) / 100.0000,4)
-                        gl_entries.append(
-                            self.get_gl_dict({
-                                "account": tax.account_head,
-                                "against": self.customer,
-                                "credit": adv_vat,
-                                "credit_in_account_currency": adv_vat \
-                                    if account_currency==self.company_currency else adv_vat,
-                                "cost_center": tax.cost_center
-                            }, account_currency)
-                        )
-                        adv_total_tax += adv_vat
+                        adv_vat = flt(flt(adv_sales_item_doc[0]["base_amount"],4) * flt(ps.billing_percentage,4) / 100.0000,4)
+                        print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+                        print(adv_vat)
                         
-            for tax in self.get("taxes"):
-                if flt(tax.base_tax_amount_after_discount_amount):
-                    #~ account_currency = get_account_currency(tax.account_head)
-                    #~ gl_entries.append(
-                        #~ self.get_gl_dict({
-                            #~ "account": tax.account_head,
-                            #~ "against": self.customer,
-                            #~ "credit": flt(tax.base_tax_amount_after_discount_amount),
-                            #~ "credit_in_account_currency": flt(tax.base_tax_amount_after_discount_amount) \
-                                #~ if account_currency==self.company_currency else flt(tax.tax_amount_after_discount_amount),
-                            #~ "cost_center": tax.cost_center
-                        #~ }, account_currency)
-                    #~ )
-                    total_tax += flt(tax.base_tax_amount_after_discount_amount)
-                    
-            gl_entries.append(
+                        adv_vat = flt(adv_vat * flt(tax.rate) / 100.0000,4)
+                        print(adv_vat)
+                        adv_total_tax += adv_vat
+          
+			for tax in self.get("taxes"):
+				if flt(tax.base_tax_amount_after_discount_amount):
+					account_currency = get_account_currency(tax.account_head)
+					adv_por = flt(adv_total_tax,4) / flt(len(self.taxes),4)
+					cr = flt(tax.base_tax_amount_after_discount_amount,4) - adv_por
+					total_tax += flt(tax.base_tax_amount_after_discount_amount,4)
+
+			
+            
+			if total_tax-adv_total_tax <.05000:
+				pass
+			else:
+				for tax in adv_sales_invoice_doc.get("taxes"):
+					if flt(tax.base_tax_amount_after_discount_amount):
+						account_currency = get_account_currency(tax.account_head)
+						#~ adv_vat = flt(flt(tax.base_tax_amount_after_discount_amount)* flt(ps.billing_percentage) / 100.0000,self.precision("total"))
+						adv_vat = flt(flt(adv_sales_item_doc[0]["base_amount"],4) * flt(ps.billing_percentage,4) / 100.000,4)
+						adv_vat = flt(adv_vat * flt(tax.rate) / 100.0000,4)
+						gl_entries.append(
+							self.get_gl_dict({
+								"account": tax.account_head,
+								"against": self.customer,
+								"credit": adv_vat,
+								"credit_in_account_currency": adv_vat \
+									if account_currency==self.company_currency else adv_vat,
+								"cost_center": tax.cost_center
+							}, account_currency)
+						)
+				#~ for tax in self.get("taxes"):
+					#~ if flt(tax.base_tax_amount_after_discount_amount):
+						#~ account_currency = get_account_currency(tax.account_head)
+						#~ adv_por = flt(adv_total_tax,4) / flt(len(self.taxes),4)
+						#~ cr = flt(tax.base_tax_amount_after_discount_amount,4) - adv_por
+						#~ gl_entries.append(
+							#~ self.get_gl_dict({
+								#~ "account": tax.account_head,
+								#~ "against": self.customer,
+								#~ "credit": cr,
+								#~ "credit_in_account_currency": cr,
+								#~ "cost_center": tax.cost_center
+							#~ }, account_currency)
+							#~ )
+				gl_entries.append(
                     self.get_gl_dict({
                     "account": self.debit_to,
                     "party_type": "Customer",
