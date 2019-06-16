@@ -83,10 +83,18 @@ class MaterialRequest(BuyingController):
         # self.validate_project()
         # self.validate_project_items()
         # self.set_title()
+        
 
-        if self.get("__islocal") :
+        if self.get("__islocal"):
+            self.validate_director_role()
             self.title = self.get_title()
             self.set_user_emp()
+
+
+    def validate_director_role(self):
+        if "Director" in frappe.get_roles(frappe.session.user):
+            self.workflow_state = 'Approved By Director'
+
 
     def validate_project_items(self):
         if self.project :
