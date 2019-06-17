@@ -574,7 +574,7 @@ frappe.ui.form.on('Sales Invoice', {
 			}
 		})
 	},
-	validate: function(frm){
+	onload: function(frm){
 		var total_billing = 0;
         $.each(frm.doc.project_payment_schedule_invoice || [], function (i, d) {
             total_billing += flt(d.billing_value);
