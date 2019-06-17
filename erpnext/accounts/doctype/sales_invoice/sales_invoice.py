@@ -66,6 +66,7 @@ class SalesInvoice(SellingController):
         self.validate_account_for_change_amount()
         self.validate_fixed_asset()
         self.set_income_account_for_fixed_assets()
+        # self.calculate_total_paid_advance()
         
 
         if cint(self.is_pos):
@@ -111,6 +112,21 @@ class SalesInvoice(SellingController):
                 self.workflow_state = "Pending"
             
 
+    def calculate_total_paid_advance(self):
+        advance_total = 0
+        advanced = frappe.db.sql_list("select distinct advance_project_items from `tabProject Payment Schedule` where parent='{0}'".format(self.project))
+        for item in self.project_payment_schedule_invoice:
+            if item.scope_item in advanced:
+                frappe.msgprint(str(item.billing_value))
+                advance_amount = flt(item.billing_value) * flt(flt(item.billing_percentage)/100)
+                advance_tax = flt(advance_amount) * flt(flt(item.vat)/100)
+                total = advance_amount + advance_tax
+
+                advance_total = advance_total + total
+        self.total_advance = advance_total
+        self.item_advance_amount = advance_total
+
+
     def validate_project_item_advance(self):
         # if self.get('__islocal'):
         self.total_demand = self.grand_total-flt(self.item_advance_amount)
@@ -148,10 +164,11 @@ class SalesInvoice(SellingController):
         customer_group = frappe.db.get_value("Customer", self.customer, "customer_group")
         if customer_group:
             customer_group_income_account = frappe.db.get_value("Customer Group", self.customer_group, "default_income_account")
-        if customer_group_income_account :
-            for item in self.get("items"):
-                if frappe.db.get_value("Item", item.item_code, "is_advance_item") == 0:
-                    item.income_account=customer_group_income_account
+            
+            if customer_group_income_account :
+                for item in self.get("items"):
+                    if frappe.db.get_value("Item", item.item_code, "is_advance_item") == 0:
+                        item.income_account=customer_group_income_account
         #~ if self.get("payment_schedule") : 
             #~ payment_schedule = self.get("payment_schedule")
             #~ for pt in payment_schedule : 

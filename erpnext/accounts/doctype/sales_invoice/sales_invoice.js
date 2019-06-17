@@ -573,6 +573,24 @@ frappe.ui.form.on('Sales Invoice', {
 				refresh_field(['timesheets'])
 			}
 		})
+	},
+	validate: function(frm){
+		var total_billing = 0;
+        $.each(frm.doc.project_payment_schedule_invoice || [], function (i, d) {
+            total_billing += flt(d.billing_value);
+        });
+
+        var total_tax = 0;
+        $.each(frm.doc.project_payment_schedule_invoice || [], function (i, d) {
+            total_tax += flt(d.vat_value);
+        });
+
+        frm.set_value('total_control_billing', total_billing);
+        frm.set_value('total_control_tax', total_tax);
+        frm.set_value('total_after_advance', cur_frm.doc.total - total_billing);
+        frm.set_value('total_vat_advance', Math.round(cur_frm.doc.total_taxes_and_charges - total_tax));
+        frm.set_value('final_total', cur_frm.doc.total_after_advance + Math.round(cur_frm.doc.total_vat_advance));
+
 	}
 })
 
