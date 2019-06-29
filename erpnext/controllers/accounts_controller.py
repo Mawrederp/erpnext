@@ -849,7 +849,7 @@ def get_advance_payment_entries(party_type, party, party_account,
 	payment_type = "Receive" if party_type == "Customer" else "Pay"
 	payment_entries_against_order, unallocated_payment_entries = [], []
 
-	if (order_list or against_all_orders) and (party_type != "Imprest Permanent" and party_type != "Imprest Temporary"):
+	if (order_list or against_all_orders) and (party_type != "Imprest Permanent" and party_type != "Imprest Temporary" and party_type != "Employee"):
 		if order_list:
 			reference_condition = " and t2.reference_name in ({0})"\
 				.format(', '.join(['%s'] * len(order_list)))
