@@ -22,8 +22,10 @@ cur_frm.cscript.custom_grade = function(doc, cdt, cd) {
             filters: { name: doc.grade }
         },
         callback: function(r) {
-            cur_frm.set_value("external_per_diem_rate", r.message.external_per_diem_rate);
-            cur_frm.set_value("internal_per_diem_rate", r.message.internal_per_diem_rate);
+            if(cur_frm.doc.add_per_diem){
+                cur_frm.set_value("external_per_diem_rate", r.message.external_per_diem_rate);
+                cur_frm.set_value("internal_per_diem_rate", r.message.internal_per_diem_rate);
+            }
         }
     });
    
@@ -90,6 +92,25 @@ frappe.ui.form.on('Training Trip', {
     assignment_type: function(frm) {
         if(cur_frm.doc.assignment_type=="Internal"){
             cur_frm.set_value("world_countries", "Saudi Arabia");
+        }
+    },
+    add_per_diem: function(frm) {
+        if(cur_frm.doc.add_per_diem){
+            frappe.call({
+                method: "frappe.client.get_value",
+                args: {
+                    doctype: "Grade",
+                    fieldname: ["internal_per_diem_rate", "external_per_diem_rate"],
+                    filters: { name: cur_frm.doc.grade }
+                },
+                callback: function(r) {
+                        cur_frm.set_value("external_per_diem_rate", r.message.external_per_diem_rate);
+                        cur_frm.set_value("internal_per_diem_rate", r.message.internal_per_diem_rate);
+                }
+            });
+        }else{
+            cur_frm.set_value("external_per_diem_rate", 0);
+            cur_frm.set_value("internal_per_diem_rate", 0);
         }
     }
 });
