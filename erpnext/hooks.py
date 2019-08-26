@@ -15,7 +15,8 @@ source_link = "https://github.com/frappe/erpnext"
 error_report_email = "support@erpnext.com"
 
 app_include_js = [
-		"assets/js/erpnext.min.js",'assets/erpnext/assets/plugins/morris/raphael.min.js',
+		"assets/js/erpnext.min.js",
+		'assets/erpnext/assets/plugins/morris/raphael.min.js',
 		'assets/erpnext/assets/plugins/morris/morris.min.js',
 		'assets/erpnext/assets/plugins/morris/morris-data.js',
 		'assets/erpnext/assets/plugins/lobipanel/lobipanel.min.js',
