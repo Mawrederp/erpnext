@@ -160,12 +160,22 @@ class LeaveApplication(Document):
                     if applied_days or self.total_leave_days > 10:
                         self.workflow_state = "Approved By Director (U.L)"
         def workflow_leave_switcher(wf = self.workflow_state, ld = self.total_leave_days, lt = self.leave_type):
-            if ld > 5:
+             # New Code For higher than 30 days, ceo check
+            if ld > 30:
+                if lt == 'Annual Leave - اجازة اعتيادية':
+                    if wf == "Approved By HR Specialist":
+                        self.workflow_state = "Approved By HR Specialist (+30)"
+                    elif wf == "Approved By HR Manager":
+                        self.workflow_state = "Approved By HR Manager (+30)"
+
+            elif ld > 5:
                 if wf == "Approved By Director" and (lt == " Annual Leave - اجازة اعتيادية" or lt == " emergency -اضطرارية" or lt == " Without Pay - غير مدفوعة"):
                     self.workflow_state = "Approved By Director (+5)"
 
                 elif wf == "Approved By CEO":
                     self.workflow_state = "Approved By CEO (+5 U.L)"
+
+               
             else:
                 if wf == "Approved By HR Specialist":
                     self.workflow_state = "Approved By HR Specialist (F.T)"
