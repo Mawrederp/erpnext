@@ -78,7 +78,6 @@ class PaymentEntry(AccountsController):
 				
 	def get_title(self):
 		from frappe.utils import getdate
-		
 		namming =frappe.get_list("Enhanced Nameing Doc", fields=["name","name_of_doc", "index_value","year"],filters={"year": str(getdate(self.posting_date).year),"name_of_doc":self.doctype},ignore_permissions=True)
 		if namming :
 			#~ title =self.name[:len(self.naming_series)] + str(getdate(self.posting_date).year) +"-"+ self.name[len(self.naming_series):]
@@ -87,7 +86,6 @@ class PaymentEntry(AccountsController):
 			nammeing_doc.flags.ignore_permissions = True
 			nammeing_doc.index_value = nammeing_doc.index_value+1
 			nammeing_doc.save()
-			return title
 		else : 
 			title =self.name[:len(self.naming_series)] + str(getdate(self.posting_date).year) +"-"+ str(1).zfill(5)
 			nammeing_doc = frappe.new_doc("Enhanced Nameing Doc")
@@ -95,11 +93,12 @@ class PaymentEntry(AccountsController):
 			nammeing_doc.parent = "Enhanced Nameing"
 			nammeing_doc.parenttype = "Enhanced Nameing"
 			nammeing_doc.parentfield='enhanced_nameing'
+			nammeing_doc.naming_series = self.naming_series
 			nammeing_doc.index_value = 1
 			nammeing_doc.year = str(getdate(self.posting_date).year)
 			nammeing_doc.name_of_doc = self.doctype
-			nammeing_doc.save()
-			return title
+			nammeing_doc.save(ignore_permissions=True)
+		return title
 		
 		
 	def on_submit(self):
